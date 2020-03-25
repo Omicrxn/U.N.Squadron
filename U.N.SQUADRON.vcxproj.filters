@@ -19,6 +19,9 @@
     <Filter Include="Source Files\Application">
       <UniqueIdentifier>{02062b33-5144-42c7-9205-edbb0f2951cd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Utils">
+      <UniqueIdentifier>{ebd11cf4-fbb6-4435-bca6-0c1ab72fab66}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -70,6 +73,12 @@
     </ClInclude>
     <ClInclude Include="ModuleWindow.h">
       <Filter>Source Files\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="p2Point.h">
+      <Filter>Source Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Source Files\Application</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

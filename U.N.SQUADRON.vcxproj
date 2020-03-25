@@ -139,6 +139,7 @@
     <ClCompile Include="ModuleWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Animation.h" />
     <ClInclude Include="Application.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="MemLeaks.h" />
@@ -147,6 +148,7 @@
     <ClInclude Include="ModuleRenderer.h" />
     <ClInclude Include="ModuleTextureManager.h" />
     <ClInclude Include="ModuleWindow.h" />
+    <ClInclude Include="p2Point.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
