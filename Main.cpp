@@ -16,7 +16,7 @@ int main()
 {
 	ReportMemoryLeaks();
 
-	int main_return = EXIT_FAILURE;
+	int mainReturn = EXIT_FAILURE;
 	main_states state = main_states::MAIN_CREATION;
 	
 	while (state != main_states::MAIN_EXIT)
@@ -66,7 +66,7 @@ int main()
 				LOG("Game CleanUp returning with some errors -----");
 			}
 			else {
-				main_return = EXIT_SUCCESS;
+				mainReturn = EXIT_SUCCESS;
 				state = main_states::MAIN_EXIT;
 			}
 		}break;
@@ -79,5 +79,5 @@ int main()
 
 
 	delete App;
-	return main_return;
+	return mainReturn;
 }

@@ -67,7 +67,7 @@ update_status ModuleInput::PreUpdate() {
 			return update_status::UPDATE_STOP;
 		}//Maximize window
 		else if (event.type == SDL_WINDOWEVENT_MAXIMIZED) {
-			SDL_MaximizeWindow(App->window->sdl_window);
+			SDL_MaximizeWindow(App->window->sdlWindow);
 
 		}
 	}

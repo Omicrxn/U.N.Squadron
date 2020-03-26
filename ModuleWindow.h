@@ -19,8 +19,8 @@ public:
 
 	bool CleanUp();
 
-	SDL_Window* sdl_window = nullptr;
-	SDL_Surface* screen_surface = nullptr;
+	SDL_Window* sdlWindow = nullptr;
+	SDL_Surface* screenSurface = nullptr;
 
 	SDL_Surface* windowIcon;
 

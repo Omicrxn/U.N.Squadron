@@ -10,7 +10,7 @@
 
 #define MAX_KEYS 300
 
-enum KEY_STATE {
+enum key_state {
 	KEY_IDLE = 0,
 	KEY_DOWN,
 	KEY_REPEAT,
@@ -29,7 +29,7 @@ public:
 	bool CleanUp();
 
 
-	KEY_STATE keyboard[MAX_KEYS];
+	key_state keyboard[MAX_KEYS];
 
 private:
 	int controllerCharacterSelection;

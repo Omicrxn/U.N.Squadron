@@ -39,14 +39,14 @@ bool ModuleWindow::Init() {
 		if (WIN_FULLSCREEN_DESKTOP == true)
 			flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
 
-		sdl_window = SDL_CreateWindow(WIN_TITLE, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, flags);
-		SDL_SetWindowIcon(sdl_window, windowIcon);
-		if (sdl_window == NULL) {
+		sdlWindow = SDL_CreateWindow(WIN_TITLE, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, flags);
+		SDL_SetWindowIcon(sdlWindow, windowIcon);
+		if (sdlWindow == NULL) {
 			LOG("Window has not been created! SDL_Error: %s\n", SDL_GetError());
 				ret = false;
 		}
 		else {
-			screen_surface = SDL_GetWindowSurface(sdl_window);
+			screenSurface = SDL_GetWindowSurface(sdlWindow);
 		}
 	}
 
@@ -58,8 +58,8 @@ bool ModuleWindow::CleanUp()
 	LOG("Destroying SDL window and quitting all SDL systems");
 
 	//Destroy window
-	if (sdl_window != NULL)
-		SDL_DestroyWindow(sdl_window);
+	if (sdlWindow != NULL)
+		SDL_DestroyWindow(sdlWindow);
 
 	if (windowIcon != NULL)
 		SDL_FreeSurface(windowIcon);

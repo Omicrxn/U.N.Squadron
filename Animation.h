@@ -14,23 +14,23 @@ public:
 
 
 private:
-	float current_frame = 0.0f;
-	int last_frame = 0;
+	float currentFrame = 0.0f;
+	int lastFrame = 0;
 	int loops = 0;
-	enum FLOW {
-		forwards,
-		backwards
-	} direction = forwards;
+	enum flow {
+		FORWARDS,
+		BACKWARDS
+	} direction = FORWARDS;
 
 public:
 	Animation()
 	{}
-	Animation(const Animation& anim) : loop(anim.loop), speed(anim.speed), last_frame(anim.last_frame) { // the colon is used to inherit or in this case to initialize variables before the constructor is called
+	Animation(const Animation& anim) : loop(anim.loop), speed(anim.speed), lastFrame(anim.lastFrame) { // the colon is used to inherit or in this case to initialize variables before the constructor is called
 		SDL_memcpy(&frames, anim.frames, sizeof(frames));//copies the info in anim.frames to local variable frames
 	}
 	void PushBack(const SDL_Rect& rect) //stores the rect into frames array
 	{
-		frames[last_frame++] = rect;
+		frames[lastFrame++] = rect;
 	}
 
 	SDL_Rect& GetCurrentFrame()
@@ -38,31 +38,31 @@ public:
 
 		switch (direction)
 		{
-		case FLOW::forwards:
+		case flow::FORWARDS:
 		{
-			current_frame += speed;
-			if (current_frame >= last_frame)
+			currentFrame += speed;
+			if (currentFrame >= lastFrame)
 			{
-				current_frame = (loop || flow) ? 0.0f : last_frame - 1;
-				direction = flow ? FLOW::backwards : FLOW::forwards;
+				currentFrame = (loop || flow) ? 0.0f : lastFrame - 1;
+				direction = flow ? flow::BACKWARDS : flow::FORWARDS;
 				loops++;
 			}
 		}
 		break;
-		case FLOW::backwards:
+		case flow::BACKWARDS:
 		{
-			current_frame -= speed;
-			if (current_frame <= 0.0f)
+			currentFrame -= speed;
+			if (currentFrame <= 0.0f)
 			{
-				current_frame = 0.0f;
-				direction = FLOW::forwards;
+				currentFrame = 0.0f;
+				direction = flow::FORWARDS;
 				loops++;
 			}
 		}
 		break;
 		}
 
-		return frames[(int)current_frame];
+		return frames[(int)currentFrame];
 	}
 	bool Finished() const
 	{
@@ -71,7 +71,7 @@ public:
 	void Reset()
 	{
 		loops = 0;
-		current_frame = 0.0f;
+		currentFrame = 0.0f;
 	}
 
 

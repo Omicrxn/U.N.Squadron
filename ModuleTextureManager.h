@@ -22,7 +22,7 @@ public:
 	void GetSize(const SDL_Texture* texture, uint& width, uint& height) const;
 
 	SDL_Texture* textures[MAX_TEXTURES];
-	uint last_texture = 0;
+	uint lastTexture = 0;
 };
 
 #endif //__ModuleTextures_H__
