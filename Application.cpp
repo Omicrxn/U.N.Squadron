@@ -2,6 +2,7 @@
 #include "ModuleWindow.h"
 #include "ModuleRenderer.h"
 #include "ModuleTextureManager.h"
+#include "ModuleLevel2.h"
 #include "ModuleInput.h"
 
 Application::Application()
@@ -11,6 +12,7 @@ Application::Application()
 	modules[i++] = render = new ModuleRenderer();
 	modules[i++] = input = new ModuleInput();
 	modules[i++] = textures = new ModuleTextureManager();
+	modules[i++] = lvl2 = new ModuleLevel2();
 }
 Application::~Application()
 {
@@ -27,6 +29,10 @@ bool Application::Init()
 	for (int i = 0; i < NUM_MODULES; ++i)
 	{
 		ret = modules[i]->Init();
+	}
+	for (int i = 0; i < NUM_MODULES; ++i)
+	{
+		ret = modules[i]->IsEnabled() ? modules[i]->Start() : true;;
 	}
 
 	return ret;

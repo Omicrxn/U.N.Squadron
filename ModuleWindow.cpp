@@ -41,6 +41,7 @@ bool ModuleWindow::Init() {
 
 		sdlWindow = SDL_CreateWindow(WIN_TITLE, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, flags);
 		SDL_SetWindowIcon(sdlWindow, windowIcon);
+		//SDL_FreeSurface(windowIcon);
 		if (sdlWindow == NULL) {
 			LOG("Window has not been created! SDL_Error: %s\n", SDL_GetError());
 				ret = false;

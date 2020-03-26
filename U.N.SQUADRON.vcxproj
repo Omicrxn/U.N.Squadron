@@ -134,6 +134,7 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Module.cpp" />
     <ClCompile Include="ModuleInput.cpp" />
+    <ClCompile Include="ModuleLevel2.cpp" />
     <ClCompile Include="ModuleRenderer.cpp" />
     <ClCompile Include="ModuleTextureManager.cpp" />
     <ClCompile Include="ModuleWindow.cpp" />
@@ -145,6 +146,7 @@
     <ClInclude Include="MemLeaks.h" />
     <ClInclude Include="Module.h" />
     <ClInclude Include="ModuleInput.h" />
+    <ClInclude Include="ModuleLevel2.h" />
     <ClInclude Include="ModuleRenderer.h" />
     <ClInclude Include="ModuleTextureManager.h" />
     <ClInclude Include="ModuleWindow.h" />

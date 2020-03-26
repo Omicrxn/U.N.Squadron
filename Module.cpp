@@ -4,6 +4,9 @@ bool Module::Init()
 {
 	return true;
 }
+bool Module::Start() {
+	return true;
+}
 
 update_status Module::PreUpdate()
 {

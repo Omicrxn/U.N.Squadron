@@ -48,6 +48,9 @@
     <ClCompile Include="Globals.cpp">
       <Filter>Source Files\Application</Filter>
     </ClCompile>
+    <ClCompile Include="ModuleLevel2.cpp">
+      <Filter>Source Files\Modules</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -79,6 +82,9 @@
     </ClInclude>
     <ClInclude Include="Animation.h">
       <Filter>Source Files\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleLevel2.h">
+      <Filter>Source Files\Modules</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

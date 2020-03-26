@@ -6,10 +6,12 @@
 
 class Module
 {
+private:
+	bool enabled = true;
 public:
 	//Called at the beginning of the application execution
 	virtual bool Init();
-
+	virtual bool Start();
 	//Called at the beginning of each application loop
 	virtual update_status PreUpdate();
 
@@ -21,6 +23,24 @@ public:
 
 	//Called at the end of the application
 	virtual bool CleanUp();
+	bool IsEnabled() const { return enabled; }
+
+	void Enable()
+	{
+		if (enabled == false)
+		{
+			enabled = true;
+			Start();
+		}
+	}
+
+	void Disable()
+	{
+		if (enabled == true) {
+			enabled = false;
+			CleanUp();
+		}
+	}
 };
 
 #endif // __MODULE_H__
