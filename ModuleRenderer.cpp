@@ -6,8 +6,8 @@
 #include "SDL.h"
 ModuleRenderer::ModuleRenderer() : Module() {
 	camera.x = camera.y = 0;
-	camera.w = SCREEN_WIDTH;
-	camera.h = SCREEN_HEIGHT;
+	camera.w = SCREEN_WIDTH*SCREEN_SIZE;
+	camera.h = SCREEN_HEIGHT*SCREEN_SIZE;
 }
 
 ModuleRenderer::~ModuleRenderer() {
@@ -39,11 +39,13 @@ bool ModuleRenderer::Init() {
 update_status ModuleRenderer::PreUpdate() {
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 	SDL_RenderClear(renderer);
+	
 	return update_status::UPDATE_CONTINUE;
 }
 
 update_status ModuleRenderer::Update() {
-
+	
+	
 	return update_status::UPDATE_CONTINUE;
 }
 
