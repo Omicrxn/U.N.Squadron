@@ -10,11 +10,9 @@ class ModuleRenderer;
 class Module;
 class ModuleTextureManager;
 class ModuleLevel2;
+class ModulePlayer;
 
-
-
-
-#define NUM_MODULES 5
+#define NUM_MODULES 6
 
 class Application
 {
@@ -31,6 +29,7 @@ public:
 	ModuleInput* input;
 	ModuleTextureManager* textures;
 	ModuleLevel2* lvl2;
+	ModulePlayer* player;
 	//Initializes all modules
 	bool Init();
 

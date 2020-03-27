@@ -4,6 +4,7 @@
 #include "ModuleTextureManager.h"
 #include "ModuleLevel2.h"
 #include "ModuleInput.h"
+#include "ModulePlayer.h"
 
 Application::Application()
 {
@@ -13,6 +14,7 @@ Application::Application()
 	modules[i++] = input = new ModuleInput();
 	modules[i++] = textures = new ModuleTextureManager();
 	modules[i++] = lvl2 = new ModuleLevel2();
+	modules[i++] = player = new ModulePlayer();
 }
 Application::~Application()
 {

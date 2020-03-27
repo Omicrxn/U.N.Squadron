@@ -65,7 +65,7 @@ bool ModuleRenderer::CleanUp() {
 
 
 
-bool ModuleRenderer::Blit(SDL_Texture* texture, int x, int y, SDL_Rect* section, bool background, float speed)
+bool ModuleRenderer::Blit(SDL_Texture* texture, int x, int y, SDL_Rect* section, float speed)
 {
 	bool ret = true;
 	SDL_Rect rect;
