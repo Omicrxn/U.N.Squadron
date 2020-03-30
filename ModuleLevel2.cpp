@@ -6,68 +6,47 @@
 
 ModuleLevel2::ModuleLevel2(){}
 ModuleLevel2::~ModuleLevel2(){}
-bool ModuleLevel2::Start(){
+bool ModuleLevel2::Start() {
 	bool ret = true;
 	backgroundTexture = App->textures->Load("Assets/sprites/scenarios/ThunderStorm_SpriteSheet.png");
 	App->render->camera.x = 0;
 	//center rect
-	centerLayer.w = 255;
-	centerLayer.h = 62;
-	centerLayer.x = 0;
-	centerLayer.y = 100;
+	centerLayer = { 0, 100, 256, 62 };
+	
 	//firstTop & firstBottom
-	firstTopLayer.w = 255;
-	firstTopLayer.h = 16;
-	firstTopLayer.x = 0;
-	firstTopLayer.y = 81;
+	firstTopLayer = { 0,81,256,16 };
+	firstBottomLayer = { 0,165,256,17 };
 
-	firstBottomLayer.w = 255;
-	firstBottomLayer.h = 17;
-	firstBottomLayer.x = 0;
-	firstBottomLayer.y = 165;
 	//secondTop & secondBottom
-	secondTopLayer.w = 255;
-	secondTopLayer.h = 27;
-	secondTopLayer.x = 0;
-	secondTopLayer.y = 52;
-
-	secondBottomLayer.w = 255;
-	secondBottomLayer.h = 30;
-	secondBottomLayer.x = 0;
-	secondBottomLayer.y = 184;
+	secondTopLayer = { 0,52,256,27 };
+	secondBottomLayer = { 0,184,256,30 };
 	//thirdTop & thirdTop
-	thirdTopLayer.w = 255;
-	thirdTopLayer.h = 45;
-	thirdTopLayer.x = 0;
-	thirdTopLayer.y = 0;
+	thirdTopLayer = {0,0,256,45};
+	thirdBottomLayer = {0,217,256,33};
 
-	thirdBottomLayer.w = 255;
-	thirdBottomLayer.h = 30;
-	thirdBottomLayer.x = 0;
-	thirdBottomLayer.y = 217;
 	
 //background position in screen
 	//center
-	centerPos = { 0,(float)((SCREEN_HEIGHT / 2)-(centerLayer.h/2))+3 };
-	centerPos2 = { (float)centerLayer.w,(float)((SCREEN_HEIGHT / 2) - (centerLayer.h / 2)) + 3 };
+	centerPos = { 0,85 };
+	centerPos2 = { (float)centerLayer.w,85 };
 	centerSpeed = 0.5f;
 	//first
-	firstTopPos = { 0,(float)(centerPos.y-(firstTopLayer.h))};
-	firstBotPos = { 0,(float)((centerPos.y) + (centerLayer.h)) };
-	firstTopPos2 = { (float)firstTopLayer.w,(float)(centerPos.y - (firstTopLayer.h)) };
-	firstBotPos2 = { (float)firstBottomLayer.w,(float)((centerPos.y)+ (centerLayer.h)) };
+	firstTopPos = { 0,69};
+	firstBotPos = { 0, 147};
+	firstTopPos2 = { (float)firstTopLayer.w,69 };
+	firstBotPos2 = { (float)firstBottomLayer.w,147};
 	firstSpeed = 1.0f;
 	//second
-	secondTopPos = { 0,(float)(firstTopPos.y-secondTopLayer.h) };
-	secondBotPos = { 0,(float)((firstBotPos.y) + (firstBottomLayer.h)) };
-	secondTopPos2 = { (float)secondTopLayer.w,(float)(firstTopPos.y - secondTopLayer.h)};
-	secondBotPos2 = { (float)secondBottomLayer.w,(float)((firstBotPos.y + firstBottomLayer.h)) };
+	secondTopPos = { 0,42 };
+	secondBotPos = { 0,164 };
+	secondTopPos2 = { (float)secondTopLayer.w,42};
+	secondBotPos2 = { (float)secondBottomLayer.w,164 };
 	secondSpeed = 1.5f;
 	//third
 	thirdTopPos = { 0,0 };
-	thirdBotPos = { 0,(float)((secondBotPos.y) + (secondBottomLayer.h)-3.1) };
+	thirdBotPos = { 0,191 };//TODO: CHANGE TO SCREEN_HEIGHT-thirdLayerBot.h
 	thirdTopPos2 = { (float)thirdTopLayer.w,0 };
-	thirdBotPos2 = { (float)thirdBottomLayer.w,(float)((secondBotPos.y) + (secondBottomLayer.h) - 3.1) };
+	thirdBotPos2 = { (float)thirdBottomLayer.w,191 };//TODO: CHANGE TO SCREEN_HEIGHT-thirdLayerBot.h
 	thirdSpeed = 2.0f;
 
 	App->player->Enable();
