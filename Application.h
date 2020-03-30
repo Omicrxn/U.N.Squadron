@@ -9,10 +9,12 @@ class ModuleInput;
 class ModuleRenderer;
 class Module;
 class ModuleTextureManager;
+class ModuleStartScreen;
 class ModuleLevel2;
 class ModulePlayer;
+class ModuleTransition;
 
-#define NUM_MODULES 6
+#define NUM_MODULES 8
 
 class Application
 {
@@ -28,6 +30,8 @@ public:
 	ModuleRenderer* render;
 	ModuleInput* input;
 	ModuleTextureManager* textures;
+	ModuleTransition* transition;
+	ModuleStartScreen* startScreen;
 	ModuleLevel2* lvl2;
 	ModulePlayer* player;
 	//Initializes all modules

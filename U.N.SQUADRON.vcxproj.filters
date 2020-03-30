@@ -54,6 +54,12 @@
     <ClCompile Include="ModulePlayer.cpp">
       <Filter>Source Files\Modules</Filter>
     </ClCompile>
+    <ClCompile Include="ModuleStartScreen.cpp">
+      <Filter>Source Files\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleTransition.cpp">
+      <Filter>Source Files\Modules</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -90,6 +96,12 @@
       <Filter>Source Files\Modules</Filter>
     </ClInclude>
     <ClInclude Include="ModulePlayer.h">
+      <Filter>Source Files\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleStartScreen.h">
+      <Filter>Source Files\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleTransition.h">
       <Filter>Source Files\Modules</Filter>
     </ClInclude>
   </ItemGroup>

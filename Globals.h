@@ -9,6 +9,9 @@ void Log(const char file[], int line, const char* format, ...);
 #define EXIT_FAILURE 1
 #define EXIT_SUCCESS 0
 
+#define MIN( a, b ) ( ((a) < (b)) ? (a) : (b) )
+#define MAX( a, b ) ( ((a) > (b)) ? (a) : (b) )
+
 enum update_status
 {
 	UPDATE_CONTINUE = 1,
@@ -22,8 +25,8 @@ typedef unsigned int uint;
 
 // Settings
 #define WINDOW_ICON_PATH "Assets/Sprites/windowIcon.bmp"
-#define SCREEN_WIDTH 240//ratio 8:7
-#define SCREEN_HEIGHT 210
+#define SCREEN_WIDTH 256//ratio 8:7
+#define SCREEN_HEIGHT 224
 #define WIN_FULLSCREEN 0
 #define WIN_FULLSCREEN_DESKTOP 0
 #define SCREEN_SIZE 3

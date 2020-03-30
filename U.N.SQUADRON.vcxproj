@@ -80,6 +80,7 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)SDL2/include;$(ProjectDir)SDL2_image/include;$(ProjectDir)SDL2_mixer/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -137,7 +138,9 @@
     <ClCompile Include="ModuleLevel2.cpp" />
     <ClCompile Include="ModuleRenderer.cpp" />
     <ClCompile Include="ModulePlayer.cpp" />
+    <ClCompile Include="ModuleStartScreen.cpp" />
     <ClCompile Include="ModuleTextureManager.cpp" />
+    <ClCompile Include="ModuleTransition.cpp" />
     <ClCompile Include="ModuleWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -150,7 +153,9 @@
     <ClInclude Include="ModuleLevel2.h" />
     <ClInclude Include="ModuleRenderer.h" />
     <ClInclude Include="ModulePlayer.h" />
+    <ClInclude Include="ModuleStartScreen.h" />
     <ClInclude Include="ModuleTextureManager.h" />
+    <ClInclude Include="ModuleTransition.h" />
     <ClInclude Include="ModuleWindow.h" />
     <ClInclude Include="p2Point.h" />
   </ItemGroup>

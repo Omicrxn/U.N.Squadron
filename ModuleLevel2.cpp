@@ -1,6 +1,7 @@
 #include "ModuleLevel2.h"
 #include "Application.h"
 #include "ModuleTextureManager.h"
+#include "ModulePlayer.h"
 #include "ModuleRenderer.h"
 
 ModuleLevel2::ModuleLevel2(){}
@@ -68,7 +69,8 @@ bool ModuleLevel2::Start(){
 	thirdTopPos2 = { (float)thirdTopLayer.w,0 };
 	thirdBotPos2 = { (float)thirdBottomLayer.w,(float)((secondBotPos.y) + (secondBottomLayer.h) - 3.1) };
 	thirdSpeed = 2.0f;
-	
+
+	App->player->Enable();
 	
 	return ret;
 }
