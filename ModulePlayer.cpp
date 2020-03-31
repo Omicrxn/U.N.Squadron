@@ -24,10 +24,9 @@ bool ModulePlayer::Start() {
 	position.x = 10;
 	position.y = 10;
 	//Position of the rectangle that we are getting from the image we load
-	player.x = 155;
-	player.y = 187;
-	player.w = 32;
-	player.h = 9;
+	playerAnim.PushBack({ 155,187,32,9 });
+	playerAnim.PushBack({ 189,40,32,12 });
+	playerAnim.PushBack({ 120,39,32,13 });
 
 	//Loading shooting sound effect
 	App->audio->LoadFx("Assets/music/events/shoot.wav");
@@ -57,14 +56,34 @@ update_status ModulePlayer::Update() {
 	}
 
 	//Moving the spaceship when pressing WASD
+	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_IDLE && App->input->keyboard[SDL_SCANCODE_S] == KEY_IDLE)
+	{
+		if (current_anim != &playerAnim)
+		{
+			current_anim = &playerAnim;
+		}
+		rectAnim = current_anim->GetFrame(0);
+	}
 	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_REPEAT)
 	{
 		position.y -= 5;
+		if (current_anim != &playerAnim)
+		{
+			current_anim = &playerAnim;
+		}
+		rectAnim = current_anim->GetFrame(1);
 	}
+	
 	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_REPEAT)
 	{
 		position.y += 5;
+		if (current_anim != &playerAnim)
+		{
+			current_anim = &playerAnim;
+		}
+		rectAnim = current_anim->GetFrame(2);
 	}
+	
 	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_REPEAT)
 	{
 		position.x -= 5;
@@ -109,10 +128,10 @@ update_status ModulePlayer::Update() {
 
 update_status ModulePlayer::PostUpdate() {
 	update_status ret = UPDATE_CONTINUE;
-	if (!App->render->Blit(texture, position.x, position.y, &player)) {
+	//blit player
+	if (!App->render->Blit(texture, position.x, position.y, &rectAnim)) {
 		ret = UPDATE_ERROR;
 	}
-
 	return ret;
 }
 

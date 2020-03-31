@@ -5,6 +5,7 @@
 #include "Module.h"
 #include "p2Point.h"
 #include "SDL_rect.h"
+#include "Animation.h"
 
 struct SDL_Texture;
 class ModulePlayer : public Module {
@@ -20,7 +21,9 @@ public:
 private:
 	iPoint position;
 	SDL_Texture* texture = nullptr;
-	SDL_Rect player;
+	Animation* current_anim = nullptr;
+	Animation playerAnim;
+	SDL_Rect rectAnim;
 };
 
 #endif // __MODULEPLAYER_H__

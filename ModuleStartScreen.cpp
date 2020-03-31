@@ -74,7 +74,7 @@ update_status ModuleStartScreen::Update(){
 update_status ModuleStartScreen::PostUpdate() {
 	update_status ret = UPDATE_CONTINUE;
 	SDL_Rect rect = current_anim->GetCurrentFrame();
-	////blit unicorn
+	//blit unicorn
 	if (!App->render->Blit(tex, 81, 50, &rect)) {
 		ret = UPDATE_ERROR;
 	}
@@ -86,12 +86,13 @@ update_status ModuleStartScreen::PostUpdate() {
 	if (!App->render->Blit(tex, 24, 87, &text)) {
 		ret = UPDATE_ERROR;
 	}
-	////blit selector
+	//blit selector
 	if (!App->render->Blit(tex, selectorPos.x, selectorPos.y, &selector)) {
 		ret = UPDATE_ERROR;
 	}
 	return ret;
 }
+
 bool ModuleStartScreen::CleanUp(){
 	bool ret = true;
 	if (!App->textures->Unload(tex)) {

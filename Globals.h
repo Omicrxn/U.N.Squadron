@@ -25,7 +25,7 @@ typedef unsigned int uint;
 
 // Settings
 #define WINDOW_ICON_PATH "Assets/Sprites/windowIcon.bmp"
-#define SCREEN_WIDTH 256//ratio 8:7
+#define SCREEN_WIDTH 256 //ratio 8:7
 #define SCREEN_HEIGHT 224
 #define WIN_FULLSCREEN 0
 #define WIN_FULLSCREEN_DESKTOP 0
