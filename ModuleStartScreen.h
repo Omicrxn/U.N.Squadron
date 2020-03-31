@@ -15,9 +15,10 @@ public:
 
 	bool Start();
 	update_status Update();
+	update_status PostUpdate();
 	bool CleanUp();
 private:
-	SDL_Texture* texture = nullptr;
+	SDL_Texture* tex = nullptr;
 	SDL_Rect title;
 	SDL_Rect text;
 	SDL_Rect selector;

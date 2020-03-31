@@ -17,6 +17,7 @@ public:
 
 	bool Start();
 	update_status Update();
+	update_status PostUpdate();
 	bool CleanUp();
 
 	void Parallax(fPoint* top, fPoint* top2, fPoint* bot, fPoint* bot2, SDL_Rect* topLayer, SDL_Rect* botLayer, float speed);

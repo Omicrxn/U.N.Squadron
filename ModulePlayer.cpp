@@ -1,6 +1,8 @@
 #include "ModulePlayer.h"
 #include "Application.h"
 #include "ModuleTextureManager.h"
+#include "ModuleInput.h"
+#include "ModuleParticles.h"
 #include "ModuleRenderer.h"
 
 ModulePlayer::ModulePlayer() : Module() {
@@ -34,10 +36,23 @@ bool ModulePlayer::Init() {
 update_status ModulePlayer::Update() {
 	update_status ret = UPDATE_CONTINUE;
 
+	// Spawn explosion particles when pressing B
+	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_DOWN)
+	{
+		App->particles->AddParticle(App->particles->bullet, position.x+100, position.y + 25,Collider::Type::PLAYER_SHOT);
+	
+	}
+
+	
+
+	return ret;
+}
+
+update_status ModulePlayer::PostUpdate() {
+	update_status ret = UPDATE_CONTINUE;
 	if (!App->render->Blit(texture, position.x, position.y, &player)) {
 		ret = UPDATE_ERROR;
 	}
-
 	return ret;
 }
 

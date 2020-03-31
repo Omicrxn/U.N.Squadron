@@ -9,7 +9,6 @@ ModuleLevel2::~ModuleLevel2(){}
 bool ModuleLevel2::Start() {
 	bool ret = true;
 	backgroundTexture = App->textures->Load("Assets/sprites/scenarios/ThunderStorm_SpriteSheet.png");
-	App->render->camera.x = 0;
 	//center rect
 	centerLayer = { 0, 100, 256, 62 };
 	
@@ -70,8 +69,13 @@ update_status ModuleLevel2::Update(){
 	Parallax(&thirdTopPos, &thirdTopPos2, &thirdBotPos, &thirdBotPos2, &thirdTopLayer, &thirdBottomLayer, thirdSpeed);
 
 	
+	
+	return ret;
+}
+update_status ModuleLevel2::PostUpdate() {
+	update_status ret = UPDATE_CONTINUE;
 	//Render center layers
-	if (!App->render->Blit(backgroundTexture,(int)centerPos.x, (int)centerPos.y, &centerLayer, 0.7f)) {
+	if (!App->render->Blit(backgroundTexture, (int)centerPos.x, (int)centerPos.y, &centerLayer, 0.7f)) {
 		LOG("Cannot blit the texture in ModulePlayer %s\n", SDL_GetError());
 		ret = update_status::UPDATE_ERROR;
 	}
@@ -132,7 +136,6 @@ update_status ModuleLevel2::Update(){
 	}
 	return ret;
 }
-
 void ModuleLevel2::Parallax(fPoint* top, fPoint* top2, fPoint* bot, fPoint* bot2,SDL_Rect* topLayer,SDL_Rect* botLayer, float speed ) {
 	if (bot != nullptr) {
 		if (top->x < SCREEN_WIDTH || top2->x < SCREEN_WIDTH) {

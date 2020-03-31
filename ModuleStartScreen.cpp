@@ -22,8 +22,8 @@ ModuleStartScreen::ModuleStartScreen(){
 ModuleStartScreen::~ModuleStartScreen(){}
 bool ModuleStartScreen::Start(){
 	bool ret = true;
-	texture = App->textures->Load("Assets/sprites/menus/Menu-Spritesheet.png");
-	if (texture == nullptr) {
+	tex = App->textures->Load("Assets/sprites/menus/Menu-Spritesheet.png");
+	if (tex == nullptr) {
 		ret = false;
 	}
 	
@@ -33,6 +33,7 @@ bool ModuleStartScreen::Start(){
 }
 update_status ModuleStartScreen::Update(){
 	update_status ret = update_status::UPDATE_CONTINUE;
+
 	if (current_anim != &unicorn_anim) {
 		current_anim = &unicorn_anim;
 		unicorn_anim.Reset();
@@ -44,14 +45,15 @@ update_status ModuleStartScreen::Update(){
 		selectorPos = { 68,116 };
 	}
 	if ((App->input->keyboard[SDL_SCANCODE_S] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_DOWN)
-		&& selectorPos.y != 135) {
+		&& selectorPos.y != 135 &&App->transition->TransitionEnd()) {
 		selectorPos = { 68,135 };
 	}
-	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN){
+	
+	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN) {
 		switch (selectorPos.y)
 		{
 		case 116: {
-			App->transition->TransitionStart(this, App->lvl2);
+			App->transition->TransitionStart(this, App->lvl2,4.0f);
 		}break;
 		case 135: {
 
@@ -62,21 +64,37 @@ update_status ModuleStartScreen::Update(){
 	}
 
 
+
+	return ret;
+}
+
+update_status ModuleStartScreen::PostUpdate() {
+	update_status ret = UPDATE_CONTINUE;
 	SDL_Rect rect = current_anim->GetCurrentFrame();
-	
-	//blit unicorn
-	App->render->Blit(texture, 81, 50, &rect);
+	////blit unicorn
+	if (!App->render->Blit(tex, 81, 50, &rect)) {
+		ret = UPDATE_ERROR;
+	}
 	//blit title
-	App->render->Blit(texture, 11, 16, &title);
+	if (!App->render->Blit(tex, 11, 16, &title)) {
+		ret = UPDATE_ERROR;
+	}
 	//blit text
-	App->render->Blit(texture, 24, 87, &text);
-	//blit selector
-	App->render->Blit(texture, selectorPos.x, selectorPos.y, &selector);
-	
+	if (!App->render->Blit(tex, 24, 87, &text)) {
+		ret = UPDATE_ERROR;
+	}
+	////blit selector
+	if (!App->render->Blit(tex, selectorPos.x, selectorPos.y, &selector)) {
+		ret = UPDATE_ERROR;
+	}
 	return ret;
 }
 bool ModuleStartScreen::CleanUp(){
 	bool ret = true;
-	App->textures->Unload(texture);
+	if (!App->textures->Unload(tex)) {
+		LOG("Start Screen -> Error unloading the texture.");
+		ret = false;
+	}
+	
 	return ret;
 }

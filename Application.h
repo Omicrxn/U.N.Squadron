@@ -3,18 +3,20 @@
 #define __APPLICATION_H__
 
 #include "Globals.h"
-
+class Module;
 class ModuleWindow;
 class ModuleInput;
-class ModuleRenderer;
-class Module;
 class ModuleTextureManager;
-class ModuleStartScreen;
-class ModuleLevel2;
+class ModuleAudio;
 class ModulePlayer;
+class ModuleLevel2;
+class ModuleParticles;
+class ModuleStartScreen;
 class ModuleTransition;
+class ModuleCollisions;
+class ModuleRenderer;
 
-#define NUM_MODULES 8
+#define NUM_MODULES 11
 
 class Application
 {
@@ -26,14 +28,19 @@ public:
 	~Application();
 
 	Module* modules[NUM_MODULES];
-	ModuleWindow* window;
-	ModuleRenderer* render;
-	ModuleInput* input;
-	ModuleTextureManager* textures;
-	ModuleTransition* transition;
-	ModuleStartScreen* startScreen;
-	ModuleLevel2* lvl2;
-	ModulePlayer* player;
+	ModuleWindow* window = nullptr;
+
+	ModuleInput* input = nullptr;
+	ModuleTextureManager* textures = nullptr;
+	ModuleAudio* audio = nullptr;
+	ModuleLevel2* lvl2 = nullptr;
+	ModulePlayer* player = nullptr;
+	ModuleStartScreen* startScreen = nullptr;
+	ModuleParticles* particles = nullptr;
+	ModuleCollisions* collisions = nullptr;
+	ModuleTransition* transition = nullptr;
+	ModuleRenderer* render = nullptr;
+
 	//Initializes all modules
 	bool Init();
 

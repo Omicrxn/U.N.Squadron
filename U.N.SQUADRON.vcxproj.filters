@@ -22,6 +22,12 @@
     <Filter Include="Source Files\Utils">
       <UniqueIdentifier>{ebd11cf4-fbb6-4435-bca6-0c1ab72fab66}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Modules\Core">
+      <UniqueIdentifier>{7d839a10-e388-4c8a-8927-1aafe7f04d4e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Modules\Gameplay">
+      <UniqueIdentifier>{d71fa01b-06de-4c19-a959-347074acdf04}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -33,32 +39,41 @@
     <ClCompile Include="Module.cpp">
       <Filter>Source Files\Modules</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleInput.cpp">
-      <Filter>Source Files\Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleRenderer.cpp">
-      <Filter>Source Files\Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleTextureManager.cpp">
-      <Filter>Source Files\Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleWindow.cpp">
-      <Filter>Source Files\Modules</Filter>
-    </ClCompile>
     <ClCompile Include="Globals.cpp">
       <Filter>Source Files\Application</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleLevel2.cpp">
-      <Filter>Source Files\Modules</Filter>
+    <ClCompile Include="ModuleInput.cpp">
+      <Filter>Source Files\Modules\Core</Filter>
     </ClCompile>
-    <ClCompile Include="ModulePlayer.cpp">
-      <Filter>Source Files\Modules</Filter>
+    <ClCompile Include="ModuleParticles.cpp">
+      <Filter>Source Files\Modules\Core</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleStartScreen.cpp">
-      <Filter>Source Files\Modules</Filter>
+    <ClCompile Include="ModuleRenderer.cpp">
+      <Filter>Source Files\Modules\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleWindow.cpp">
+      <Filter>Source Files\Modules\Core</Filter>
     </ClCompile>
     <ClCompile Include="ModuleTransition.cpp">
-      <Filter>Source Files\Modules</Filter>
+      <Filter>Source Files\Modules\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleTextureManager.cpp">
+      <Filter>Source Files\Modules\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleLevel2.cpp">
+      <Filter>Source Files\Modules\Gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="ModulePlayer.cpp">
+      <Filter>Source Files\Modules\Gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleStartScreen.cpp">
+      <Filter>Source Files\Modules\Gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleAudio.cpp">
+      <Filter>Source Files\Modules\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleCollisions.cpp">
+      <Filter>Source Files\Modules\Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -74,35 +89,44 @@
     <ClInclude Include="Module.h">
       <Filter>Source Files\Modules</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleInput.h">
-      <Filter>Source Files\Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleRenderer.h">
-      <Filter>Source Files\Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleTextureManager.h">
-      <Filter>Source Files\Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleWindow.h">
-      <Filter>Source Files\Modules</Filter>
-    </ClInclude>
     <ClInclude Include="p2Point.h">
       <Filter>Source Files\Utils</Filter>
     </ClInclude>
     <ClInclude Include="Animation.h">
       <Filter>Source Files\Application</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleLevel2.h">
-      <Filter>Source Files\Modules</Filter>
+    <ClInclude Include="ModuleInput.h">
+      <Filter>Source Files\Modules\Core</Filter>
     </ClInclude>
-    <ClInclude Include="ModulePlayer.h">
-      <Filter>Source Files\Modules</Filter>
+    <ClInclude Include="ModuleParticles.h">
+      <Filter>Source Files\Modules\Core</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleStartScreen.h">
-      <Filter>Source Files\Modules</Filter>
+    <ClInclude Include="ModuleRenderer.h">
+      <Filter>Source Files\Modules\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleWindow.h">
+      <Filter>Source Files\Modules\Core</Filter>
     </ClInclude>
     <ClInclude Include="ModuleTransition.h">
-      <Filter>Source Files\Modules</Filter>
+      <Filter>Source Files\Modules\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleTextureManager.h">
+      <Filter>Source Files\Modules\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleLevel2.h">
+      <Filter>Source Files\Modules\Gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="ModulePlayer.h">
+      <Filter>Source Files\Modules\Gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleStartScreen.h">
+      <Filter>Source Files\Modules\Gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleAudio.h">
+      <Filter>Source Files\Modules\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleCollisions.h">
+      <Filter>Source Files\Modules\Core</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

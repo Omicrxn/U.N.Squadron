@@ -26,7 +26,7 @@ update_status ModuleTransition::Update()
 		return UPDATE_CONTINUE;
 
 	Uint32 now = SDL_GetTicks() - start_time;
-	float normalized = MIN(1.0f, (float)now / (float)total_time);
+	normalized = MIN(1.0f, (float)now / (float)total_time);
 
 	switch (current_step)
 	{
@@ -53,12 +53,19 @@ update_status ModuleTransition::Update()
 	} break;
 	}
 
-	// Finally render the black square with alpha on the screen
-	SDL_SetRenderDrawColor(App->render->renderer, 0, 0, 0, (Uint8)(normalized * 255.0f));
-	SDL_RenderFillRect(App->render->renderer, &screen);
+	
 
 	return UPDATE_CONTINUE;
 }
+update_status ModuleTransition::PostUpdate() {
+	update_status ret = UPDATE_CONTINUE;
+	// Finally render the black square with alpha on the screen
+	SDL_SetRenderDrawColor(App->render->renderer, 0, 0, 0, (Uint8)(normalized * 255.0f));
+	SDL_RenderFillRect(App->render->renderer, &screen);
+	return ret;
+}
+
+
 
 bool ModuleTransition::TransitionStart(Module* module_off, Module* module_on, float time)
 {

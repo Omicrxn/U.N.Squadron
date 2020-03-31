@@ -35,8 +35,10 @@ bool ModuleTextureManager::CleanUp() {
 	LOG("Freeing textures and Image library");
 
 	for (uint i = 0; i < MAX_TEXTURES; ++i)
-		if (textures[i] != nullptr)
+		if (textures[i] != nullptr) {
 			SDL_DestroyTexture(textures[i]);
+			textures[i] = nullptr;
+		}
 
 	IMG_Quit();
 	return true;
@@ -78,6 +80,7 @@ bool ModuleTextureManager::Unload(SDL_Texture* texture) {
 
 			SDL_DestroyTexture(textures[i]);
 			textures[i] = nullptr;
+			
 			ret = true;
 			break;
 

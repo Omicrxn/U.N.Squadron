@@ -1,29 +1,41 @@
 #include "Application.h"
 #include "ModuleWindow.h"
-#include "ModuleRenderer.h"
-#include "ModuleTextureManager.h"
-#include "ModuleTransition.h"
-#include "ModuleStartScreen.h"
-#include "ModuleLevel2.h"
+#include "ModuleAudio.h"
 #include "ModuleInput.h"
+#include "ModuleTextureManager.h"
+#include "ModuleLevel2.h"
 #include "ModulePlayer.h"
-
+#include "ModuleParticles.h"
+#include "ModuleStartScreen.h"
+#include "ModuleCollisions.h"
+#include "ModuleTransition.h"
+#include "ModuleRenderer.h"
 Application::Application()
 {
 	int i = 0;
 	modules[i++] = window = new ModuleWindow();
-	modules[i++] = render = new ModuleRenderer();
 	modules[i++] = input = new ModuleInput();
 	modules[i++] = textures = new ModuleTextureManager();
-	modules[i++] = transition = new ModuleTransition();
-	modules[i++] = startScreen = new ModuleStartScreen();
+	modules[i++] = audio = new ModuleAudio();
+
 	modules[i++] = lvl2 = new ModuleLevel2();
 	modules[i++] = player = new ModulePlayer();
+	modules[i++] = startScreen = new ModuleStartScreen();
+
+	modules[i++] = particles = new ModuleParticles();
+	modules[i++] = collisions = new ModuleCollisions();
+
+	modules[i++] = transition = new ModuleTransition();
+	modules[i++] = render = new ModuleRenderer();
 }
 Application::~Application()
 {
-	for (int i = NUM_MODULES - 1; i >= 0; --i) {
+	for (int i = 0; i < NUM_MODULES; ++i)
+	{
+		//Important: when deleting a pointer, set it to nullptr afterwards
+		//It allows us for null check in other parts of the code
 		delete modules[i];
+		modules[i] = nullptr;
 	}
 		
 }
@@ -31,10 +43,11 @@ Application::~Application()
 // INIT all modules
 bool Application::Init()
 {
-	
+	bool ret = true;
+	//startScreen->Disable();
 	player->Disable();
 	lvl2->Disable();
-	bool ret = true;
+
 	for (int i = 0; i < NUM_MODULES && ret == true; ++i)
 	{
 		ret = modules[i]->Init();

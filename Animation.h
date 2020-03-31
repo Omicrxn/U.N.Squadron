@@ -68,6 +68,15 @@ public:
 	{
 		return loops > 0;
 	}
+	void Update()
+	{
+		currentFrame += speed;
+		if (currentFrame >= lastFrame)
+		{
+			currentFrame = (loop) ? 0.0f : lastFrame - 1;
+			++loops;
+		}
+	}
 	void Reset()
 	{
 		loops = 0;
