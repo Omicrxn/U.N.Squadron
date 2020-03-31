@@ -62,6 +62,8 @@ bool Application::Init()
 
 update_status Application::Update()
 {
+	
+	frameStart = SDL_GetTicks();
 	update_status ret = update_status::UPDATE_CONTINUE;
 	for (int i = 0; i < NUM_MODULES && ret == update_status::UPDATE_CONTINUE; ++i) {
 		ret = modules[i]->IsEnabled() ? modules[i]->PreUpdate() : UPDATE_CONTINUE;
@@ -71,6 +73,10 @@ update_status Application::Update()
 		ret = modules[i]->IsEnabled() ? modules[i]->PostUpdate() : UPDATE_CONTINUE;
 	}
 
+	frameTime = SDL_GetTicks() - frameStart;
+	if (frameDelay > frameTime) {
+		SDL_Delay(frameDelay - frameTime);
+	}
 	return ret;
 }
 

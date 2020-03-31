@@ -3,6 +3,7 @@
 #define __APPLICATION_H__
 
 #include "Globals.h"
+
 class Module;
 class ModuleWindow;
 class ModuleInput;
@@ -50,6 +51,10 @@ public:
 	//Releases all the application data
 	bool CleanUp();
 
+	const int FPS = 60;
+	const int frameDelay = 1000 / FPS;
+	UINT32 frameStart = 0;
+	int frameTime;
 
 
 };
