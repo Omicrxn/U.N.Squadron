@@ -4,6 +4,7 @@
 #include "ModuleTransition.h"
 #include "ModuleRenderer.h"
 #include "ModuleInput.h"
+#include "ModuleAudio.h"
 
 #include "ModuleLevel2.h"
 ModuleStartScreen::ModuleStartScreen(){
@@ -29,8 +30,12 @@ bool ModuleStartScreen::Start(){
 	
 	selectorPos = {68,116};
 
+	//Playing opening music
+	App->audio->PlayMusic("Assets/music/soundtrack/opening.ogg");
+
 	return ret;
 }
+
 update_status ModuleStartScreen::Update(){
 	update_status ret = update_status::UPDATE_CONTINUE;
 
@@ -38,7 +43,6 @@ update_status ModuleStartScreen::Update(){
 		current_anim = &unicorn_anim;
 		unicorn_anim.Reset();
 	}
-
 
 	if ((App->input->keyboard[SDL_SCANCODE_W] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_UP] == KEY_DOWN)
 		&& selectorPos.y != 116) {
@@ -62,8 +66,6 @@ update_status ModuleStartScreen::Update(){
 			break;
 		}
 	}
-
-
 
 	return ret;
 }
