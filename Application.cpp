@@ -44,9 +44,9 @@ Application::~Application()
 bool Application::Init()
 {
 	bool ret = true;
-	//startScreen->Disable();
-	player->Disable();
-	lvl2->Disable();
+	startScreen->Disable();
+	/*player->Disable();
+	lvl2->Disable();*/
 
 	for (int i = 0; i < NUM_MODULES && ret == true; ++i)
 	{

@@ -57,7 +57,7 @@ update_status ModuleStartScreen::Update(){
 		switch (selectorPos.y)
 		{
 		case 116: {
-			App->transition->TransitionStart(this, App->lvl2,4.0f);
+			App->transition->TransitionStart(this, App->lvl2);
 		}break;
 		case 135: {
 
@@ -97,6 +97,7 @@ bool ModuleStartScreen::CleanUp(){
 		LOG("Start Screen -> Error unloading the texture.");
 		ret = false;
 	}
+	App->audio->StopMusic();
 	
 	return ret;
 }
