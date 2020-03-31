@@ -75,6 +75,9 @@
     <ClCompile Include="ModuleCollisions.cpp">
       <Filter>Source Files\Modules\Core</Filter>
     </ClCompile>
+    <ClCompile Include="ModuleHUD.cpp">
+      <Filter>Source Files\Modules\Gameplay</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -127,6 +130,9 @@
     </ClInclude>
     <ClInclude Include="ModuleCollisions.h">
       <Filter>Source Files\Modules\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleHUD.h">
+      <Filter>Source Files\Modules\Gameplay</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

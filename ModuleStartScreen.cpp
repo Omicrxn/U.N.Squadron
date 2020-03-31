@@ -13,6 +13,7 @@ ModuleStartScreen::ModuleStartScreen(){
 	unicorn_anim.PushBack({ 122,2,120,160 });
 	unicorn_anim.PushBack({ 248,2,120,160 });
 	unicorn_anim.speed = 0.1f;
+	
 	//Title rect
 	title = { 235,165,236,67 };
 	//text rect
