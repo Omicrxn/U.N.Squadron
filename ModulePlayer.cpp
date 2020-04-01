@@ -25,8 +25,8 @@ bool ModulePlayer::Start() {
 	position.y = 10;
 	//Position of the rectangle that we are getting from the image we load
 	playerAnim.PushBack({ 155,187,32,9 });
-	playerAnim.PushBack({ 189,40,32,12 });
-	playerAnim.PushBack({ 120,39,32,13 });
+	playerAnim.PushBack({ 190,186,32,12 });
+	playerAnim.PushBack({ 120,185,32,16 });
 
 	//Loading shooting sound effect
 	App->audio->LoadFx("Assets/music/events/shoot.wav");
