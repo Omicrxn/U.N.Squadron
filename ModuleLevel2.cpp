@@ -28,25 +28,26 @@ bool ModuleLevel2::Start() {
 	//center
 	centerPos = { 0,85 };
 	centerPos2 = { (float)centerLayer.w,85 };
-	centerSpeed = 0.5f;
+	centerSpeed = 0.5;
+	
 	//first
 	firstTopPos = { 0,69};
 	firstBotPos = { 0, 147};
 	firstTopPos2 = { (float)firstTopLayer.w,69 };
 	firstBotPos2 = { (float)firstBottomLayer.w,147};
-	firstSpeed = 1.0f;
+	firstSpeed = 1.0;
 	//second
 	secondTopPos = { 0,42 };
 	secondBotPos = { 0,164 };
 	secondTopPos2 = { (float)secondTopLayer.w,42};
 	secondBotPos2 = { (float)secondBottomLayer.w,164 };
-	secondSpeed = 1.5f;
+	secondSpeed = 1.5;
 	//third
 	thirdTopPos = { 0,0 };
-	thirdBotPos = { 0,191 };//TODO: CHANGE TO SCREEN_HEIGHT-thirdLayerBot.h
+	thirdBotPos = { 0,(float)(SCREEN_HEIGHT - thirdBottomLayer.h) };
 	thirdTopPos2 = { (float)thirdTopLayer.w,0 };
-	thirdBotPos2 = { (float)thirdBottomLayer.w,191 };//TODO: CHANGE TO SCREEN_HEIGHT-thirdLayerBot.h
-	thirdSpeed = 2.0f;
+	thirdBotPos2 = { (float)thirdBottomLayer.w,(float)(SCREEN_HEIGHT-thirdBottomLayer.h) };
+	thirdSpeed = 2.0;
 
 	App->player->Enable();
 	
@@ -55,19 +56,20 @@ bool ModuleLevel2::Start() {
 update_status ModuleLevel2::Update(){
 	update_status ret = update_status::UPDATE_CONTINUE;
 	
+	
+	App->render->camera.x += 6;
 	//center layers movement
-	Parallax(&centerPos, &centerPos2, nullptr, nullptr, &centerLayer, nullptr, centerSpeed);
+	InfiniteScrolling(&centerPos, &centerPos2, nullptr, nullptr, &centerLayer, nullptr, centerSpeed);
 
 	//first layers movement
-	Parallax(&firstTopPos, &firstTopPos2, &firstBotPos, &firstBotPos2, &firstTopLayer, &firstBottomLayer, firstSpeed);
-	
+	InfiniteScrolling(&firstTopPos, &firstTopPos2, &firstBotPos, &firstBotPos2, &firstTopLayer, &firstBottomLayer, firstSpeed);
 	
 	//second layer movement
-	Parallax(&secondTopPos, &secondTopPos2, &secondBotPos, &secondBotPos2, &secondTopLayer, &secondBottomLayer, secondSpeed);
+	InfiniteScrolling(&secondTopPos, &secondTopPos2, &secondBotPos, &secondBotPos2, &secondTopLayer, &secondBottomLayer, secondSpeed);
 
 	//third layer movement
-	Parallax(&thirdTopPos, &thirdTopPos2, &thirdBotPos, &thirdBotPos2, &thirdTopLayer, &thirdBottomLayer, thirdSpeed);
-
+	InfiniteScrolling(&thirdTopPos, &thirdTopPos2, &thirdBotPos, &thirdBotPos2, &thirdTopLayer, &thirdBottomLayer, thirdSpeed);
+	
 	
 	
 	return ret;
@@ -75,68 +77,70 @@ update_status ModuleLevel2::Update(){
 update_status ModuleLevel2::PostUpdate() {
 	update_status ret = UPDATE_CONTINUE;
 	//Render center layers
-	if (!App->render->Blit(backgroundTexture, (int)centerPos.x, (int)centerPos.y, &centerLayer, 0.7f)) {
+	if (!App->render->Blit(backgroundTexture, (int)centerPos.x, (int)centerPos.y, &centerLayer,0)) {
 		LOG("Cannot blit the texture in ModulePlayer %s\n", SDL_GetError());
 		ret = update_status::UPDATE_ERROR;
 	}
-	if (!App->render->Blit(backgroundTexture, (int)centerPos2.x, (int)centerPos2.y, &centerLayer, 0.7f)) {
+	if (!App->render->Blit(backgroundTexture, (int)centerPos2.x, (int)centerPos2.y, &centerLayer, 0)) {
 		LOG("Cannot blit the texture in ModulePlayer %s\n", SDL_GetError());
 		ret = update_status::UPDATE_ERROR;
 	}
 	//renderFirstLayers
-	if (!App->render->Blit(backgroundTexture, (int)firstTopPos.x, (int)firstTopPos.y, &firstTopLayer, 0.7f)) {
+	if (!App->render->Blit(backgroundTexture, (int)firstTopPos.x, (int)firstTopPos.y, &firstTopLayer, 0)) {
 		LOG("Cannot blit the texture in ModulePlayer %s\n", SDL_GetError());
 		ret = update_status::UPDATE_ERROR;
 	}
-	if (!App->render->Blit(backgroundTexture, (int)firstTopPos2.x, (int)firstTopPos2.y, &firstTopLayer, 0.7f)) {
+	if (!App->render->Blit(backgroundTexture, (int)firstTopPos2.x, (int)firstTopPos2.y, &firstTopLayer, 0)) {
 		LOG("Cannot blit the texture in ModulePlayer %s\n", SDL_GetError());
 		ret = update_status::UPDATE_ERROR;
 	}
-	if (!App->render->Blit(backgroundTexture, (int)firstBotPos.x, (int)firstBotPos.y, &firstBottomLayer, 0.7f)) {
+	if (!App->render->Blit(backgroundTexture, (int)firstBotPos.x, (int)firstBotPos.y, &firstBottomLayer, 0)) {
 		LOG("Cannot blit the texture in ModulePlayer %s\n", SDL_GetError());
 		ret = update_status::UPDATE_ERROR;
 	}
-	if (!App->render->Blit(backgroundTexture, (int)firstBotPos2.x, (int)firstBotPos2.y, &firstBottomLayer, 0.7f)) {
+	if (!App->render->Blit(backgroundTexture, (int)firstBotPos2.x, (int)firstBotPos2.y, &firstBottomLayer, 0)) {
 		LOG("Cannot blit the texture in ModulePlayer %s\n", SDL_GetError());
 		ret = update_status::UPDATE_ERROR;
 	}
 	//renderSecondLayers
-	if (!App->render->Blit(backgroundTexture, (int)secondTopPos.x, (int)secondTopPos.y, &secondTopLayer, 0.7f)) {
+	if (!App->render->Blit(backgroundTexture, (int)secondTopPos.x, (int)secondTopPos.y, &secondTopLayer, 0)) {
 		LOG("Cannot blit the texture in ModulePlayer %s\n", SDL_GetError());
 		ret = update_status::UPDATE_ERROR;
 	}
-	if (!App->render->Blit(backgroundTexture, (int)secondTopPos2.x, (int)secondTopPos2.y, &secondTopLayer, 0.7f)) {
+	if (!App->render->Blit(backgroundTexture, (int)secondTopPos2.x, (int)secondTopPos2.y, &secondTopLayer, 0)) {
 		LOG("Cannot blit the texture in ModulePlayer %s\n", SDL_GetError());
 		ret = update_status::UPDATE_ERROR;
 	}
-	if (!App->render->Blit(backgroundTexture, (int)secondBotPos.x, (int)secondBotPos.y, &secondBottomLayer, 0.7f)) {
+	if (!App->render->Blit(backgroundTexture, (int)secondBotPos.x, (int)secondBotPos.y, &secondBottomLayer, 0)) {
 		LOG("Cannot blit the texture in ModulePlayer %s\n", SDL_GetError());
 		ret = update_status::UPDATE_ERROR;
 	}
-	if (!App->render->Blit(backgroundTexture, (int)secondBotPos2.x, (int)secondBotPos2.y, &secondBottomLayer, 0.7f)) {
+	if (!App->render->Blit(backgroundTexture, (int)secondBotPos2.x, (int)secondBotPos2.y, &secondBottomLayer, 0)) {
 		LOG("Cannot blit the texture in ModulePlayer %s\n", SDL_GetError());
 		ret = update_status::UPDATE_ERROR;
 	}
 	//renderThirdLayers
-	if (!App->render->Blit(backgroundTexture, (int)thirdTopPos.x, (int)thirdTopPos.y, &thirdTopLayer, 0.7f)) {
+	if (!App->render->Blit(backgroundTexture, (int)thirdTopPos.x, (int)thirdTopPos.y, &thirdTopLayer, 0)) {
 		LOG("Cannot blit the texture in ModulePlayer %s\n", SDL_GetError());
 		ret = update_status::UPDATE_ERROR;
 	}
-	if (!App->render->Blit(backgroundTexture, (int)thirdTopPos2.x, (int)thirdTopPos2.y, &thirdTopLayer, 0.7f)) {
+	if (!App->render->Blit(backgroundTexture, (int)thirdTopPos2.x, (int)thirdTopPos2.y, &thirdTopLayer, 0)) {
 		LOG("Cannot blit the texture in ModulePlayer %s\n", SDL_GetError());
 		ret = update_status::UPDATE_ERROR;
 	}
-	if (!App->render->Blit(backgroundTexture, (int)thirdBotPos.x, (int)thirdBotPos.y, &thirdBottomLayer, 0.7f)) {
+	if (!App->render->Blit(backgroundTexture, (int)thirdBotPos.x, (int)thirdBotPos.y, &thirdBottomLayer, 0)) {
 		LOG("Cannot blit the texture in ModulePlayer %s\n", SDL_GetError());
 		ret = update_status::UPDATE_ERROR;
 	}
-	if (!App->render->Blit(backgroundTexture, (int)thirdBotPos2.x, (int)thirdBotPos2.y, &thirdBottomLayer, 0.7f)) {
+	if (!App->render->Blit(backgroundTexture, (int)thirdBotPos2.x, (int)thirdBotPos2.y, &thirdBottomLayer, 0)) {
 		LOG("Cannot blit the texture in ModulePlayer %s\n", SDL_GetError());
 		ret = update_status::UPDATE_ERROR;
 	}
+	centerPosX = (int)(-(App->render->camera.x) * firstSpeed) + centerPos.x * SCREEN_SIZE;
+	centerPosX2 = (int)(-(App->render->camera.x) * firstSpeed) + centerPos2.x * SCREEN_SIZE;
 	return ret;
 }
-void ModuleLevel2::Parallax(fPoint* top, fPoint* top2, fPoint* bot, fPoint* bot2,SDL_Rect* topLayer,SDL_Rect* botLayer, float speed ) {
+void ModuleLevel2::InfiniteScrolling(fPoint* top, fPoint* top2, fPoint* bot, fPoint* bot2,SDL_Rect* topLayer,SDL_Rect* botLayer, float speed ) {
 	if (bot != nullptr) {
 		if (top->x < SCREEN_WIDTH || top2->x < SCREEN_WIDTH) {
 			top->x -= speed;
@@ -158,18 +162,25 @@ void ModuleLevel2::Parallax(fPoint* top, fPoint* top2, fPoint* bot, fPoint* bot2
 		if (top->x < SCREEN_WIDTH || top2->x < SCREEN_WIDTH) {
 			top->x -= speed;
 			top2->x -= speed;
-			
+
 		}
 		if (top2->x <= 0 && top2->x >= -1) {
 			top->x = top2->x + topLayer->w;
-		
+
 
 		}
 		else if (top->x <= 0 && top->x >= -1) {
 			top2->x = top->x + topLayer->w;
-		
+
 		}
 	}
+	
+		top = nullptr;
+		top2 = nullptr;
+		bot = nullptr;
+		bot2 = nullptr;
+		topLayer = nullptr;
+		botLayer = nullptr;
 	
 }
 bool ModuleLevel2::CleanUp() {

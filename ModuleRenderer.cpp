@@ -8,6 +8,7 @@ ModuleRenderer::ModuleRenderer() : Module() {
 	camera.x = camera.y = 0;
 	camera.w = SCREEN_WIDTH*SCREEN_SIZE;
 	camera.h = SCREEN_HEIGHT*SCREEN_SIZE;
+	
 }
 
 ModuleRenderer::~ModuleRenderer() {
@@ -95,24 +96,20 @@ bool ModuleRenderer::Blit(SDL_Texture* texture, int x, int y, SDL_Rect* section,
 
 	return ret;
 }
-bool ModuleRenderer::DrawQuad(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a, bool use_camera)
+bool ModuleRenderer::DrawQuad(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a, float speed)
 {
 	bool ret = true;
 
 	SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
 	SDL_SetRenderDrawColor(renderer, r, g, b, a);
 
-	SDL_Rect rec(rect);
-	if (use_camera)
-	{
-		rec.x = rect.x;
-		rec.y = rect.y;
-	
-		rec.w = rect.w;
-		rec.h = rect.h;
-	}
+	SDL_Rect dstRect{
+		(int)(-camera.x * speed) + rect.x * SCREEN_SIZE,
+		(int)(-camera.y * speed) + rect.y * SCREEN_SIZE,
+		rect.w * SCREEN_SIZE, rect.h * SCREEN_SIZE
+	};
 
-	if (SDL_RenderFillRect(renderer, &rec) != 0)
+	if (SDL_RenderFillRect(renderer, &dstRect) != 0)
 	{
 		LOG("Cannot draw quad to screen. SDL_RenderFillRect error: %s", SDL_GetError());
 		ret = false;

@@ -46,6 +46,9 @@ bool ModulePlayer::Init() {
 update_status ModulePlayer::Update() {
 	update_status ret = UPDATE_CONTINUE;
 
+	// Moving the player with the camera scroll
+	App->player->position.x += 2;
+
 	// Spawn explosion particles when pressing B
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_DOWN)
 	{
@@ -93,35 +96,35 @@ update_status ModulePlayer::Update() {
 		position.x += 5;
 	}
 
-	//Avoiding the spaceship to get out of the screen
-	if (position.x < 0)
-	{
-		position.x = 0;
+	////Avoiding the spaceship to get out of the screen
+	//if (position.x < 0)
+	//{
+	//	position.x = 0;
 
-		//Playing collision sound effect (if we touch the border of the screen)
-		App->audio->PlayFx(1, 0);
-	}
-	if (position.y <= 0)
-	{
-		position.y = 0;
+	//	//Playing collision sound effect (if we touch the border of the screen)
+	//	App->audio->PlayFx(1, 0);
+	//}
+	//if (position.y <= 0)
+	//{
+	//	position.y = 0;
 
-		//Playing collision sound effect (if we touch the border of the screen)
-		App->audio->PlayFx(1, 0);
-	}
-	if (position.x > SCREEN_WIDTH - 32)
-	{
-		position.x = SCREEN_WIDTH - 32;
+	//	//Playing collision sound effect (if we touch the border of the screen)
+	//	App->audio->PlayFx(1, 0);
+	//}
+	//if (position.x > SCREEN_WIDTH - 32)
+	//{
+	//	position.x = SCREEN_WIDTH - 32;
 
-		//Playing collision sound effect (if we touch the border of the screen)
-		App->audio->PlayFx(1, 0);
-	}
-	if (position.y > SCREEN_HEIGHT - 9)
-	{
-		position.y = SCREEN_HEIGHT - 9;
+	//	//Playing collision sound effect (if we touch the border of the screen)
+	//	App->audio->PlayFx(1, 0);
+	//}
+	//if (position.y > SCREEN_HEIGHT - 9)
+	//{
+	//	position.y = SCREEN_HEIGHT - 9;
 
-		//Playing collision sound effect (if we touch the border of the screen)
-		App->audio->PlayFx(1, 0);
-	}
+	//	//Playing collision sound effect (if we touch the border of the screen)
+	//	App->audio->PlayFx(1, 0);
+	//}
 
 	return ret;
 }
