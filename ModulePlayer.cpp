@@ -47,7 +47,7 @@ update_status ModulePlayer::Update() {
 	update_status ret = UPDATE_CONTINUE;
 
 	// Moving the player with the camera scroll
-	App->player->position.x += 2;
+	App->player->position.x += 1;
 
 	// Spawn explosion particles when pressing B
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_DOWN)

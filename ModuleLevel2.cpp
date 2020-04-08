@@ -56,8 +56,8 @@ bool ModuleLevel2::Start() {
 update_status ModuleLevel2::Update(){
 	update_status ret = update_status::UPDATE_CONTINUE;
 	
-	
-	App->render->camera.x += 6;
+	App->render->camera.x += 3;
+
 	//center layers movement
 	InfiniteScrolling(&centerPos, &centerPos2, nullptr, nullptr, &centerLayer, nullptr, centerSpeed);
 
@@ -77,101 +77,87 @@ update_status ModuleLevel2::Update(){
 update_status ModuleLevel2::PostUpdate() {
 	update_status ret = UPDATE_CONTINUE;
 	//Render center layers
-	if (!App->render->Blit(backgroundTexture, (int)centerPos.x, (int)centerPos.y, &centerLayer,0)) {
+	if (!App->render->Blit(backgroundTexture, (int)centerPos.x, (int)centerPos.y, &centerLayer,centerSpeed)) {
 		LOG("Cannot blit the texture in ModulePlayer %s\n", SDL_GetError());
 		ret = update_status::UPDATE_ERROR;
 	}
-	if (!App->render->Blit(backgroundTexture, (int)centerPos2.x, (int)centerPos2.y, &centerLayer, 0)) {
+	if (!App->render->Blit(backgroundTexture, (int)centerPos2.x, (int)centerPos2.y, &centerLayer, centerSpeed)) {
 		LOG("Cannot blit the texture in ModulePlayer %s\n", SDL_GetError());
 		ret = update_status::UPDATE_ERROR;
 	}
 	//renderFirstLayers
-	if (!App->render->Blit(backgroundTexture, (int)firstTopPos.x, (int)firstTopPos.y, &firstTopLayer, 0)) {
+	if (!App->render->Blit(backgroundTexture, (int)firstTopPos.x, (int)firstTopPos.y, &firstTopLayer, firstSpeed)) {
 		LOG("Cannot blit the texture in ModulePlayer %s\n", SDL_GetError());
 		ret = update_status::UPDATE_ERROR;
 	}
-	if (!App->render->Blit(backgroundTexture, (int)firstTopPos2.x, (int)firstTopPos2.y, &firstTopLayer, 0)) {
+	if (!App->render->Blit(backgroundTexture, (int)firstTopPos2.x, (int)firstTopPos2.y, &firstTopLayer, firstSpeed)) {
 		LOG("Cannot blit the texture in ModulePlayer %s\n", SDL_GetError());
 		ret = update_status::UPDATE_ERROR;
 	}
-	if (!App->render->Blit(backgroundTexture, (int)firstBotPos.x, (int)firstBotPos.y, &firstBottomLayer, 0)) {
+	if (!App->render->Blit(backgroundTexture, (int)firstBotPos.x, (int)firstBotPos.y, &firstBottomLayer, firstSpeed)) {
 		LOG("Cannot blit the texture in ModulePlayer %s\n", SDL_GetError());
 		ret = update_status::UPDATE_ERROR;
 	}
-	if (!App->render->Blit(backgroundTexture, (int)firstBotPos2.x, (int)firstBotPos2.y, &firstBottomLayer, 0)) {
+	if (!App->render->Blit(backgroundTexture, (int)firstBotPos2.x, (int)firstBotPos2.y, &firstBottomLayer, firstSpeed)) {
 		LOG("Cannot blit the texture in ModulePlayer %s\n", SDL_GetError());
 		ret = update_status::UPDATE_ERROR;
 	}
 	//renderSecondLayers
-	if (!App->render->Blit(backgroundTexture, (int)secondTopPos.x, (int)secondTopPos.y, &secondTopLayer, 0)) {
+	if (!App->render->Blit(backgroundTexture, (int)secondTopPos.x, (int)secondTopPos.y, &secondTopLayer,secondSpeed )) {
 		LOG("Cannot blit the texture in ModulePlayer %s\n", SDL_GetError());
 		ret = update_status::UPDATE_ERROR;
 	}
-	if (!App->render->Blit(backgroundTexture, (int)secondTopPos2.x, (int)secondTopPos2.y, &secondTopLayer, 0)) {
+	if (!App->render->Blit(backgroundTexture, (int)secondTopPos2.x, (int)secondTopPos2.y, &secondTopLayer, secondSpeed)) {
 		LOG("Cannot blit the texture in ModulePlayer %s\n", SDL_GetError());
 		ret = update_status::UPDATE_ERROR;
 	}
-	if (!App->render->Blit(backgroundTexture, (int)secondBotPos.x, (int)secondBotPos.y, &secondBottomLayer, 0)) {
+	if (!App->render->Blit(backgroundTexture, (int)secondBotPos.x, (int)secondBotPos.y, &secondBottomLayer, secondSpeed)) {
 		LOG("Cannot blit the texture in ModulePlayer %s\n", SDL_GetError());
 		ret = update_status::UPDATE_ERROR;
 	}
-	if (!App->render->Blit(backgroundTexture, (int)secondBotPos2.x, (int)secondBotPos2.y, &secondBottomLayer, 0)) {
+	if (!App->render->Blit(backgroundTexture, (int)secondBotPos2.x, (int)secondBotPos2.y, &secondBottomLayer, secondSpeed)) {
 		LOG("Cannot blit the texture in ModulePlayer %s\n", SDL_GetError());
 		ret = update_status::UPDATE_ERROR;
 	}
 	//renderThirdLayers
-	if (!App->render->Blit(backgroundTexture, (int)thirdTopPos.x, (int)thirdTopPos.y, &thirdTopLayer, 0)) {
+	if (!App->render->Blit(backgroundTexture, (int)thirdTopPos.x, (int)thirdTopPos.y, &thirdTopLayer, thirdSpeed)) {
 		LOG("Cannot blit the texture in ModulePlayer %s\n", SDL_GetError());
 		ret = update_status::UPDATE_ERROR;
 	}
-	if (!App->render->Blit(backgroundTexture, (int)thirdTopPos2.x, (int)thirdTopPos2.y, &thirdTopLayer, 0)) {
+	if (!App->render->Blit(backgroundTexture, (int)thirdTopPos2.x, (int)thirdTopPos2.y, &thirdTopLayer, thirdSpeed)) {
 		LOG("Cannot blit the texture in ModulePlayer %s\n", SDL_GetError());
 		ret = update_status::UPDATE_ERROR;
 	}
-	if (!App->render->Blit(backgroundTexture, (int)thirdBotPos.x, (int)thirdBotPos.y, &thirdBottomLayer, 0)) {
+	if (!App->render->Blit(backgroundTexture, (int)thirdBotPos.x, (int)thirdBotPos.y, &thirdBottomLayer, thirdSpeed)) {
 		LOG("Cannot blit the texture in ModulePlayer %s\n", SDL_GetError());
 		ret = update_status::UPDATE_ERROR;
 	}
-	if (!App->render->Blit(backgroundTexture, (int)thirdBotPos2.x, (int)thirdBotPos2.y, &thirdBottomLayer, 0)) {
+	if (!App->render->Blit(backgroundTexture, (int)thirdBotPos2.x, (int)thirdBotPos2.y, &thirdBottomLayer, thirdSpeed)) {
 		LOG("Cannot blit the texture in ModulePlayer %s\n", SDL_GetError());
 		ret = update_status::UPDATE_ERROR;
 	}
-	centerPosX = (int)(-(App->render->camera.x) * firstSpeed) + centerPos.x * SCREEN_SIZE;
-	centerPosX2 = (int)(-(App->render->camera.x) * firstSpeed) + centerPos2.x * SCREEN_SIZE;
+
 	return ret;
 }
 void ModuleLevel2::InfiniteScrolling(fPoint* top, fPoint* top2, fPoint* bot, fPoint* bot2,SDL_Rect* topLayer,SDL_Rect* botLayer, float speed ) {
 	if (bot != nullptr) {
-		if (top->x < SCREEN_WIDTH || top2->x < SCREEN_WIDTH) {
-			top->x -= speed;
-			top2->x -= speed;
-			bot->x -= speed;
-			bot2->x -= speed;
-		}
-		if (top2->x <= 0 && top2->x >= -1) {
+		
+		if ((App->render->camera.x * speed) >= top2->x * SCREEN_SIZE && top->x * SCREEN_SIZE <= top2->x * SCREEN_SIZE) {
 			top->x = top2->x + topLayer->w;
 			bot->x = bot2->x + botLayer->w;
-
 		}
-		else if (top->x <= 0 && top->x >= -1) {
+		else if ((App->render->camera.x * speed) >= top->x * SCREEN_SIZE && top2->x * SCREEN_SIZE <= top->x * SCREEN_SIZE) {
 			top2->x = top->x + topLayer->w;
 			bot2->x = bot->x + botLayer->w;
 		}
 	}
 	else {
-		if (top->x < SCREEN_WIDTH || top2->x < SCREEN_WIDTH) {
-			top->x -= speed;
-			top2->x -= speed;
-
-		}
-		if (top2->x <= 0 && top2->x >= -1) {
+	
+		if ((App->render->camera.x*speed) >= top2->x*SCREEN_SIZE && top->x * SCREEN_SIZE <= top2->x * SCREEN_SIZE){
 			top->x = top2->x + topLayer->w;
-
-
 		}
-		else if (top->x <= 0 && top->x >= -1) {
-			top2->x = top->x + topLayer->w;
-
+		else if ((App->render->camera.x * speed) >= top->x * SCREEN_SIZE && top2->x * SCREEN_SIZE <= top->x * SCREEN_SIZE) {
+			top2->x = top->x + topLayer->w ;
 		}
 	}
 	
