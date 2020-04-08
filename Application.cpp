@@ -10,6 +10,8 @@
 #include "ModuleCollisions.h"
 #include "ModuleTransition.h"
 #include "ModuleRenderer.h"
+#include "ModuleEnemies.h"
+
 Application::Application()
 {
 	int i = 0;
@@ -20,6 +22,7 @@ Application::Application()
 
 	modules[i++] = lvl2 = new ModuleLevel2();
 	modules[i++] = player = new ModulePlayer();
+	modules[i++] = enemies = new ModuleEnemies();
 	modules[i++] = startScreen = new ModuleStartScreen();
 
 	modules[i++] = particles = new ModuleParticles();

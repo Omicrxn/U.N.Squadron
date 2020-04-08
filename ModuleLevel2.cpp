@@ -3,6 +3,7 @@
 #include "ModuleTextureManager.h"
 #include "ModulePlayer.h"
 #include "ModuleRenderer.h"
+#include "ModuleEnemies.h"
 
 ModuleLevel2::ModuleLevel2(){}
 ModuleLevel2::~ModuleLevel2(){}
@@ -50,6 +51,8 @@ bool ModuleLevel2::Start() {
 	thirdSpeed = 2.0;
 
 	App->player->Enable();
+
+	App->enemies->AddEnemy(ENEMY_TYPE::MEDIUMCAMOUFLAGEJET, 256, 80);
 	
 	return ret;
 }
