@@ -17,8 +17,9 @@ class ModuleStartScreen;
 class ModuleTransition;
 class ModuleCollisions;
 class ModuleRenderer;
+class ModuleEnemies;
 
-#define NUM_MODULES 12
+#define NUM_MODULES 13
 
 class Application
 {
@@ -43,6 +44,7 @@ public:
 	ModuleCollisions* collisions = nullptr;
 	ModuleTransition* transition = nullptr;
 	ModuleRenderer* render = nullptr;
+	ModuleEnemies* enemies = nullptr;
 
 	//Initializes all modules
 	bool Init();

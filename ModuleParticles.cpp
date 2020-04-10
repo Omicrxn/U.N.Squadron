@@ -28,7 +28,7 @@ bool ModuleParticles::Start()
 	bullet.anim.PushBack({ 393,743,12,7 });
 	bullet.anim.PushBack({ 420,743,17,7 });
 	bullet.anim.loop = true;
-	bullet.anim.speed = 0.3f;
+	bullet.anim.speed = 0.1f;
 	bullet.speed.x = 5.0f;
 	bullet.lifetime = 180;
 
