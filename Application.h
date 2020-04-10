@@ -12,12 +12,13 @@ class ModuleAudio;
 class ModulePlayer;
 class ModuleLevel2;
 class ModuleParticles;
+class ModuleInitialScreen;
 class ModuleStartScreen;
 class ModuleTransition;
 class ModuleCollisions;
 class ModuleRenderer;
 
-#define NUM_MODULES 11
+#define NUM_MODULES 12
 
 class Application
 {
@@ -36,6 +37,7 @@ public:
 	ModuleAudio* audio = nullptr;
 	ModuleLevel2* lvl2 = nullptr;
 	ModulePlayer* player = nullptr;
+	ModuleInitialScreen* initialScreen = nullptr;
 	ModuleStartScreen* startScreen = nullptr;
 	ModuleParticles* particles = nullptr;
 	ModuleCollisions* collisions = nullptr;

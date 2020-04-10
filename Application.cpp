@@ -6,6 +6,7 @@
 #include "ModuleLevel2.h"
 #include "ModulePlayer.h"
 #include "ModuleParticles.h"
+#include "ModuleInitialScreen.h"
 #include "ModuleStartScreen.h"
 #include "ModuleCollisions.h"
 #include "ModuleTransition.h"
@@ -21,6 +22,7 @@ Application::Application()
 	modules[i++] = lvl2 = new ModuleLevel2();
 	modules[i++] = player = new ModulePlayer();
 	modules[i++] = startScreen = new ModuleStartScreen();
+	modules[i++] = initialScreen = new ModuleInitialScreen();
 
 	modules[i++] = particles = new ModuleParticles();
 	modules[i++] = collisions = new ModuleCollisions();
@@ -44,9 +46,10 @@ Application::~Application()
 bool Application::Init()
 {
 	bool ret = true;
+	//initialScreen->Disable();
 	startScreen->Disable();
-	/*player->Disable();
-	lvl2->Disable();*/
+	player->Disable();
+	lvl2->Disable();
 
 	for (int i = 0; i < NUM_MODULES && ret == true; ++i)
 	{

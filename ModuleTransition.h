@@ -12,7 +12,6 @@ public:
 	~ModuleTransition();
 
 	bool Start();
-	update_status Update();
 	update_status PostUpdate();
 	bool TransitionStart(Module* module_off, Module* module_on, float time = 2.0f);
 	bool TransitionEnd();

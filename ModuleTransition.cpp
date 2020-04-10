@@ -20,7 +20,7 @@ bool ModuleTransition::Start(){
 	return true;
 }
 
-update_status ModuleTransition::Update()
+update_status ModuleTransition::PostUpdate()
 {
 	if (current_step == fade_step::none)
 		return UPDATE_CONTINUE;
@@ -36,7 +36,6 @@ update_status ModuleTransition::Update()
 		{
 			this->moduleOff->Disable();
 			this->moduleOn->Enable();
-
 			total_time += total_time;
 			start_time = SDL_GetTicks();
 			current_step = fade_step::fade_from_black;
@@ -54,16 +53,12 @@ update_status ModuleTransition::Update()
 	}
 
 	
-
-	return UPDATE_CONTINUE;
-}
-update_status ModuleTransition::PostUpdate() {
-	update_status ret = UPDATE_CONTINUE;
 	// Finally render the black square with alpha on the screen
 	SDL_SetRenderDrawColor(App->render->renderer, 0, 0, 0, (Uint8)(normalized * 255.0f));
 	SDL_RenderFillRect(App->render->renderer, &screen);
-	return ret;
+	return UPDATE_CONTINUE;
 }
+
 
 
 

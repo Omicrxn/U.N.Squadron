@@ -30,8 +30,7 @@ public:
 	SDL_Rect firstBottomLayer;
 	SDL_Rect secondBottomLayer;
 	SDL_Rect thirdBottomLayer;
-	/*int centerPosX = 0;
-	int centerPosX2 = 256;*/
+	
 	fPoint centerPos,firstTopPos,secondTopPos,thirdTopPos,firstBotPos, secondBotPos, thirdBotPos;
 	fPoint centerPos2,firstTopPos2,secondTopPos2,thirdTopPos2,firstBotPos2, secondBotPos2, thirdBotPos2;
 	float centerSpeed, firstSpeed, secondSpeed, thirdSpeed;
