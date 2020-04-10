@@ -51,7 +51,11 @@ update_status ModulePlayer::Update() {
 
 	// Moving the player with the camera scroll
 	App->player->position.x += 1;
-
+	//God Mode
+	if (App->input->keyboard[SDL_SCANCODE_F5] == KEY_DOWN)
+	{
+	}
+		
 	// Spawn explosion particles when pressing B
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_DOWN)
 	{

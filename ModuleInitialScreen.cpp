@@ -37,15 +37,10 @@ update_status ModuleInitialScreen::Update() {
 	
 	actualTime = startTime + SDL_GetTicks();
 	
-	 /*if (actualTime >= endTime && actualTime <= endTime+100) {
+	 if (actualTime >= endTime && actualTime <= endTime+100) {
 		 App->transition->TransitionStart(this, App->startScreen);
 
-			}*/
-	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN) {
-		
-			App->transition->TransitionStart(this, App->startScreen);
-		
-	}
+			}
 	
 	return ret;
 }
