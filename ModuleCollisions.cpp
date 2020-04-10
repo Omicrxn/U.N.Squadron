@@ -173,6 +173,22 @@ Collider* ModuleCollisions::AddCollider(SDL_Rect rect, Collider::Type type, Modu
 
 	return ret;
 }
+bool ModuleCollisions::DeleteCollider(Collider* collider) {
+	if (collider != nullptr)
+	{
+		for (uint i = 0; i < MAX_COLLIDERS; ++i)
+		{
+			if (colliders[i] == collider)
+			{
+				collider->pendingToDelete = true;
+				break;
+			}
+		}
+	}
+
+
+	return false;
+}
 
 
 //Collider class
@@ -191,5 +207,5 @@ bool Collider::Intersects(const SDL_Rect& r) const
 {
 	// TODO 1:	Return true if there is an overlap
 	//			between argument "r" and property "rect"
-	return false;
+	return (rect.x < r.x + r.w && rect.x + rect.w>r.x && rect.y > r.y + r.h && rect.h + rect.y > r.y);
 }

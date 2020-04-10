@@ -54,6 +54,14 @@ update_status ModulePlayer::Update() {
 	//God Mode
 	if (App->input->keyboard[SDL_SCANCODE_F5] == KEY_DOWN)
 	{
+		godMode = !godMode;
+		if (godMode) {
+			App->collisions->DeleteCollider(collider);
+			collider = nullptr;
+		}
+		else {
+			collider = App->collisions->AddCollider({ position.x, position.y, 32, 16 }, Collider::Type::PLAYER, this);
+		}
 	}
 		
 	// Spawn explosion particles when pressing B
@@ -104,7 +112,10 @@ update_status ModulePlayer::Update() {
 	}
 
 	// Update collider position to player position
-	collider->SetPos(position.x, position.y);
+	if (collider != nullptr) {
+		collider->SetPos(position.x, position.y);
+
+	}
 
 	return ret;
 }

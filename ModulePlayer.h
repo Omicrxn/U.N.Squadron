@@ -27,6 +27,7 @@ private:
 	Animation* current_anim = nullptr;
 	Animation playerAnim;
 	SDL_Rect rectAnim;
+	bool godMode;
 };
 
 #endif // __MODULEPLAYER_H__
