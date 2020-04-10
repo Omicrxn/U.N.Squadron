@@ -65,6 +65,8 @@ public:
 
 	// Adds a new collider to the list
 	Collider* AddCollider(SDL_Rect rect, Collider::Type type, Module* listener = nullptr);
+	//Delete collider to the list
+	bool DeleteCollider(Collider* collider);
 
 
 	// Draws all existing colliders with some transparency
