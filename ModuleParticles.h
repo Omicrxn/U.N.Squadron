@@ -105,5 +105,6 @@ public:
 	//Template particle for an explosion
 	Particle explosion;
 	Particle bullet;
+	Particle enemyBullet;
 };
 #endif

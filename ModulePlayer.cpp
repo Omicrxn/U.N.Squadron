@@ -34,6 +34,9 @@ bool ModulePlayer::Start() {
 	//Loading collision sound effect
 	App->audio->LoadFx("Assets/music/events/collisionswithobjects.wav");
 
+	// Add a collider to the player
+	collider = App->collisions->AddCollider({ position.x, position.y, 32, 16 }, Collider::Type::PLAYER, this);
+
 	return ret;
 }
 
@@ -96,35 +99,8 @@ update_status ModulePlayer::Update() {
 		position.x += 5;
 	}
 
-	////Avoiding the spaceship to get out of the screen
-	//if (position.x < 0)
-	//{
-	//	position.x = 0;
-
-	//	//Playing collision sound effect (if we touch the border of the screen)
-	//	App->audio->PlayFx(1, 0);
-	//}
-	//if (position.y <= 0)
-	//{
-	//	position.y = 0;
-
-	//	//Playing collision sound effect (if we touch the border of the screen)
-	//	App->audio->PlayFx(1, 0);
-	//}
-	//if (position.x > SCREEN_WIDTH - 32)
-	//{
-	//	position.x = SCREEN_WIDTH - 32;
-
-	//	//Playing collision sound effect (if we touch the border of the screen)
-	//	App->audio->PlayFx(1, 0);
-	//}
-	//if (position.y > SCREEN_HEIGHT - 9)
-	//{
-	//	position.y = SCREEN_HEIGHT - 9;
-
-	//	//Playing collision sound effect (if we touch the border of the screen)
-	//	App->audio->PlayFx(1, 0);
-	//}
+	// Update collider position to player position
+	collider->SetPos(position.x, position.y);
 
 	return ret;
 }

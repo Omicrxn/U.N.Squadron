@@ -18,6 +18,9 @@ public:
 	update_status PostUpdate();
 	bool CleanUp();
 
+	// The player's collider
+	Collider* collider = nullptr;
+
 private:
 	iPoint position;
 	SDL_Texture* texture = nullptr;

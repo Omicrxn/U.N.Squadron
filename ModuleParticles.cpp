@@ -22,15 +22,25 @@ bool ModuleParticles::Start()
 	LOG("Loading particles");
 	texture = App->textures->Load("Assets/sprites/playablecharacters/aircrafts.png");
 
-	//Bullet Animaiton
+	//Bullet Animaton
 	bullet.anim.PushBack({ 239,744,12,6 });
 	bullet.anim.PushBack({ 356,743,17,7 });
 	bullet.anim.PushBack({ 393,743,12,7 });
 	bullet.anim.PushBack({ 420,743,17,7 });
 	bullet.anim.loop = true;
-	bullet.anim.speed = 0.1f;
+	bullet.anim.speed = 0.05f;
 	bullet.speed.x = 5.0f;
 	bullet.lifetime = 180;
+
+	//Enemy Bullet Animaton
+	enemyBullet.anim.PushBack({ 239,744,12,6 });
+	enemyBullet.anim.PushBack({ 356,743,17,7 });
+	enemyBullet.anim.PushBack({ 393,743,12,7 });
+	enemyBullet.anim.PushBack({ 420,743,17,7 });
+	enemyBullet.anim.loop = true;
+	enemyBullet.anim.speed = 0.05f;
+	enemyBullet.speed.x = -5.0f;
+	enemyBullet.lifetime = 180;
 
 	return true;
 }

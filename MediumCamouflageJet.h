@@ -15,6 +15,9 @@ public:
 	// Position will be updated depending on the speed defined at each step
 	void Update() override;
 
+	// The medium camouflage jet collider
+	Collider* collider = nullptr;
+
 private:
 	// A set of steps that define the position in the screen
 	// And an animation for each step
@@ -23,6 +26,8 @@ private:
 	// This enemy has one sprite and one frame
 	// We are keeping it an animation for consistency with other enemies
 	Animation fly;
+
+	int shootingFrequency;
 };
 
 #endif // __MEDIUMCAMOUFLAGEJET_H__
