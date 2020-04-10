@@ -9,6 +9,7 @@ ModuleInput::ModuleInput() : Module()
 	for (uint i = 0; i < MAX_KEYS; ++i)
 		keyboard[i] = KEY_IDLE;
 }
+
 // Destructor
 ModuleInput::~ModuleInput()
 {
@@ -58,6 +59,7 @@ update_status ModuleInput::PreUpdate() {
 	if (keyboard[SDL_SCANCODE_ESCAPE]) {
 		return update_status::UPDATE_STOP;
 	}
+
 	//CHECKS IF WINDOW X IS CLICKED TO CLOSE
 	SDL_Event event;
 	while (SDL_PollEvent(&event))
@@ -73,10 +75,10 @@ update_status ModuleInput::PreUpdate() {
 	}
 	return update_status:: UPDATE_CONTINUE;
 }
+
 // Called before quitting
 bool ModuleInput::CleanUp()
 {
-
 	LOG("Quitting SDL input event subsystem");
 	SDL_QuitSubSystem(SDL_INIT_EVENTS);
 	return true;

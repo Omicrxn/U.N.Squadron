@@ -35,10 +35,12 @@ bool ModuleParticles::Start()
 	bullet.lifetime = 180;
 
 	//Enemy Bullet Animaton
-	enemyBullet.anim.PushBack({ 239,744,12,6 });
+	enemyBullet.anim.PushBack({ 292,744,17,6 });
+	enemyBullet.anim.PushBack({ 329,744,12,6 });
 	enemyBullet.anim.PushBack({ 356,743,17,7 });
 	enemyBullet.anim.PushBack({ 393,743,12,7 });
 	enemyBullet.anim.PushBack({ 420,743,17,7 });
+	enemyBullet.anim.PushBack({ 457,743,12,7 });
 	enemyBullet.anim.loop = true;
 	enemyBullet.anim.speed = 0.05f;
 	enemyBullet.speed.x = -5.0f;

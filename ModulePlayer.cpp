@@ -51,9 +51,11 @@ update_status ModulePlayer::Update() {
 
 	// Moving the player with the camera scroll
 	App->player->position.x += 1;
+	
 	//God Mode
 	if (App->input->keyboard[SDL_SCANCODE_F5] == KEY_DOWN)
 	{
+
 	}
 		
 	// Spawn explosion particles when pressing B
@@ -112,10 +114,13 @@ update_status ModulePlayer::Update() {
 update_status ModulePlayer::PostUpdate() {
 	update_status ret = UPDATE_CONTINUE;
 	//blit player
-	if (!App->render->Blit(texture, position.x, position.y, &rectAnim)) {
-		ret = UPDATE_ERROR;
+	if (!destroyed)
+	{
+		if (!App->render->Blit(texture, position.x, position.y, &rectAnim)) {
+			ret = UPDATE_ERROR;
+		}
+		return ret;
 	}
-	return ret;
 }
 
 bool ModulePlayer::CleanUp() {
@@ -124,4 +129,16 @@ bool ModulePlayer::CleanUp() {
 	App->textures->Unload(texture);
 
 	return ret;
+}
+
+void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
+{
+	// TODO 5: Detect collision with a wall. If so, go back to intro screen.
+	if (c1 == collider && destroyed == false)
+	{
+		//Playing explosion sound effect
+		App->audio->PlayFx(1, 0);
+
+		destroyed = true;
+	}
 }
