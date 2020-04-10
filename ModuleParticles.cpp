@@ -23,12 +23,10 @@ bool ModuleParticles::Start()
 	texture = App->textures->Load("Assets/sprites/playablecharacters/aircrafts.png");
 
 	//Bullet Animaton
-	bullet.anim.PushBack({ 292,744,17,6 });
-	bullet.anim.PushBack({ 329,744,12,6 });
+	bullet.anim.PushBack({ 239,744,12,6 });
 	bullet.anim.PushBack({ 356,743,17,7 });
 	bullet.anim.PushBack({ 393,743,12,7 });
 	bullet.anim.PushBack({ 420,743,17,7 });
-	bullet.anim.PushBack({ 457,743,12,7 });
 	bullet.anim.loop = true;
 	bullet.anim.speed = 0.05f;
 	bullet.speed.x = 5.0f;
@@ -91,8 +89,6 @@ update_status ModuleParticles::Update()
 			delete particle;
 			particles[i] = nullptr;
 		}
-		
-		
 	}
 	
 	return update_status::UPDATE_CONTINUE;
