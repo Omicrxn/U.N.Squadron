@@ -23,6 +23,7 @@ bool ModulePlayer::Start() {
 	//Position of the spaceship in the screen
 	position.x = 10;
 	position.y = 10;
+
 	//Position of the rectangle that we are getting from the image we load
 	playerAnim.PushBack({ 155,187,32,9 });
 	playerAnim.PushBack({ 190,186,32,12 });
@@ -115,7 +116,6 @@ update_status ModulePlayer::Update() {
 	// Update collider position to player position
 	if (collider != nullptr) {
 		collider->SetPos(position.x, position.y);
-
 	}
 
 	return ret;
@@ -129,8 +129,8 @@ update_status ModulePlayer::PostUpdate() {
 		if (!App->render->Blit(texture, position.x, position.y, &rectAnim)) {
 			ret = UPDATE_ERROR;
 		}
-		return ret;
 	}
+	return ret;
 }
 
 bool ModulePlayer::CleanUp() {
@@ -146,6 +146,12 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 	// TODO 5: Detect collision with a wall. If so, go back to intro screen.
 	if (c1 == collider && destroyed == false)
 	{
+		App->particles->AddParticle(App->particles->explosion, position.x, position.y, Collider::Type::NONE, 9);
+		App->particles->AddParticle(App->particles->explosion, position.x, position.y, Collider::Type::NONE, 14);
+		App->particles->AddParticle(App->particles->explosion, position.x, position.y, Collider::Type::NONE, 40);
+		App->particles->AddParticle(App->particles->explosion, position.x, position.y, Collider::Type::NONE, 28);
+		App->particles->AddParticle(App->particles->explosion, position.x, position.y, Collider::Type::NONE, 21);
+
 		//Playing explosion sound effect
 		App->audio->PlayFx(1, 0);
 

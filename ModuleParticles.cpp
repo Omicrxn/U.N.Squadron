@@ -21,6 +21,7 @@ bool ModuleParticles::Start()
 {
 	LOG("Loading particles");
 	texture = App->textures->Load("Assets/sprites/playablecharacters/aircrafts.png");
+	texture2 = App->textures->Load("Assets/sprites/explosions/explosions.png");
 
 	//Bullet Animaton
 	bullet.anim.PushBack({ 292,744,17,6 });
@@ -45,6 +46,16 @@ bool ModuleParticles::Start()
 	enemyBullet.anim.speed = 0.05f;
 	enemyBullet.speed.x = -5.0f;
 	enemyBullet.lifetime = 180;
+
+	//Explosion Animation
+	explosion.anim.PushBack({ 27, 128, 40, 41 });
+	explosion.anim.PushBack({ 78, 127, 41, 64 });
+	explosion.anim.PushBack({ 130, 127, 45, 57 });
+	explosion.anim.PushBack({ 188, 127, 42, 43 });
+	explosion.anim.PushBack({ 244, 127, 37, 19 });
+	enemyBullet.anim.loop = true;
+	enemyBullet.anim.speed = 0.05f;
+	enemyBullet.lifetime = 200;
 
 	return true;
 }
@@ -108,6 +119,7 @@ update_status ModuleParticles::PostUpdate()
 		if (particle != nullptr && particle->isAlive)
 		{
 			App->render->Blit(texture, particle->position.x, particle->position.y, &(particle->anim.GetCurrentFrame()));
+			App->render->Blit(texture2, particle->position.x, particle->position.y, &(particle->anim.GetCurrentFrame()));
 		}
 	}
 

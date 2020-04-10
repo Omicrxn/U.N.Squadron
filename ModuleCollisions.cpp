@@ -207,5 +207,8 @@ bool Collider::Intersects(const SDL_Rect& r) const
 {
 	// TODO 1:	Return true if there is an overlap
 	//			between argument "r" and property "rect"
-	return (rect.x < r.x + r.w && rect.x + rect.w>r.x && rect.y > r.y + r.h && rect.h + rect.y > r.y);
+	return (rect.x < r.x + r.w &&
+		rect.x + rect.w > r.x &&
+		rect.y < r.y + r.h &&
+		rect.y + rect.h > r.y);
 }
