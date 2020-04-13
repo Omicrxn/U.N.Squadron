@@ -53,6 +53,20 @@ update_status ModulePlayer::Update() {
 	// Moving the player with the camera scroll
 	App->player->position.x += 0;
 	
+	if (position.x < App->render->camera.x) {
+		position.x = App->render->camera.x;
+	}
+	else if (position.x > App->render->camera.x + SCREEN_WIDTH) { // Or camera.w?
+		position.x = App->render->camera.x + SCREEN_WIDTH;
+	}
+
+	if (position.y < App->render->camera.y) {
+		position.y = App->render->camera.y;
+	}
+	else if (position.y > App->render->camera.x + SCREEN_HEIGHT) { // Or camera.h?
+		position.y = App->render->camera.x + SCREEN_HEIGHT;
+	}
+
 	//God Mode
 	if (App->input->keyboard[SDL_SCANCODE_F5] == KEY_DOWN)
 	{
@@ -66,7 +80,7 @@ update_status ModulePlayer::Update() {
 		}
 	}
 		
-	// Spawn explosion particles when pressing B
+	// Spawn explosion particles when pressing SPACE
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_DOWN && !destroyed)
 	{
 		App->particles->AddParticle(App->particles->bullet, position.x + 32, position.y, Collider::Type::PLAYER_SHOT);
