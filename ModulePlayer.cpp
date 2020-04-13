@@ -56,15 +56,15 @@ update_status ModulePlayer::Update() {
 	if (position.x < App->render->camera.x) {
 		position.x = App->render->camera.x;
 	}
-	else if (position.x > App->render->camera.x + SCREEN_WIDTH) { // Or camera.w?
-		position.x = App->render->camera.x + SCREEN_WIDTH;
+	else if (position.x > App->render->camera.x + (App->render->camera.w / SCREEN_SIZE)) { // Or camera.w?
+		position.x = App->render->camera.x + ((App->render->camera.w)/SCREEN_SIZE)-32;
 	}
 
 	if (position.y < App->render->camera.y) {
 		position.y = App->render->camera.y;
 	}
-	else if (position.y > App->render->camera.x + SCREEN_HEIGHT) { // Or camera.h?
-		position.y = App->render->camera.x + SCREEN_HEIGHT;
+	else if (position.y > App->render->camera.y + (App->render->camera.w / SCREEN_SIZE)) { // Or camera.h?
+		position.y = App->render->camera.y + ((App->render->camera.h) / SCREEN_SIZE) - 12;
 	}
 
 	//God Mode
