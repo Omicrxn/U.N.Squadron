@@ -51,7 +51,7 @@ update_status ModulePlayer::Update() {
 	update_status ret = UPDATE_CONTINUE;
 
 	// Moving the player with the camera scroll
-	App->player->position.x += 1;
+	App->player->position.x += 0;
 	
 	//God Mode
 	if (App->input->keyboard[SDL_SCANCODE_F5] == KEY_DOWN)
@@ -67,7 +67,7 @@ update_status ModulePlayer::Update() {
 	}
 		
 	// Spawn explosion particles when pressing B
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_DOWN)
+	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_DOWN && !destroyed)
 	{
 		App->particles->AddParticle(App->particles->bullet, position.x + 32, position.y, Collider::Type::PLAYER_SHOT);
 
@@ -104,6 +104,7 @@ update_status ModulePlayer::Update() {
 		rectAnim = current_anim->GetFrame(2);
 	}
 	
+	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_REPEAT)
 	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_REPEAT)
 	{
 		position.x -= 5;
@@ -147,14 +148,12 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 	if (c1 == collider && destroyed == false)
 	{
 		App->particles->AddParticle(App->particles->explosion, position.x, position.y, Collider::Type::NONE, 9);
-		App->particles->AddParticle(App->particles->explosion, position.x, position.y, Collider::Type::NONE, 14);
-		App->particles->AddParticle(App->particles->explosion, position.x, position.y, Collider::Type::NONE, 40);
-		App->particles->AddParticle(App->particles->explosion, position.x, position.y, Collider::Type::NONE, 28);
-		App->particles->AddParticle(App->particles->explosion, position.x, position.y, Collider::Type::NONE, 21);
+		
 
 		//Playing explosion sound effect
 		App->audio->PlayFx(1, 0);
 
 		destroyed = true;
+		
 	}
 }

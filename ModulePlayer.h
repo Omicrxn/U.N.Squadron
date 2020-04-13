@@ -34,7 +34,6 @@ private:
 	Animation playerAnim;
 	SDL_Rect rectAnim;
 	bool godMode;
-	Animation explosion;
 };
 
 #endif // __MODULEPLAYER_H__

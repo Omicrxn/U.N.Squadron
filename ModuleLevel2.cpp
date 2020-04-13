@@ -59,7 +59,7 @@ bool ModuleLevel2::Start() {
 update_status ModuleLevel2::Update(){
 	update_status ret = update_status::UPDATE_CONTINUE;
 	
-	App->render->camera.x += 3;
+	App->render->camera.x += 0;
 
 	//center layers movement
 	InfiniteScrolling(&centerPos, &centerPos2, nullptr, nullptr, &centerLayer, nullptr, centerSpeed);

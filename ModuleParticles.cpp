@@ -20,28 +20,27 @@ ModuleParticles::~ModuleParticles()
 bool ModuleParticles::Start()
 {
 	LOG("Loading particles");
-	texture = App->textures->Load("Assets/sprites/playablecharacters/aircrafts.png");
-	texture2 = App->textures->Load("Assets/sprites/explosions/explosions.png");
+	particlesTexture = App->textures->Load("Assets/sprites/explosions/explosions.png");
 
 	//Bullet Animaton
-	bullet.anim.PushBack({ 292,744,17,6 });
-	bullet.anim.PushBack({ 329,744,12,6 });
-	bullet.anim.PushBack({ 356,743,17,7 });
-	bullet.anim.PushBack({ 393,743,12,7 });
-	bullet.anim.PushBack({ 420,743,17,7 });
-	bullet.anim.PushBack({ 457,743,12,7 });
+	bullet.anim.PushBack({ 27,218,17,6 });
+	bullet.anim.PushBack({ 64,218,12,6 });
+	bullet.anim.PushBack({ 91,217,17,7 });
+	bullet.anim.PushBack({ 128,217,12,7 });
+	bullet.anim.PushBack({ 155,217,17,7 });
+	bullet.anim.PushBack({ 192,217,12,7 });
 	bullet.anim.loop = true;
 	bullet.anim.speed = 0.05f;
 	bullet.speed.x = 5.0f;
 	bullet.lifetime = 180;
 
 	//Enemy Bullet Animaton
-	enemyBullet.anim.PushBack({ 292,744,17,6 });
-	enemyBullet.anim.PushBack({ 329,744,12,6 });
-	enemyBullet.anim.PushBack({ 356,743,17,7 });
-	enemyBullet.anim.PushBack({ 393,743,12,7 });
-	enemyBullet.anim.PushBack({ 420,743,17,7 });
-	enemyBullet.anim.PushBack({ 457,743,12,7 });
+	enemyBullet.anim.PushBack({ 27,218,17,6 });
+	enemyBullet.anim.PushBack({ 64,218,12,6 });
+	enemyBullet.anim.PushBack({ 91,217,17,7 });
+	enemyBullet.anim.PushBack({ 128,217,12,7 });
+	enemyBullet.anim.PushBack({ 155,217,17,7 });
+	enemyBullet.anim.PushBack({ 192,217,12,7 });
 	enemyBullet.anim.loop = true;
 	enemyBullet.anim.speed = 0.05f;
 	enemyBullet.speed.x = -5.0f;
@@ -53,9 +52,8 @@ bool ModuleParticles::Start()
 	explosion.anim.PushBack({ 130, 127, 45, 57 });
 	explosion.anim.PushBack({ 188, 127, 42, 43 });
 	explosion.anim.PushBack({ 244, 127, 37, 19 });
-	enemyBullet.anim.loop = true;
-	enemyBullet.anim.speed = 0.05f;
-	enemyBullet.lifetime = 200;
+	explosion.anim.loop = true;
+	explosion.anim.speed = 0.1f;
 
 	return true;
 }
@@ -73,6 +71,8 @@ bool ModuleParticles::CleanUp()
 			particles[i] = nullptr;
 		}
 	}
+	App->textures->Unload(particlesTexture);
+
 
 	return true;
 }
@@ -118,8 +118,7 @@ update_status ModuleParticles::PostUpdate()
 
 		if (particle != nullptr && particle->isAlive)
 		{
-			App->render->Blit(texture, particle->position.x, particle->position.y, &(particle->anim.GetCurrentFrame()));
-			App->render->Blit(texture2, particle->position.x, particle->position.y, &(particle->anim.GetCurrentFrame()));
+			App->render->Blit(particlesTexture, particle->position.x, particle->position.y, &(particle->anim.GetCurrentFrame()));
 		}
 	}
 
