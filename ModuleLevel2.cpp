@@ -56,6 +56,8 @@ bool ModuleLevel2::Start() {
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
 	App->enemies->AddEnemy(ENEMY_TYPE::MEDIUMCAMOUFLAGEJET, 256, 80);
+	App->enemies->AddEnemy(ENEMY_TYPE::MEDIUMCAMOUFLAGEJET, 306, 130);
+	App->enemies->AddEnemy(ENEMY_TYPE::MEDIUMCAMOUFLAGEJET, 356, 180);
 	
 	return ret;
 }
