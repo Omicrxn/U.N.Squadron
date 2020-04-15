@@ -16,6 +16,7 @@ public:
 	~ModuleLevel2();
 
 	bool Start();
+	
 	update_status Update();
 	update_status PostUpdate();
 	bool CleanUp();

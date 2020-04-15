@@ -29,6 +29,8 @@ bool ModuleStartScreen::Start(){
 		ret = false;
 	}
 	
+	App->render->camera.x = 0;
+	App->render->camera.y = 0;
 	selectorPos = {68,116};
 
 	//Playing opening music

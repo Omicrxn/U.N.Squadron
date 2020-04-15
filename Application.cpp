@@ -52,6 +52,7 @@ bool Application::Init()
 	/*initialScreen->Disable();
 	startScreen->Disable();*/
 	player->Disable();
+	enemies->Disable();
 	lvl2->Disable();
 
 	for (int i = 0; i < NUM_MODULES && ret == true; ++i)

@@ -4,6 +4,8 @@
 #include "ModuleInput.h"
 #include "ModuleParticles.h"
 #include "ModuleRenderer.h"
+#include "ModuleStartScreen.h"
+#include "ModuleFadeToBlack.h"
 #include "ModuleAudio.h"
 
 ModulePlayer::ModulePlayer() : Module() {
@@ -34,7 +36,7 @@ bool ModulePlayer::Start() {
 
 	//Loading collision sound effect
 	App->audio->LoadFx("Assets/music/events/collisionswithobjects.wav");
-
+	destroyed = false;
 	// Add a collider to the player
 	collider = App->collisions->AddCollider({ position.x, position.y, 32, 16 }, Collider::Type::PLAYER, this);
 
@@ -163,7 +165,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 	{
 		App->particles->AddParticle(App->particles->explosion, position.x, position.y, Collider::Type::NONE, 9);
 		
-
+		App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->startScreen, 60);
 		//Playing explosion sound effect
 		App->audio->PlayFx(1, 0);
 

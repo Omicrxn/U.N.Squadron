@@ -52,11 +52,14 @@ bool ModuleLevel2::Start() {
 	thirdSpeed = 2.0;
 
 	App->player->Enable();
-
+	App->enemies->Enable();
+	App->render->camera.x = 0;
+	App->render->camera.y = 0;
 	App->enemies->AddEnemy(ENEMY_TYPE::MEDIUMCAMOUFLAGEJET, 256, 80);
 	
 	return ret;
 }
+
 update_status ModuleLevel2::Update(){
 	update_status ret = update_status::UPDATE_CONTINUE;
 	
@@ -177,5 +180,7 @@ bool ModuleLevel2::CleanUp() {
 		LOG("Error unloading background textue in lvl 2");
 		ret = false;
 	}
+	App->player->Disable();
+	App->enemies->Disable();
 	return ret;
 }

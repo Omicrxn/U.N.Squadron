@@ -38,7 +38,7 @@ update_status ModuleInitialScreen::Update() {
 	actualTime = startTime + SDL_GetTicks();
 	
 	 if (actualTime >= endTime && actualTime <= endTime+100) {
-		 App->transition->FadeToBlack(this, App->startScreen);
+		 App->transition->FadeToBlack(this, App->startScreen,90);
 
 			}
 	
