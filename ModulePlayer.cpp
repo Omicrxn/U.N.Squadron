@@ -51,21 +51,21 @@ update_status ModulePlayer::Update() {
 	update_status ret = UPDATE_CONTINUE;
 
 	// Moving the player with the camera scroll
-	App->player->position.x += 0;
+	App->player->position.x += 1;
 	
-	if (position.x < App->render->camera.x) {
-		position.x = App->render->camera.x;
-	}
-	else if (position.x > App->render->camera.x + (App->render->camera.w / SCREEN_SIZE)) { // Or camera.w?
-		position.x = App->render->camera.x + ((App->render->camera.w)/SCREEN_SIZE)-32;
-	}
+	//if (position.x < App->render->camera.x) {
+	//	position.x = App->render->camera.x;
+	//}
+	//else if (position.x > App->render->camera.x + (App->render->camera.w / SCREEN_SIZE)) { // Or camera.w?
+	//	position.x = App->render->camera.x + ((App->render->camera.w)/SCREEN_SIZE)-32;
+	//}
 
-	if (position.y < App->render->camera.y) {
-		position.y = App->render->camera.y;
-	}
-	else if (position.y > App->render->camera.y + (App->render->camera.w / SCREEN_SIZE)) { // Or camera.h?
-		position.y = App->render->camera.y + ((App->render->camera.h) / SCREEN_SIZE) - 12;
-	}
+	//if (position.y < App->render->camera.y) {
+	//	position.y = App->render->camera.y;
+	//}
+	//else if (position.y > App->render->camera.y + (App->render->camera.w / SCREEN_SIZE)) { // Or camera.h?
+	//	position.y = App->render->camera.y + ((App->render->camera.h) / SCREEN_SIZE) - 12;
+	//}
 
 	//God Mode
 	if (App->input->keyboard[SDL_SCANCODE_F5] == KEY_DOWN)
@@ -158,7 +158,7 @@ bool ModulePlayer::CleanUp() {
 
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 {
-	// TODO 5: Detect collision with a wall. If so, go back to intro screen.
+	// Detect collision with a bullet or an enemy. If so, disappear and explode.
 	if (c1 == collider && destroyed == false)
 	{
 		App->particles->AddParticle(App->particles->explosion, position.x, position.y, Collider::Type::NONE, 9);
@@ -168,6 +168,5 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		App->audio->PlayFx(1, 0);
 
 		destroyed = true;
-		
 	}
 }

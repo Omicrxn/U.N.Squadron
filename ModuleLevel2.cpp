@@ -20,6 +20,7 @@ bool ModuleLevel2::Start() {
 	//secondTop & secondBottom
 	secondTopLayer = { 0,52,256,27 };
 	secondBottomLayer = { 0,184,256,30 };
+
 	//thirdTop & thirdTop
 	thirdTopLayer = {0,0,256,45};
 	thirdBottomLayer = {0,217,256,33};
@@ -59,7 +60,7 @@ bool ModuleLevel2::Start() {
 update_status ModuleLevel2::Update(){
 	update_status ret = update_status::UPDATE_CONTINUE;
 	
-	App->render->camera.x += 0;
+	App->render->camera.x += 3;
 
 	//center layers movement
 	InfiniteScrolling(&centerPos, &centerPos2, nullptr, nullptr, &centerLayer, nullptr, centerSpeed);
@@ -72,8 +73,6 @@ update_status ModuleLevel2::Update(){
 
 	//third layer movement
 	InfiniteScrolling(&thirdTopPos, &thirdTopPos2, &thirdBotPos, &thirdBotPos2, &thirdTopLayer, &thirdBottomLayer, thirdSpeed);
-	
-	
 	
 	return ret;
 }

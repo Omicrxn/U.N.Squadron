@@ -18,11 +18,11 @@ public:
 	update_status PostUpdate();
 	bool CleanUp();
 
-	// Collision callback, called when the player intersects with another collider
-	void OnCollision(Collider* c1, Collider* c2) override;
-
 	// The player's collider
 	Collider* collider = nullptr;
+
+	// Collision callback, called when the player intersects with another collider
+	void OnCollision(Collider* c1, Collider* c2) override;
 
 	// A flag to detect when the player has been destroyed
 	bool destroyed = false;
