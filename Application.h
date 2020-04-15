@@ -14,7 +14,7 @@ class ModuleLevel2;
 class ModuleParticles;
 class ModuleInitialScreen;
 class ModuleStartScreen;
-class ModuleTransition;
+class ModuleFadeToBlack;
 class ModuleCollisions;
 class ModuleRenderer;
 class ModuleEnemies;
@@ -42,7 +42,7 @@ public:
 	ModuleStartScreen* startScreen = nullptr;
 	ModuleParticles* particles = nullptr;
 	ModuleCollisions* collisions = nullptr;
-	ModuleTransition* transition = nullptr;
+	ModuleFadeToBlack* transition = nullptr;
 	ModuleRenderer* render = nullptr;
 	ModuleEnemies* enemies = nullptr;
 

@@ -1,7 +1,7 @@
 #include "ModuleInitialScreen.h"
 #include "Application.h"
 #include "ModuleTextureManager.h"
-#include "ModuleTransition.h"
+#include "ModuleFadeToBlack.h"
 #include "ModuleRenderer.h"
 #include "ModuleInput.h"
 #include "ModuleAudio.h"
@@ -38,7 +38,7 @@ update_status ModuleInitialScreen::Update() {
 	actualTime = startTime + SDL_GetTicks();
 	
 	 if (actualTime >= endTime && actualTime <= endTime+100) {
-		 App->transition->TransitionStart(this, App->startScreen);
+		 App->transition->FadeToBlack(this, App->startScreen);
 
 			}
 	

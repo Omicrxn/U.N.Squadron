@@ -1,7 +1,7 @@
 #include "ModuleStartScreen.h"
 #include "Application.h"
 #include "ModuleTextureManager.h"
-#include "ModuleTransition.h"
+#include "ModuleFadeToBlack.h"
 #include "ModuleRenderer.h"
 #include "ModuleInput.h"
 #include "ModuleAudio.h"
@@ -50,7 +50,7 @@ update_status ModuleStartScreen::Update(){
 		selectorPos = { 68,116 };
 	}
 	if ((App->input->keyboard[SDL_SCANCODE_S] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_DOWN)
-		&& selectorPos.y != 135 &&App->transition->TransitionEnd()) {
+		&& selectorPos.y != 135) {
 		selectorPos = { 68,135 };
 	}
 	
@@ -58,7 +58,7 @@ update_status ModuleStartScreen::Update(){
 		switch (selectorPos.y)
 		{
 		case 116: {
-			App->transition->TransitionStart(this, App->lvl2);
+			App->transition->FadeToBlack(this, App->lvl2,90);
 		}break;
 		case 135: {
 

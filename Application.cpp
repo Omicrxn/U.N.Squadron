@@ -9,7 +9,7 @@
 #include "ModuleInitialScreen.h"
 #include "ModuleStartScreen.h"
 #include "ModuleCollisions.h"
-#include "ModuleTransition.h"
+#include "ModuleFadeToBlack.h"
 #include "ModuleRenderer.h"
 #include "ModuleEnemies.h"
 
@@ -30,7 +30,7 @@ Application::Application()
 	modules[i++] = particles = new ModuleParticles();
 	modules[i++] = collisions = new ModuleCollisions();
 
-	modules[i++] = transition = new ModuleTransition();
+	modules[i++] = transition = new ModuleFadeToBlack();
 	modules[i++] = render = new ModuleRenderer();
 }
 Application::~Application()
@@ -49,10 +49,10 @@ Application::~Application()
 bool Application::Init()
 {
 	bool ret = true;
-	initialScreen->Disable();
-	startScreen->Disable();
-	/*player->Disable();*/
-	/*lvl2->Disable();*/
+	/*initialScreen->Disable();
+	startScreen->Disable();*/
+	player->Disable();
+	lvl2->Disable();
 
 	for (int i = 0; i < NUM_MODULES && ret == true; ++i)
 	{

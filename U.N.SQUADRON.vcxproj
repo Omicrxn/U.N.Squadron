@@ -140,6 +140,7 @@
     <ClCompile Include="ModuleAudio.cpp" />
     <ClCompile Include="ModuleCollisions.cpp" />
     <ClCompile Include="ModuleEnemies.cpp" />
+    <ClCompile Include="ModuleFadeToBlack.cpp" />
     <ClCompile Include="ModuleHUD.cpp" />
     <ClCompile Include="ModuleInitialScreen.cpp" />
     <ClCompile Include="ModuleInput.cpp" />
@@ -149,7 +150,6 @@
     <ClCompile Include="ModulePlayer.cpp" />
     <ClCompile Include="ModuleStartScreen.cpp" />
     <ClCompile Include="ModuleTextureManager.cpp" />
-    <ClCompile Include="ModuleTransition.cpp" />
     <ClCompile Include="ModuleWindow.cpp" />
     <ClCompile Include="Path.cpp" />
   </ItemGroup>
@@ -164,6 +164,7 @@
     <ClInclude Include="ModuleAudio.h" />
     <ClInclude Include="ModuleCollisions.h" />
     <ClInclude Include="ModuleEnemies.h" />
+    <ClInclude Include="ModuleFadeToBlack.h" />
     <ClInclude Include="ModuleHUD.h" />
     <ClInclude Include="ModuleInitialScreen.h" />
     <ClInclude Include="ModuleInput.h" />
@@ -173,7 +174,6 @@
     <ClInclude Include="ModulePlayer.h" />
     <ClInclude Include="ModuleStartScreen.h" />
     <ClInclude Include="ModuleTextureManager.h" />
-    <ClInclude Include="ModuleTransition.h" />
     <ClInclude Include="ModuleWindow.h" />
     <ClInclude Include="p2Point.h" />
     <ClInclude Include="Path.h" />
