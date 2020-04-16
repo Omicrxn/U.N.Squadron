@@ -12,6 +12,7 @@
 #include "ModuleFadeToBlack.h"
 #include "ModuleRenderer.h"
 #include "ModuleEnemies.h"
+#include "ModuleFonts.h"
 
 Application::Application()
 {
@@ -31,6 +32,7 @@ Application::Application()
 	modules[i++] = collisions = new ModuleCollisions(true);
 
 	modules[i++] = transition = new ModuleFadeToBlack(true);
+	modules[i++] = fonts = new ModuleFonts(true);
 	modules[i++] = render = new ModuleRenderer(true);
 }
 Application::~Application()

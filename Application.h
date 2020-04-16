@@ -18,6 +18,7 @@ class ModuleFadeToBlack;
 class ModuleCollisions;
 class ModuleRenderer;
 class ModuleEnemies;
+class ModuleFonts;
 
 #define NUM_MODULES 13
 
@@ -45,6 +46,7 @@ public:
 	ModuleFadeToBlack* transition = nullptr;
 	ModuleRenderer* render = nullptr;
 	ModuleEnemies* enemies = nullptr;
+	ModuleFonts* fonts = nullptr;
 
 	//Initializes all modules
 	bool Init();
