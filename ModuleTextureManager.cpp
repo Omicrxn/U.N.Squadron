@@ -5,7 +5,7 @@
 #include "SDL.h"
 #include "SDL_image.h"
 
-ModuleTextureManager::ModuleTextureManager() : Module() {
+ModuleTextureManager::ModuleTextureManager(bool startEnabled) : Module(startEnabled) {
 	for (uint i = 0; i < MAX_TEXTURES; i++)
 	{
 		textures[i] = nullptr;

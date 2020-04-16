@@ -5,7 +5,7 @@
 #include "ModuleInput.h"
 #include "SDL_scancode.h"
 
-ModuleCollisions::ModuleCollisions()
+ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 {
 	for (uint i = 0; i < MAX_COLLIDERS; ++i)
 		colliders[i] = nullptr;

@@ -11,7 +11,7 @@ class ModuleTextureManager : public Module
 {
 
 public:
-	ModuleTextureManager();
+	ModuleTextureManager(bool startEnabled);
 	~ModuleTextureManager();
 
 	bool Init();

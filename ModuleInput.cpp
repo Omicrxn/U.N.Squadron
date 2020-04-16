@@ -4,7 +4,7 @@
 #include "ModuleWindow.h"
 #include "SDL.h"
 
-ModuleInput::ModuleInput() : Module()
+ModuleInput::ModuleInput(bool startEnabled) : Module(startEnabled)
 {
 	for (uint i = 0; i < MAX_KEYS; ++i)
 		keyboard[i] = KEY_IDLE;

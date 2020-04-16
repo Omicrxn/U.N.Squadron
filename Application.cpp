@@ -16,22 +16,22 @@
 Application::Application()
 {
 	int i = 0;
-	modules[i++] = window = new ModuleWindow();
-	modules[i++] = input = new ModuleInput();
-	modules[i++] = textures = new ModuleTextureManager();
-	modules[i++] = audio = new ModuleAudio();
+	modules[i++] = window = new ModuleWindow(true);
+	modules[i++] = input = new ModuleInput(true);
+	modules[i++] = textures = new ModuleTextureManager(true);
+	modules[i++] = audio = new ModuleAudio(true);
 
-	modules[i++] = lvl2 = new ModuleLevel2();
-	modules[i++] = player = new ModulePlayer();
-	modules[i++] = enemies = new ModuleEnemies();
-	modules[i++] = startScreen = new ModuleStartScreen();
-	modules[i++] = initialScreen = new ModuleInitialScreen();
+	modules[i++] = initialScreen = new ModuleInitialScreen(true);
+	modules[i++] = startScreen = new ModuleStartScreen(false);
+	modules[i++] = lvl2 = new ModuleLevel2(false);
+	modules[i++] = player = new ModulePlayer(false);
+	modules[i++] = particles = new ModuleParticles(true);
+	modules[i++] = enemies = new ModuleEnemies(false);
 
-	modules[i++] = particles = new ModuleParticles();
-	modules[i++] = collisions = new ModuleCollisions();
+	modules[i++] = collisions = new ModuleCollisions(true);
 
-	modules[i++] = transition = new ModuleFadeToBlack();
-	modules[i++] = render = new ModuleRenderer();
+	modules[i++] = transition = new ModuleFadeToBlack(true);
+	modules[i++] = render = new ModuleRenderer(true);
 }
 Application::~Application()
 {
@@ -49,11 +49,6 @@ Application::~Application()
 bool Application::Init()
 {
 	bool ret = true;
-	/*initialScreen->Disable();
-	startScreen->Disable();*/
-	player->Disable();
-	enemies->Disable();
-	lvl2->Disable();
 
 	for (int i = 0; i < NUM_MODULES && ret == true; ++i)
 	{

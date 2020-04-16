@@ -12,7 +12,7 @@ struct SDL_Texture;
 class ModuleLevel2 : public Module
 {
 public:
-	ModuleLevel2();
+	ModuleLevel2(bool startEnabled);
 	~ModuleLevel2();
 
 	bool Start();

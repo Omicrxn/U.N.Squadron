@@ -64,4 +64,5 @@ public:
 };
 //To make it global and be able to access from other calses without include
 extern Application* App;
+
 #endif // __APPLICATION_H__

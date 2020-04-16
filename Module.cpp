@@ -1,5 +1,10 @@
 #include "Module.h"
 
+Module::Module(bool startEnabled) : enabled(startEnabled)
+{
+
+}
+
 bool Module::Init()
 {
 	return true;
@@ -31,4 +36,21 @@ bool Module::CleanUp()
 void Module::OnCollision(Collider* c1, Collider* c2)
 {
 
+}
+
+void Module::Enable()
+{
+	if (enabled == false)
+	{
+		enabled = true;
+		Start();
+	}
+}
+
+void Module::Disable()
+{
+	if (enabled) {
+		enabled = false;
+		CleanUp();
+	}
 }

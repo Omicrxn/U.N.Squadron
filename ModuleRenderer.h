@@ -13,7 +13,7 @@ class ModuleRenderer : public Module
 {
 
 public:
-	ModuleRenderer();
+	ModuleRenderer(bool startEnabled);
 	~ModuleRenderer();
 
 	bool Init();

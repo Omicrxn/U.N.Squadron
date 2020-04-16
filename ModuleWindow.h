@@ -11,7 +11,7 @@ class ModuleWindow : public Module
 {
 
 public:
-	ModuleWindow();
+	ModuleWindow(bool startEnabled);
 
 	virtual ~ModuleWindow();
 

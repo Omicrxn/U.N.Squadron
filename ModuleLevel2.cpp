@@ -5,11 +5,14 @@
 #include "ModuleRenderer.h"
 #include "ModuleEnemies.h"
 
-ModuleLevel2::ModuleLevel2(){}
+ModuleLevel2::ModuleLevel2(bool startEnabled) : Module(startEnabled) {}
 ModuleLevel2::~ModuleLevel2(){}
+
 bool ModuleLevel2::Start() {
 	bool ret = true;
+
 	backgroundTexture = App->textures->Load("Assets/sprites/scenarios/ThunderStorm_SpriteSheet.png");
+	
 	//center rect
 	centerLayer = { 0, 100, 256, 62 };
 	
@@ -51,14 +54,15 @@ bool ModuleLevel2::Start() {
 	thirdBotPos2 = { (float)thirdBottomLayer.w,(float)(SCREEN_HEIGHT-thirdBottomLayer.h) };
 	thirdSpeed = 2.0;
 
-	App->player->Enable();
-	App->enemies->Enable();
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
 	App->enemies->AddEnemy(ENEMY_TYPE::MEDIUMCAMOUFLAGEJET, 256, 80);
 	App->enemies->AddEnemy(ENEMY_TYPE::MEDIUMCAMOUFLAGEJET, 306, 130);
 	App->enemies->AddEnemy(ENEMY_TYPE::MEDIUMCAMOUFLAGEJET, 356, 180);
 	
+	App->player->Enable();
+	App->enemies->Enable();
+
 	return ret;
 }
 
@@ -81,6 +85,7 @@ update_status ModuleLevel2::Update(){
 	
 	return ret;
 }
+
 update_status ModuleLevel2::PostUpdate() {
 	update_status ret = UPDATE_CONTINUE;
 	//Render center layers
@@ -168,21 +173,24 @@ void ModuleLevel2::InfiniteScrolling(fPoint* top, fPoint* top2, fPoint* bot, fPo
 		}
 	}
 	
-		top = nullptr;
-		top2 = nullptr;
-		bot = nullptr;
-		bot2 = nullptr;
-		topLayer = nullptr;
-		botLayer = nullptr;
-	
+	top = nullptr;
+	top2 = nullptr;
+	bot = nullptr;
+	bot2 = nullptr;
+	topLayer = nullptr;
+	botLayer = nullptr;
 }
+
 bool ModuleLevel2::CleanUp() {
 	bool ret = true;
+
 	if (!App->textures->Unload(backgroundTexture)) {
 		LOG("Error unloading background textue in lvl 2");
 		ret = false;
 	}
+
 	App->player->Disable();
 	App->enemies->Disable();
+
 	return ret;
 }

@@ -21,7 +21,7 @@ class ModuleInput : public Module
 {
 public:
 
-	ModuleInput();
+	ModuleInput(bool startEnabled);
 	~ModuleInput();
 
 	bool Init();

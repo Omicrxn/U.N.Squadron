@@ -7,7 +7,7 @@
 #include "ModuleAudio.h"
 
 #include "ModuleLevel2.h"
-ModuleStartScreen::ModuleStartScreen(){
+ModuleStartScreen::ModuleStartScreen(bool startEnabled) : Module(startEnabled) {
 	//Unicorn Animation
 	unicorn_anim.PushBack({ 5,2,112,160 });
 	unicorn_anim.PushBack({ 122,2,120,160 });
@@ -21,9 +21,12 @@ ModuleStartScreen::ModuleStartScreen(){
 	//selector rect
 	selector = { 236,240,13,16 };
 }
-ModuleStartScreen::~ModuleStartScreen(){}
-bool ModuleStartScreen::Start(){
+
+ModuleStartScreen::~ModuleStartScreen() {}
+
+bool ModuleStartScreen::Start() {
 	bool ret = true;
+
 	tex = App->textures->Load("Assets/sprites/menus/Menu-Spritesheet.png");
 	if (tex == nullptr) {
 		ret = false;
@@ -60,7 +63,7 @@ update_status ModuleStartScreen::Update(){
 		switch (selectorPos.y)
 		{
 		case 116: {
-			App->transition->FadeToBlack(this, App->lvl2,90);
+			App->transition->FadeToBlack(this, (Module*)App->lvl2, 90);
 		}break;
 		case 135: {
 
@@ -97,6 +100,7 @@ update_status ModuleStartScreen::PostUpdate() {
 
 bool ModuleStartScreen::CleanUp(){
 	bool ret = true;
+
 	if (!App->textures->Unload(tex)) {
 		LOG("Start Screen -> Error unloading the texture.");
 		ret = false;

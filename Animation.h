@@ -23,11 +23,12 @@ private:
 	} direction = FORWARDS;
 
 public:
-	Animation()
-	{}
+	Animation() {}
+
 	Animation(const Animation& anim) : loop(anim.loop), speed(anim.speed), lastFrame(anim.lastFrame) { // the colon is used to inherit or in this case to initialize variables before the constructor is called
 		SDL_memcpy(&frames, anim.frames, sizeof(frames));//copies the info in anim.frames to local variable frames
 	}
+
 	void PushBack(const SDL_Rect& rect) //stores the rect into frames array
 	{
 		frames[lastFrame++] = rect;
@@ -35,7 +36,6 @@ public:
 
 	SDL_Rect& GetCurrentFrame()
 	{
-
 		switch (direction)
 		{
 		case flow::FORWARDS:
@@ -86,7 +86,6 @@ public:
 		loops = 0;
 		currentFrame = 0.0f;
 	}
-
 
 };
 

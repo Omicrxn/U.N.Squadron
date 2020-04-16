@@ -10,6 +10,7 @@ enum class main_states
 	MAIN_FINISH,
 	MAIN_EXIT
 };
+
 Application* App = nullptr;
 
 int main()
@@ -58,6 +59,7 @@ int main()
 				state = main_states::MAIN_FINISH;
 			}
 		}	break;
+
 		case main_states::MAIN_FINISH:
 		{
 			LOG("Cleaning Game -----\n");
@@ -69,14 +71,12 @@ int main()
 				mainReturn = EXIT_SUCCESS;
 				state = main_states::MAIN_EXIT;
 			}
-		}break;
-
+		}	break;
 
 		}
 	}
 
 	LOG("\nBye :)\n");
-
 
 	delete App;
 	return mainReturn;

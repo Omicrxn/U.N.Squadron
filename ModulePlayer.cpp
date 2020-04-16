@@ -8,7 +8,7 @@
 #include "ModuleFadeToBlack.h"
 #include "ModuleAudio.h"
 
-ModulePlayer::ModulePlayer() : Module() {
+ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled) {
 
 }
 
@@ -18,6 +18,8 @@ ModulePlayer::~ModulePlayer() {
 
 bool ModulePlayer::Start() {
 	bool ret = true;
+
+	destroyed = false;
 
 	//Loading the image into a texture
 	texture = App->textures->Load("Assets/sprites/playablecharacters/player spaceships.png");
@@ -36,7 +38,7 @@ bool ModulePlayer::Start() {
 
 	//Loading collision sound effect
 	App->audio->LoadFx("Assets/music/events/collisionswithobjects.wav");
-	destroyed = false;
+
 	// Add a collider to the player
 	collider = App->collisions->AddCollider({ position.x, position.y, 32, 16 }, Collider::Type::PLAYER, this);
 
@@ -55,6 +57,7 @@ update_status ModulePlayer::Update() {
 	// Moving the player with the camera scroll
 	App->player->position.x += 1;
 	
+	// TEST of Camera Limits (IN PROCESS)
 	//if (position.x < App->render->camera.x) {
 	//	position.x = App->render->camera.x;
 	//}
@@ -82,7 +85,7 @@ update_status ModulePlayer::Update() {
 		}
 	}
 		
-	// Spawn explosion particles when pressing SPACE
+	// Spawn bullet particles when pressing SPACE
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_DOWN && !destroyed)
 	{
 		App->particles->AddParticle(App->particles->bullet, position.x + 32, position.y, Collider::Type::PLAYER_SHOT);
@@ -91,7 +94,7 @@ update_status ModulePlayer::Update() {
 		App->audio->PlayFx(0, 0);
 	}
 
-	//Moving the spaceship when pressing WASD
+	// Moving the spaceship when pressing WASD
 	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_IDLE && App->input->keyboard[SDL_SCANCODE_S] == KEY_IDLE)
 	{
 		if (current_anim != &playerAnim)
@@ -140,7 +143,8 @@ update_status ModulePlayer::Update() {
 
 update_status ModulePlayer::PostUpdate() {
 	update_status ret = UPDATE_CONTINUE;
-	//blit player
+	
+	// Blit player
 	if (!destroyed)
 	{
 		if (!App->render->Blit(texture, position.x, position.y, &rectAnim)) {
@@ -166,6 +170,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		App->particles->AddParticle(App->particles->explosion, position.x, position.y, Collider::Type::NONE, 9);
 		
 		App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->startScreen, 60);
+	
 		//Playing explosion sound effect
 		App->audio->PlayFx(1, 0);
 

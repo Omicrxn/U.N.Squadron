@@ -11,9 +11,14 @@ class Module
 private:
 	bool enabled = true;
 public:
+	Module(bool startEnabled);
+
 	//Called at the beginning of the application execution
 	virtual bool Init();
+
+	//Called when the module is activated
 	virtual bool Start();
+
 	//Called at the beginning of each application loop
 	virtual update_status PreUpdate();
 
@@ -30,24 +35,14 @@ public:
 	//and the module is registered as the listener
 	virtual void OnCollision(Collider* c1, Collider* c2);
 
-	bool IsEnabled() const { return enabled; }
+	// Switches isEnabled and calls Start() method
+	void Enable();
 
-	void Enable()
-	{
-		if (enabled == false)
-		{
-			enabled = true;
-			Start();
-		}
-	}
+	// Switches isEnabled and calls CleanUp() method
+	void Disable();
 
-	void Disable()
-	{
-		if (enabled == true) {
-			enabled = false;
-			CleanUp();
-		}
-	}
+	inline bool IsEnabled() const { return enabled; }
+
 };
 
 #endif // __MODULE_H__

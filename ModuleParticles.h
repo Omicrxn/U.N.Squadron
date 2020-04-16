@@ -21,7 +21,6 @@ public:
 	// Constructor
 	Particle();
 	
-
 	// Copy constructor
 	Particle(const Particle& p);
 
@@ -54,12 +53,13 @@ public:
 	// The particle's collider
 	Collider* collider = nullptr;
 };
+
 class ModuleParticles : public Module
 {
 public:
 	// Constructor
 	// Initializes all the particles in the array to nullptr
-	ModuleParticles();
+	ModuleParticles(bool startEnabled);
 
 	//Destructor
 	~ModuleParticles();

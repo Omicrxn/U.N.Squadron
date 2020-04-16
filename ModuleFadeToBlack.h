@@ -8,7 +8,7 @@ class ModuleFadeToBlack : public Module
 {
 public:
 	//Constructor
-	ModuleFadeToBlack();
+	ModuleFadeToBlack(bool startEnabled);
 
 	//Destructor
 	~ModuleFadeToBlack();

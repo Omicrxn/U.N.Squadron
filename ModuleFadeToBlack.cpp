@@ -5,7 +5,7 @@
 
 #include "SDL_render.h"
 
-ModuleFadeToBlack::ModuleFadeToBlack()
+ModuleFadeToBlack::ModuleFadeToBlack(bool startEnabled) : Module(startEnabled)
 {
 	screenRect = {0, 0, SCREEN_WIDTH * SCREEN_SIZE, SCREEN_HEIGHT * SCREEN_SIZE};
 }
@@ -18,6 +18,9 @@ ModuleFadeToBlack::~ModuleFadeToBlack()
 bool ModuleFadeToBlack::Start()
 {
 	LOG("Preparing Fade Screen");
+
+	moduleToEnable = nullptr;
+	moduleToDisable = nullptr;
 
 	// Enable blending mode for transparency
 	SDL_SetRenderDrawBlendMode(App->render->renderer, SDL_BLENDMODE_BLEND);

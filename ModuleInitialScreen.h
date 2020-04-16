@@ -10,7 +10,7 @@ struct SDL_Texture;
 class ModuleInitialScreen : public Module
 {
 public:
-	ModuleInitialScreen();
+	ModuleInitialScreen(bool startEnabled);
 	~ModuleInitialScreen();
 	
 

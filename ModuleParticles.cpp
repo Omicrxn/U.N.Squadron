@@ -6,7 +6,7 @@
 
 #include "SDL_timer.h"
 
-ModuleParticles::ModuleParticles()
+ModuleParticles::ModuleParticles(bool startEnabled) : Module(startEnabled)
 {
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 		particles[i] = nullptr;
@@ -148,6 +148,7 @@ void ModuleParticles::AddParticle(const Particle& particle, int x, int y, Collid
 		}
 	}
 }
+
 Particle::Particle()
 {
 	position.SetToZero();
