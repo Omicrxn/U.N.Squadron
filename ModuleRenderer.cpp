@@ -4,7 +4,7 @@
 #include "ModuleWindow.h"
 #include "ModuleInput.h"
 #include "SDL.h"
-ModuleRenderer::ModuleRenderer() : Module() {
+ModuleRenderer::ModuleRenderer(bool startEnabled) : Module(startEnabled) {
 	camera.x = camera.y = 0;
 	camera.w = SCREEN_WIDTH*SCREEN_SIZE;
 	camera.h = SCREEN_HEIGHT*SCREEN_SIZE;

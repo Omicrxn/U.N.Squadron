@@ -2,7 +2,7 @@
 #include "Application.h"
 #include "SDL.h"
 
-ModuleWindow::ModuleWindow() : Module() {
+ModuleWindow::ModuleWindow(bool startEnabled) : Module(startEnabled) {
 
 
 }
