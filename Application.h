@@ -20,7 +20,7 @@ class ModuleRenderer;
 class ModuleEnemies;
 class ModuleFonts;
 
-#define NUM_MODULES 13
+#define NUM_MODULES 14
 
 class Application
 {
