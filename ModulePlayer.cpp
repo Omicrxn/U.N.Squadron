@@ -158,6 +158,7 @@ bool ModulePlayer::CleanUp() {
 	bool ret = true;
 
 	App->textures->Unload(texture);
+	
 
 	return ret;
 }

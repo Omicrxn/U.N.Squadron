@@ -23,7 +23,7 @@ private:
 	SDL_Rect text;
 	SDL_Rect selector;
 	Animation unicorn_anim;
-	Animation* current_anim;
+	Animation* current_anim = nullptr;
 	iPoint selectorPos;
 };
 #endif

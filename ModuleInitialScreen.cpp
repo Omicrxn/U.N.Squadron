@@ -41,10 +41,6 @@ update_status ModuleInitialScreen::Update() {
 		App->transition->FadeToBlack(this, (Module*)App->startScreen, 90);
 	}
 
-	//if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN)
-	//{
-	//	App->transition->FadeToBlack(this, (Module*)App->startScreen, 90);
-	//}
 	
 	return ret;
 }

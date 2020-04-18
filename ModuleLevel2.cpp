@@ -191,6 +191,7 @@ bool ModuleLevel2::CleanUp() {
 
 	App->player->Disable();
 	App->enemies->Disable();
+	
 
 	return ret;
 }

@@ -22,12 +22,15 @@ Application::Application()
 	modules[i++] = textures = new ModuleTextureManager(true);
 	modules[i++] = audio = new ModuleAudio(true);
 
-	modules[i++] = initialScreen = new ModuleInitialScreen(false);
-	modules[i++] = startScreen = new ModuleStartScreen(true);
+
+	modules[i++] = initialScreen = new ModuleInitialScreen(true);
+	modules[i++] = startScreen = new ModuleStartScreen(false);
 	modules[i++] = lvl2 = new ModuleLevel2(false);
 	modules[i++] = player = new ModulePlayer(false);
 	modules[i++] = particles = new ModuleParticles(true);
 	modules[i++] = enemies = new ModuleEnemies(false);
+	
+	
 
 	modules[i++] = collisions = new ModuleCollisions(true);
 
@@ -71,7 +74,9 @@ update_status Application::Update()
 	update_status ret = update_status::UPDATE_CONTINUE;
 	for (int i = 0; i < NUM_MODULES && ret == update_status::UPDATE_CONTINUE; ++i) {
 		ret = modules[i]->IsEnabled() ? modules[i]->PreUpdate() : UPDATE_CONTINUE;
-	}for (int i = 0; i < NUM_MODULES && ret == update_status::UPDATE_CONTINUE; ++i) {
+	}
+	
+	for (int i = 0; i < NUM_MODULES && ret == update_status::UPDATE_CONTINUE; ++i) {
 		ret = modules[i]->IsEnabled() ? modules[i]->Update() : UPDATE_CONTINUE;
 	}for (int i = 0; i < NUM_MODULES && ret == update_status::UPDATE_CONTINUE; ++i) {
 		ret = modules[i]->IsEnabled() ? modules[i]->PostUpdate() : UPDATE_CONTINUE;
