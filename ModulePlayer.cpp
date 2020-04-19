@@ -7,6 +7,7 @@
 #include "ModuleStartScreen.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleAudio.h"
+#include "ModuleFonts.h"
 
 ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled) {
 
@@ -41,6 +42,11 @@ bool ModulePlayer::Start() {
 
 	// Add a collider to the player
 	collider = App->collisions->AddCollider({ position.x, position.y, 32, 16 }, Collider::Type::PLAYER, this);
+
+	// HUD (PROVISIONAL)
+	char lookupTable[] = { "abcdefghijklmnopqrstuvwxyz0123456789.,+-=?!*%&        " };
+	yellowFont = App->fonts->Load("Assets/Fonts/FontCalids.png", lookupTable, 3);
+	greenFont = App->fonts->Load("Assets/Fonts/FontYG.png", lookupTable, 3);
 
 	return ret;
 }
@@ -149,6 +155,10 @@ update_status ModulePlayer::PostUpdate() {
 			ret = UPDATE_ERROR;
 		}
 	}
+
+	// Blit of the HUD (PROVISIONAL)
+	App->fonts->BlitText(10, 15, yellowFont, "score");
+
 	return ret;
 }
 

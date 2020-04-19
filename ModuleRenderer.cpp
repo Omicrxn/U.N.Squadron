@@ -4,6 +4,7 @@
 #include "ModuleWindow.h"
 #include "ModuleInput.h"
 #include "SDL.h"
+
 ModuleRenderer::ModuleRenderer(bool startEnabled) : Module(startEnabled) {
 	camera.x = camera.y = 0;
 	camera.w = SCREEN_WIDTH*SCREEN_SIZE;
@@ -66,8 +67,6 @@ bool ModuleRenderer::CleanUp() {
 	return true;
 
 }
-
-
 
 // Blit to screen
 bool ModuleRenderer::Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* section, float speed, bool useCamera)
