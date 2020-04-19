@@ -7,6 +7,7 @@
 #include "ModuleStartScreen.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleAudio.h"
+#include "ModuleFonts.h"
 
 ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled) {
 
@@ -41,6 +42,11 @@ bool ModulePlayer::Start() {
 
 	// Add a collider to the player
 	collider = App->collisions->AddCollider({ position.x, position.y, 32, 16 }, Collider::Type::PLAYER, this);
+
+	// HUD (PROVISIONAL)
+	char lookupTable[] = { "abcdefghijklmnopqrstuvwxyz0123456789.,+-=?!*%&        " };
+	yellowFont = App->fonts->Load("Assets/Fonts/FontCalids.png", lookupTable, 3);
+	greenFont = App->fonts->Load("Assets/Fonts/FontYG.png", lookupTable, 3);
 
 	return ret;
 }
@@ -93,7 +99,7 @@ update_status ModulePlayer::Update() {
 	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_REPEAT)
 	{
 		if (position.y > 0) {
-			position.y -= 5;
+			position.y -= 3;
 			if (current_anim != &playerAnim)
 			{
 				current_anim = &playerAnim;
@@ -105,7 +111,7 @@ update_status ModulePlayer::Update() {
 	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_REPEAT)
 	{
 		if (position.y < SCREEN_HEIGHT-18) {
-			position.y += 5;
+			position.y += 3;
 			if (current_anim != &playerAnim)
 			{
 				current_anim = &playerAnim;
@@ -118,7 +124,7 @@ update_status ModulePlayer::Update() {
 	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_REPEAT)
 	{
 		if (position.x > App->render->camera.x/SCREEN_SIZE) {
-			position.x -= 5;
+			position.x -= 3;
 		}
 		
 		
@@ -126,7 +132,7 @@ update_status ModulePlayer::Update() {
 	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_REPEAT)
 	{
 		if (position.x < (App->render->camera.x / SCREEN_SIZE+SCREEN_WIDTH-32) ) {
-			position.x += 5;
+			position.x += 3;
 		}
 	
 	}
@@ -149,6 +155,10 @@ update_status ModulePlayer::PostUpdate() {
 			ret = UPDATE_ERROR;
 		}
 	}
+
+	// Blit of the HUD (PROVISIONAL)
+	App->fonts->BlitText(10, 15, yellowFont, "score");
+
 	return ret;
 }
 

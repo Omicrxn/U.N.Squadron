@@ -27,6 +27,10 @@ public:
 	// A flag to detect when the player has been destroyed
 	bool destroyed = false;
 
+	// Id Fonts
+	int yellowFont = -1;
+	int greenFont = -1;
+
 private:
 	iPoint position;
 	SDL_Texture* texture = nullptr;
