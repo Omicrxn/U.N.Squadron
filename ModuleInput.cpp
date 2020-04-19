@@ -88,17 +88,17 @@ update_status ModuleInput::PreUpdate() {
 	}
 
 	// Debug functionality to jump screens
-	/*if (keyboard[SDL_SCANCODE_F3] == KEY_REPEAT) {
-		if (App->initialScreen->IsEnabled) {
+	if (keyboard[SDL_SCANCODE_F3] == KEY_DOWN) {
+		if (App->initialScreen->IsEnabled()) {
 			App->transition->FadeToBlack((Module*)App->initialScreen, (Module*)App->startScreen, 60);
 		}
-		else if (App->startScreen->IsEnabled) {
+		else if (App->startScreen->IsEnabled()) {
 			App->transition->FadeToBlack((Module*)App->startScreen, (Module*)App->lvl2, 60);
 		}
-		else if (App->lvl2->IsEnabled) {
+		else if (App->lvl2->IsEnabled()) {
 			App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->startScreen, 60);
 		}
-	}*/
+	}
 
 	return update_status:: UPDATE_CONTINUE;
 }
