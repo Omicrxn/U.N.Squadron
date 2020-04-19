@@ -29,7 +29,7 @@ While at the moment Capcom was developing vertically scrolling shooters, U.N.Squ
 
 ### CONTROLS FOR PC
 |Function|Keyboard|
-|-------|--------|-------|
+|-------|--------|
 |Fly your Aircraft (Up)|🡱 or W|
 |Fly your Aircraft (Down)|🡳 or S|
 |Fly your Aircraft (Left)|🡰 or A|
