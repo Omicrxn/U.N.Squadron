@@ -1,17 +1,17 @@
-#include "MediumCamouflageJet.h"
+#include "BlueJet.h"
 
 #include "Application.h"
 #include "ModuleCollisions.h"
 #include "ModuleParticles.h"
 #include "ModuleAudio.h"
-#include "ModulePlayer.h"	
+#include "ModulePlayer.h"
 
-MediumCamouflageJet::MediumCamouflageJet(int x, int y) : Enemy(x, y)
+BlueJet::BlueJet(int x, int y) : Enemy(x, y)
 {
-	fly.PushBack({ 225, 151, 29, 15 });
+	fly.PushBack({ 194, 206, 26, 14 });
 	currentAnim = &fly;
 
-	// Have the medium camouflage jet describe a path in the screen
+	// Have the blue jet describe a path in the screen
 	path.PushBack({ 0.0f, -1.0f }, 50);
 	path.PushBack({ 0.0f, 1.0f }, 100);
 	path.PushBack({ 0.0f, -1.0f }, 50);
@@ -19,12 +19,12 @@ MediumCamouflageJet::MediumCamouflageJet(int x, int y) : Enemy(x, y)
 	collider = App->collisions->AddCollider({ position.x, position.y, 32, 16 }, Collider::Type::ENEMY, (Module*)App->enemies);
 }
 
-void MediumCamouflageJet::Update()
+void BlueJet::Update()
 {
 	path.Update();
 	position = spawnPos + path.GetRelativePosition();
 
-	// Call to the base class. It must be called at the end
+	// Call	to the base class. It must be called at the end
 	// It will update the collider depending on the position
 	Enemy::Update();
 
@@ -35,7 +35,7 @@ void MediumCamouflageJet::Update()
 
 		App->particles->AddParticle(App->particles->enemyBullet, position.x + 32, position.y, Collider::Type::ENEMY_SHOT);
 
-		//Playing shooting sound effect (if space was pressed)
+		// Playing shooting sound effects (if space was pressed)
 		App->audio->PlayFx(0, 0);
 	}
 }

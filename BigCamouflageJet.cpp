@@ -1,17 +1,17 @@
-#include "MediumCamouflageJet.h"
+#include "BigCamouflageJet.h"
 
 #include "Application.h"
 #include "ModuleCollisions.h"
 #include "ModuleParticles.h"
 #include "ModuleAudio.h"
-#include "ModulePlayer.h"	
+#include "ModulePlayer.h"
 
-MediumCamouflageJet::MediumCamouflageJet(int x, int y) : Enemy(x, y)
+BigCamouflageJet::BigCamouflageJet(int x, int y) : Enemy(x, y)
 {
-	fly.PushBack({ 225, 151, 29, 15 });
+	fly.PushBack({ 366, 92, 31, 28 });
 	currentAnim = &fly;
 
-	// Have the medium camouflage jet describe a path in the screen
+	// Have the big camouflage jet describe a path in the screen
 	path.PushBack({ 0.0f, -1.0f }, 50);
 	path.PushBack({ 0.0f, 1.0f }, 100);
 	path.PushBack({ 0.0f, -1.0f }, 50);
@@ -19,7 +19,7 @@ MediumCamouflageJet::MediumCamouflageJet(int x, int y) : Enemy(x, y)
 	collider = App->collisions->AddCollider({ position.x, position.y, 32, 16 }, Collider::Type::ENEMY, (Module*)App->enemies);
 }
 
-void MediumCamouflageJet::Update()
+void BigCamouflageJet::Update()
 {
 	path.Update();
 	position = spawnPos + path.GetRelativePosition();
@@ -35,7 +35,7 @@ void MediumCamouflageJet::Update()
 
 		App->particles->AddParticle(App->particles->enemyBullet, position.x + 32, position.y, Collider::Type::ENEMY_SHOT);
 
-		//Playing shooting sound effect (if space was pressed)
+		// Playing shooting sound effect (if space was pressed)
 		App->audio->PlayFx(0, 0);
 	}
 }
