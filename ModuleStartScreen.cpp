@@ -49,8 +49,10 @@ bool ModuleStartScreen::Start() {
 update_status ModuleStartScreen::Update(){
 	update_status ret = update_status::UPDATE_CONTINUE;
 
-	
-
+	//Mute Audio when F2 is pressed, press again to unmute
+	if (App->input->keyboard[SDL_SCANCODE_F2] == KEY_DOWN){
+		App->audio->MuteMusic();
+	}
 	if ((App->input->keyboard[SDL_SCANCODE_W] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_UP] == KEY_DOWN)
 		&& selectorPos.y != 116) {
 		selectorPos = { 68,116 };

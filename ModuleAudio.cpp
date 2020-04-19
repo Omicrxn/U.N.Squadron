@@ -123,6 +123,25 @@ bool ModuleAudio::PlayMusic(const char* path, float fade_time)
 	return ret;
 }
 
+bool ModuleAudio::MuteMusic() {
+	bool ret = true;
+	//If the music is paused
+	if (Mix_PausedMusic() == 1)
+	{
+		//Resume the music
+		Mix_ResumeMusic();
+	}
+	//If the music is playing
+	else
+	{
+		//Pause the music
+		Mix_PauseMusic();
+	}
+
+
+	return ret;
+}
+
 bool ModuleAudio::StopMusic() {
 	Mix_FreeMusic(music);
 	music = nullptr;
