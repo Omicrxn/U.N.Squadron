@@ -8,6 +8,7 @@
 
 #include "Enemy.h"
 #include "MediumCamouflageJet.h"
+#include "ModuleParticles.h"
 
 #define SPAWN_MARGIN 50
 
@@ -164,4 +165,5 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 			break;
 		}
 	}
+
 }

@@ -23,37 +23,34 @@ bool ModuleParticles::Start()
 	particlesTexture = App->textures->Load("Assets/sprites/explosions/explosions.png");
 
 	//Bullet Animaton
-	bullet.anim.PushBack({ 27,218,17,6 });
-	bullet.anim.PushBack({ 64,218,12,6 });
-	bullet.anim.PushBack({ 91,217,17,7 });
-	bullet.anim.PushBack({ 128,217,12,7 });
-	bullet.anim.PushBack({ 155,217,17,7 });
-	bullet.anim.PushBack({ 192,217,12,7 });
+	bullet.anim.PushBack({ 216, 219, 13, 3 });
 	bullet.anim.loop = true;
-	bullet.anim.speed = 0.05f;
 	bullet.speed.x = 5.0f;
 	bullet.lifetime = 180;
 
 	//Enemy Bullet Animaton
-	enemyBullet.anim.PushBack({ 27,218,17,6 });
-	enemyBullet.anim.PushBack({ 64,218,12,6 });
-	enemyBullet.anim.PushBack({ 91,217,17,7 });
-	enemyBullet.anim.PushBack({ 128,217,12,7 });
-	enemyBullet.anim.PushBack({ 155,217,17,7 });
-	enemyBullet.anim.PushBack({ 192,217,12,7 });
+	enemyBullet.anim.PushBack({ 44, 370, 5 , 7 });
+	enemyBullet.anim.PushBack({ 78, 372, 5, 5 });
+	enemyBullet.anim.PushBack({ 110, 371, 15, 6 });
 	enemyBullet.anim.loop = true;
 	enemyBullet.anim.speed = 0.05f;
 	enemyBullet.speed.x = -5.0f;
 	enemyBullet.lifetime = 180;
 
 	//Explosion Animation
-	explosion.anim.PushBack({ 27, 128, 40, 41 });
-	explosion.anim.PushBack({ 78, 127, 41, 64 });
-	explosion.anim.PushBack({ 130, 127, 45, 57 });
-	explosion.anim.PushBack({ 188, 127, 42, 43 });
-	explosion.anim.PushBack({ 244, 127, 37, 19 });
+	explosion.anim.PushBack({ 27, 256, 34, 39 });
+	explosion.anim.PushBack({ 98, 261, 44, 36 });
+	explosion.anim.PushBack({ 164, 263, 33, 27 });
+	explosion.anim.PushBack({ 223, 262, 31, 29 });
 	explosion.anim.loop = true;
-	explosion.anim.speed = 0.1f;
+	explosion.anim.speed = 0.075f;
+
+	//Explosion of the enemies
+	enemyExplosion.anim.PushBack({ 27, 313, 24, 25 });
+	enemyExplosion.anim.PushBack({ 97, 310, 31, 29 });
+	enemyExplosion.anim.PushBack({ 159, 310, 31, 28 });
+	enemyExplosion.anim.PushBack({ 217, 315, 35, 27 });
+	enemyExplosion.anim.speed = 0.075f;
 
 	return true;
 }

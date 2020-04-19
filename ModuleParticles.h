@@ -104,6 +104,7 @@ private:
 public:
 	//Template particle for an explosion
 	Particle explosion;
+	Particle enemyExplosion;
 	Particle bullet;
 	Particle enemyBullet;
 };
