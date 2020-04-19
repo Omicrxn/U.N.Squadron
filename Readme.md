@@ -25,6 +25,7 @@ While at the moment Capcom was developing vertically scrolling shooters, U.N.Squ
 ## Controls
 ### GETTING STARTED (IN SNES)
 1.Execute the U.N.SQUADRON.exe file in the U.N.SQUADRON folder.
+
 2.Read the following instructions to learn the controls:
 
 ### CONTROLS FOR PC
