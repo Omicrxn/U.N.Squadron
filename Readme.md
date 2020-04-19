@@ -23,8 +23,9 @@ While at the moment Capcom was developing vertically scrolling shooters, U.N.Squ
 ![Gameplay](https://gamefabrique.com/storage/screenshots/snes/un-squadron-03.png)
 # How To Play The Game
 ## Controls
-### GETTING STARTED (IN SNES)
+### GETTING STARTED
 1.Execute the U.N.SQUADRON.exe file in the U.N.SQUADRON folder.
+
 2.Read the following instructions to learn the controls:
 
 ### CONTROLS FOR PC
