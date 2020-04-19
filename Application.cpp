@@ -23,9 +23,9 @@ Application::Application()
 	modules[i++] = audio = new ModuleAudio(true);
 
 
-	modules[i++] = initialScreen = new ModuleInitialScreen(true);
+	modules[i++] = initialScreen = new ModuleInitialScreen(false);
 	modules[i++] = startScreen = new ModuleStartScreen(false);
-	modules[i++] = lvl2 = new ModuleLevel2(false);
+	modules[i++] = lvl2 = new ModuleLevel2(true);
 	modules[i++] = player = new ModulePlayer(false);
 	modules[i++] = particles = new ModuleParticles(true);
 	modules[i++] = enemies = new ModuleEnemies(false);
