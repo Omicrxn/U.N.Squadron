@@ -9,6 +9,9 @@
 #include "Enemy.h"
 #include "MediumCamouflageJet.h"
 #include "BigOrangeJet.h"
+#include "BigCamouflageJet.h"
+#include "BlueJet.h"
+#include "GreenFighterPlane.h"
 #include "ModuleParticles.h"
 
 #define SPAWN_MARGIN 50
@@ -147,6 +150,15 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 					break;
 				case ENEMY_TYPE::BIGORANGEJET:
 					enemies[i] = new BigOrangeJet(info.x, info.y);
+					break;
+				case ENEMY_TYPE::BIGCAMOUFLAGEJET:
+					enemies[i] = new BigCamouflageJet(info.x, info.y);
+					break;
+				case ENEMY_TYPE::BLUEJET:
+					enemies[i] = new BlueJet(info.x, info.y);
+					break;
+				case ENEMY_TYPE::GREENFIGHTERPLANE:
+					enemies[i] = new GreenFighterPlane(info.x, info.y);
 					break;
 			}
 			enemies[i]->texture = texture;
