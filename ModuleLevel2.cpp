@@ -5,6 +5,7 @@
 #include "ModuleRenderer.h"
 #include "ModuleAudio.h"
 #include "ModuleEnemies.h"
+#include "ModuleParticles.h"
 
 ModuleLevel2::ModuleLevel2(bool startEnabled) : Module(startEnabled) {}
 ModuleLevel2::~ModuleLevel2(){}
@@ -59,6 +60,7 @@ bool ModuleLevel2::Start() {
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
 	
+	App->particles->Enable();
 	App->player->Enable();
 	App->enemies->Enable();
 
@@ -218,10 +220,13 @@ bool ModuleLevel2::CleanUp() {
 		LOG("Error unloading background textue in lvl 2");
 		ret = false;
 	}
+
+	numSpawnedEnemies = 0;
+
 	App->audio->StopMusic();
 	App->player->Disable();
 	App->enemies->Disable();
-	
+	App->particles->Disable();
 
 	return ret;
 }

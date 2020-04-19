@@ -27,7 +27,7 @@ Application::Application()
 	modules[i++] = startScreen = new ModuleStartScreen(false);
 	modules[i++] = lvl2 = new ModuleLevel2(true);
 	modules[i++] = player = new ModulePlayer(false);
-	modules[i++] = particles = new ModuleParticles(true);
+	modules[i++] = particles = new ModuleParticles(false);
 	modules[i++] = enemies = new ModuleEnemies(false);
 	
 	modules[i++] = collisions = new ModuleCollisions(true);

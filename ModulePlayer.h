@@ -27,6 +27,14 @@ public:
 	// A flag to detect when the player has been destroyed
 	bool destroyed = false;
 
+	// Score
+	uint score = 000;
+	char scoreText[10] = { "\0" };
+
+	// Money
+	uint money = 000;
+	char moneyText[10] = { "\0" };
+
 	// Id Fonts
 	int yellowFont = -1;
 	int greenFont = -1;

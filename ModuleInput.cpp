@@ -76,9 +76,8 @@ update_status ModuleInput::PreUpdate() {
 			return update_status::UPDATE_STOP;
 		}
 		// Maximize window
-		else if (event.type == SDL_WINDOWEVENT_MAXIMIZED) {
+		else if (event.type == SDL_WINDOWEVENT_MAXIMIZED || keyboard[SDL_SCANCODE_F11] == KEY_DOWN) {
 			SDL_MaximizeWindow(App->window->sdlWindow);
-
 		}
 	}
 
