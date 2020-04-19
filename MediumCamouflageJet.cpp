@@ -4,6 +4,7 @@
 #include "ModuleCollisions.h"
 #include "ModuleParticles.h"
 #include "ModuleAudio.h"
+#include "ModulePlayer.h"
 
 MediumCamouflageJet::MediumCamouflageJet(int x, int y) : Enemy(x, y)
 {

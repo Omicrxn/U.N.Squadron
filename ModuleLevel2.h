@@ -36,7 +36,7 @@ public:
 	fPoint centerPos2,firstTopPos2,secondTopPos2,thirdTopPos2,firstBotPos2, secondBotPos2, thirdBotPos2;
 	float centerSpeed, firstSpeed, secondSpeed, thirdSpeed;
 	
-
+	unsigned int numSpawnedEnemies = 0;
 };
 
 #endif

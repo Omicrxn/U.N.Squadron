@@ -58,9 +58,6 @@ bool ModuleLevel2::Start() {
 
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
-	App->enemies->AddEnemy(ENEMY_TYPE::MEDIUMCAMOUFLAGEJET, 256, 80);
-	App->enemies->AddEnemy(ENEMY_TYPE::MEDIUMCAMOUFLAGEJET, 306, 130);
-	App->enemies->AddEnemy(ENEMY_TYPE::MEDIUMCAMOUFLAGEJET, 356, 180);
 	
 	App->player->Enable();
 	App->enemies->Enable();
@@ -84,6 +81,24 @@ update_status ModuleLevel2::Update(){
 
 	//third layer movement
 	InfiniteScrolling(&thirdTopPos, &thirdTopPos2, &thirdBotPos, &thirdBotPos2, &thirdTopLayer, &thirdBottomLayer, thirdSpeed);
+
+	if (App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH > 256 && numSpawnedEnemies == 0)
+	{
+		App->enemies->AddEnemy(ENEMY_TYPE::MEDIUMCAMOUFLAGEJET, App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH, 80);
+		numSpawnedEnemies++;
+	}
+
+	if (App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH > 512 && numSpawnedEnemies == 1)
+	{
+		App->enemies->AddEnemy(ENEMY_TYPE::MEDIUMCAMOUFLAGEJET, App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH, 80);
+		numSpawnedEnemies++;
+	}
+
+	if (App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH > 768 && numSpawnedEnemies == 2)
+	{
+		App->enemies->AddEnemy(ENEMY_TYPE::MEDIUMCAMOUFLAGEJET, App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH, 80);
+		numSpawnedEnemies++;
+	}
 	
 	return ret;
 }

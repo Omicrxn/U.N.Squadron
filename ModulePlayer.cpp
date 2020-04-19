@@ -92,8 +92,6 @@ update_status ModulePlayer::Update() {
 	}
 	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_REPEAT)
 	{
-
-
 		if (position.y > 0) {
 			position.y -= 5;
 			if (current_anim != &playerAnim)
@@ -102,8 +100,6 @@ update_status ModulePlayer::Update() {
 			}
 			rectAnim = current_anim->GetFrame(1);
 		}
-
-		
 	}
 	
 	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_REPEAT)

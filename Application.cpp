@@ -30,8 +30,6 @@ Application::Application()
 	modules[i++] = particles = new ModuleParticles(true);
 	modules[i++] = enemies = new ModuleEnemies(false);
 	
-	
-
 	modules[i++] = collisions = new ModuleCollisions(true);
 
 	modules[i++] = transition = new ModuleFadeToBlack(true);
