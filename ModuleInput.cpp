@@ -2,6 +2,7 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleWindow.h"
+#include "ModuleAudio.h"
 #include "SDL.h"
 
 ModuleInput::ModuleInput(bool startEnabled) : Module(startEnabled)
@@ -56,6 +57,7 @@ update_status ModuleInput::PreUpdate() {
 			}
 		}
 	}
+	
 	if (keyboard[SDL_SCANCODE_ESCAPE]) {
 		return update_status::UPDATE_STOP;
 	}
@@ -72,6 +74,11 @@ update_status ModuleInput::PreUpdate() {
 			SDL_MaximizeWindow(App->window->sdlWindow);
 
 		}
+	}
+
+	//Mute Audio when F2 is pressed, press again to unmute
+	if (keyboard[SDL_SCANCODE_F2] == KEY_DOWN) {
+		App->audio->MuteMusic();
 	}
 	return update_status:: UPDATE_CONTINUE;
 }

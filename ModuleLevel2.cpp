@@ -3,6 +3,7 @@
 #include "ModuleTextureManager.h"
 #include "ModulePlayer.h"
 #include "ModuleRenderer.h"
+#include "ModuleAudio.h"
 #include "ModuleEnemies.h"
 
 ModuleLevel2::ModuleLevel2(bool startEnabled) : Module(startEnabled) {}
@@ -12,7 +13,8 @@ bool ModuleLevel2::Start() {
 	bool ret = true;
 
 	backgroundTexture = App->textures->Load("Assets/sprites/scenarios/ThunderStorm_SpriteSheet.png");
-	
+	//Music
+	App->audio->PlayMusic("Assets/music/soundtrack/airDivision.ogg");
 	//center rect
 	centerLayer = { 0, 100, 256, 62 };
 	
@@ -188,7 +190,7 @@ bool ModuleLevel2::CleanUp() {
 		LOG("Error unloading background textue in lvl 2");
 		ret = false;
 	}
-
+	App->audio->StopMusic();
 	App->player->Disable();
 	App->enemies->Disable();
 	

@@ -26,8 +26,7 @@ bool ModuleInitialScreen::Start() {
 		ret = false;
 	}
 
-	//Playing opening music
-	//App->audio->PlayMusic("Assets/music/soundtrack/opening.ogg");
+	
 
 	return ret;
 }
