@@ -23,6 +23,7 @@
     <ClCompile Include="Path.cpp" />
     <ClCompile Include="ModuleFadeToBlack.cpp" />
     <ClCompile Include="ModuleFonts.cpp" />
+    <ClCompile Include="BigOrangeJet.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
@@ -49,5 +50,6 @@
     <ClInclude Include="Path.h" />
     <ClInclude Include="ModuleFadeToBlack.h" />
     <ClInclude Include="ModuleFonts.h" />
+    <ClInclude Include="BigOrangeJet.h" />
   </ItemGroup>
 </Project>

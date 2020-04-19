@@ -8,6 +8,7 @@
 
 #include "Enemy.h"
 #include "MediumCamouflageJet.h"
+#include "BigOrangeJet.h"
 #include "ModuleParticles.h"
 
 #define SPAWN_MARGIN 50
@@ -143,6 +144,9 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 			{
 				case ENEMY_TYPE::MEDIUMCAMOUFLAGEJET:
 					enemies[i] = new MediumCamouflageJet(info.x, info.y);
+					break;
+				case ENEMY_TYPE::BIGORANGEJET:
+					enemies[i] = new BigOrangeJet(info.x, info.y);
 					break;
 			}
 			enemies[i]->texture = texture;
