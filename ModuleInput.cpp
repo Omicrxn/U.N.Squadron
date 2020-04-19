@@ -3,6 +3,10 @@
 #include "Application.h"
 #include "ModuleWindow.h"
 #include "ModuleAudio.h"
+#include "ModuleInitialScreen.h"
+#include "ModuleFadeToBlack.h"
+#include "ModuleStartScreen.h"
+#include "ModuleLevel2.h"
 #include "SDL.h"
 
 ModuleInput::ModuleInput(bool startEnabled) : Module(startEnabled)
@@ -58,28 +62,44 @@ update_status ModuleInput::PreUpdate() {
 		}
 	}
 	
+	// CHECKS IF ESC IS CLICKED TO CLOSE
 	if (keyboard[SDL_SCANCODE_ESCAPE]) {
 		return update_status::UPDATE_STOP;
 	}
 
-	//CHECKS IF WINDOW X IS CLICKED TO CLOSE
+	// CHECKS IF WINDOW X IS CLICKED TO CLOSE
 	SDL_Event event;
 	while (SDL_PollEvent(&event))
 	{
 		if (event.type == SDL_QUIT)
 		{
 			return update_status::UPDATE_STOP;
-		}//Maximize window
+		}
+		// Maximize window
 		else if (event.type == SDL_WINDOWEVENT_MAXIMIZED) {
 			SDL_MaximizeWindow(App->window->sdlWindow);
 
 		}
 	}
 
-	//Mute Audio when F2 is pressed, press again to unmute
+	// Mute Audio when F2 is pressed, press again to unmute
 	if (keyboard[SDL_SCANCODE_F2] == KEY_DOWN) {
 		App->audio->MuteMusic();
 	}
+
+	// Debug functionality to jump screens
+	if (keyboard[SDL_SCANCODE_F3] == KEY_REPEAT) {
+		if (App->initialScreen->IsEnabled) {
+			App->transition->FadeToBlack((Module*)App->initialScreen, (Module*)App->startScreen, 60);
+		}
+		else if (App->startScreen->IsEnabled) {
+			App->transition->FadeToBlack((Module*)App->startScreen, (Module*)App->lvl2, 60);
+		}
+		else if (App->lvl2->IsEnabled) {
+			App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->startScreen, 60);
+		}
+	}
+
 	return update_status:: UPDATE_CONTINUE;
 }
 

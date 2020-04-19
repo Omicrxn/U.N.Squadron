@@ -57,20 +57,7 @@ update_status ModulePlayer::Update() {
 	// Moving the player with the camera scroll
 	App->player->position.x += 1;
 	
-	// TEST of Camera Limits (IN PROCESS)
-	//if (position.x < App->render->camera.x) {
-	//	position.x = App->render->camera.x;
-	//}
-	//else if (position.x > App->render->camera.x + (App->render->camera.w / SCREEN_SIZE)) { // Or camera.w?
-	//	position.x = App->render->camera.x + ((App->render->camera.w)/SCREEN_SIZE)-32;
-	//}
-
-	//if (position.y < App->render->camera.y) {
-	//	position.y = App->render->camera.y;
-	//}
-	//else if (position.y > App->render->camera.y + (App->render->camera.w / SCREEN_SIZE)) { // Or camera.h?
-	//	position.y = App->render->camera.y + ((App->render->camera.h) / SCREEN_SIZE) - 12;
-	//}
+	 
 
 	//God Mode
 	if (App->input->keyboard[SDL_SCANCODE_F5] == KEY_DOWN)
@@ -105,32 +92,47 @@ update_status ModulePlayer::Update() {
 	}
 	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_REPEAT)
 	{
-		position.y -= 5;
-		if (current_anim != &playerAnim)
-		{
-			current_anim = &playerAnim;
+
+
+		if (position.y > 0) {
+			position.y -= 5;
+			if (current_anim != &playerAnim)
+			{
+				current_anim = &playerAnim;
+			}
+			rectAnim = current_anim->GetFrame(1);
 		}
-		rectAnim = current_anim->GetFrame(1);
+
+		
 	}
 	
 	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_REPEAT)
 	{
-		position.y += 5;
-		if (current_anim != &playerAnim)
-		{
-			current_anim = &playerAnim;
+		if (position.y < SCREEN_HEIGHT-18) {
+			position.y += 5;
+			if (current_anim != &playerAnim)
+			{
+				current_anim = &playerAnim;
+			}
+			rectAnim = current_anim->GetFrame(2);
 		}
-		rectAnim = current_anim->GetFrame(2);
+		
 	}
 	
 	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_REPEAT)
-	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_REPEAT)
 	{
-		position.x -= 5;
+		if (position.x > App->render->camera.x/SCREEN_SIZE) {
+			position.x -= 5;
+		}
+		
+		
 	}
 	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_REPEAT)
 	{
-		position.x += 5;
+		if (position.x < (App->render->camera.x / SCREEN_SIZE+SCREEN_WIDTH-32) ) {
+			position.x += 5;
+		}
+	
 	}
 
 	// Update collider position to player position

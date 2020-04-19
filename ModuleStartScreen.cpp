@@ -36,6 +36,7 @@ bool ModuleStartScreen::Start() {
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
 	selectorPos = {68,116};
+
 	if (current_anim != &unicorn_anim) {
 		current_anim = &unicorn_anim;
 		unicorn_anim.Reset();
@@ -63,7 +64,7 @@ update_status ModuleStartScreen::Update(){
 		switch (selectorPos.y)
 		{
 		case 116: {
-			App->transition->FadeToBlack(this, (Module*)App->lvl2, 90);
+			App->transition->FadeToBlack(this, (Module*)App->lvl2, 60);
 		}break;
 		case 135: {
 
@@ -79,6 +80,7 @@ update_status ModuleStartScreen::Update(){
 update_status ModuleStartScreen::PostUpdate() {
 	update_status ret = UPDATE_CONTINUE;
 	SDL_Rect rect = current_anim->GetCurrentFrame();
+
 	//blit unicorn
 	if (!App->render->Blit(tex, 81, 50, &rect)) {
 		ret = UPDATE_ERROR;
