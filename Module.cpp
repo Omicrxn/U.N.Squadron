@@ -40,8 +40,7 @@ void Module::OnCollision(Collider* c1, Collider* c2)
 
 void Module::Enable()
 {
-	if (!enabled)
-	{
+	if (!enabled) {
 		enabled = true;
 		Start();
 	}

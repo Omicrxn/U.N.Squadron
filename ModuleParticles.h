@@ -7,7 +7,7 @@
 #include "Animation.h"
 #include "p2Point.h"
 #include "Module.h"
-#include"SDL.h"
+#include "SDL.h"
 #include "ModuleCollisions.h"
 
 #define MAX_ACTIVE_PARTICLES 200
