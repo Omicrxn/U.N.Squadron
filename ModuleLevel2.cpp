@@ -85,31 +85,31 @@ update_status ModuleLevel2::Update(){
 
 	if (App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH > 256 && numSpawnedEnemies == 0)
 	{
-		App->enemies->AddEnemy(ENEMY_TYPE::MEDIUMCAMOUFLAGEJET, App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH, 80);
+		App->enemies->AddEnemy(ENEMY_TYPE::MEDIUMCAMOUFLAGEJET, App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH, SCREEN_HEIGHT/2);
 		numSpawnedEnemies++;
 	}
 
 	if (App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH > 512 && numSpawnedEnemies == 1)
 	{
-		App->enemies->AddEnemy(ENEMY_TYPE::BIGORANGEJET, App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH, 80);
+		App->enemies->AddEnemy(ENEMY_TYPE::BIGORANGEJET, App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH, SCREEN_HEIGHT / 2);
 		numSpawnedEnemies++;
 	}
 
 	if (App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH > 768 && numSpawnedEnemies == 2)
 	{
-		App->enemies->AddEnemy(ENEMY_TYPE::BIGCAMOUFLAGEJET, App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH, 80);
+		App->enemies->AddEnemy(ENEMY_TYPE::BIGCAMOUFLAGEJET, App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH, SCREEN_HEIGHT / 2);
 		numSpawnedEnemies++;
 	}
 
 	if (App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH > 1024 && numSpawnedEnemies == 3)
 	{
-		App->enemies->AddEnemy(ENEMY_TYPE::BLUEJET, App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH, 80);
+		App->enemies->AddEnemy(ENEMY_TYPE::BLUEJET, App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH, SCREEN_HEIGHT / 2);
 		numSpawnedEnemies++;
 	}
 
 	if (App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH > 1280 && numSpawnedEnemies == 4)
 	{
-		App->enemies->AddEnemy(ENEMY_TYPE::GREENFIGHTERPLANE, App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH, 80);
+		App->enemies->AddEnemy(ENEMY_TYPE::GREENFIGHTERPLANE, App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH, SCREEN_HEIGHT / 2);
 		numSpawnedEnemies++;
 	}
 	
