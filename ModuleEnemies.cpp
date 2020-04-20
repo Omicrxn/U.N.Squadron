@@ -13,7 +13,6 @@
 #include "BlueJet.h"
 #include "GreenFighterPlane.h"
 #include "ModuleParticles.h"
-#include "ModulePlayer.h"
 
 #define SPAWN_MARGIN 50
 
@@ -32,9 +31,6 @@ bool ModuleEnemies::Start()
 {
 	texture = App->textures->Load("Assets/sprites/enemies/UNSquadronSheet9.gif ");
 	enemyDestroyedFx = App->audio->LoadFx("Assets/music/explosion.wav");
-
-	App->player->score = 0;
-	App->player->money = 0;
 
 	return true;
 }
