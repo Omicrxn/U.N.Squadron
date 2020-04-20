@@ -10,6 +10,9 @@
 ModuleInitialScreen::ModuleInitialScreen(bool startEnabled) : Module(startEnabled) {
 	//screen rect
 	screen = { 0,0,256,224 };
+
+	startTime = 0;
+	
 }
 
 ModuleInitialScreen::~ModuleInitialScreen() {}
@@ -17,6 +20,7 @@ ModuleInitialScreen::~ModuleInitialScreen() {}
 bool ModuleInitialScreen::Start() {
 	bool ret = true;
 
+	logoTex = App->textures->Load("Assets/sprites/menus/Logo.png");
 	tex = App->textures->Load("Assets/sprites/menus/InitialScreen.png");
 
 	if (tex == nullptr) {
@@ -39,10 +43,26 @@ update_status ModuleInitialScreen::Update() {
 update_status ModuleInitialScreen::PostUpdate() {
 	update_status ret = UPDATE_CONTINUE;
 
-	// Blit 
-	if (!App->render->Blit(tex, 0, 0, &screen, 1, false)) {
-		ret = UPDATE_ERROR;
+	if (startTime == 0) {
+		startTime = SDL_GetTicks();
+		endTime = startTime + 3000;
 	}
+	else {
+		actualTime = SDL_GetTicks()-startTime ;
+	}
+	
+	// Blit 
+	if (actualTime < endTime) {
+		if (!App->render->Blit(logoTex, 0, 0, &screen, 0.0f, false)) {
+			ret = UPDATE_ERROR;
+		}
+	}
+	else {
+		if (!App->render->Blit(tex, 0, 0, &screen, 0.0f, false)) {
+			ret = UPDATE_ERROR;
+		}
+	}
+	
 	return ret;
 }
 
@@ -50,6 +70,10 @@ bool ModuleInitialScreen::CleanUp() {
 	bool ret = true;
 
 	if (!App->textures->Unload(tex)) {
+		LOG("Start Screen -> Error unloading the texture.");
+		ret = false;
+	}
+	if (!App->textures->Unload(logoTex)) {
 		LOG("Start Screen -> Error unloading the texture.");
 		ret = false;
 	}

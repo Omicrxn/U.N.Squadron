@@ -28,13 +28,13 @@ Application::Application()
 	modules[i++] = startScreen = new ModuleStartScreen(false);
 	modules[i++] = winScreen = new ModuleWinScreen(false);
 	modules[i++] = lvl2 = new ModuleLevel2(false);
-
 	modules[i++] = player = new ModulePlayer(false);
 	modules[i++] = particles = new ModuleParticles(false);
 	modules[i++] = enemies = new ModuleEnemies(false);
+
+
 	modules[i++] = collisions = new ModuleCollisions(true);
 	modules[i++] = transition = new ModuleFadeToBlack(true);
-
 	modules[i++] = fonts = new ModuleFonts(true);
 	modules[i++] = render = new ModuleRenderer(true);
 }

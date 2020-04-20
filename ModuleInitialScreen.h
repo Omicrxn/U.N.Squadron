@@ -19,8 +19,10 @@ public:
 	update_status PostUpdate();
 	bool CleanUp();
 private:
+	SDL_Texture* logoTex = nullptr;
 	SDL_Texture* tex = nullptr;
 	SDL_Rect screen;
+	
 	Uint32 startTime;
 	Uint32 endTime;
 	Uint32 actualTime;

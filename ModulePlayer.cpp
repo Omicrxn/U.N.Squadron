@@ -77,7 +77,9 @@ update_status ModulePlayer::Update() {
 			collider = nullptr;
 		}
 		else {
-			collider = App->collisions->AddCollider({ position.x, position.y, 32, 16 }, Collider::Type::PLAYER, this);
+			if (collider == nullptr) {
+				collider = App->collisions->AddCollider({ position.x, position.y, 32, 16 }, Collider::Type::PLAYER, this);
+			}
 		}
 	}
 		
