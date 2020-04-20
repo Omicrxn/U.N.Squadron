@@ -8,7 +8,7 @@
 
 BigOrangeJet::BigOrangeJet(int x, int y) : Enemy(x, y)
 {
-	fly.PushBack({ 366, 34, 30, 30 });
+	fly.PushBack({ 387, 20, 32, 19 });
 	currentAnim = &fly;
 
 	// Have the big orange jet describe a path in the screen

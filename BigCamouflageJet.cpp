@@ -8,7 +8,7 @@
 
 BigCamouflageJet::BigCamouflageJet(int x, int y) : Enemy(x, y)
 {
-	fly.PushBack({ 366, 92, 31, 28 });
+	fly.PushBack({ 387, 57, 32, 19 });
 	currentAnim = &fly;
 
 	// Have the big camouflage jet describe a path in the screen

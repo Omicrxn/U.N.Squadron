@@ -8,7 +8,7 @@
 
 GreenFighterPlane::GreenFighterPlane(int x, int y) : Enemy(x, y)
 {
-	fly.PushBack({ 152, 237, 102, 60 });
+	fly.PushBack({ 163, 151, 107, 39 });
 	currentAnim = &fly;
 
 	// Have the green fighter plane describe a path in the screen
