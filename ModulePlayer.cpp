@@ -175,6 +175,9 @@ bool ModulePlayer::CleanUp() {
 	bool ret = true;
 
 	App->textures->Unload(texture);
+	App->collisions->DeleteCollider(collider);
+	collider = nullptr;
+	
 	
 	return ret;
 }
