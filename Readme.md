@@ -1,5 +1,5 @@
 # B.A.T.L. Studios
-Github of the project: [U.N.SQUADRON GITHUB](http://https://github.com/Omicrxn/U.N.Squadron "U.N.SQUADRON GITHUB")
+Github of the project: [U.N.SQUADRON GITHUB](http://https://github.com/Omicrxn/U.N.Squadron "U.N. SQUADRON GITHUB")
 # Team Members
 |NAME|ROLE|GITHUB|
 |----|----|------|
@@ -24,18 +24,26 @@ While at the moment Capcom was developing vertically scrolling shooters, U.N.Squ
 # How To Play The Game
 ## Controls
 ### GETTING STARTED
-1.Execute the U.N.SQUADRON.exe file in the U.N.SQUADRON folder.
+1. Execute the U.N.SQUADRON.exe file in the U.N.SQUADRON folder.
 
-2.Read the following instructions to learn the controls:
+2. Read the following instructions to learn the controls:
 
 ### CONTROLS FOR PC
 |Function|Keyboard|
 |-------|--------|
-|Fly your Aircraft (Up)|🡱 or W|
-|Fly your Aircraft (Down)|🡳 or S|
-|Fly your Aircraft (Left)|🡰 or A|
-|Fly your Aircraft (Right)|🡲 or D|
+|Fly your Aircraft (Up)|W|
+|Fly your Aircraft (Down)|S|
+|Fly your Aircraft (Left)|A|
+|Fly your Aircraft (Right)|D|
 |Select|Enter|
-|Fire the Vulcan Cannon.|Space|
-|Travel through the options. (Up)|W|
-|Travel through the options. (Down)|S|
+|Fire the Vulcan Cannon|Space|
+|Travel through the options (Up)|W|
+|Travel through the options (Down)|S|
+
+|Debug Functionality|Keyboard|
+|-------|--------|
+|Display Collisions|F1|
+|Mute Background Music|F2|
+|Jump Screens|F3|
+|God Mode|F5|
+|Maximize|F11|
