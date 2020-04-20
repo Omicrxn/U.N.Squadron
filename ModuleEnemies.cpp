@@ -29,7 +29,7 @@ ModuleEnemies::~ModuleEnemies()
 
 bool ModuleEnemies::Start()
 {
-	texture = App->textures->Load("Assets/sprites/enemies/squadronshet9.png");
+	texture = App->textures->Load("Assets/sprites/enemies/UNSquadronSheet9.gif");
 	enemyDestroyedFx = App->audio->LoadFx("Assets/music/explosion.wav");
 
 	return true;

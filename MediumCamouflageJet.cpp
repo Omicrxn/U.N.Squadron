@@ -8,7 +8,7 @@
 
 MediumCamouflageJet::MediumCamouflageJet(int x, int y) : Enemy(x, y)
 {
-	fly.PushBack({ 225, 151, 29, 15 });
+	fly.PushBack({ 240, 96, 30, 9 });
 	currentAnim = &fly;
 
 	// Have the medium camouflage jet describe a path in the screen

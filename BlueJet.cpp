@@ -8,7 +8,7 @@
 
 BlueJet::BlueJet(int x, int y) : Enemy(x, y)
 {
-	fly.PushBack({ 194, 206, 26, 14 });
+	fly.PushBack({ 207, 131, 30, 9 });
 	currentAnim = &fly;
 
 	// Have the blue jet describe a path in the screen
