@@ -35,7 +35,7 @@ While at the moment Capcom was developing vertically scrolling shooters, U.N.Squ
 |Fly your Aircraft (Down)|S|
 |Fly your Aircraft (Left)|A|
 |Fly your Aircraft (Right)|D|
-|Select|Enter|
+|Select / Continue|Enter|
 |Fire the Vulcan Cannon|Space|
 |Travel through the options (Up)|W|
 |Travel through the options (Down)|S|
@@ -45,5 +45,6 @@ While at the moment Capcom was developing vertically scrolling shooters, U.N.Squ
 |Display Collisions|F1|
 |Mute Background Music|F2|
 |Jump Screens|F3|
+|Direct Win|F4|
 |God Mode|F5|
 |Maximize|F11|
