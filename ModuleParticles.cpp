@@ -3,6 +3,7 @@
 #include "ModuleTextureManager.h"
 #include "ModuleRenderer.h"
 #include "ModuleCollisions.h"
+#include "ModulePlayer.h"
 
 #include "SDL_timer.h"
 
@@ -84,9 +85,12 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 			delete particles[i];
 			particles[i] = nullptr;
 			break;
+
+			App->player->score++;
 		}
 	}
 }
+
 update_status ModuleParticles::Update()
 {
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)

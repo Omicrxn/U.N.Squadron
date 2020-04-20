@@ -26,8 +26,6 @@ bool ModuleInitialScreen::Start() {
 		ret = false;
 	}
 
-	
-
 	return ret;
 }
 
