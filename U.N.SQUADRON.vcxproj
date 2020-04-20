@@ -155,6 +155,7 @@
     <ClCompile Include="ModuleStartScreen.cpp" />
     <ClCompile Include="ModuleTextureManager.cpp" />
     <ClCompile Include="ModuleWindow.cpp" />
+    <ClCompile Include="ModuleWinScreen.cpp" />
     <ClCompile Include="Path.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -183,6 +184,7 @@
     <ClInclude Include="ModuleStartScreen.h" />
     <ClInclude Include="ModuleTextureManager.h" />
     <ClInclude Include="ModuleWindow.h" />
+    <ClInclude Include="ModuleWinScreen.h" />
     <ClInclude Include="p2Point.h" />
     <ClInclude Include="Path.h" />
   </ItemGroup>
