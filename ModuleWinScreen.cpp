@@ -28,14 +28,9 @@ bool ModuleWinScreen::Start() {
 update_status ModuleWinScreen::Update() {
 	update_status ret = update_status::UPDATE_CONTINUE;
 	
-	
-		if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN) {
-			App->transition->FadeToBlack(this, (Module*)App->startScreen, 60);
-		}
-	
-	
-	
-
+	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN) {
+		App->transition->FadeToBlack(this, (Module*)App->startScreen, 60);
+	}
 	
 	return ret;
 }

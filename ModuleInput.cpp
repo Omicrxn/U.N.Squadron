@@ -7,6 +7,7 @@
 #include "ModuleFadeToBlack.h"
 #include "ModuleStartScreen.h"
 #include "ModuleLevel2.h"
+#include "ModuleWinScreen.h"
 #include "SDL.h"
 
 ModuleInput::ModuleInput(bool startEnabled) : Module(startEnabled)
@@ -94,18 +95,18 @@ update_status ModuleInput::PreUpdate() {
 		else if (App->startScreen->IsEnabled()) {
 			App->transition->FadeToBlack((Module*)App->startScreen, (Module*)App->lvl2, 60);
 		}
-	/*	else if (App->lvl2->IsEnabled()) {
+		else if (App->lvl2->IsEnabled()) {
 			App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->startScreen, 60);
 		}
 		else if (App->winScreen->IsEnabled()) {
 			App->transition->FadeToBlack((Module*)App->winScreen, (Module*)App->startScreen, 60);
-		}*/
+		}
 	}
 
 	// Jump to Win Screen
 	if (keyboard[SDL_SCANCODE_F4] == KEY_DOWN) {
 		if (App->lvl2->IsEnabled()) {
-			//App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->winScreen, 60);
+			App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->winScreen, 60);
 		}
 	}
 
