@@ -32,7 +32,6 @@ bool ModuleParticles::Start()
 	enemyBullet.anim.PushBack({ 44, 370, 5 , 7 });
 	enemyBullet.anim.PushBack({ 78, 372, 5, 5 });
 	enemyBullet.anim.PushBack({ 110, 371, 15, 6 });
-	enemyBullet.anim.loop = true;
 	enemyBullet.anim.speed = 0.05f;
 	enemyBullet.speed.x = -5.0f;
 	enemyBullet.lifetime = 180;
@@ -42,7 +41,7 @@ bool ModuleParticles::Start()
 	explosion.anim.PushBack({ 98, 261, 44, 36 });
 	explosion.anim.PushBack({ 164, 263, 33, 27 });
 	explosion.anim.PushBack({ 223, 262, 31, 29 });
-	explosion.anim.loop = true;
+	explosion.anim.loop = false;
 	explosion.anim.speed = 0.075f;
 
 	//Explosion of the enemies
@@ -51,6 +50,8 @@ bool ModuleParticles::Start()
 	enemyExplosion.anim.PushBack({ 159, 310, 31, 28 });
 	enemyExplosion.anim.PushBack({ 217, 315, 35, 27 });
 	enemyExplosion.anim.speed = 0.075f;
+	explosion.anim.loop = false;
+
 
 	return true;
 }
