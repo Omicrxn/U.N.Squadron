@@ -23,6 +23,7 @@ Application::Application()
 	modules[i++] = textures = new ModuleTextureManager(true);
 	modules[i++] = audio = new ModuleAudio(true);
 
+	
 	modules[i++] = initialScreen = new ModuleInitialScreen(true);
 	modules[i++] = startScreen = new ModuleStartScreen(false);
 	modules[i++] = winScreen = new ModuleWinScreen(false);

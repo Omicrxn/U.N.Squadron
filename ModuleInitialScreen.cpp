@@ -9,7 +9,7 @@
 
 ModuleInitialScreen::ModuleInitialScreen(bool startEnabled) : Module(startEnabled) {
 	//screen rect
-	screen = { 0,0,256,256 };
+	screen = { 0,0,256,224 };
 }
 
 ModuleInitialScreen::~ModuleInitialScreen() {}
@@ -40,7 +40,7 @@ update_status ModuleInitialScreen::PostUpdate() {
 	update_status ret = UPDATE_CONTINUE;
 
 	// Blit 
-	if (!App->render->Blit(tex, 0, 0, &screen)) {
+	if (!App->render->Blit(tex, 0, 0, &screen, 1, false)) {
 		ret = UPDATE_ERROR;
 	}
 	return ret;

@@ -4,19 +4,18 @@
 #include "ModuleFadeToBlack.h"
 #include "ModuleRenderer.h"
 #include "ModuleInput.h"
-#include "ModuleAudio.h"
 #include "ModuleStartScreen.h"
 ModuleWinScreen::ModuleWinScreen(bool startEnabled) : Module(startEnabled) {
 	//screen rect
-	screen = { 0,0,256,256 };
+	screen = { 0,0,256,224 };
 }
 
 ModuleWinScreen::~ModuleWinScreen() {}
 
 bool ModuleWinScreen::Start() {
 	bool ret = true;
-	startTime = SDL_GetTicks();
-	endTime = startTime + 3000;
+	
+	
 	tex = App->textures->Load("Assets/sprites/menus/WinScreen.png");
 
 	if (tex == nullptr) {
@@ -28,12 +27,16 @@ bool ModuleWinScreen::Start() {
 
 update_status ModuleWinScreen::Update() {
 	update_status ret = update_status::UPDATE_CONTINUE;
+	
+	
+		if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN) {
+			App->transition->FadeToBlack(this, (Module*)App->startScreen, 60);
+		}
+	
+	
+	
 
-	actualTime = startTime + SDL_GetTicks();
-
-	if (actualTime >= endTime && actualTime <= endTime+100) {
-		App->transition->FadeToBlack(this, (Module*)App->startScreen,60);
-	}
+	
 	return ret;
 }
 
@@ -41,7 +44,7 @@ update_status ModuleWinScreen::PostUpdate() {
 	update_status ret = UPDATE_CONTINUE;
 
 	// Blit 
-	if (!App->render->Blit(tex, 0, 0, &screen)) {
+	if (!App->render->Blit(tex, 0, 0, &screen, 1, false)) {
 		ret = UPDATE_ERROR;
 	}
 	return ret;

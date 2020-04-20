@@ -223,7 +223,7 @@ bool ModuleLevel2::CleanUp() {
 		LOG("Error unloading background textue in lvl 2");
 		ret = false;
 	}
-
+	App->render->camera.x = App->render->camera.y = 0;
 	App->audio->StopMusic();
 	App->player->Disable();
 	App->enemies->Disable();
