@@ -8,7 +8,7 @@
 
 GreenFighterPlane::GreenFighterPlane(int x, int y) : Enemy(x, y)
 {
-	fly.PushBack({ 152, 237, 102, 60 });
+	fly.PushBack({ 163, 151, 107, 39 });
 	currentAnim = &fly;
 
 	// Have the green fighter plane describe a path in the screen
@@ -16,7 +16,7 @@ GreenFighterPlane::GreenFighterPlane(int x, int y) : Enemy(x, y)
 	path.PushBack({ 0.0f, 1.0f }, 100);
 	path.PushBack({ 0.0f, -1.0f }, 50);
 
-	collider = App->collisions->AddCollider({ position.x, position.y, 102, 60 }, Collider::Type::ENEMY, (Module*)App->enemies);
+	collider = App->collisions->AddCollider({ position.x, position.y, 107, 39 }, Collider::Type::ENEMY, (Module*)App->enemies);
 }
 
 void GreenFighterPlane::Update()

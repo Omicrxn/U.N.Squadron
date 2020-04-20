@@ -8,7 +8,7 @@
 
 MediumCamouflageJet::MediumCamouflageJet(int x, int y) : Enemy(x, y)
 {
-	fly.PushBack({ 225, 151, 29, 15 });
+	fly.PushBack({ 240, 96, 30, 9 });
 	currentAnim = &fly;
 
 	// Have the medium camouflage jet describe a path in the screen
@@ -16,7 +16,7 @@ MediumCamouflageJet::MediumCamouflageJet(int x, int y) : Enemy(x, y)
 	path.PushBack({ 0.0f, 1.0f }, 100);
 	path.PushBack({ 0.0f, -1.0f }, 50);
 
-	collider = App->collisions->AddCollider({ position.x, position.y, 29, 15 }, Collider::Type::ENEMY, (Module*)App->enemies);
+	collider = App->collisions->AddCollider({ position.x, position.y, 30, 9 }, Collider::Type::ENEMY, (Module*)App->enemies);
 }
 
 void MediumCamouflageJet::Update()
