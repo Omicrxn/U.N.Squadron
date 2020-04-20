@@ -50,6 +50,8 @@ bool ModulePlayer::Start() {
 	yellowFont = App->fonts->Load("Assets/Fonts/FontY.png", lookupTable, 5);
 	greenFont = App->fonts->Load("Assets/Fonts/FontG.png", lookupTable, 5);
 
+	score = 0;
+
 	return ret;
 }
 

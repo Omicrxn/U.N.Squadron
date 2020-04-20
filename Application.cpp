@@ -22,7 +22,6 @@ Application::Application()
 	modules[i++] = textures = new ModuleTextureManager(true);
 	modules[i++] = audio = new ModuleAudio(true);
 
-
 	modules[i++] = initialScreen = new ModuleInitialScreen(false);
 	modules[i++] = startScreen = new ModuleStartScreen(false);
 	modules[i++] = lvl2 = new ModuleLevel2(true);
