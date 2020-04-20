@@ -13,6 +13,8 @@ ModuleLevel2::~ModuleLevel2(){}
 bool ModuleLevel2::Start() {
 	bool ret = true;
 
+	numSpawnedEnemies = 0;
+
 	backgroundTexture = App->textures->Load("Assets/sprites/scenarios/ThunderStorm_SpriteSheet.png");
 	//Music
 	App->audio->PlayMusic("Assets/music/soundtrack/airDivision.ogg");
@@ -220,8 +222,6 @@ bool ModuleLevel2::CleanUp() {
 		LOG("Error unloading background textue in lvl 2");
 		ret = false;
 	}
-
-	numSpawnedEnemies = 0;
 
 	App->audio->StopMusic();
 	App->player->Disable();

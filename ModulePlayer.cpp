@@ -98,7 +98,7 @@ update_status ModulePlayer::Update() {
 	}
 	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_REPEAT)
 	{
-		if (position.y > 0) {
+		if (position.y > 37) {
 			position.y -= 3;
 			if (current_anim != &playerAnim)
 			{
