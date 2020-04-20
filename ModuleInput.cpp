@@ -67,7 +67,7 @@ update_status ModuleInput::PreUpdate() {
 		return update_status::UPDATE_STOP;
 	}
 
-	// CHECKS IF WINDOW X IS CLICKED TO CLOSE
+	// CHECKS IF WINDOW X IS CLICKED TO CLOSE OR MAXIMIZE SCREEN
 	SDL_Event event;
 	while (SDL_PollEvent(&event))
 	{
@@ -75,7 +75,7 @@ update_status ModuleInput::PreUpdate() {
 		{
 			return update_status::UPDATE_STOP;
 		}
-		// Maximize window
+		// Maximize window (Button or F11)
 		else if (event.type == SDL_WINDOWEVENT_MAXIMIZED || keyboard[SDL_SCANCODE_F11] == KEY_DOWN) {
 			SDL_MaximizeWindow(App->window->sdlWindow);
 		}
