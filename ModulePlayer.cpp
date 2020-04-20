@@ -29,7 +29,7 @@ bool ModulePlayer::Start() {
 
 	//Position of the spaceship in the screen
 	position.x = 10;
-	position.y = 10;
+	position.y = 39;
 
 	//Position of the rectangle that we are getting from the image we load
 	playerAnim.PushBack({ 155,187,32,9 });
@@ -81,7 +81,7 @@ update_status ModulePlayer::Update() {
 	// Spawn bullet particles when pressing SPACE
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_DOWN && !destroyed)
 	{
-		App->particles->AddParticle(App->particles->bullet, position.x + 32, position.y, Collider::Type::PLAYER_SHOT);
+		App->particles->AddParticle(App->particles->bullet, position.x + 32, position.y + 5, Collider::Type::PLAYER_SHOT);
 
 		//Playing shooting sound effect (if space was pressed)
 		App->audio->PlayFx(0, 0);

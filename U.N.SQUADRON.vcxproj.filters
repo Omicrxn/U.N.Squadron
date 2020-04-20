@@ -61,9 +61,6 @@
     <ClCompile Include="ModuleLevel2.cpp">
       <Filter>Source Files\Modules\Gameplay</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleHUD.cpp">
-      <Filter>Source Files\Modules\Gameplay</Filter>
-    </ClCompile>
     <ClCompile Include="ModuleStartScreen.cpp">
       <Filter>Source Files\Modules\Gameplay</Filter>
     </ClCompile>
@@ -139,9 +136,6 @@
       <Filter>Source Files\Modules\Gameplay</Filter>
     </ClInclude>
     <ClInclude Include="ModuleLevel2.h">
-      <Filter>Source Files\Modules\Gameplay</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleHUD.h">
       <Filter>Source Files\Modules\Gameplay</Filter>
     </ClInclude>
     <ClInclude Include="ModuleStartScreen.h">
