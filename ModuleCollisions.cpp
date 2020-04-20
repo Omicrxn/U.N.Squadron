@@ -173,6 +173,7 @@ Collider* ModuleCollisions::AddCollider(SDL_Rect rect, Collider::Type type, Modu
 
 	return ret;
 }
+
 bool ModuleCollisions::DeleteCollider(Collider* collider) {
 	if (collider != nullptr)
 	{
@@ -185,8 +186,6 @@ bool ModuleCollisions::DeleteCollider(Collider* collider) {
 			}
 		}
 	}
-
-
 	return false;
 }
 

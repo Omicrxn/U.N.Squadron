@@ -16,7 +16,6 @@
 
 #define SPAWN_MARGIN 50
 
-
 ModuleEnemies::ModuleEnemies(bool startEnabled) : Module(startEnabled)
 {
 	for(uint i = 0; i < MAX_ENEMIES; ++i)
