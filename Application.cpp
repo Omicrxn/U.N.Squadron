@@ -7,6 +7,7 @@
 #include "ModulePlayer.h"
 #include "ModuleParticles.h"
 #include "ModuleInitialScreen.h"
+#include "ModuleWinScreen.h"
 #include "ModuleStartScreen.h"
 #include "ModuleCollisions.h"
 #include "ModuleFadeToBlack.h"
@@ -24,6 +25,7 @@ Application::Application()
 
 	modules[i++] = initialScreen = new ModuleInitialScreen(true);
 	modules[i++] = startScreen = new ModuleStartScreen(false);
+	modules[i++] = winScreen = new ModuleWinScreen(false);
 	modules[i++] = lvl2 = new ModuleLevel2(false);
 
 	modules[i++] = player = new ModulePlayer(false);

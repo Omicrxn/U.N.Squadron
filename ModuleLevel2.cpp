@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "ModuleTextureManager.h"
 #include "ModulePlayer.h"
+#include "ModuleFadeToBlack.h"
 #include "ModuleRenderer.h"
 #include "ModuleAudio.h"
 #include "ModuleEnemies.h"

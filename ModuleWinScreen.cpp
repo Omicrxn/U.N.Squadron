@@ -1,4 +1,4 @@
-#include "ModuleInitialScreen.h"
+#include "ModuleWinScreen.h"
 #include "Application.h"
 #include "ModuleTextureManager.h"
 #include "ModuleFadeToBlack.h"
@@ -6,18 +6,18 @@
 #include "ModuleInput.h"
 #include "ModuleAudio.h"
 #include "ModuleStartScreen.h"
-
-ModuleInitialScreen::ModuleInitialScreen(bool startEnabled) : Module(startEnabled) {
+ModuleWinScreen::ModuleWinScreen(bool startEnabled) : Module(startEnabled) {
 	//screen rect
 	screen = { 0,0,256,256 };
 }
 
-ModuleInitialScreen::~ModuleInitialScreen() {}
+ModuleWinScreen::~ModuleWinScreen() {}
 
-bool ModuleInitialScreen::Start() {
+bool ModuleWinScreen::Start() {
 	bool ret = true;
-
-	tex = App->textures->Load("Assets/sprites/menus/InitialScreen.png");
+	startTime = SDL_GetTicks();
+	endTime = startTime + 3000;
+	tex = App->textures->Load("Assets/sprites/menus/WinScreen.png");
 
 	if (tex == nullptr) {
 		ret = false;
@@ -26,17 +26,18 @@ bool ModuleInitialScreen::Start() {
 	return ret;
 }
 
-update_status ModuleInitialScreen::Update() {
+update_status ModuleWinScreen::Update() {
 	update_status ret = update_status::UPDATE_CONTINUE;
 
-	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN) {
-		App->transition->FadeToBlack(this, (Module*)App->startScreen, 60);
-	}
+	actualTime = startTime + SDL_GetTicks();
 
+	if (actualTime >= endTime && actualTime <= endTime+100) {
+		App->transition->FadeToBlack(this, (Module*)App->startScreen,60);
+	}
 	return ret;
 }
 
-update_status ModuleInitialScreen::PostUpdate() {
+update_status ModuleWinScreen::PostUpdate() {
 	update_status ret = UPDATE_CONTINUE;
 
 	// Blit 
@@ -46,12 +47,13 @@ update_status ModuleInitialScreen::PostUpdate() {
 	return ret;
 }
 
-bool ModuleInitialScreen::CleanUp() {
+bool ModuleWinScreen::CleanUp() {
 	bool ret = true;
 
 	if (!App->textures->Unload(tex)) {
 		LOG("Start Screen -> Error unloading the texture.");
 		ret = false;
 	}
+
 	return ret;
 }
