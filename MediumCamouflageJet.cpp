@@ -4,7 +4,8 @@
 #include "ModuleCollisions.h"
 #include "ModuleParticles.h"
 #include "ModuleAudio.h"
-#include "ModulePlayer.h"	
+#include "ModulePlayer.h"
+#include "ModuleLevel2.h"
 
 MediumCamouflageJet::MediumCamouflageJet(int x, int y) : Enemy(x, y)
 {
@@ -12,11 +13,22 @@ MediumCamouflageJet::MediumCamouflageJet(int x, int y) : Enemy(x, y)
 	currentAnim = &fly;
 
 	// Have the medium camouflage jet describe a path in the screen
-	path.PushBack({ 0.0f, -1.0f }, 50);
-	path.PushBack({ 0.0f, 1.0f }, 100);
-	path.PushBack({ 0.0f, -1.0f }, 50);
+	if (App->lvl2->numSpawnedEnemies <= 4)
+	{
+		path.PushBack({ -2.0f, 0.0f }, 20);
+		path.PushBack({ -2.0f, 1.0f }, 40);
+		path.PushBack({ -2.0f, 0.0f }, 60);
+	}
+	else
+	{
+		path.PushBack({ -2.0f, 0.0f }, 20);
+		path.PushBack({ -2.0f, -1.0f }, 40);
+		path.PushBack({ -2.0f, 0.0f }, 60);
+	}
 
 	collider = App->collisions->AddCollider({ position.x, position.y, 30, 9 }, Collider::Type::ENEMY, (Module*)App->enemies);
+
+	right = true;
 }
 
 void MediumCamouflageJet::Update()
@@ -29,7 +41,7 @@ void MediumCamouflageJet::Update()
 	Enemy::Update();
 
 	shootingFrequency++;
-	if (shootingFrequency > 50)
+	if (shootingFrequency > 30)
 	{
 		shootingFrequency = 0;
 

@@ -45,6 +45,9 @@ public:
 	uint scoreGiven = 0;
 	uint moneyGiven = 0;
 
+	// To know if the enemies are coming from the right
+	bool right;
+
 protected:
 	// A ptr to the current animation
 	Animation* currentAnim = nullptr;
