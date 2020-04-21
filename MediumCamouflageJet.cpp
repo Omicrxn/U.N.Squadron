@@ -25,7 +25,7 @@ MediumCamouflageJet::MediumCamouflageJet(int x, int y, bool spawnRight) : Enemy(
 	if (spawnPos.y < SCREEN_HEIGHT/2)
 	{
 		path.PushBack({ -2.0f, 0.0f }, 30, &flyLeft);
-		path.PushBack({ -2.0f, 1.0f }, 20, &flyLeft);
+		path.PushBack({ -2.0f, 1.0f }, 10, &flyLeft);
 		path.PushBack({ -2.0f, 1.0f }, 40, &turnLeft);
 		path.PushBack({ 3.0f, 0.0f }, 300, &flyRight);
 	}
