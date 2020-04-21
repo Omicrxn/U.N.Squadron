@@ -8,13 +8,36 @@
 
 BigCamouflageJet::BigCamouflageJet(int x, int y,bool spawnRight) : Enemy(x, y,spawnRight)
 {
-	fly.PushBack({ 126, 57, 32, 19 });
-	currentAnim = &fly;
+	flyRight.PushBack({ 126, 57, 32, 19 });
+	flyLeft.PushBack({ 387, 57, 32, 19 });
 
 	// Have the big camouflage jet describe a path in the screen
-	path.PushBack({ 3.0f, 0.0f }, 20);
-	path.PushBack({ 3.0f, 1.0f }, 40);
-	path.PushBack({ 3.0f, 0.0f }, 60);
+	if (spawnRight) {
+		if (spawnPos.y < SCREEN_HEIGHT / 2) {
+			path.PushBack({ -3.0f, 0.0f }, 40, &flyLeft);
+			path.PushBack({ -3.0f, 1.0f }, 40, &flyLeft);
+			path.PushBack({ -3.0f, 0.0f }, 60, &flyLeft);
+		}
+		else {
+			path.PushBack({ -3.0f, 0.0f }, 40, &flyLeft);
+			path.PushBack({ -3.0f, -1.0f }, 40, &flyLeft);
+			path.PushBack({ -3.0f, 0.0f }, 60, &flyLeft);
+		}
+	}
+	else {
+		if (spawnPos.y < SCREEN_HEIGHT / 2) {
+			path.PushBack({ 3.0f, 0.0f }, 40, &flyRight);
+			path.PushBack({ 3.0f, 1.0f }, 40, &flyRight);
+			path.PushBack({ 3.0f, 0.0f }, 60, &flyRight);
+		}
+		else {
+			path.PushBack({ 3.0f, 0.0f }, 40, &flyRight);
+			path.PushBack({ 3.0f, -1.0f }, 40, &flyRight);
+			path.PushBack({ 3.0f, 0.0f }, 60, &flyRight);
+		}
+		
+	}
+	
 
 	collider = App->collisions->AddCollider({ position.x, position.y, 32, 19 }, Collider::Type::ENEMY, (Module*)App->enemies);
 
@@ -26,7 +49,7 @@ void BigCamouflageJet::Update()
 {
 	path.Update();
 	position = spawnPos + path.GetRelativePosition();
-
+	currentAnim = path.GetCurrentAnimation();
 	// Call to the base class. It must be called at the end
 	// It will update the collider depending on the position
 	Enemy::Update();

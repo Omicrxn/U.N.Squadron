@@ -34,6 +34,7 @@ public:
 private:
 	int controllerCharacterSelection;
 	SDL_Event ev;
+	bool maximized = false;
 
 };
 

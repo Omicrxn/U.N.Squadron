@@ -10,6 +10,7 @@
 #include "MediumCamouflageJet.h"
 #include "BigOrangeJet.h"
 #include "BigCamouflageJet.h"
+#include "SmallCamouflageJet.h"
 #include "BlueJet.h"
 #include "GreenFighterPlane.h"
 #include "ModuleParticles.h"
@@ -135,7 +136,7 @@ void ModuleEnemies::HandleEnemiesSpawn()
 			{
 
 				// Spawn a new enemy if the screen has reached a spawn position
-				if (spawnQueue[i].x * SCREEN_SIZE < App->render->camera.x - SPAWN_MARGIN)
+				if (spawnQueue[i].x * SCREEN_SIZE < App->render->camera.x  - SPAWN_MARGIN)
 				{
 					LOG("Spawning enemy at %d", spawnQueue[i].x * SCREEN_SIZE);
 
@@ -202,6 +203,8 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 					break;
 				case ENEMY_TYPE::GREENFIGHTERPLANE:
 					enemies[i] = new GreenFighterPlane(info.x, info.y, info.spawnRight);
+				case ENEMY_TYPE::SMALLCAMOUFLAGEJET:
+					enemies[i] = new SmallCamouflageJet(info.x, info.y, info.spawnRight);
 					break;
 			}
 			enemies[i]->texture = texture;

@@ -9,13 +9,22 @@
 
 BigOrangeJet::BigOrangeJet(int x, int y, bool spawnRight) : Enemy(x, y, spawnRight)
 {
-	fly.PushBack({ 126, 20, 32, 19 });
-	currentAnim = &fly;
+	flyRight.PushBack({ 126, 20, 32, 19 });
+	flyLeft.PushBack({ 387,20,32,19 });
 
 	// Have the big orange jet describe a path in the screen
-	path.PushBack({ 3.0f, 0.0f }, 40);
-	path.PushBack({ 3.0f, -1.0f }, 40);
-	path.PushBack({ 3.0f, 0.0f }, 60);
+	if (spawnRight == false)
+	{
+		path.PushBack({ 3.0f, 0.0f }, 40,&flyRight);
+		path.PushBack({ 3.0f, -1.0f }, 40, &flyRight);
+		path.PushBack({ 3.0f, 0.0f }, 60, &flyRight);
+	}
+	else
+	{
+		path.PushBack({ -3.0f, 0.0f }, 40, &flyLeft);
+		path.PushBack({ -3.0f, -1.0f }, 40, &flyLeft);
+		path.PushBack({ -3.0f, 0.0f }, 60, &flyLeft);
+	}
 
 	collider = App->collisions->AddCollider({ position.x, position.y, 32, 19 }, Collider::Type::ENEMY, (Module*)App->enemies);
 
@@ -27,19 +36,20 @@ void BigOrangeJet::Update()
 {
 	path.Update();
 	position = spawnPos + path.GetRelativePosition();
+	currentAnim = path.GetCurrentAnimation();
 
 	// Call to the base class. It must be called at the end
 	// It will update the collider depending on the position
 	Enemy::Update();
 
-	//shootingFrequency++;
-	//if (shootingFrequency > 50)
-	//{
-	//	shootingFrequency = 0;
+	shootingFrequency++;
+	if (shootingFrequency > 50)
+	{
+		shootingFrequency = 0;
 
-	//	App->particles->AddParticle(App->particles->enemyBullet, position.x + 32, position.y, Collider::Type::ENEMY_SHOT);
+		App->particles->AddParticle(App->particles->enemyBullet, position.x + 32, position.y, Collider::Type::ENEMY_SHOT);
 
-	//	//Playing shooting sound effect (if space was pressed)
-	//	App->audio->PlayFx(0, 0);
-	//}
+		//Playing shooting sound effect (if space was pressed)
+		App->audio->PlayFx(0, 0);
+	}
 }

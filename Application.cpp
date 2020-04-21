@@ -25,19 +25,19 @@ Application::Application()
 	modules[i++] = audio = new ModuleAudio(true);
 
 	
-	modules[i++] = initialScreen = new ModuleInitialScreen(false);
+	modules[i++] = initialScreen = new ModuleInitialScreen(true);
 	modules[i++] = startScreen = new ModuleStartScreen(false);
 	modules[i++] = winScreen = new ModuleWinScreen(false);
-	modules[i++] = lvl2 = new ModuleLevel2(true);
+	modules[i++] = lvl2 = new ModuleLevel2(false);
 	modules[i++] = player = new ModulePlayer(false);
 	modules[i++] = particles = new ModuleParticles(false);
 	modules[i++] = enemies = new ModuleEnemies(false);
-	modules[i++] = HUD = new ModuleHUD(true);
+	modules[i++] = HUD = new ModuleHUD(false);
 
 
-	modules[i++] = collisions = new ModuleCollisions(true);
+	modules[i++] = collisions = new ModuleCollisions(false);
 	modules[i++] = transition = new ModuleFadeToBlack(true);
-	modules[i++] = fonts = new ModuleFonts(true);
+	modules[i++] = fonts = new ModuleFonts(false);
 	modules[i++] = render = new ModuleRenderer(true);
 }
 Application::~Application()

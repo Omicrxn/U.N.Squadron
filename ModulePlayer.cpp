@@ -137,7 +137,7 @@ update_status ModulePlayer::Update() {
 		collider->SetPos(position.x, position.y);
 	}
 
-	if (position.x >= 1600) {
+	if (position.x >= 7600) {
 		App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->winScreen, 60);
 	}
 

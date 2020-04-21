@@ -77,8 +77,11 @@ update_status ModuleInput::PreUpdate() {
 			return update_status::UPDATE_STOP;
 		}
 		// Maximize window (Button or F11)
-		else if (event.type == SDL_WINDOWEVENT_MAXIMIZED || keyboard[SDL_SCANCODE_F11] == KEY_DOWN) {
+		else if (event.type == SDL_WINDOWEVENT_MAXIMIZED) {
 			SDL_MaximizeWindow(App->window->sdlWindow);
+		}
+		else if (event.type == SDL_WINDOWEVENT_MINIMIZED){
+			SDL_MinimizeWindow(App->window->sdlWindow);
 		}
 	}
 
@@ -86,6 +89,20 @@ update_status ModuleInput::PreUpdate() {
 	if (keyboard[SDL_SCANCODE_F2] == KEY_DOWN) {
 		App->audio->MuteMusic();
 	}
+
+	// F11 to full screen
+	if (keyboard[SDL_SCANCODE_F11] == KEY_DOWN) {
+		if (maximized) {
+			SDL_RestoreWindow(App->window->sdlWindow);
+			
+		}
+		else {
+			SDL_MaximizeWindow(App->window->sdlWindow);
+
+		}
+		maximized = !maximized;
+	}
+	
 
 	// Debug functionality to jump screens
 	if (keyboard[SDL_SCANCODE_F3] == KEY_DOWN) {

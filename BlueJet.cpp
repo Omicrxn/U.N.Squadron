@@ -9,22 +9,45 @@
 
 BlueJet::BlueJet(int x, int y,bool spawnRight) : Enemy(x, y, spawnRight)
 {
-	fly.PushBack({ 308, 131, 30, 9 });
-	currentAnim = &fly;
+	flyRight.PushBack({ 308, 131, 30, 9 });
+	flyLeft.PushBack({ 207, 131, 30, 9 });
+	
 
 	// Have the blue jet describe a path in the screen
-	if (spawnPos.y < SCREEN_HEIGHT / 2)
-	{
-		path.PushBack({ 3.0f, 0.0f }, 20);
-		path.PushBack({ 3.0f, 1.0f }, 40);
-		path.PushBack({ 3.0f, 0.0f }, 60);
+	if (spawnRight) {
+		if (spawnPos.y < SCREEN_HEIGHT / 2)
+		{
+			path.PushBack({ -3.0f, 0.0f }, 20,&flyLeft);
+			path.PushBack({ -3.0f, 1.0f }, 40, &flyLeft);
+			path.PushBack({ -3.0f, 0.0f }, 60, &flyLeft);
+		}else if(spawnPos.y == SCREEN_HEIGHT/2) {
+
+			path.PushBack({ -3.0f, 0.0f }, 20, &flyLeft);
+			path.PushBack({ -3.0f, 0.0f }, 40, &flyLeft);
+			path.PushBack({ -3.0f, 0.0f }, 60, &flyLeft);
+
+		}
+		else
+		{
+			path.PushBack({ -3.0f, 0.0f }, 20, &flyLeft);
+			path.PushBack({ -3.0f, -1.0f }, 40, &flyLeft);
+			path.PushBack({ -3.0f, 0.0f }, 60, &flyLeft);
+		}
+	}else {
+		if (spawnPos.y < SCREEN_HEIGHT / 2)
+		{
+			path.PushBack({ 3.0f, 0.0f }, 20, &flyRight);
+			path.PushBack({ 3.0f, 1.0f }, 40, &flyRight);
+			path.PushBack({ 3.0f, 0.0f }, 60, &flyRight);
+		}
+		else
+		{
+			path.PushBack({ 3.0f, 0.0f }, 20, &flyRight);
+			path.PushBack({ 3.0f, -1.0f }, 40, &flyRight);
+			path.PushBack({ 3.0f, 0.0f }, 60, &flyRight);
+		}
 	}
-	else
-	{
-		path.PushBack({ 3.0f, 0.0f }, 20);
-		path.PushBack({ 3.0f, -1.0f }, 40);
-		path.PushBack({ 3.0f, 0.0f }, 60);
-	}
+	
 
 	collider = App->collisions->AddCollider({ position.x, position.y, 30, 9 }, Collider::Type::ENEMY, (Module*)App->enemies);
 
@@ -37,19 +60,19 @@ void BlueJet::Update()
 {
 	path.Update();
 	position = spawnPos + path.GetRelativePosition();
-
+	currentAnim = path.GetCurrentAnimation();
 	// Call	to the base class. It must be called at the end
 	// It will update the collider depending on the position
 	Enemy::Update();
 
-	//shootingFrequency++;
-	//if (shootingFrequency > 50)
-	//{
-	//	shootingFrequency = 0;
+	shootingFrequency++;
+	if (shootingFrequency > 50)
+	{
+		shootingFrequency = 0;
 
-	//	App->particles->AddParticle(App->particles->enemyBullet, position.x + 32, position.y, Collider::Type::ENEMY_SHOT);
+		App->particles->AddParticle(App->particles->enemyBullet, position.x + 32, position.y, Collider::Type::ENEMY_SHOT);
 
-	//	// Playing shooting sound effects (if space was pressed)
-	//	App->audio->PlayFx(0, 0);
-	//}
+		// Playing shooting sound effects (if space was pressed)
+		App->audio->PlayFx(0, 0);
+	}
 }

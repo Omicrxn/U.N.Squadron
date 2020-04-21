@@ -1,4 +1,4 @@
-#include "MediumCamouflageJet.h"
+#include "SmallCamouflageJet.h"
 
 #include "Application.h"
 #include "ModuleCollisions.h"
@@ -7,22 +7,22 @@
 #include "ModulePlayer.h"
 #include "ModuleLevel2.h"
 
-MediumCamouflageJet::MediumCamouflageJet(int x, int y, bool spawnRight) : Enemy(x, y, spawnRight)
+SmallCamouflageJet::SmallCamouflageJet(int x, int y, bool spawnRight) : Enemy(x, y, spawnRight)
 {
-	flyLeft.PushBack({ 240, 96, 30, 9 });
-	turnRight.PushBack({ 205, 88, 30, 17 });
-	turnRight.PushBack({ 173, 82, 30, 23 });
-	turnRight.PushBack({ 147, 82, 24, 23 });
-	turnRight.PushBack({ 128, 82, 17, 23 });
-	turnRight.PushBack({ 113, 82, 10, 23 });
-	turnRight.PushBack({ 94, 82, 16, 23 });
-	turnRight.PushBack({ 68, 82, 23, 23 });
-	turnRight.PushBack({ 36, 81, 30, 24 });
-	turnRight.PushBack({ 4, 89, 30, 16 });
+	flyLeft.PushBack({ 245, 112, 26, 8 });
+	turnRight.PushBack({ 215, 113, 26, 10 });
+	turnRight.PushBack({ 185, 110, 26, 15 });
+	turnRight.PushBack({ 163, 110, 19, 15 });
+	turnRight.PushBack({ 145, 109, 14, 17 });
+	turnRight.PushBack({ 132, 108, 9, 19 });
+	turnRight.PushBack({ 119, 109, 11, 17 });
+	turnRight.PushBack({ 99, 110, 18, 15 });
+	turnRight.PushBack({ 70, 110, 26, 15 });
+	turnRight.PushBack({ 40, 12, 26, 10 });
 	turnRight.speed = 0.1f;
-	flyRight.PushBack({ 275, 96, 30, 9 });
+	flyRight.PushBack({ 274, 112, 26, 8 });
 
-	if (spawnPos.y < SCREEN_HEIGHT/2)
+	if (spawnPos.y < SCREEN_HEIGHT / 2)
 	{
 		path.PushBack({ -2.0f, 0.0f }, 40, &flyLeft);
 		path.PushBack({ -1.5f, 1.0f }, 40, &turnRight);
@@ -41,7 +41,7 @@ MediumCamouflageJet::MediumCamouflageJet(int x, int y, bool spawnRight) : Enemy(
 	moneyGiven = 300;
 }
 
-void MediumCamouflageJet::Update()
+void SmallCamouflageJet::Update()
 {
 	path.Update();
 	position = spawnPos + path.GetRelativePosition();
@@ -52,7 +52,7 @@ void MediumCamouflageJet::Update()
 	Enemy::Update();
 
 	shootingFrequency++;
-	
+
 	if (shootingFrequency > 40)
 	{
 		shootingFrequency = 0;

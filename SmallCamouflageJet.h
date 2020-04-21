@@ -1,15 +1,16 @@
-#ifndef __MEDIUMCAMOUFLAGEJET_H__
-#define __MEDIUMCAMOUFLAGEJET_H__
+#pragma once
+#ifndef __SMALLCAMOUFLAGEJET_H__
+#define __SMALLCAMOUFLAGEJET_H__
 
 #include "Enemy.h"
 #include "Path.h"
 
-class MediumCamouflageJet : public Enemy
+class SmallCamouflageJet : public Enemy
 {
 public:
 	// Constructor (x y coordinates in the world)
 	// Creates animation and movement data and the collider
-	MediumCamouflageJet(int x, int y,bool spawnRight);
+	SmallCamouflageJet(int x, int y, bool spawnRight);
 
 	// The enemy is going to follow the different steps in the path
 	// Position will be updated depending on the speed defined at each step
@@ -29,4 +30,4 @@ private:
 	unsigned int shootingFrequency;
 };
 
-#endif // __MEDIUMCAMOUFLAGEJET_H__
+#endif // __SMALLCAMOUFLAGEJET_H__
