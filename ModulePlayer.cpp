@@ -185,7 +185,6 @@ bool ModulePlayer::CleanUp() {
 	App->collisions->DeleteCollider(collider);
 	collider = nullptr;
 	
-	
 	return ret;
 }
 
