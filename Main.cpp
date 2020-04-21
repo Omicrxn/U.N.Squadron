@@ -1,6 +1,9 @@
 #include "Application.h"
 #include "Globals.h"
 #include "MemLeaks.h"
+#include "SDL.h"
+
+
 
 enum class main_states
 {
@@ -13,7 +16,7 @@ enum class main_states
 
 Application* App = nullptr;
 
-int main()
+int main(int argc, char* argv[])
 {
 	ReportMemoryLeaks();
 

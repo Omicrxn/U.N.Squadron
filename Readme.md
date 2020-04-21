@@ -51,4 +51,4 @@ While at the moment Capcom was developing vertically scrolling shooters, U.N.Squ
 |Jump Screens|F3|
 |Direct Win|F4|
 |God Mode|F5|
-|Maximize|F11|
+|Maximize / Resize|F11|
