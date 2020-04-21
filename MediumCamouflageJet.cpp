@@ -29,6 +29,9 @@ MediumCamouflageJet::MediumCamouflageJet(int x, int y) : Enemy(x, y)
 	collider = App->collisions->AddCollider({ position.x, position.y, 30, 9 }, Collider::Type::ENEMY, (Module*)App->enemies);
 
 	right = true;
+
+	scoreGiven = 100;
+	moneyGiven = 300;
 }
 
 void MediumCamouflageJet::Update()

@@ -29,6 +29,9 @@ BigOrangeJet::BigOrangeJet(int x, int y) : Enemy(x, y)
 	collider = App->collisions->AddCollider({ position.x, position.y, 32, 19 }, Collider::Type::ENEMY, (Module*)App->enemies);
 
 	right = false;
+
+	scoreGiven = 200;
+	moneyGiven = 600;
 }
 
 void BigOrangeJet::Update()

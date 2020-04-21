@@ -17,6 +17,9 @@ BlueJet::BlueJet(int x, int y) : Enemy(x, y)
 	path.PushBack({ 0.0f, -1.0f }, 50);
 
 	collider = App->collisions->AddCollider({ position.x, position.y, 30, 9 }, Collider::Type::ENEMY, (Module*)App->enemies);
+
+	scoreGiven = 100;
+	moneyGiven = 300;
 }
 
 void BlueJet::Update()

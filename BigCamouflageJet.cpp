@@ -17,6 +17,9 @@ BigCamouflageJet::BigCamouflageJet(int x, int y) : Enemy(x, y)
 	path.PushBack({ 0.0f, -1.0f }, 50);
 
 	collider = App->collisions->AddCollider({ position.x, position.y, 32, 19 }, Collider::Type::ENEMY, (Module*)App->enemies);
+
+	scoreGiven = 200;
+	moneyGiven = 600;
 }
 
 void BigCamouflageJet::Update()
