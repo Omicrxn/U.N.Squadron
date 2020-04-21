@@ -9,7 +9,8 @@
 
 ModuleInitialScreen::ModuleInitialScreen(bool startEnabled) : Module(startEnabled) {
 	//screen rect
-	screen = { 0,0,256,224 };
+	logo = { 0,0,256,224 };
+	screen = { 0,0,SCREEN_WIDTH*3,SCREEN_HEIGHT*3 };
 
 	startTime = 0;
 	
@@ -53,12 +54,12 @@ update_status ModuleInitialScreen::PostUpdate() {
 	
 	// Blit 
 	if (actualTime < endTime) {
-		if (!App->render->Blit(logoTex, 0, 0, &screen, 0.0f, false)) {
+		if (!App->render->Blit(logoTex, 0, 0, &logo, 0.0f, false)) {
 			ret = UPDATE_ERROR;
 		}
 	}
 	else {
-		if (!App->render->Blit(tex, 0, 0, &screen, 0.0f, false)) {
+		if (!App->render->Blit(tex, 0, 0, &screen, 0.0f, false,true)) {
 			ret = UPDATE_ERROR;
 		}
 	}
