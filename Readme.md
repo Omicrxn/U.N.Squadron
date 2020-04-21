@@ -26,7 +26,11 @@ While at the moment Capcom was developing vertically scrolling shooters, U.N.Squ
 ### GETTING STARTED
 1. Execute the U.N.SQUADRON.exe file in the U.N.SQUADRON folder.
 
-2. Read the following instructions to learn the controls:
+2. Use Enter to navigate between screens.
+
+3. The game ends when the player has surpassed all enemies, it's not necessary to have destroyed them all.
+
+4. Read the following instructions to learn the controls:
 
 ### CONTROLS FOR PC
 |Function|Keyboard|
@@ -37,8 +41,8 @@ While at the moment Capcom was developing vertically scrolling shooters, U.N.Squ
 |Fly your Aircraft (Right)|D|
 |Select / Continue|Enter|
 |Fire the Vulcan Cannon|Space|
-|Travel through the options (Up)|W|
-|Travel through the options (Down)|S|
+|Travel through the options (Up)|W or 🡱|
+|Travel through the options (Down)|S or 🡳|
 
 |Debug Functionality|Keyboard|
 |-------|--------|
