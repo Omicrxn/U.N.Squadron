@@ -183,6 +183,8 @@ bool ModulePlayer::CleanUp() {
 
 	App->textures->Unload(texture);
 	App->collisions->DeleteCollider(collider);
+	App->fonts->UnLoad(yellowFont);
+	App->fonts->UnLoad(greenFont);
 	collider = nullptr;
 	
 	return ret;

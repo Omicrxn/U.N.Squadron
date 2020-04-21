@@ -21,6 +21,7 @@ public:
 private:
 	SDL_Texture* logoTex = nullptr;
 	SDL_Texture* tex = nullptr;
+	SDL_Rect logo;
 	SDL_Rect screen;
 	
 	Uint32 startTime;
