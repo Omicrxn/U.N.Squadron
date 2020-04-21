@@ -177,6 +177,7 @@
     <ClInclude Include="ModuleEnemies.h" />
     <ClInclude Include="ModuleFadeToBlack.h" />
     <ClInclude Include="ModuleFonts.h" />
+    <ClInclude Include="ModuleHUD.h" />
     <ClInclude Include="ModuleInitialScreen.h" />
     <ClInclude Include="ModuleInput.h" />
     <ClInclude Include="ModuleLevel2.h" />
