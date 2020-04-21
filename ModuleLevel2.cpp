@@ -65,23 +65,27 @@ bool ModuleLevel2::Start() {
 	App->enemies->AddEnemy(ENEMY_TYPE::MEDIUMCAMOUFLAGEJET, 350, 50);
 	App->enemies->AddEnemy(ENEMY_TYPE::MEDIUMCAMOUFLAGEJET, 400, 50);
 	App->enemies->AddEnemy(ENEMY_TYPE::MEDIUMCAMOUFLAGEJET, 450, 50);
+
 	App->enemies->AddEnemy(ENEMY_TYPE::MEDIUMCAMOUFLAGEJET, 500, SCREEN_HEIGHT - 70);
 	App->enemies->AddEnemy(ENEMY_TYPE::MEDIUMCAMOUFLAGEJET, 550, SCREEN_HEIGHT - 70);
 	App->enemies->AddEnemy(ENEMY_TYPE::MEDIUMCAMOUFLAGEJET, 600, SCREEN_HEIGHT - 70);
 	App->enemies->AddEnemy(ENEMY_TYPE::MEDIUMCAMOUFLAGEJET, 650, SCREEN_HEIGHT - 70);
+
 	App->enemies->AddEnemy(ENEMY_TYPE::BIGORANGEJET, 700, SCREEN_HEIGHT - 70, false);
 	App->enemies->AddEnemy(ENEMY_TYPE::BIGORANGEJET, 750, SCREEN_HEIGHT - 70, false);
 	App->enemies->AddEnemy(ENEMY_TYPE::BIGORANGEJET, 800, SCREEN_HEIGHT - 70, false);
-	App->enemies->AddEnemy(ENEMY_TYPE::BIGCAMOUFLAGEJET, 850, 50, false);
+
 	App->enemies->AddEnemy(ENEMY_TYPE::BIGCAMOUFLAGEJET, 900, 50, false);
 	App->enemies->AddEnemy(ENEMY_TYPE::BIGCAMOUFLAGEJET, 950, 50, false);
+	App->enemies->AddEnemy(ENEMY_TYPE::BIGCAMOUFLAGEJET, 1000, 50, false);
 
-	App->enemies->AddEnemy(ENEMY_TYPE::BLUEJET, 1000, 50, false );
-	App->enemies->AddEnemy(ENEMY_TYPE::BLUEJET, 1050, 50, false );
-	App->enemies->AddEnemy(ENEMY_TYPE::BLUEJET, 1100, 50, false);
-	App->enemies->AddEnemy(ENEMY_TYPE::BLUEJET, 1000, SCREEN_HEIGHT - 70, false);
-	App->enemies->AddEnemy(ENEMY_TYPE::BLUEJET, 1050, SCREEN_HEIGHT - 70, false);
+	App->enemies->AddEnemy(ENEMY_TYPE::BLUEJET, 1100, 50, false );
+	App->enemies->AddEnemy(ENEMY_TYPE::BLUEJET, 1150, 50, false );
+	App->enemies->AddEnemy(ENEMY_TYPE::BLUEJET, 1200, 50, false);
+
 	App->enemies->AddEnemy(ENEMY_TYPE::BLUEJET, 1100, SCREEN_HEIGHT - 70, false);
+	App->enemies->AddEnemy(ENEMY_TYPE::BLUEJET, 1150, SCREEN_HEIGHT - 70, false);
+	App->enemies->AddEnemy(ENEMY_TYPE::BLUEJET, 1200, SCREEN_HEIGHT - 70, false);
 
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
