@@ -129,8 +129,6 @@ update_status ModulePlayer::Update() {
 		if (position.x > App->render->camera.x/SCREEN_SIZE) {
 			position.x -= 3;
 		}
-		
-		
 	}
 	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_REPEAT)
 	{
@@ -181,7 +179,6 @@ bool ModulePlayer::CleanUp() {
 	App->collisions->DeleteCollider(collider);
 	collider = nullptr;
 	
-	
 	return ret;
 }
 
@@ -198,11 +195,5 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		App->audio->PlayFx(1, 0);
 
 		destroyed = true;
-	}
-
-	if (c1->type == Collider::Type::PLAYER_SHOT && c2->type == Collider::Type::ENEMY)
-	{
-		score += 2;
-		money += 5;
 	}
 }
