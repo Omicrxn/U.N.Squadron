@@ -50,7 +50,6 @@ bool ModuleStartScreen::Start() {
 update_status ModuleStartScreen::Update(){
 	update_status ret = update_status::UPDATE_CONTINUE;
 
-	
 	if ((App->input->keyboard[SDL_SCANCODE_W] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_UP] == KEY_DOWN)
 		&& selectorPos.y != 116) {
 		selectorPos = { 68,116 };
@@ -82,19 +81,19 @@ update_status ModuleStartScreen::PostUpdate() {
 	SDL_Rect rect = current_anim->GetCurrentFrame();
 
 	//blit unicorn
-	if (!App->render->Blit(tex, 81, 50, &rect)) {
+	if (!App->render->Blit(tex, 81, 50, &rect, 1, false)) {
 		ret = UPDATE_ERROR;
 	}
 	//blit title
-	if (!App->render->Blit(tex, 11, 16, &title)) {
+	if (!App->render->Blit(tex, 11, 16, &title, 1, false)) {
 		ret = UPDATE_ERROR;
 	}
 	//blit text
-	if (!App->render->Blit(tex, 24, 87, &text)) {
+	if (!App->render->Blit(tex, 24, 87, &text, 1, false)) {
 		ret = UPDATE_ERROR;
 	}
 	//blit selector
-	if (!App->render->Blit(tex, selectorPos.x, selectorPos.y, &selector)) {
+	if (!App->render->Blit(tex, selectorPos.x, selectorPos.y, &selector, 1, false)) {
 		ret = UPDATE_ERROR;
 	}
 	return ret;

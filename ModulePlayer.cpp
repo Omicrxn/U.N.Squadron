@@ -77,7 +77,9 @@ update_status ModulePlayer::Update() {
 			collider = nullptr;
 		}
 		else {
-			collider = App->collisions->AddCollider({ position.x, position.y, 32, 16 }, Collider::Type::PLAYER, this);
+			if (collider == nullptr) {
+				collider = App->collisions->AddCollider({ position.x, position.y, 32, 16 }, Collider::Type::PLAYER, this);
+			}
 		}
 	}
 		
@@ -143,6 +145,9 @@ update_status ModulePlayer::Update() {
 		collider->SetPos(position.x, position.y);
 	}
 
+	if (score == 500 || position.x >= 1600) {
+		App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->winScreen, 60);
+	}
 	return ret;
 }
 

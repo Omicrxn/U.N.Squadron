@@ -8,6 +8,7 @@ class Module;
 class ModuleWindow;
 class ModuleInput;
 class ModuleTextureManager;
+class ModuleWinScreen;
 class ModuleAudio;
 class ModulePlayer;
 class ModuleLevel2;
@@ -20,7 +21,7 @@ class ModuleRenderer;
 class ModuleEnemies;
 class ModuleFonts;
 
-#define NUM_MODULES 14
+#define NUM_MODULES 15
 
 class Application
 {
@@ -41,6 +42,7 @@ public:
 	ModulePlayer* player = nullptr;
 	ModuleInitialScreen* initialScreen = nullptr;
 	ModuleStartScreen* startScreen = nullptr;
+	ModuleWinScreen* winScreen = nullptr;
 	ModuleParticles* particles = nullptr;
 	ModuleCollisions* collisions = nullptr;
 	ModuleFadeToBlack* transition = nullptr;

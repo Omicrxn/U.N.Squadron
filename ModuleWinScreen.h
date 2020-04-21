@@ -1,32 +1,29 @@
 #pragma once
-#ifndef __MODULEINITIALSCREEN_H__
-#define __MODULEINITIALSCREEN_H__
+#ifndef __MODULEWINSCREEN_H__
+#define __MODULEWINSCREEN_H__
 
 #include "Module.h"
 #include "Globals.h"
 #include "SDL_timer.h"
 #include "SDL_rect.h"
 struct SDL_Texture;
-class ModuleInitialScreen : public Module
+class ModuleWinScreen : public Module
 {
 public:
-	ModuleInitialScreen(bool startEnabled);
-	~ModuleInitialScreen();
-	
+	ModuleWinScreen(bool startEnabled);
+	~ModuleWinScreen();
+
 
 	bool Start();
 	update_status Update();
 	update_status PostUpdate();
 	bool CleanUp();
 private:
-	SDL_Texture* logoTex = nullptr;
 	SDL_Texture* tex = nullptr;
 	SDL_Rect screen;
-	
 	Uint32 startTime;
 	Uint32 endTime;
 	Uint32 actualTime;
-	
 };
 #endif
 

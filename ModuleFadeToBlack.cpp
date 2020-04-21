@@ -88,3 +88,14 @@ bool ModuleFadeToBlack::FadeToBlack(Module* moduleToDisable, Module* moduleToEna
 
 	return ret;
 }
+
+bool ModuleFadeToBlack::hasEnded() {
+	bool ret = true;
+
+	if (currentStep == Fade_Step::NONE)
+		ret = true;
+	else
+		ret = false;
+
+	return ret;
+}

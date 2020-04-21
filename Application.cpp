@@ -7,6 +7,7 @@
 #include "ModulePlayer.h"
 #include "ModuleParticles.h"
 #include "ModuleInitialScreen.h"
+#include "ModuleWinScreen.h"
 #include "ModuleStartScreen.h"
 #include "ModuleCollisions.h"
 #include "ModuleFadeToBlack.h"
@@ -22,16 +23,18 @@ Application::Application()
 	modules[i++] = textures = new ModuleTextureManager(true);
 	modules[i++] = audio = new ModuleAudio(true);
 
+	
 	modules[i++] = initialScreen = new ModuleInitialScreen(true);
 	modules[i++] = startScreen = new ModuleStartScreen(false);
+	modules[i++] = winScreen = new ModuleWinScreen(false);
 	modules[i++] = lvl2 = new ModuleLevel2(false);
-
 	modules[i++] = player = new ModulePlayer(false);
 	modules[i++] = particles = new ModuleParticles(false);
 	modules[i++] = enemies = new ModuleEnemies(false);
+
+
 	modules[i++] = collisions = new ModuleCollisions(true);
 	modules[i++] = transition = new ModuleFadeToBlack(true);
-
 	modules[i++] = fonts = new ModuleFonts(true);
 	modules[i++] = render = new ModuleRenderer(true);
 }
