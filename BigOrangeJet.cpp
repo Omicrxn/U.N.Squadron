@@ -13,18 +13,9 @@ BigOrangeJet::BigOrangeJet(int x, int y) : Enemy(x, y)
 	currentAnim = &fly;
 
 	// Have the big orange jet describe a path in the screen
-	if (App->lvl2->numSpawnedEnemies <= 8)
-	{
-		path.PushBack({ 2.0f, 0.0f }, 20);
-		path.PushBack({ 2.0f, 1.0f }, 40);
-		path.PushBack({ 2.0f, 0.0f }, 60);
-	}
-	else
-	{
-		path.PushBack({ 3.0f, 0.0f }, 20);
-		path.PushBack({ 3.0f, -1.0f }, 40);
-		path.PushBack({ 3.0f, 0.0f }, 60);
-	}
+	path.PushBack({ 3.0f, 0.0f }, 20);
+	path.PushBack({ 3.0f, -1.0f }, 40);
+	path.PushBack({ 3.0f, 0.0f }, 60);
 
 	collider = App->collisions->AddCollider({ position.x, position.y, 32, 19 }, Collider::Type::ENEMY, (Module*)App->enemies);
 

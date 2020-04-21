@@ -12,9 +12,9 @@ BigCamouflageJet::BigCamouflageJet(int x, int y) : Enemy(x, y)
 	currentAnim = &fly;
 
 	// Have the big camouflage jet describe a path in the screen
-	path.PushBack({ 0.0f, -1.0f }, 50);
-	path.PushBack({ 0.0f, 1.0f }, 100);
-	path.PushBack({ 0.0f, -1.0f }, 50);
+	path.PushBack({ 3.0f, 0.0f }, 20);
+	path.PushBack({ 3.0f, 1.0f }, 40);
+	path.PushBack({ 3.0f, 0.0f }, 60);
 
 	collider = App->collisions->AddCollider({ position.x, position.y, 32, 19 }, Collider::Type::ENEMY, (Module*)App->enemies);
 
