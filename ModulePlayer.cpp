@@ -45,14 +45,6 @@ bool ModulePlayer::Start() {
 	// Add a collider to the player
 	collider = App->collisions->AddCollider({ position.x, position.y, 32, 16 }, Collider::Type::PLAYER, this);
 
-	// HUD (PROVISIONAL)
-	char lookupTable[] = { "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz  0123456789.,ªº?!*$%&()+-/:;<=>@·    " };
-	yellowFont = App->fonts->Load("Assets/Fonts/FontY.png", lookupTable, 5);
-	greenFont = App->fonts->Load("Assets/Fonts/FontG.png", lookupTable, 5);
-
-	score = 0;
-	money = 0;
-
 	return ret;
 }
 
@@ -163,18 +155,6 @@ update_status ModulePlayer::PostUpdate() {
 		}
 	}
 
-	// Draw UI (score & money)
-	sprintf_s(scoreText, 10, "%7d", score);
-	sprintf_s(moneyText, 10, "%7d", money);
-
-	// Blit of the HUD (PROVISIONAL)
-	App->fonts->BlitText(8, 10, yellowFont, "SCORE");
-	App->fonts->BlitText(132, 10, yellowFont, "LEVEL");
-	App->fonts->BlitText(132, 25, yellowFont, "$");
-	App->fonts->BlitText(10, 25, greenFont, scoreText);
-	App->fonts->BlitText(144, 25, greenFont, moneyText);
-	App->fonts->BlitText(144, 10, greenFont, "      2");
-
 	return ret;
 }
 
@@ -183,8 +163,6 @@ bool ModulePlayer::CleanUp() {
 
 	App->textures->Unload(texture);
 	App->collisions->DeleteCollider(collider);
-	App->fonts->UnLoad(yellowFont);
-	App->fonts->UnLoad(greenFont);
 
 	collider = nullptr;
 	

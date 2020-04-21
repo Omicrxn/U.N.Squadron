@@ -6,6 +6,7 @@
 #include "ModuleRenderer.h"
 #include "ModuleAudio.h"
 #include "ModuleEnemies.h"
+#include "ModuleHUD.h"
 #include "ModuleParticles.h"
 
 ModuleLevel2::ModuleLevel2(bool startEnabled) : Module(startEnabled) {}
@@ -61,10 +62,10 @@ bool ModuleLevel2::Start() {
 	thirdBotPos2 = { (float)thirdBottomLayer.w,(float)(SCREEN_HEIGHT-thirdBottomLayer.h) };
 	thirdSpeed = 2.0;
 
-	App->enemies->AddEnemy(ENEMY_TYPE::MEDIUMCAMOUFLAGEJET, 300, 50);
-	App->enemies->AddEnemy(ENEMY_TYPE::MEDIUMCAMOUFLAGEJET, 350, 50);
 	App->enemies->AddEnemy(ENEMY_TYPE::MEDIUMCAMOUFLAGEJET, 400, 50);
-	App->enemies->AddEnemy(ENEMY_TYPE::MEDIUMCAMOUFLAGEJET, 450, 50);
+	App->enemies->AddEnemy(ENEMY_TYPE::MEDIUMCAMOUFLAGEJET, 415, 50);
+	App->enemies->AddEnemy(ENEMY_TYPE::MEDIUMCAMOUFLAGEJET, 425, 50);
+	App->enemies->AddEnemy(ENEMY_TYPE::MEDIUMCAMOUFLAGEJET, 435, 50);
 
 	App->enemies->AddEnemy(ENEMY_TYPE::MEDIUMCAMOUFLAGEJET, 500, SCREEN_HEIGHT - 70);
 	App->enemies->AddEnemy(ENEMY_TYPE::MEDIUMCAMOUFLAGEJET, 550, SCREEN_HEIGHT - 70);
@@ -93,6 +94,7 @@ bool ModuleLevel2::Start() {
 	App->particles->Enable();
 	App->player->Enable();
 	App->enemies->Enable();
+	App->HUD->Enable();
 
 	return ret;
 }
@@ -224,6 +226,7 @@ bool ModuleLevel2::CleanUp() {
 	App->player->Disable();
 	App->enemies->Disable();
 	App->particles->Disable();
+	App->HUD->Disable();
 
 	return ret;
 }

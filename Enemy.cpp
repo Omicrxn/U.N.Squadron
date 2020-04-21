@@ -5,7 +5,7 @@
 #include "ModuleParticles.h"
 #include "ModuleAudio.h"
 #include "ModuleRenderer.h"
-#include "ModulePlayer.h"
+#include "ModuleHUD.h"
 
 Enemy::Enemy(int x, int y,bool spawnRight) : position(x, y)
 {
@@ -44,8 +44,8 @@ void Enemy::OnCollision(Collider* collider)
 	App->particles->AddParticle(App->particles->enemyExplosion, position.x, position.y);
 	App->audio->PlayFx(destroyedFx);
 
-	App->player->score += scoreGiven;
-	App->player->money += moneyGiven;
+	App->HUD->score += scoreGiven;
+	App->HUD->money += moneyGiven;
 }
 void Enemy::SetToDelete()
 {
