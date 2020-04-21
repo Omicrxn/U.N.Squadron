@@ -18,18 +18,22 @@ public:
 
 	bool CleanUp();
 
-public:
-	// Score
-	uint score = 0;
+private:
 	char scoreText[10] = { "\0" };
-
-	// Money
-	uint money = 0;
 	char moneyText[10] = { "\0" };
-
 	// Id Fonts
 	int yellowFont = -1;
 	int greenFont = -1;
+public:
+	// Score
+	uint score = 0;
+	
+
+	// Money
+	uint money = 0;
+	
+
+	
 };
 
 #endif // __ModuleHUD_H__

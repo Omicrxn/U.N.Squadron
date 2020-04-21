@@ -18,10 +18,11 @@ class ModuleStartScreen;
 class ModuleFadeToBlack;
 class ModuleCollisions;
 class ModuleRenderer;
+class ModuleHUD;
 class ModuleEnemies;
 class ModuleFonts;
 
-#define NUM_MODULES 15
+#define NUM_MODULES 16
 
 class Application
 {
@@ -46,6 +47,7 @@ public:
 	ModuleParticles* particles = nullptr;
 	ModuleCollisions* collisions = nullptr;
 	ModuleFadeToBlack* transition = nullptr;
+	ModuleHUD* HUD = nullptr;
 	ModuleRenderer* render = nullptr;
 	ModuleEnemies* enemies = nullptr;
 	ModuleFonts* fonts = nullptr;

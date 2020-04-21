@@ -9,6 +9,7 @@
 #include "ModuleInitialScreen.h"
 #include "ModuleWinScreen.h"
 #include "ModuleStartScreen.h"
+#include "ModuleHUD.h"
 #include "ModuleCollisions.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleRenderer.h"
@@ -31,6 +32,7 @@ Application::Application()
 	modules[i++] = player = new ModulePlayer(false);
 	modules[i++] = particles = new ModuleParticles(false);
 	modules[i++] = enemies = new ModuleEnemies(false);
+	modules[i++] = HUD = new ModuleHUD(true);
 
 
 	modules[i++] = collisions = new ModuleCollisions(true);

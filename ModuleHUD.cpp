@@ -9,7 +9,7 @@ ModuleHUD::ModuleHUD(bool startEnabled) : Module(startEnabled) {}
 ModuleHUD::~ModuleHUD() {}
 
 bool ModuleHUD::Start() {
-
+	bool ret = true;
 	// HUD (Prototype)
 	char lookupTable[] = { "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz  0123456789.,ªº?!*$%&()+-/:;<=>@·    " };
 	yellowFont = App->fonts->Load("Assets/Fonts/FontY.png", lookupTable, 5);
@@ -17,6 +17,7 @@ bool ModuleHUD::Start() {
 
 	score = 0;
 	money = 0;
+	return ret;
 }
 
 update_status ModuleHUD::PostUpdate() {
