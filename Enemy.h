@@ -41,6 +41,10 @@ public:
 	// Sound fx when destroyed
 	int destroyedFx = 0;
 
+	// Score and Money values
+	uint scoreGiven = 0;
+	uint moneyGiven = 0;
+
 protected:
 	// A ptr to the current animation
 	Animation* currentAnim = nullptr;

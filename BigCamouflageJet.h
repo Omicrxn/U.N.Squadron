@@ -24,5 +24,4 @@ private:
 	Animation fly;
 
 	unsigned int shootingFrequency;
-
 };

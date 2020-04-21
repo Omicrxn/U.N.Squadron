@@ -5,7 +5,7 @@
 
 #define MAX_ENEMIES 100
 
-// TODO 4: Create a new enemy type: the Mech
+// Create new enemy types:
 
 enum class ENEMY_TYPE
 {
@@ -80,6 +80,7 @@ private:
 
 	// The audio fx for destroying an enemy
 	int enemyDestroyedFx = 0;
+
 };
 
 #endif // __MODULE_ENEMIES_H__
