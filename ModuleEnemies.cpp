@@ -34,7 +34,20 @@ bool ModuleEnemies::Start()
 
 	return true;
 }
+update_status ModuleEnemies::PreUpdate()
+{
+	// Remove all enemies scheduled for deletion
+	for (uint i = 0; i < MAX_ENEMIES; ++i)
+	{
+		if (enemies[i] != nullptr && enemies[i]->pendingToDelete)
+		{
+			delete enemies[i];
+			enemies[i] = nullptr;
+		}
+	}
 
+	return update_status::UPDATE_CONTINUE;
+}
 update_status ModuleEnemies::Update()
 {
 	HandleEnemiesSpawn();
@@ -78,7 +91,7 @@ bool ModuleEnemies::CleanUp()
 	return true;
 }
 
-bool ModuleEnemies::AddEnemy(ENEMY_TYPE type, int x, int y)
+bool ModuleEnemies::AddEnemy(ENEMY_TYPE type, int x, int y, bool spawnRight)
 {
 	bool ret = false;
 
@@ -89,6 +102,7 @@ bool ModuleEnemies::AddEnemy(ENEMY_TYPE type, int x, int y)
 			spawnQueue[i].type = type;
 			spawnQueue[i].x = x;
 			spawnQueue[i].y = y;
+			spawnQueue[i].spawnRight = spawnRight;
 			ret = true;
 			break;
 		}
@@ -102,17 +116,36 @@ void ModuleEnemies::HandleEnemiesSpawn()
 	// Iterate all the enemies queue
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
 	{
-		if (spawnQueue[i].type != ENEMY_TYPE::NO_TYPE)
-		{
-			// Spawn a new enemy if the screen has reached a spawn position
-			if (spawnQueue[i].x * SCREEN_SIZE < App->render->camera.x + (App->render->camera.w * SCREEN_SIZE) + SPAWN_MARGIN)
+		if (spawnQueue[i].spawnRight == true) {
+			if (spawnQueue[i].type != ENEMY_TYPE::NO_TYPE)
 			{
-				LOG("Spawning enemy at %d", spawnQueue[i].x * SCREEN_SIZE);
 
-				SpawnEnemy(spawnQueue[i]);
-				spawnQueue[i].type = ENEMY_TYPE::NO_TYPE; // Removing the newly spawned enemy from the queue
+				// Spawn a new enemy if the screen has reached a spawn position
+				if (spawnQueue[i].x * SCREEN_SIZE < App->render->camera.x + (App->render->camera.w) + SPAWN_MARGIN)
+				{
+					LOG("Spawning enemy at %d", spawnQueue[i].x * SCREEN_SIZE);
+
+					SpawnEnemy(spawnQueue[i]);
+					spawnQueue[i].type = ENEMY_TYPE::NO_TYPE; // Removing the newly spawned enemy from the queue
+				}
 			}
 		}
+		else {
+			if (spawnQueue[i].type != ENEMY_TYPE::NO_TYPE)
+			{
+
+				// Spawn a new enemy if the screen has reached a spawn position
+				if (spawnQueue[i].x * SCREEN_SIZE < App->render->camera.x - SPAWN_MARGIN)
+				{
+					LOG("Spawning enemy at %d", spawnQueue[i].x * SCREEN_SIZE);
+
+					SpawnEnemy(spawnQueue[i]);
+					spawnQueue[i].type = ENEMY_TYPE::NO_TYPE; // Removing the newly spawned enemy from the queue
+				}
+			}
+
+		}
+		
 	}
 }
 
@@ -124,24 +157,22 @@ void ModuleEnemies::HandleEnemiesDespawn()
 		if (enemies[i] != nullptr)
 		{
 			// Delete the enemy when it has reached the end of the screen
-			if (enemies[i]->right == true)
+			if (enemies[i]->despawnLeft == true)
 			{
 				if (enemies[i]->position.x * SCREEN_SIZE < (App->render->camera.x) - SPAWN_MARGIN)
 				{
 					LOG("DeSpawning enemy at %d", enemies[i]->position.x * SCREEN_SIZE);
 
-					delete enemies[i];
-					enemies[i] = nullptr;
+					enemies[i]->SetToDelete();
 				}
 			}
 			else
 			{
-				if (enemies[i]->position.x * SCREEN_SIZE > (App->render->camera.x) + SPAWN_MARGIN + (SCREEN_WIDTH * SCREEN_SIZE))
+				if (enemies[i]->position.x * SCREEN_SIZE > ((App->render->camera.x) + SPAWN_MARGIN + (SCREEN_WIDTH * SCREEN_SIZE)))
 				{
 					LOG("DeSpawning enemy at %d", enemies[i]->position.x * SCREEN_SIZE);
 
-					delete enemies[i];
-					enemies[i] = nullptr;
+					enemies[i]->SetToDelete();
 				}
 			}
 		}
@@ -158,19 +189,19 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 			switch (info.type)
 			{
 				case ENEMY_TYPE::MEDIUMCAMOUFLAGEJET:
-					enemies[i] = new MediumCamouflageJet(info.x, info.y);
+					enemies[i] = new MediumCamouflageJet(info.x, info.y, info.spawnRight);
 					break;
 				case ENEMY_TYPE::BIGORANGEJET:
-					enemies[i] = new BigOrangeJet(info.x, info.y);
+					enemies[i] = new BigOrangeJet(info.x, info.y, info.spawnRight);
 					break;
 				case ENEMY_TYPE::BIGCAMOUFLAGEJET:
-					enemies[i] = new BigCamouflageJet(info.x, info.y);
+					enemies[i] = new BigCamouflageJet(info.x, info.y, info.spawnRight);
 					break;
 				case ENEMY_TYPE::BLUEJET:
-					enemies[i] = new BlueJet(info.x, info.y);
+					enemies[i] = new BlueJet(info.x, info.y, info.spawnRight);
 					break;
 				case ENEMY_TYPE::GREENFIGHTERPLANE:
-					enemies[i] = new GreenFighterPlane(info.x, info.y);
+					enemies[i] = new GreenFighterPlane(info.x, info.y, info.spawnRight);
 					break;
 			}
 			enemies[i]->texture = texture;

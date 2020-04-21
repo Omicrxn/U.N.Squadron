@@ -7,9 +7,10 @@
 #include "ModuleRenderer.h"
 #include "ModulePlayer.h"
 
-Enemy::Enemy(int x, int y) : position(x, y)
+Enemy::Enemy(int x, int y,bool spawnRight) : position(x, y)
 {
 	spawnPos = position;
+	despawnLeft = spawnRight;
 }
 
 Enemy::~Enemy()
@@ -45,4 +46,10 @@ void Enemy::OnCollision(Collider* collider)
 
 	App->player->score += scoreGiven;
 	App->player->money += moneyGiven;
+}
+void Enemy::SetToDelete()
+{
+	pendingToDelete = true;
+	if (collider != nullptr)
+		collider->pendingToDelete = true;
 }

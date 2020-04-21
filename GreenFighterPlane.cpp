@@ -6,7 +6,7 @@
 #include "ModuleAudio.h"
 #include "ModulePlayer.h"
 
-GreenFighterPlane::GreenFighterPlane(int x, int y) : Enemy(x, y)
+GreenFighterPlane::GreenFighterPlane(int x, int y, bool spawnRight) : Enemy(x, y, spawnRight)
 {
 	fly.PushBack({ 163, 151, 107, 39 });
 	currentAnim = &fly;

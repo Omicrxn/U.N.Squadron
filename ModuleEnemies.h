@@ -21,6 +21,7 @@ struct EnemySpawnpoint
 {
 	ENEMY_TYPE type = ENEMY_TYPE::NO_TYPE;
 	int x, y;
+	bool spawnRight;
 };
 
 class Enemy;
@@ -39,6 +40,10 @@ public:
 	// Loads the necessary textures for the enemies
 	bool Start() override;
 
+	// Called at the beginning of the application loop
+	// Removes all enemies pending to delete
+	update_status PreUpdate() override;
+
 	// Called at the middle of the application loop
 	// Handles all enemies logic and spawning/despawning
 	update_status Update() override;
@@ -56,7 +61,7 @@ public:
 	void OnCollision(Collider* c1, Collider* c2) override;
 
 	// Add an enemy into the queue to be spawned later
-	bool AddEnemy(ENEMY_TYPE type, int x, int y);
+	bool AddEnemy(ENEMY_TYPE type, int x, int y, bool spawnRight = true);
 
 	// Iterates the queue and checks for camera position
 	void HandleEnemiesSpawn();
@@ -80,7 +85,6 @@ private:
 
 	// The audio fx for destroying an enemy
 	int enemyDestroyedFx = 0;
-
 };
 
 #endif // __MODULE_ENEMIES_H__

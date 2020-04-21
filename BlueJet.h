@@ -8,7 +8,7 @@ class BlueJet : public Enemy
 public:
 	// Constructor (x y coordinates in the world)
 	// Creates animation and movement data and the collider
-	BlueJet(int x, int y);
+	BlueJet(int x, int y,bool spawnRight);
 
 	// The enemy is going to follow the different steps in the path
 	// Position will be updated depending on the speed defined at each step
