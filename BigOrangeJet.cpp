@@ -9,7 +9,7 @@
 
 BigOrangeJet::BigOrangeJet(int x, int y) : Enemy(x, y)
 {
-	fly.PushBack({ 387, 20, 32, 19 });
+	fly.PushBack({ 126, 20, 32, 19 });
 	currentAnim = &fly;
 
 	// Have the big orange jet describe a path in the screen
@@ -34,14 +34,14 @@ void BigOrangeJet::Update()
 	// It will update the collider depending on the position
 	Enemy::Update();
 
-	shootingFrequency++;
-	if (shootingFrequency > 50)
-	{
-		shootingFrequency = 0;
+	//shootingFrequency++;
+	//if (shootingFrequency > 50)
+	//{
+	//	shootingFrequency = 0;
 
-		App->particles->AddParticle(App->particles->enemyBullet, position.x + 32, position.y, Collider::Type::ENEMY_SHOT);
+	//	App->particles->AddParticle(App->particles->enemyBullet, position.x + 32, position.y, Collider::Type::ENEMY_SHOT);
 
-		//Playing shooting sound effect (if space was pressed)
-		App->audio->PlayFx(0, 0);
-	}
+	//	//Playing shooting sound effect (if space was pressed)
+	//	App->audio->PlayFx(0, 0);
+	//}
 }
