@@ -93,7 +93,7 @@ update_status ModulePlayer::Update() {
 	}
 
 	// Moving the spaceship when pressing WASD
-	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_IDLE && App->input->keyboard[SDL_SCANCODE_S] == KEY_IDLE)
+	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_IDLE && App->input->keyboard[SDL_SCANCODE_S] == KEY_IDLE && App->input->keyboard[SDL_SCANCODE_UP] == KEY_IDLE && App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_IDLE)
 	{
 		if (current_anim != &playerAnim)
 		{
@@ -101,7 +101,7 @@ update_status ModulePlayer::Update() {
 		}
 		rectAnim = current_anim->GetFrame(0);
 	}
-	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_REPEAT)
+	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_UP] == KEY_REPEAT)
 	{
 		if (position.y > 37) {
 			position.y -= 3;
@@ -113,9 +113,9 @@ update_status ModulePlayer::Update() {
 		}
 	}
 	
-	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_REPEAT)
+	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_REPEAT)
 	{
-		if (position.y < SCREEN_HEIGHT-18) {
+		if (position.y < SCREEN_HEIGHT - 18) {
 			position.y += 3;
 			if (current_anim != &playerAnim)
 			{
@@ -126,20 +126,18 @@ update_status ModulePlayer::Update() {
 		
 	}
 	
-	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_REPEAT)
+	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_REPEAT)
 	{
-		if (position.x > App->render->camera.x/SCREEN_SIZE) {
+		if (position.x > App->render->camera.x / SCREEN_SIZE) {
 			position.x -= 3;
 		}
-		
-		
 	}
-	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_REPEAT)
+
+	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_REPEAT)
 	{
-		if (position.x < (App->render->camera.x / SCREEN_SIZE+SCREEN_WIDTH-32) ) {
+		if (position.x < (App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH - 32)) {
 			position.x += 3;
 		}
-	
 	}
 
 	// Update collider position to player position
@@ -147,9 +145,10 @@ update_status ModulePlayer::Update() {
 		collider->SetPos(position.x, position.y);
 	}
 
-	if (score == 500 || position.x >= 1600) {
+	if (position.x >= 1600) {
 		App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->winScreen, 60);
 	}
+
 	return ret;
 }
 
@@ -186,7 +185,6 @@ bool ModulePlayer::CleanUp() {
 	App->collisions->DeleteCollider(collider);
 	collider = nullptr;
 	
-	
 	return ret;
 }
 
@@ -203,11 +201,5 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		App->audio->PlayFx(1, 0);
 
 		destroyed = true;
-	}
-
-	if (c1->type == Collider::Type::PLAYER_SHOT && c2->type == Collider::Type::ENEMY)
-	{
-		score += 2;
-		money += 5;
 	}
 }
