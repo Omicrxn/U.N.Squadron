@@ -35,10 +35,10 @@ While at the moment Capcom was developing vertically scrolling shooters, U.N.Squ
 ### CONTROLS FOR PC
 |Function|Keyboard|
 |-------|--------|
-|Fly your Aircraft (Up)|W|
-|Fly your Aircraft (Down)|S|
-|Fly your Aircraft (Left)|A|
-|Fly your Aircraft (Right)|D|
+|Fly your Aircraft (Up)|W or 🡱|
+|Fly your Aircraft (Down)|S or 🡳|
+|Fly your Aircraft (Left)|A or 🡰|
+|Fly your Aircraft (Right)|D or 🡲|
 |Select / Continue|Enter|
 |Fire the Vulcan Cannon|Space|
 |Travel through the options (Up)|W or 🡱|
