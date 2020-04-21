@@ -5,18 +5,30 @@
 #include "ModuleParticles.h"
 #include "ModuleAudio.h"
 #include "ModulePlayer.h"
+#include "ModuleLevel2.h"
 
 BlueJet::BlueJet(int x, int y) : Enemy(x, y)
 {
-	fly.PushBack({ 207, 131, 30, 9 });
+	fly.PushBack({ 308, 131, 30, 9 });
 	currentAnim = &fly;
 
 	// Have the blue jet describe a path in the screen
-	path.PushBack({ 0.0f, -1.0f }, 50);
-	path.PushBack({ 0.0f, 1.0f }, 100);
-	path.PushBack({ 0.0f, -1.0f }, 50);
+	if (App->lvl2->numSpawnedEnemies >= 14 && App->lvl2->numSpawnedEnemies <= 16)
+	{
+		path.PushBack({ 3.0f, 0.0f }, 20);
+		path.PushBack({ 3.0f, 1.0f }, 40);
+		path.PushBack({ 3.0f, 0.0f }, 60);
+	}
+	else if(App->lvl2->numSpawnedEnemies > 16 && App->lvl2->numSpawnedEnemies <= 19)
+	{
+		path.PushBack({ 3.0f, 0.0f }, 20);
+		path.PushBack({ 3.0f, -1.0f }, 40);
+		path.PushBack({ 3.0f, 0.0f }, 60);
+	}
 
 	collider = App->collisions->AddCollider({ position.x, position.y, 30, 9 }, Collider::Type::ENEMY, (Module*)App->enemies);
+
+	right = false;
 
 	scoreGiven = 100;
 	moneyGiven = 300;

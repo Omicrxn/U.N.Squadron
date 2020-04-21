@@ -29,7 +29,7 @@ bool ModulePlayer::Start() {
 
 	//Position of the spaceship in the screen
 	position.x = 10;
-	position.y = 39;
+	position.y = SCREEN_HEIGHT / 2;
 
 	//Position of the rectangle that we are getting from the image we load
 	playerAnim.PushBack({ 155,187,32,9 });

@@ -8,9 +8,9 @@
 #include "ModuleStartScreen.h"
 
 ModuleInitialScreen::ModuleInitialScreen(bool startEnabled) : Module(startEnabled) {
-	//screen rect
+	// Screen rect
 	logo = { 0,0,256,224 };
-	screen = { 0,0,SCREEN_WIDTH*3,SCREEN_HEIGHT*3 };
+	screen = { 0,0,SCREEN_WIDTH * 3,SCREEN_HEIGHT * 3 };
 
 	startTime = 0;
 	
@@ -46,10 +46,10 @@ update_status ModuleInitialScreen::PostUpdate() {
 
 	if (startTime == 0) {
 		startTime = SDL_GetTicks();
-		endTime = startTime + 3000;
+		endTime = startTime + 1000;
 	}
 	else {
-		actualTime = SDL_GetTicks()-startTime ;
+		actualTime = SDL_GetTicks() - startTime;
 	}
 	
 	// Blit 
