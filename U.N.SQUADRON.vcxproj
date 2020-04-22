@@ -198,7 +198,14 @@
     <ClInclude Include="ModuleWinScreen.h" />
     <ClInclude Include="p2Point.h" />
     <ClInclude Include="Path.h" />
+    <ClInclude Include="resource2.h" />
     <ClInclude Include="SmallCamouflageJet.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="U.N.SQUADRON2.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Game\Assets\sprites\ExeIcon.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -93,17 +93,7 @@ update_status ModulePlayer::Update() {
 		}
 		rectAnim = current_anim->GetFrame(0);
 	}
-	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_UP] == KEY_REPEAT)
-	{
-		if (position.y > 37) {
-			position.y -= 3;
-			if (current_anim != &playerAnim)
-			{
-				current_anim = &playerAnim;
-			}
-			rectAnim = current_anim->GetFrame(1);
-		}
-	}
+	
 	
 	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_REPEAT)
 	{
@@ -116,6 +106,17 @@ update_status ModulePlayer::Update() {
 			rectAnim = current_anim->GetFrame(2);
 		}
 		
+	}
+	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_UP] == KEY_REPEAT)
+	{
+		if (position.y > 37) {
+			position.y -= 3;
+			if (current_anim != &playerAnim)
+			{
+				current_anim = &playerAnim;
+			}
+			rectAnim = current_anim->GetFrame(1);
+		}
 	}
 	
 	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_REPEAT)
