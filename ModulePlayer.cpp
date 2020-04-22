@@ -97,7 +97,7 @@ update_status ModulePlayer::Update() {
 	
 	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_REPEAT)
 	{
-		if (position.y < SCREEN_HEIGHT - 18) {
+		if (position.y < SCREEN_HEIGHT - 38) {
 			position.y += 3;
 			if (current_anim != &playerAnim)
 			{
@@ -109,7 +109,7 @@ update_status ModulePlayer::Update() {
 	}
 	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_UP] == KEY_REPEAT)
 	{
-		if (position.y > 37) {
+		if (position.y > 39) {
 			position.y -= 3;
 			if (current_anim != &playerAnim)
 			{
