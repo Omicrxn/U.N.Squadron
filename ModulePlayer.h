@@ -8,6 +8,7 @@
 #include "Animation.h"
 
 struct SDL_Texture;
+
 class ModulePlayer : public Module {
 public:
 	ModulePlayer(bool startEnabled);
@@ -24,8 +25,14 @@ public:
 	// Collision callback, called when the player intersects with another collider
 	void OnCollision(Collider* c1, Collider* c2) override;
 
+	// Draws gamepad debug info in the screen
+	void DebugDrawGamepadInfo();
+
 	// A flag to detect when the player has been destroyed
 	bool destroyed = false;
+
+	// Debugdraw for gamepad data
+	bool debugGamepadInfo = false;
 
 private:
 	iPoint position;

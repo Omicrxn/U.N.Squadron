@@ -349,6 +349,7 @@ bool ModuleLevel2::CleanUp() {
 
 	App->render->camera.x = App->render->camera.y = 0;
 	App->audio->StopMusic();
+
 	App->player->Disable();
 	App->enemies->Disable();
 	App->particles->Disable();

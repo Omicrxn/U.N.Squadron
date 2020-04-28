@@ -8,6 +8,7 @@
 #include "ModuleFadeToBlack.h"
 #include "ModuleAudio.h"
 #include "ModuleFonts.h"
+#include "ModuleHUD.h"
 
 #include <stdio.h>
 
@@ -57,8 +58,28 @@ bool ModulePlayer::Init() {
 update_status ModulePlayer::Update() {
 	update_status ret = UPDATE_CONTINUE;
 
+	GamePad& pad = App->input->pads[0];
+
 	// Moving the player with the camera scroll
 	App->player->position.x += 1;
+
+	//Debug key for gamepad rumble testing purposes
+	if (App->input->keyboard[SDL_SCANCODE_1] == KEY_DOWN)
+	{
+		App->input->ShakeController(0, 12, 0.33f);
+	}
+
+	//Debug key for gamepad rumble testing purposes
+	if (App->input->keyboard[SDL_SCANCODE_2] == KEY_DOWN)
+	{
+		App->input->ShakeController(0, 36, 0.66f);
+	}
+
+	//Debug key for gamepad rumble testing purposes
+	if (App->input->keyboard[SDL_SCANCODE_3] == KEY_DOWN)
+	{
+		App->input->ShakeController(0, 60, 1.0f);
+	}
 	
 	//God Mode
 	if (App->input->keyboard[SDL_SCANCODE_F5] == KEY_DOWN)
@@ -155,6 +176,11 @@ update_status ModulePlayer::PostUpdate() {
 			ret = UPDATE_ERROR;
 		}
 	}
+
+	if (debugGamepadInfo == true)
+		DebugDrawGamepadInfo();
+	else
+		App->fonts->BlitText(5, 10, App->HUD->greenFont, "press f2 to display gamepad debug info");
 
 	return ret;
 }
