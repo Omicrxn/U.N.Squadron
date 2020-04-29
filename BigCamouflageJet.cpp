@@ -5,6 +5,7 @@
 #include "ModuleParticles.h"
 #include "ModuleAudio.h"
 #include "ModulePlayer.h"
+#include "SetBulletDirection.h"
 
 BigCamouflageJet::BigCamouflageJet(int x, int y,bool spawnRight) : Enemy(x, y,spawnRight)
 {
@@ -54,14 +55,16 @@ void BigCamouflageJet::Update()
 	// It will update the collider depending on the position
 	Enemy::Update();
 
-	//shootingFrequency++;
-	//if (shootingFrequency > 50)
-	//{
-	//	shootingFrequency = 0;
+	shootingFrequency++;
+	if (shootingFrequency > 120)
+	{
+		shootingFrequency = 0;
 
-	//	App->particles->AddParticle(App->particles->enemyBullet, position.x + 32, position.y, Collider::Type::ENEMY_SHOT);
+		SetBulletDirection(this);
 
-	//	// Playing shooting sound effect (if space was pressed)
-	//	App->audio->PlayFx(0, 0);
-	//}
+		App->particles->AddParticle(App->particles->enemyBullet, position.x + 32, position.y, Collider::Type::ENEMY_SHOT);
+
+		//Playing shooting sound effect (if space was pressed)
+		App->audio->PlayFx(0, 0);
+	}
 }

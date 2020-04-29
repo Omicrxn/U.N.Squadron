@@ -5,6 +5,7 @@
 #include "ModuleParticles.h"
 #include "ModuleAudio.h"
 #include "ModulePlayer.h"
+#include "SetBulletDirection.h"
 
 GreenFighterPlane::GreenFighterPlane(int x, int y, bool spawnRight) : Enemy(x, y, spawnRight)
 {
@@ -32,13 +33,15 @@ void GreenFighterPlane::Update()
 	Enemy::Update();
 
 	shootingFrequency++;
-	if (shootingFrequency > 50)
+	if (shootingFrequency > 120)
 	{
 		shootingFrequency = 0;
 
+		SetBulletDirection(this);
+
 		App->particles->AddParticle(App->particles->enemyBullet, position.x + 32, position.y, Collider::Type::ENEMY_SHOT);
 
-		// Playing shooting effect (if space was pressed)
+		//Playing shooting sound effect (if space was pressed)
 		App->audio->PlayFx(0, 0);
 	}
 }

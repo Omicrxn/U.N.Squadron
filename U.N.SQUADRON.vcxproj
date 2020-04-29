@@ -166,6 +166,7 @@
     <ClCompile Include="ModuleWindow.cpp" />
     <ClCompile Include="ModuleWinScreen.cpp" />
     <ClCompile Include="Path.cpp" />
+    <ClCompile Include="SetBulletDirection.cpp" />
     <ClCompile Include="SmallCamouflageJet.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -199,6 +200,7 @@
     <ClInclude Include="p2Point.h" />
     <ClInclude Include="Path.h" />
     <ClInclude Include="resource2.h" />
+    <ClInclude Include="SetBulletDirection.h" />
     <ClInclude Include="SmallCamouflageJet.h" />
   </ItemGroup>
   <ItemGroup>

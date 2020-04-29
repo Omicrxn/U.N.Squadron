@@ -85,6 +85,9 @@
     <ClCompile Include="SmallCamouflageJet.cpp">
       <Filter>Source Files\Entities\Enemies</Filter>
     </ClCompile>
+    <ClCompile Include="SetBulletDirection.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -178,6 +181,9 @@
       <Filter>Source Files\Entities\Enemies</Filter>
     </ClInclude>
     <ClInclude Include="resource2.h" />
+    <ClInclude Include="SetBulletDirection.h">
+      <Filter>Source Files\Utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source Files">

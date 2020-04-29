@@ -34,7 +34,6 @@ bool ModuleParticles::Start()
 	enemyBullet.anim.PushBack({ 110, 371, 15, 6 });
 	enemyBullet.anim.loop = true;
 	enemyBullet.anim.speed = 0.05f;
-	enemyBullet.speed.x = -10.0f;
 	enemyBullet.lifetime = 180;
 
 	//Explosion Animation

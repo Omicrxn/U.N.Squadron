@@ -6,6 +6,7 @@
 #include "ModuleAudio.h"
 #include "ModulePlayer.h"
 #include "ModuleLevel2.h"
+#include "SetBulletDirection.h"
 
 BigOrangeJet::BigOrangeJet(int x, int y, bool spawnRight) : Enemy(x, y, spawnRight)
 {
@@ -43,9 +44,11 @@ void BigOrangeJet::Update()
 	Enemy::Update();
 
 	shootingFrequency++;
-	if (shootingFrequency > 50)
+	if (shootingFrequency > 120)
 	{
 		shootingFrequency = 0;
+
+		SetBulletDirection(this);
 
 		App->particles->AddParticle(App->particles->enemyBullet, position.x + 32, position.y, Collider::Type::ENEMY_SHOT);
 
