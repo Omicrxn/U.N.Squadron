@@ -72,7 +72,6 @@ public:
 	GamePad pads[MAX_PADS];
 
 private:
-	SDL_Event ev;
 	bool maximized = false;
 };
 

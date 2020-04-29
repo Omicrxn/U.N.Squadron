@@ -14,6 +14,7 @@ ModuleInput::ModuleInput(bool startEnabled) : Module(startEnabled)
 {
 	for (uint i = 0; i < MAX_KEYS; ++i)
 		keyboard[i] = KEY_IDLE;
+	memset(&pads[0], 0, sizeof(GamePad) * MAX_PADS);
 }
 
 // Destructor
@@ -98,12 +99,12 @@ update_status ModuleInput::PreUpdate() {
 		else if (event.type == SDL_CONTROLLERDEVICEADDED)
 		{
 			HandleDeviceConnection(event.cdevice.which);
-			break;
+			
 		}
 		else if (event.type == SDL_CONTROLLERDEVICEREMOVED)
 		{
 			HandleDeviceRemoval(event.cdevice.which);
-			break;
+			
 		}
 	}
 
