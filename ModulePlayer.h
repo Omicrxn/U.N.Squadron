@@ -33,7 +33,10 @@ public:
 
 	// Debugdraw for gamepad data
 	bool debugGamepadInfo = false;
-
+public:
+	iPoint GetPlayerPosition() {
+		return position;
+	}
 private:
 	iPoint position;
 	SDL_Texture* texture = nullptr;
@@ -41,6 +44,7 @@ private:
 	Animation playerAnim;
 	SDL_Rect rectAnim;
 	bool godMode;
+	
 };
 
 #endif // __MODULEPLAYER_H__

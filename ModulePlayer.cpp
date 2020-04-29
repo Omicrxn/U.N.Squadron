@@ -179,8 +179,6 @@ update_status ModulePlayer::PostUpdate() {
 
 	if (debugGamepadInfo == true)
 		DebugDrawGamepadInfo();
-	else
-		App->fonts->BlitText(5, 10, App->HUD->greenFont, "press f2 to display gamepad debug info");
 
 	return ret;
 }
@@ -210,4 +208,52 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 
 		destroyed = true;
 	}
+}
+
+void ModulePlayer::DebugDrawGamepadInfo()
+{
+	GamePad& pad = App->input->pads[0];
+
+	sprintf_s(App->HUD->scoreText, 150, "pad 0 %s, press 1/2/3 for rumble", (pad.enabled) ? "plugged" : "not detected");
+	App->fonts->BlitText(5, 10, App->HUD->yellowFont, App->HUD->scoreText);
+
+	sprintf_s(App->HUD->scoreText, 150, "buttons %s %s %s %s %s %s %s %s %s %s %s",
+		(pad.a) ? "a" : "",
+		(pad.b) ? "b" : "",
+		(pad.x) ? "x" : "",
+		(pad.y) ? "y" : "",
+		(pad.start) ? "start" : "",
+		(pad.back) ? "back" : "",
+		(pad.guide) ? "guide" : "",
+		(pad.l1) ? "lb" : "",
+		(pad.r1) ? "rb" : "",
+		(pad.l3) ? "l3" : "",
+		(pad.r3) ? "r3" : ""
+	);
+	App->fonts->BlitText(5, 20, App->HUD->yellowFont, App->HUD->scoreText);
+
+	sprintf_s(App->HUD->scoreText, 150, "dpad %s %s %s %s",
+		(pad.up) ? "up" : "",
+		(pad.down) ? "down" : "",
+		(pad.left) ? "left" : "",
+		(pad.right) ? "right" : ""
+	);
+	App->fonts->BlitText(5, 30, App->HUD->yellowFont, App->HUD->scoreText);
+
+	sprintf_s(App->HUD->scoreText, 150, "left trigger  %0.2f", pad.l2);
+	App->fonts->BlitText(5, 40, App->HUD->yellowFont, App->HUD->scoreText);
+	sprintf_s(App->HUD->scoreText, 150, "right trigger %0.2f", pad.r2);
+	App->fonts->BlitText(5, 50, App->HUD->yellowFont, App->HUD->scoreText);
+
+	sprintf_s(App->HUD->scoreText, 150, "left thumb    %.2fx, %0.2fy", pad.l_x, pad.l_y);
+	App->fonts->BlitText(5, 60, App->HUD->yellowFont, App->HUD->scoreText);
+
+	sprintf_s(App->HUD->scoreText, 150, "   deadzone   %0.2f", pad.l_dz);
+	App->fonts->BlitText(5, 70, App->HUD->yellowFont, App->HUD->scoreText);
+
+	sprintf_s(App->HUD->scoreText, 150, "right thumb   %.2fx, %0.2fy", pad.r_x, pad.r_y);
+	App->fonts->BlitText(5, 80, App->HUD->yellowFont, App->HUD->scoreText);
+
+	sprintf_s(App->HUD->scoreText, 150, "   deadzone   %0.2f", pad.r_dz);
+	App->fonts->BlitText(5, 90, App->HUD->yellowFont, App->HUD->scoreText);
 }

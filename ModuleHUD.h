@@ -18,11 +18,12 @@ public:
 
 	bool CleanUp();
 
-private:
-	char scoreText[10] = { "\0" };
-	char moneyText[10] = { "\0" };
+
+	
 
 public:
+	char scoreText[150] = { "\0" };
+	char moneyText[10] = { "\0" };
 	// Id Fonts
 	int yellowFont = -1;
 	int greenFont = -1;

@@ -57,6 +57,8 @@ void MediumCamouflageJet::Update()
 	{
 		shootingFrequency = 0;
 
+		/*App->particles->enemyBullet.speed.x = (position.x - App->player->GetPlayerPosition().x);
+		App->particles->enemyBullet.speed.y = (position.y - App->player->GetPlayerPosition().y);*/
 		App->particles->AddParticle(App->particles->enemyBullet, position.x + 32, position.y, Collider::Type::ENEMY_SHOT);
 
 		//Playing shooting sound effect (if space was pressed)

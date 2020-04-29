@@ -78,9 +78,12 @@ update_status ModuleInput::PreUpdate() {
 	}
 
 	// CHECKS IF WINDOW X IS CLICKED TO CLOSE OR MAXIMIZE SCREEN
+	//Read new SDL events
+
 	SDL_Event event;
 	while (SDL_PollEvent(&event))
 	{
+		
 		if (event.type == SDL_QUIT)
 		{
 			return update_status::UPDATE_STOP;
@@ -91,6 +94,16 @@ update_status ModuleInput::PreUpdate() {
 		}
 		else if (event.type == SDL_WINDOWEVENT_MINIMIZED){
 			SDL_MinimizeWindow(App->window->sdlWindow);
+		}
+		else if (event.type == SDL_CONTROLLERDEVICEADDED)
+		{
+			HandleDeviceConnection(event.cdevice.which);
+			break;
+		}
+		else if (event.type == SDL_CONTROLLERDEVICEREMOVED)
+		{
+			HandleDeviceRemoval(event.cdevice.which);
+			break;
 		}
 	}
 
@@ -135,29 +148,7 @@ update_status ModuleInput::PreUpdate() {
 		}
 	}
 
-	//Read new SDL events
-	SDL_Event event;
-	while (SDL_PollEvent(&event) != 0)
-	{
-		switch (event.type)
-		{
-		case(SDL_CONTROLLERDEVICEADDED):
-		{
-			HandleDeviceConnection(event.cdevice.which);
-			break;
-		}
-		case(SDL_CONTROLLERDEVICEREMOVED):
-		{
-			HandleDeviceRemoval(event.cdevice.which);
-			break;
-		}
-		case(SDL_QUIT):
-		{
-			return update_status::UPDATE_STOP;
-			break;
-		}
-		}
-	}
+	
 
 	UpdateGamepadsInput();
 

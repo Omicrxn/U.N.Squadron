@@ -24,12 +24,12 @@ update_status ModuleHUD::PostUpdate() {
 	update_status ret = UPDATE_CONTINUE;
 
 	// Draw UI (score & money)
-	sprintf_s(scoreText, 10, "%7d", score);
+	sprintf_s(scoreText, 150, "%7d", score);
 	sprintf_s(moneyText, 10, "%7d", money);
 
 	// Blit of the HUD (PROVISIONAL)
-	App->fonts->BlitText(8, 10, yellowFont, "SCORE");
-	App->fonts->BlitText(132, 10, yellowFont, "LEVEL");
+	App->fonts->BlitText(8, 15, yellowFont, "SCORE");
+	App->fonts->BlitText(120, 15, yellowFont, "LEVEL");
 	App->fonts->BlitText(132, 25, yellowFont, "$");
 	App->fonts->BlitText(10, 25, greenFont, scoreText);
 	App->fonts->BlitText(144, 25, greenFont, moneyText);
