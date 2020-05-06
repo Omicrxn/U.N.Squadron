@@ -16,12 +16,14 @@
 #include "ModuleEnemies.h"
 #include "ModuleFonts.h"
 #include "ModuleStore.h"
+#include "ModuleDebugInfo.h"
 
 Application::Application()
 {
 	int i = 0;
 	modules[i++] = window = new ModuleWindow(true);
 	modules[i++] = input = new ModuleInput(true);
+	modules[i++] = debugInfo = new ModuleDebugInfo(false);
 	modules[i++] = textures = new ModuleTextureManager(true);
 	modules[i++] = audio = new ModuleAudio(true);
 

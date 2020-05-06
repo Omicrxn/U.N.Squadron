@@ -22,8 +22,9 @@ class ModuleHUD;
 class ModuleEnemies;
 class ModuleFonts;
 class ModuleStore;
+class ModuleDebugInfo;
 
-#define NUM_MODULES 17
+#define NUM_MODULES 18
 
 class Application
 {
@@ -53,6 +54,7 @@ public:
 	ModuleEnemies* enemies = nullptr;
 	ModuleFonts* fonts = nullptr;
 	ModuleStore* store = nullptr;
+	ModuleDebugInfo* debugInfo = nullptr;
 
 	//Initializes all modules
 	bool Init();
@@ -67,9 +69,8 @@ public:
 	const int frameDelay = 1000 / FPS;
 	UINT32 frameStart = 0;
 	int frameTime;
-
-
 };
+
 //To make it global and be able to access from other calses without include
 extern Application* App;
 

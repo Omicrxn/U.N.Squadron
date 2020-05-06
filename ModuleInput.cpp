@@ -84,7 +84,6 @@ update_status ModuleInput::PreUpdate() {
 	SDL_Event event;
 	while (SDL_PollEvent(&event))
 	{
-		
 		if (event.type == SDL_QUIT)
 		{
 			return update_status::UPDATE_STOP;
@@ -96,15 +95,12 @@ update_status ModuleInput::PreUpdate() {
 		else if (event.type == SDL_WINDOWEVENT_MINIMIZED){
 			SDL_MinimizeWindow(App->window->sdlWindow);
 		}
-		else if (event.type == SDL_CONTROLLERDEVICEADDED)
-		{
+		else if (event.type == SDL_CONTROLLERDEVICEADDED) {
 			HandleDeviceConnection(event.cdevice.which);
 			
 		}
-		else if (event.type == SDL_CONTROLLERDEVICEREMOVED)
-		{
+		else if (event.type == SDL_CONTROLLERDEVICEREMOVED)	{
 			HandleDeviceRemoval(event.cdevice.which);
-			
 		}
 	}
 
@@ -149,21 +145,17 @@ update_status ModuleInput::PreUpdate() {
 		}
 	}
 
-	
-
 	UpdateGamepadsInput();
 
 	return update_status:: UPDATE_CONTINUE;
 }
 
 // Called before quitting
-bool ModuleInput::CleanUp()
-{
+bool ModuleInput::CleanUp() {
 	LOG("Quitting SDL input event subsystem");
 
 	// Stop rumble from all gamepads and deactivate SDL functionallity
-	for (uint i = 0; i < MAX_PADS; ++i)
-	{
+	for (uint i = 0; i < MAX_PADS; ++i)	{
 		if (pads[i].haptic != nullptr)
 		{
 			SDL_HapticStopAll(pads[i].haptic);
@@ -179,8 +171,7 @@ bool ModuleInput::CleanUp()
 	return true;
 }
 
-void ModuleInput::HandleDeviceConnection(int index)
-{
+void ModuleInput::HandleDeviceConnection(int index) {
 	if (SDL_IsGameController(index))
 	{
 		for (int i = 0; i < MAX_PADS; ++i)

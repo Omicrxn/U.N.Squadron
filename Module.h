@@ -43,6 +43,21 @@ public:
 
 	inline bool IsEnabled() const { return enabled; }
 
+public:
+	char* name = (char*)"None";
+
+	// Resources info
+	uint activeFonts = 0;
+	uint totalFonts = 0;
+
+	uint activeTextures = 0;
+	uint totalTextures = 0;
+
+	uint activeColliders = 0;
+	uint totalColliders = 0;
+
+	uint activeFx = 0;
+	uint totalFx = 0;
 };
 
 #endif // __MODULE_H__
