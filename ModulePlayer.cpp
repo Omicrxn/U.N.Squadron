@@ -46,6 +46,8 @@ bool ModulePlayer::Start() {
 	// Add a collider to the player
 	collider = App->collisions->AddCollider({ position.x, position.y, 32, 16 }, Collider::Type::PLAYER, this);
 
+	currentFuel = maxFuel;
+
 	return ret;
 }
 
@@ -200,7 +202,10 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 			currentFuel--;
 		}
 		else {
-			playerLifes--;
+			if (playerLifes > 1) {
+				playerLifes--;
+			}
+			
 			App->particles->AddParticle(App->particles->explosion, position.x, position.y, Collider::Type::NONE, 9);
 
 			App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->startScreen, 60);

@@ -59,6 +59,7 @@ update_status ModuleHUD::PostUpdate() {
 	// Draw UI (score & money)
 	sprintf_s(scoreText, 10, "%7d", score);
 	sprintf_s(moneyText, 10, "%7d", money);
+	sprintf_s(lifesText, 10, "%d", App->player->GetLifes());
 
 	
 	//Blit images
@@ -79,9 +80,8 @@ update_status ModuleHUD::PostUpdate() {
 	App->fonts->BlitText(176, 15, greenFont, "2");
 	App->fonts->BlitText(193, 31, greenFont, "max");
 	App->fonts->BlitText(224, 31, greenFont, "  1");
-	//TODO: FIX THE COLOR OF THE =
-	App->fonts->BlitText(33, 209, yellowFont, "=");
-	App->fonts->BlitText(41, 207, greenFont, "5");
+	App->fonts->BlitText(33, 208, yellowFont, "=");
+	App->fonts->BlitText(41, 207, greenFont, lifesText);
 	App->fonts->BlitText(224, 207, greenFont, "50");
 	return ret;
 }

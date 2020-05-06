@@ -26,13 +26,13 @@ public:
 public:
 	char scoreText[150] = { "\0" };
 	char moneyText[10] = { "\0" };
+	char lifesText[10] = { "\0" };
 	// Id Fonts
 	int yellowFont = -1;
 	int greenFont = -1;
 
 	// Score
 	uint score = 0;
-
 	// Money
 	uint money = 0;
 private:
