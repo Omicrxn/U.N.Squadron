@@ -44,6 +44,12 @@ bool ModuleStartScreen::Start() {
 	//Playing opening music
 	App->audio->PlayMusic("Assets/music/soundtrack/opening.ogg");
 
+	//Load choose option sound
+	App->audio->LoadFx("Assets/music/events/chooseoption.wav");
+
+	//Load start event sound
+	App->audio->LoadFx("Assets/music/events/start.wav");
+
 	return ret;
 }
 
@@ -53,17 +59,20 @@ update_status ModuleStartScreen::Update(){
 	if ((App->input->keyboard[SDL_SCANCODE_W] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_UP] == KEY_DOWN)
 		&& selectorPos.y != 116) {
 		selectorPos = { 68,116 };
+		App->audio->PlayFx(0, 0);
 	}
 	if ((App->input->keyboard[SDL_SCANCODE_S] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_DOWN)
 		&& selectorPos.y != 135) {
 		selectorPos = { 68,135 };
+		App->audio->PlayFx(0, 0);
 	}
 	
 	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN) {
 		switch (selectorPos.y)
 		{
 		case 116: {
-			App->transition->FadeToBlack(this, (Module*)App->lvl2, 60);
+			App->audio->PlayFx(1, 0);
+			App->transition->FadeToBlack(this, (Module*)App->store, 60);
 		}break;
 		case 135: {
 

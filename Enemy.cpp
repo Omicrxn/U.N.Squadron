@@ -42,7 +42,7 @@ void Enemy::Draw()
 void Enemy::OnCollision(Collider* collider)
 {
 	App->particles->AddParticle(App->particles->enemyExplosion, position.x, position.y);
-	App->audio->PlayFx(destroyedFx);
+	App->audio->PlayFx(3,0);
 
 	App->HUD->score += scoreGiven;
 	App->HUD->money += moneyGiven;

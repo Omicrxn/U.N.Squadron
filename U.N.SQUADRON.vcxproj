@@ -162,6 +162,7 @@
     <ClCompile Include="ModuleRenderer.cpp" />
     <ClCompile Include="ModulePlayer.cpp" />
     <ClCompile Include="ModuleStartScreen.cpp" />
+    <ClCompile Include="ModuleStore.cpp" />
     <ClCompile Include="ModuleTextureManager.cpp" />
     <ClCompile Include="ModuleWindow.cpp" />
     <ClCompile Include="ModuleWinScreen.cpp" />
@@ -194,6 +195,7 @@
     <ClInclude Include="ModuleRenderer.h" />
     <ClInclude Include="ModulePlayer.h" />
     <ClInclude Include="ModuleStartScreen.h" />
+    <ClInclude Include="ModuleStore.h" />
     <ClInclude Include="ModuleTextureManager.h" />
     <ClInclude Include="ModuleWindow.h" />
     <ClInclude Include="ModuleWinScreen.h" />

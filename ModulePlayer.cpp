@@ -104,7 +104,7 @@ update_status ModulePlayer::Update() {
 		App->particles->AddParticle(App->particles->bullet, position.x + 32, position.y + 5, Collider::Type::PLAYER_SHOT);
 
 		//Playing shooting sound effect (if space was pressed)
-		App->audio->PlayFx(0, 0);
+		App->audio->PlayFx(2, 0);
 	}
 
 	// Moving the spaceship when pressing WASD
@@ -211,7 +211,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 			App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->startScreen, 60);
 
 			//Playing explosion sound effect
-			App->audio->PlayFx(1, 0);
+			App->audio->PlayFx(3, 0);
 
 			destroyed = true;
 		}

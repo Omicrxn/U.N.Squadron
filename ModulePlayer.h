@@ -54,7 +54,6 @@ private:
 	SDL_Rect rectAnim;
 	int maxFuel =8,currentFuel=8,playerLifes=3;
 	bool godMode;
-	
 };
 
 #endif // __MODULEPLAYER_H__

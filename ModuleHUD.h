@@ -20,10 +20,6 @@ public:
 
 	bool CleanUp();
 
-
-	
-
-public:
 	char scoreText[150] = { "\0" };
 	char moneyText[10] = { "\0" };
 	char lifesText[10] = { "\0" };
@@ -34,7 +30,8 @@ public:
 	// Score
 	uint score = 0;
 	// Money
-	uint money = 0;
+	uint money = 3000;
+
 private:
 	SDL_Texture* tex;
 	Animation playerFace;
@@ -44,7 +41,6 @@ private:
 	SDL_Rect helmet;
 	SDL_Rect powSquare;
 	SDL_Rect weapon;
-
 };
 
 #endif // __ModuleHUD_H__

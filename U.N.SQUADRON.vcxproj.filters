@@ -88,6 +88,9 @@
     <ClCompile Include="SetBulletDirection.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
+    <ClCompile Include="ModuleStore.cpp">
+      <Filter>Source Files\Modules\Gameplay</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -183,6 +186,9 @@
     <ClInclude Include="resource2.h" />
     <ClInclude Include="SetBulletDirection.h">
       <Filter>Source Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleStore.h">
+      <Filter>Source Files\Modules\Gameplay</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
