@@ -37,12 +37,22 @@ public:
 	iPoint GetPlayerPosition() {
 		return position;
 	}
+	int GetCurrentFuel() {
+		return currentFuel;
+	}
+	int GetMaxFuel() {
+		return maxFuel;
+	}
+	int GetLifes() {
+		return playerLifes;
+	}
 private:
 	iPoint position;
 	SDL_Texture* texture = nullptr;
 	Animation* current_anim = nullptr;
 	Animation playerAnim;
 	SDL_Rect rectAnim;
+	int maxFuel =8,currentFuel=8,playerLifes=3;
 	bool godMode;
 	
 };

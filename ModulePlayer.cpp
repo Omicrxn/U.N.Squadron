@@ -177,9 +177,6 @@ update_status ModulePlayer::PostUpdate() {
 		}
 	}
 
-	if (debugGamepadInfo == true)
-		DebugDrawGamepadInfo();
-
 	return ret;
 }
 
@@ -199,14 +196,21 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 	// Detect collision with a bullet or an enemy. If so, disappear and explode.
 	if (c1 == collider && destroyed == false)
 	{
-		App->particles->AddParticle(App->particles->explosion, position.x, position.y, Collider::Type::NONE, 9);
-		
-		App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->startScreen, 60);
-	
-		//Playing explosion sound effect
-		App->audio->PlayFx(1, 0);
+		if (currentFuel > 1) {
+			currentFuel--;
+		}
+		else {
+			playerLifes--;
+			App->particles->AddParticle(App->particles->explosion, position.x, position.y, Collider::Type::NONE, 9);
 
-		destroyed = true;
+			App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->startScreen, 60);
+
+			//Playing explosion sound effect
+			App->audio->PlayFx(1, 0);
+
+			destroyed = true;
+		}
+		
 	}
 }
 
