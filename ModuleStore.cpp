@@ -24,7 +24,7 @@ uint columns = 0;
 uint weapon = weapons[rows][columns];
 
 ModuleStore::ModuleStore(bool startEnabled) : Module(startEnabled) {
-
+	name = "Store";
 }
 
 ModuleStore::~ModuleStore() {}
@@ -55,12 +55,14 @@ bool ModuleStore::Start() {
 	if (tex == nullptr) {
 		ret = false;
 	}
+	++activeTextures; ++totalTextures;
 
 	//Loading the items texture
 	tex2 = App->textures->Load("Assets/sprites/menus/shop/items.png");
 	if (tex2 == nullptr) {
 		ret = false;
 	}
+	++activeTextures; ++totalTextures;
 
 	selectorPos = { 5,115 };
 
@@ -73,9 +75,10 @@ bool ModuleStore::Start() {
 	/*App->audio->PlayMusic("Assets/music/soundtrack/opening.ogg");*/
 
 	//Loading the font to print text on screen
-	char lookupTable[] = { "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz  0123456789.,ªº?!*$%&()+-/:;<=>@·    " };
-	yellowFont = App->fonts->Load("Assets/Fonts/FontY.png", lookupTable, 5);
-	greenFont = App->fonts->Load("Assets/Fonts/FontG.png", lookupTable, 5);
+	yellowFont = App->fonts->Load("Assets/Fonts/FontY.png", App->HUD->lookupTable, 5);
+	++activeFonts; ++totalFonts;
+	greenFont = App->fonts->Load("Assets/Fonts/FontG.png", App->HUD->lookupTable, 5);
+	++activeFonts; ++totalFonts;
 
 	rows = 0;
 	columns = 0;
@@ -171,10 +174,20 @@ update_status ModuleStore::PostUpdate() {
 bool ModuleStore::CleanUp() {
 	bool ret = true;
 
+	activeTextures = activeFonts = 0;
+
 	if (!App->textures->Unload(tex)) {
 		LOG("Start Screen -> Error unloading the texture.");
 		ret = false;
 	}
+	--totalTextures;
+
+	if (!App->textures->Unload(tex2)) {
+		LOG("Start Screen -> Error unloading the texture.");
+		ret = false;
+	}
+	--totalTextures;
+
 	App->audio->StopMusic();
 
 	return ret;

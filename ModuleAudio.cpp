@@ -8,6 +8,7 @@
 
 ModuleAudio::ModuleAudio(bool startEnabled) : Module(startEnabled)
 {
+	name = "Audio";
 
 	for (uint i = 0; i < MAX_FX; ++i)
 		soundFx[i] = nullptr;
@@ -62,8 +63,10 @@ bool ModuleAudio::CleanUp()
 
 	for (uint i = 0; i < MAX_FX; ++i)
 	{
-		if (soundFx[i] != nullptr)
+		if (soundFx[i] != nullptr) {
 			Mix_FreeChunk(soundFx[i]);
+			--fxCount;
+		}
 	}
 
 	Mix_CloseAudio();
@@ -165,6 +168,7 @@ uint ModuleAudio::LoadFx(const char* path)
 			if (soundFx[ret] == nullptr)
 			{
 				soundFx[ret] = chunk;
+				++fxCount;
 				break;
 			}
 		}
@@ -180,6 +184,21 @@ bool ModuleAudio::PlayFx(uint index, int repeat)
 	if (soundFx[index] != nullptr)
 	{
 		Mix_PlayChannel(-1, soundFx[index], repeat);
+		ret = true;
+	}
+
+	return ret;
+}
+
+bool ModuleAudio::UnloadFx(uint index)
+{
+	bool ret = false;
+
+	if (soundFx[index] != nullptr)
+	{
+		Mix_FreeChunk(soundFx[index]);
+		soundFx[index] = nullptr;
+		--fxCount;
 		ret = true;
 	}
 

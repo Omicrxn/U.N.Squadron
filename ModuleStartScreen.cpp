@@ -7,14 +7,17 @@
 #include "ModuleAudio.h"
 
 #include "ModuleLevel2.h"
+
 ModuleStartScreen::ModuleStartScreen(bool startEnabled) : Module(startEnabled) {
-	
+
+	name = "Start Screen";
 }
 
 ModuleStartScreen::~ModuleStartScreen() {}
 
 bool ModuleStartScreen::Start() {
 	bool ret = true;
+
 	//Unicorn Animation
 	unicorn_anim.PushBack({ 5,2,112,160 });
 	unicorn_anim.PushBack({ 122,2,120,160 });
@@ -32,6 +35,7 @@ bool ModuleStartScreen::Start() {
 	if (tex == nullptr) {
 		ret = false;
 	}
+	++activeTextures; ++totalTextures;
 	
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
@@ -41,14 +45,17 @@ bool ModuleStartScreen::Start() {
 		current_anim = &unicorn_anim;
 		unicorn_anim.Reset();
 	}
+
 	//Playing opening music
 	App->audio->PlayMusic("Assets/music/soundtrack/opening.ogg");
 
 	//Load choose option sound
-	App->audio->LoadFx("Assets/music/events/chooseoption.wav");
+	chooseFx = App->audio->LoadFx("Assets/music/events/chooseoption.wav");
+	++activeFx; ++totalFx;
 
 	//Load start event sound
-	App->audio->LoadFx("Assets/music/events/start.wav");
+	startFx = App->audio->LoadFx("Assets/music/events/start.wav");
+	++activeFx; ++totalFx;
 
 	return ret;
 }
@@ -111,10 +118,19 @@ update_status ModuleStartScreen::PostUpdate() {
 bool ModuleStartScreen::CleanUp(){
 	bool ret = true;
 
+	activeTextures = activeFx = 0;
+
 	if (!App->textures->Unload(tex)) {
 		LOG("Start Screen -> Error unloading the texture.");
 		ret = false;
 	}
+	--totalTextures;
+
+	App->audio->UnloadFx(chooseFx);
+	--totalFx;
+	App->audio->UnloadFx(startFx);
+	--totalFx;
+
 	App->audio->StopMusic();
 	
 	return ret;

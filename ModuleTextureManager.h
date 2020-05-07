@@ -21,8 +21,15 @@ public:
 	bool Unload(SDL_Texture* texture);
 	void GetSize(const SDL_Texture* texture, uint& width, uint& height) const;
 
+	inline uint GetTexturesCount() const { return texturesCount; };
+
 	SDL_Texture* textures[MAX_TEXTURES];
+	
 	uint lastTexture = 0;
+
+private:
+	// The amount of textures loaded into the array
+	uint texturesCount = 0;
 };
 
 #endif //__ModuleTextures_H__

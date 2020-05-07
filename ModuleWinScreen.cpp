@@ -6,6 +6,9 @@
 #include "ModuleInput.h"
 #include "ModuleStartScreen.h"
 ModuleWinScreen::ModuleWinScreen(bool startEnabled) : Module(startEnabled) {
+
+	name = "Win Screen";
+
 	//screen rect
 	screen = { 0,0,256,224 };
 }
@@ -14,13 +17,12 @@ ModuleWinScreen::~ModuleWinScreen() {}
 
 bool ModuleWinScreen::Start() {
 	bool ret = true;
-	
-	
-	tex = App->textures->Load("Assets/sprites/menus/WinScreen.png");
 
+	tex = App->textures->Load("Assets/sprites/menus/WinScreen.png");
 	if (tex == nullptr) {
 		ret = false;
 	}
+	++activeTextures; ++totalTextures;
 
 	return ret;
 }
@@ -48,10 +50,13 @@ update_status ModuleWinScreen::PostUpdate() {
 bool ModuleWinScreen::CleanUp() {
 	bool ret = true;
 
+	activeTextures = 0;
+
 	if (!App->textures->Unload(tex)) {
 		LOG("Start Screen -> Error unloading the texture.");
 		ret = false;
 	}
+	--totalTextures;
 
 	return ret;
 }

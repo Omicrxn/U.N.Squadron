@@ -6,6 +6,8 @@
 #include "SDL_image.h"
 
 ModuleTextureManager::ModuleTextureManager(bool startEnabled) : Module(startEnabled) {
+	name = "Texture Manager";
+	
 	for (uint i = 0; i < MAX_TEXTURES; i++)
 	{
 		textures[i] = nullptr;
@@ -61,6 +63,7 @@ SDL_Texture* const ModuleTextureManager::Load(const char* path) {
 		}
 		else {
 			textures[lastTexture++] = texture;
+			++texturesCount;
 			if (lastTexture > MAX_TEXTURES) {
 				lastTexture = 0;
 			}
@@ -80,10 +83,10 @@ bool ModuleTextureManager::Unload(SDL_Texture* texture) {
 
 			SDL_DestroyTexture(textures[i]);
 			textures[i] = nullptr;
-			
+			--texturesCount;
+
 			ret = true;
 			break;
-
 		}
 	}
 	return ret;

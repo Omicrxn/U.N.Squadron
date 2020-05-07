@@ -23,6 +23,7 @@ public:
 	// Id Fonts
 	int yellowFont = -1;
 	int greenFont = -1;
+
 private:
 	SDL_Texture* tex = nullptr;
 	SDL_Texture* tex2 = nullptr;

@@ -3,8 +3,7 @@
 #include "SDL.h"
 
 ModuleWindow::ModuleWindow(bool startEnabled) : Module(startEnabled) {
-
-
+	name = "window";
 }
 ModuleWindow::~ModuleWindow() {
 

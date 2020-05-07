@@ -44,7 +44,7 @@ public:
 	inline bool IsEnabled() const { return enabled; }
 
 public:
-	char* name = (char*)"None";
+	const char* name = "None";
 
 	// Resources info
 	uint activeFonts = 0;

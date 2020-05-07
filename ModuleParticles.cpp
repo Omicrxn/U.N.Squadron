@@ -8,6 +8,8 @@
 
 ModuleParticles::ModuleParticles(bool startEnabled) : Module(startEnabled)
 {
+	name = "particles";
+
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 		particles[i] = nullptr;
 }
@@ -21,6 +23,7 @@ bool ModuleParticles::Start()
 {
 	LOG("Loading particles");
 	particlesTexture = App->textures->Load("Assets/sprites/explosions/explosions.png");
+	++totalTextures;
 
 	//Bullet Animaton
 	bullet.anim.PushBack({ 216, 219, 13, 3 });
@@ -65,10 +68,12 @@ bool ModuleParticles::CleanUp()
 		{
 			delete particles[i];
 			particles[i] = nullptr;
+			--particlesCount;
 		}
 	}
-	App->textures->Unload(particlesTexture);
 
+	App->textures->Unload(particlesTexture);
+	--totalTextures;
 
 	return true;
 }
@@ -82,6 +87,7 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 		{
 			delete particles[i];
 			particles[i] = nullptr;
+			--particlesCount;
 			break;
 		}
 	}
@@ -100,6 +106,7 @@ update_status ModuleParticles::Update()
 		{
 			delete particle;
 			particles[i] = nullptr;
+			--particlesCount;
 		}
 	}
 	
@@ -141,6 +148,7 @@ void ModuleParticles::AddParticle(const Particle& particle, int x, int y, Collid
 			}
 
 			particles[i] = p;
+			++particlesCount;
 			break;
 		}
 	}

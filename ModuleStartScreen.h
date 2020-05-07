@@ -17,6 +17,11 @@ public:
 	update_status Update();
 	update_status PostUpdate();
 	bool CleanUp();
+
+	// Sound effects indices
+	uint chooseFx = 0;
+	uint startFx = 0;
+
 private:
 	SDL_Texture* tex = nullptr;
 	SDL_Rect title;

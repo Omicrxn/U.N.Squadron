@@ -33,6 +33,11 @@ public:
 
 	// Debugdraw for gamepad data
 	bool debugGamepadInfo = false;
+
+	// Sound effects indices
+	uint shootFx = 0;
+	uint explosionFx = 0;
+
 public:
 	iPoint GetPlayerPosition() {
 		return position;

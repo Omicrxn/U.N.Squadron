@@ -8,6 +8,9 @@
 #include "ModuleStartScreen.h"
 
 ModuleInitialScreen::ModuleInitialScreen(bool startEnabled) : Module(startEnabled) {
+	
+	name = "Initial Screen";
+	
 	// Screen rect
 	logo = { 0,0,256,224 };
 	screen = { 0,0,SCREEN_WIDTH * 3,SCREEN_HEIGHT * 3 };
@@ -22,7 +25,9 @@ bool ModuleInitialScreen::Start() {
 	bool ret = true;
 
 	logoTex = App->textures->Load("Assets/sprites/menus/Logo.png");
+	++activeTextures; ++totalTextures;
 	tex = App->textures->Load("Assets/sprites/menus/InitialScreen.png");
+	++activeTextures; ++totalTextures;
 
 	if (tex == nullptr) {
 		ret = false;
@@ -70,13 +75,18 @@ update_status ModuleInitialScreen::PostUpdate() {
 bool ModuleInitialScreen::CleanUp() {
 	bool ret = true;
 
+	activeTextures = 0;
+
 	if (!App->textures->Unload(tex)) {
 		LOG("Start Screen -> Error unloading the texture.");
 		ret = false;
 	}
+	--totalTextures;
 	if (!App->textures->Unload(logoTex)) {
 		LOG("Start Screen -> Error unloading the texture.");
 		ret = false;
 	}
+	--totalTextures;
+
 	return ret;
 }

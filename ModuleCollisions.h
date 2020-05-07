@@ -7,7 +7,6 @@
 #include "Module.h"
 #include "SDL_Rect.h"
 
-
 struct Collider
 {
 	enum Type
@@ -65,12 +64,14 @@ public:
 
 	// Adds a new collider to the list
 	Collider* AddCollider(SDL_Rect rect, Collider::Type type, Module* listener = nullptr);
+
 	//Delete collider to the list
 	bool DeleteCollider(Collider* collider);
 
-
 	// Draws all existing colliders with some transparency
 	void DebugDraw();
+
+	inline uint GetColliderCount() const { return colliderCount; };
 
 private:
 	// All existing colliders in the scene
@@ -82,6 +83,9 @@ private:
 
 	// Simple debugging flag to draw all colliders
 	bool debug = false;
+
+	// The amount of colliders loaded into the array
+	uint colliderCount = 0;
 };
 
 #endif // __MODULE_COLLISIONS_H__

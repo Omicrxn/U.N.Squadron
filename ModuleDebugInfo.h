@@ -35,12 +35,16 @@ public:
 	// Displays the active and total resources from the selected module
 	void DrawModuleResources(Module* module);
 
-private:
+public:
 	bool debugMemLeaks = false;
+
+private:
 	Module* inspectedModule = nullptr;
 
 	int debugFont = -1;
 	char debugText[150] = { "\0" };
+
+	uint counterModules = 0;
 };
 
 #endif //!__MODULE_MEMLEAKS_H__

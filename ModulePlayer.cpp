@@ -13,7 +13,8 @@
 #include <stdio.h>
 
 ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled) {
-
+	
+	name = "Player";
 }
 
 ModulePlayer::~ModulePlayer() {
@@ -25,8 +26,11 @@ bool ModulePlayer::Start() {
 
 	destroyed = false;
 
+	currentFuel = maxFuel;
+
 	//Loading the image into a texture
 	texture = App->textures->Load("Assets/sprites/playablecharacters/player spaceships.png");
+	++activeTextures; ++totalTextures;
 
 	//Position of the spaceship in the screen
 	position.x = 10;
@@ -38,15 +42,16 @@ bool ModulePlayer::Start() {
 	playerAnim.PushBack({ 120,185,32,16 });
 
 	//Loading shooting sound effect
-	App->audio->LoadFx("Assets/music/events/shoot.wav");
+	shootFx = App->audio->LoadFx("Assets/music/events/shoot.wav");
+	++activeFx; ++totalFx;
 
 	//Loading collision sound effect
-	App->audio->LoadFx("Assets/music/events/collisionswithobjects.wav");
+	explosionFx = App->audio->LoadFx("Assets/music/events/collisionswithobjects.wav");
+	++activeFx; ++totalFx;
 
 	// Add a collider to the player
 	collider = App->collisions->AddCollider({ position.x, position.y, 32, 16 }, Collider::Type::PLAYER, this);
-
-	currentFuel = maxFuel;
+	++activeColliders; ++totalColliders;
 
 	return ret;
 }
@@ -185,9 +190,18 @@ update_status ModulePlayer::PostUpdate() {
 bool ModulePlayer::CleanUp() {
 	bool ret = true;
 
-	App->textures->Unload(texture);
-	App->collisions->DeleteCollider(collider);
+	activeTextures = activeColliders = activeFonts = activeFx = 0;
 
+	App->textures->Unload(texture);
+	--totalTextures;
+
+	App->audio->UnloadFx(shootFx);
+	--totalFx;
+	App->audio->UnloadFx(explosionFx);
+	--totalFx;
+
+	App->collisions->DeleteCollider(collider);
+	--totalColliders;
 	collider = nullptr;
 	
 	return ret;

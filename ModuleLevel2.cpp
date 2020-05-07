@@ -11,7 +11,11 @@
 #include "ModuleCollisions.h"
 #include "ModuleFonts.h"
 
-ModuleLevel2::ModuleLevel2(bool startEnabled) : Module(startEnabled) {}
+ModuleLevel2::ModuleLevel2(bool startEnabled) : Module(startEnabled) {
+	
+	name = "Level 2";
+}
+
 ModuleLevel2::~ModuleLevel2(){}
 
 bool ModuleLevel2::Start() {
@@ -21,8 +25,11 @@ bool ModuleLevel2::Start() {
 	numSpawnedEnemies = 0;
 
 	backgroundTexture = App->textures->Load("Assets/sprites/scenarios/ThunderStorm_SpriteSheet.png");
+	++activeTextures; ++totalTextures;
+
 	//Music
 	App->audio->PlayMusic("Assets/music/soundtrack/airDivision.ogg");
+	
 	//center rect
 	centerLayer = { 0, 100, 256, 62 };
 	
@@ -38,7 +45,6 @@ bool ModuleLevel2::Start() {
 	thirdTopLayer = {0,0,256,45};
 	thirdBottomLayer = {0,217,256,33};
 
-	
 //background position in screen
 	//center
 	centerPos = { 0,85 };
@@ -51,12 +57,14 @@ bool ModuleLevel2::Start() {
 	firstTopPos2 = { (float)firstTopLayer.w,69 };
 	firstBotPos2 = { (float)firstBottomLayer.w,147};
 	firstSpeed = 1.0;
+	
 	//second
 	secondTopPos = { 0,42 };
 	secondBotPos = { 0,164 };
 	secondTopPos2 = { (float)secondTopLayer.w,42};
 	secondBotPos2 = { (float)secondBottomLayer.w,164 };
 	secondSpeed = 1.5;
+	
 	//third
 	thirdTopPos = { 0,0 };
 	thirdBotPos = { 0,(float)(SCREEN_HEIGHT - thirdBottomLayer.h) };
@@ -342,10 +350,13 @@ void ModuleLevel2::InfiniteScrolling(fPoint* top, fPoint* top2, fPoint* bot, fPo
 bool ModuleLevel2::CleanUp() {
 	bool ret = true;
 
+	activeTextures = 0;
+
 	if (!App->textures->Unload(backgroundTexture)) {
 		LOG("Error unloading background textue in lvl 2");
 		ret = false;
 	}
+	--totalTextures;
 
 	App->render->camera.x = App->render->camera.y = 0;
 	App->audio->StopMusic();
