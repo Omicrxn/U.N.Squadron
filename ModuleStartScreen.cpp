@@ -9,8 +9,7 @@
 #include "ModuleLevel2.h"
 
 ModuleStartScreen::ModuleStartScreen(bool startEnabled) : Module(startEnabled) {
-
-	name = "Start Screen";
+	name = "Start S";
 }
 
 ModuleStartScreen::~ModuleStartScreen() {}
@@ -18,17 +17,19 @@ ModuleStartScreen::~ModuleStartScreen() {}
 bool ModuleStartScreen::Start() {
 	bool ret = true;
 
-	//Unicorn Animation
+	// Unicorn Animation
 	unicorn_anim.PushBack({ 5,2,112,160 });
 	unicorn_anim.PushBack({ 122,2,120,160 });
 	unicorn_anim.PushBack({ 248,2,120,160 });
 	unicorn_anim.speed = 0.1f;
 
-	//Title rect
+	// title rect
 	title = { 235,165,236,67 };
-	//text rect
+
+	// text rect
 	text = { 2,168,216,128 };
-	//selector rect
+
+	// selector rect
 	selector = { 236,240,13,16 };
 
 	tex = App->textures->Load("Assets/sprites/menus/Menu-Spritesheet.png");
@@ -46,14 +47,14 @@ bool ModuleStartScreen::Start() {
 		unicorn_anim.Reset();
 	}
 
-	//Playing opening music
+	// Playing opening music
 	App->audio->PlayMusic("Assets/music/soundtrack/opening.ogg");
 
-	//Load choose option sound
+	// Load choose option sound
 	chooseFx = App->audio->LoadFx("Assets/music/events/chooseoption.wav");
 	++activeFx; ++totalFx;
 
-	//Load start event sound
+	// Load start event sound
 	startFx = App->audio->LoadFx("Assets/music/events/start.wav");
 	++activeFx; ++totalFx;
 
@@ -75,15 +76,14 @@ update_status ModuleStartScreen::Update(){
 	}
 	
 	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN) {
-		switch (selectorPos.y)
-		{
+		switch (selectorPos.y) {
 		case 116: {
 			App->audio->PlayFx(1, 0);
 			App->transition->FadeToBlack(this, (Module*)App->store, 60);
-		}break;
+		} break;
 		case 135: {
 
-		}break;
+		} break;
 		default:
 			break;
 		}
@@ -94,28 +94,33 @@ update_status ModuleStartScreen::Update(){
 
 update_status ModuleStartScreen::PostUpdate() {
 	update_status ret = UPDATE_CONTINUE;
+
 	SDL_Rect rect = current_anim->GetCurrentFrame();
 
-	//blit unicorn
+	// Blit unicorn
 	if (!App->render->Blit(tex, 81, 50, &rect, 1, false)) {
 		ret = UPDATE_ERROR;
 	}
-	//blit title
+
+	// Blit title
 	if (!App->render->Blit(tex, 11, 16, &title, 1, false)) {
 		ret = UPDATE_ERROR;
 	}
-	//blit text
+
+	// Blit text
 	if (!App->render->Blit(tex, 24, 87, &text, 1, false)) {
 		ret = UPDATE_ERROR;
 	}
-	//blit selector
+
+	// Blit selector
 	if (!App->render->Blit(tex, selectorPos.x, selectorPos.y, &selector, 1, false)) {
 		ret = UPDATE_ERROR;
 	}
+
 	return ret;
 }
 
-bool ModuleStartScreen::CleanUp(){
+bool ModuleStartScreen::CleanUp() {
 	bool ret = true;
 
 	activeTextures = activeFx = 0;

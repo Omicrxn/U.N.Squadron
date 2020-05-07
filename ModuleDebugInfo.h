@@ -3,9 +3,9 @@
 
 #include "Module.h"
 
-//Warning: This class is merely for debugging purposes.
-//It would not exist per se in a professional game engine.
-//The logic from this class would be a part of a bigger class.
+// Warning: This class is merely for debugging purposes.
+// It would not exist per se in a professional game engine.
+// The logic from this class would be a part of a bigger class.
 
 class ModuleDebugInfo : public Module
 {
@@ -44,7 +44,7 @@ private:
 	int debugFont = -1;
 	char debugText[150] = { "\0" };
 
-	uint counterModules = 0;
+	int counterModules = 0;
 };
 
 #endif //!__MODULE_MEMLEAKS_H__

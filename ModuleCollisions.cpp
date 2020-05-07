@@ -5,8 +5,7 @@
 #include "ModuleInput.h"
 #include "SDL_scancode.h"
 
-ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
-{
+ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled) {
 	name = "Collisions";
 
 	for (uint i = 0; i < MAX_COLLIDERS; ++i)
@@ -43,19 +42,12 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::ENEMY_SHOT] = false;
 }
 
-// Destructor
-ModuleCollisions::~ModuleCollisions()
-{
+ModuleCollisions::~ModuleCollisions() {}
 
-}
-
-update_status ModuleCollisions::PreUpdate()
-{
+update_status ModuleCollisions::PreUpdate() {
 	// Remove all colliders scheduled for deletion
-	for (uint i = 0; i < MAX_COLLIDERS; ++i)
-	{
-		if (colliders[i] != nullptr && colliders[i]->pendingToDelete == true)
-		{
+	for (uint i = 0; i < MAX_COLLIDERS; ++i) {
+		if (colliders[i] != nullptr && colliders[i]->pendingToDelete == true) {
 			delete colliders[i];
 			colliders[i] = nullptr;
 			--colliderCount;
@@ -65,25 +57,22 @@ update_status ModuleCollisions::PreUpdate()
 	Collider* c1;
 	Collider* c2;
 
-	for (uint i = 0; i < MAX_COLLIDERS; ++i)
-	{
-		// skip empty colliders
+	for (uint i = 0; i < MAX_COLLIDERS; ++i) {
+		// Skip empty colliders
 		if (colliders[i] == nullptr)
 			continue;
 
 		c1 = colliders[i];
 
-		// avoid checking collisions already checked
-		for (uint k = i + 1; k < MAX_COLLIDERS; ++k)
-		{
-			// skip empty colliders
+		// Avoid checking collisions already checked
+		for (uint k = i + 1; k < MAX_COLLIDERS; ++k) {
+			// Skip empty colliders
 			if (colliders[k] == nullptr)
 				continue;
 
 			c2 = colliders[k];
 
-			if (c1->Intersects(c2->rect))
-			{
+			if (c1->Intersects(c2->rect)) {
 				if (matrix[c1->type][c2->type] && c1->listener)
 					c1->listener->OnCollision(c1, c2);
 
@@ -96,63 +85,54 @@ update_status ModuleCollisions::PreUpdate()
 	return update_status::UPDATE_CONTINUE;
 }
 
-update_status ModuleCollisions::Update()
-{
+update_status ModuleCollisions::Update() {
 	if (App->input->keyboard[SDL_SCANCODE_F1] == KEY_DOWN)
 		debug = !debug;
 
 	return update_status::UPDATE_CONTINUE;
 }
 
-update_status ModuleCollisions::PostUpdate()
-{
+update_status ModuleCollisions::PostUpdate() {
 	if (debug)
 		DebugDraw();
 
 	return update_status::UPDATE_CONTINUE;
 }
 
-void ModuleCollisions::DebugDraw()
-{
+void ModuleCollisions::DebugDraw() {
 	Uint8 alpha = 80;
-	for (uint i = 0; i < MAX_COLLIDERS; ++i)
-	{
+	for (uint i = 0; i < MAX_COLLIDERS; ++i) {
 		if (colliders[i] == nullptr)
 			continue;
 
-		switch (colliders[i]->type)
-		{
-		case Collider::Type::NONE: // white
+		switch (colliders[i]->type) {
+		case Collider::Type::NONE: // White
 			App->render->DrawQuad(colliders[i]->rect, 255, 255, 255, alpha);
 			break;
-		case Collider::Type::WALL: // blue
+		case Collider::Type::WALL: // Blue
 			App->render->DrawQuad(colliders[i]->rect, 0, 0, 255, alpha);
 			break;
-		case Collider::Type::PLAYER: // green
+		case Collider::Type::PLAYER: // Green
 			App->render->DrawQuad(colliders[i]->rect, 0, 255, 0, alpha);
 			break;
-		case Collider::Type::ENEMY: // red
+		case Collider::Type::ENEMY: // Red
 			App->render->DrawQuad(colliders[i]->rect, 255, 0, 0, alpha);
 			break;
-		case Collider::Type::PLAYER_SHOT: // yellow
+		case Collider::Type::PLAYER_SHOT: // Yellow
 			App->render->DrawQuad(colliders[i]->rect, 255, 255, 0, alpha);
 			break;
-		case Collider::Type::ENEMY_SHOT: // magenta
+		case Collider::Type::ENEMY_SHOT: // Magenta
 			App->render->DrawQuad(colliders[i]->rect, 0, 255, 255, alpha);
 			break;
 		}
 	}
 }
 
-// Called before quitting
-bool ModuleCollisions::CleanUp()
-{
+bool ModuleCollisions::CleanUp() {
 	LOG("Freeing all colliders");
 
-	for (uint i = 0; i < MAX_COLLIDERS; ++i)
-	{
-		if (colliders[i] != nullptr)
-		{
+	for (uint i = 0; i < MAX_COLLIDERS; ++i) {
+		if (colliders[i] != nullptr) {
 			delete colliders[i];
 			colliders[i] = nullptr;
 			--colliderCount;
@@ -162,14 +142,11 @@ bool ModuleCollisions::CleanUp()
 	return true;
 }
 
-Collider* ModuleCollisions::AddCollider(SDL_Rect rect, Collider::Type type, Module* listener)
-{
+Collider* ModuleCollisions::AddCollider(SDL_Rect rect, Collider::Type type, Module* listener) {
 	Collider* ret = nullptr;
 
-	for (uint i = 0; i < MAX_COLLIDERS; ++i)
-	{
-		if (colliders[i] == nullptr)
-		{
+	for (uint i = 0; i < MAX_COLLIDERS; ++i) {
+		if (colliders[i] == nullptr) {
 			ret = colliders[i] = new Collider(rect, type, listener);
 			++colliderCount;
 			break;
@@ -180,38 +157,29 @@ Collider* ModuleCollisions::AddCollider(SDL_Rect rect, Collider::Type type, Modu
 }
 
 bool ModuleCollisions::DeleteCollider(Collider* collider) {
-	if (collider != nullptr)
-	{
-		for (uint i = 0; i < MAX_COLLIDERS; ++i)
-		{
-			if (colliders[i] == collider)
-			{
+	if (collider != nullptr) {
+		for (uint i = 0; i < MAX_COLLIDERS; ++i) {
+			if (colliders[i] == collider) {
 				collider->pendingToDelete = true;
-				--colliderCount;
 				break;
 			}
 		}
 	}
+
 	return false;
 }
 
+// Collider class
+Collider::Collider(SDL_Rect rectangle, Type type, Module* listener) : rect(rectangle), type(type), listener(listener) {}
 
-//Collider class
-Collider::Collider(SDL_Rect rectangle, Type type, Module* listener) : rect(rectangle), type(type), listener(listener)
-{
-
-}
-
-void Collider::SetPos(int x, int y)
-{
+void Collider::SetPos(int x, int y) {
 	rect.x = x;
 	rect.y = y;
 }
 
-bool Collider::Intersects(const SDL_Rect& r) const
-{
-	// TODO 1:	Return true if there is an overlap
-	//			between argument "r" and property "rect"
+bool Collider::Intersects(const SDL_Rect& r) const {
+	// Return true if there is an overlap
+	// between argument "r" and property "rect"
 	return (rect.x < r.x + r.w &&
 		rect.x + rect.w > r.x &&
 		rect.y < r.y + r.h &&

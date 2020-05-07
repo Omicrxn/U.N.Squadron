@@ -6,10 +6,9 @@
 #include "ModuleInput.h"
 #include "ModuleStartScreen.h"
 ModuleWinScreen::ModuleWinScreen(bool startEnabled) : Module(startEnabled) {
+	name = "Win S";
 
-	name = "Win Screen";
-
-	//screen rect
+	// Screen rect
 	screen = { 0,0,256,224 };
 }
 
@@ -44,6 +43,7 @@ update_status ModuleWinScreen::PostUpdate() {
 	if (!App->render->Blit(tex, 0, 0, &screen, 1, false)) {
 		ret = UPDATE_ERROR;
 	}
+
 	return ret;
 }
 

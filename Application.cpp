@@ -18,33 +18,35 @@
 #include "ModuleStore.h"
 #include "ModuleDebugInfo.h"
 
-Application::Application()
-{
+Application::Application() {
 	int i = 0;
 	modules[i++] = window = new ModuleWindow(true);
 	modules[i++] = input = new ModuleInput(true);
-	modules[i++] = debugInfo = new ModuleDebugInfo(false);
 	modules[i++] = textures = new ModuleTextureManager(true);
 	modules[i++] = audio = new ModuleAudio(true);
 
 	
 	modules[i++] = initialScreen = new ModuleInitialScreen(true);
 	modules[i++] = startScreen = new ModuleStartScreen(false);
-	modules[i++] = winScreen = new ModuleWinScreen(false);
+	modules[i++] = store = new ModuleStore(false);
 	modules[i++] = lvl2 = new ModuleLevel2(false);
+	modules[i++] = winScreen = new ModuleWinScreen(false);
+	
+
 	modules[i++] = player = new ModulePlayer(false);
+	modules[i++] = HUD = new ModuleHUD(false);
 	modules[i++] = particles = new ModuleParticles(false);
 	modules[i++] = enemies = new ModuleEnemies(false);
-	modules[i++] = HUD = new ModuleHUD(false);
-	modules[i++] = store = new ModuleStore(false);
-
 	modules[i++] = collisions = new ModuleCollisions(false);
+	
+
 	modules[i++] = transition = new ModuleFadeToBlack(true);
 	modules[i++] = fonts = new ModuleFonts(false);
+	modules[i++] = debugInfo = new ModuleDebugInfo(true);
 	modules[i++] = render = new ModuleRenderer(true);
 }
-Application::~Application()
-{
+
+Application::~Application() {
 	for (int i = 0; i < NUM_MODULES; ++i)
 	{
 		//Important: when deleting a pointer, set it to nullptr afterwards
@@ -55,24 +57,21 @@ Application::~Application()
 }
 
 // INIT all modules
-bool Application::Init()
-{
+bool Application::Init() {
 	bool ret = true;
 
-	for (int i = 0; i < NUM_MODULES && ret == true; ++i)
-	{
+	for (int i = 0; i < NUM_MODULES && ret == true; ++i) {
 		ret = modules[i]->Init();
 	}
-	for (int i = 0; i < NUM_MODULES && ret == true; ++i)
-	{
+
+	for (int i = 0; i < NUM_MODULES && ret == true; ++i) {
 		ret = modules[i]->IsEnabled() ? modules[i]->Start() : true;;
 	}
 
 	return ret;
 }
 
-update_status Application::Update()
-{
+update_status Application::Update() {
 	
 	frameStart = SDL_GetTicks();
 	update_status ret = update_status::UPDATE_CONTINUE;
@@ -82,7 +81,8 @@ update_status Application::Update()
 	
 	for (int i = 0; i < NUM_MODULES && ret == update_status::UPDATE_CONTINUE; ++i) {
 		ret = modules[i]->IsEnabled() ? modules[i]->Update() : UPDATE_CONTINUE;
-	}for (int i = 0; i < NUM_MODULES && ret == update_status::UPDATE_CONTINUE; ++i) {
+	}
+	for (int i = 0; i < NUM_MODULES && ret == update_status::UPDATE_CONTINUE; ++i) {
 		ret = modules[i]->IsEnabled() ? modules[i]->PostUpdate() : UPDATE_CONTINUE;
 	}
 
@@ -90,11 +90,11 @@ update_status Application::Update()
 	if (frameDelay > frameTime) {
 		SDL_Delay(frameDelay - frameTime);
 	}
+
 	return ret;
 }
 
-bool Application::CleanUp()
-{
+bool Application::CleanUp() {
 	bool ret = true;
 
 	for (int i = NUM_MODULES - 1; i >= 0 && ret == true; --i) {

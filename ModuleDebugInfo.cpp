@@ -19,12 +19,9 @@ ModuleDebugInfo::ModuleDebugInfo(bool startEnabled) : Module(startEnabled)
 	name = "Debug Info";
 }
 
-ModuleDebugInfo::~ModuleDebugInfo()
-{
+ModuleDebugInfo::~ModuleDebugInfo() {}
 
-}
-
-bool ModuleDebugInfo::Start()
+bool ModuleDebugInfo::Start() 
 {
 	debugFont = App->fonts->Load("Assets/Fonts/FontY.png", App->HUD->lookupTable, 5);
 	++totalFonts;
@@ -32,7 +29,7 @@ bool ModuleDebugInfo::Start()
 	return true;
 }
 
-bool ModuleDebugInfo::CleanUp()
+bool ModuleDebugInfo::CleanUp() 
 {
 	// Unload debug font!
 	App->fonts->UnLoad(debugFont);
@@ -41,43 +38,48 @@ bool ModuleDebugInfo::CleanUp()
 	return true;
 }
 
-update_status ModuleDebugInfo::Update()
+update_status ModuleDebugInfo::Update() 
 {
 	if (App->input->keyboard[SDL_SCANCODE_F6] == KEY_DOWN) {
 		debugMemLeaks = !debugMemLeaks;
+		counterModules = 0;
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_F7] == KEY_DOWN && counterModules <= 6)
+	if (App->input->keyboard[SDL_SCANCODE_F7] == KEY_DOWN && counterModules <= 6) {
 		++counterModules;
+	}
 
 	if (counterModules == 1)
-		inspectedModule = (Module*)App->initialScreen;
+		inspectedModule = (Module*)App->player;
 
 	if (counterModules == 2)
-		inspectedModule = (Module*)App->startScreen;
+		inspectedModule = (Module*)App->lvl2;
 
 	if (counterModules == 3)
 		inspectedModule = (Module*)App->store;
 
 	if (counterModules == 4)
-		inspectedModule = (Module*)App->player;
+		inspectedModule = (Module*)App->startScreen;
 
 	if (counterModules == 5)
-		inspectedModule = (Module*)App->lvl2;
+		inspectedModule = (Module*)App->initialScreen;
 
 	if (counterModules == 6)
 		inspectedModule = (Module*)App->winScreen;
 
+	if (counterModules == 6 && App->input->keyboard[SDL_SCANCODE_F7] == KEY_DOWN) {
+		counterModules = 0;
+	}
 
 	return update_status::UPDATE_CONTINUE;
 }
 
-update_status ModuleDebugInfo::PostUpdate()
+update_status ModuleDebugInfo::PostUpdate() 
 {
 	if (debugMemLeaks) {
-		App->fonts->BlitText(10, 1, debugFont, "press F6 to close mem leaks debug info");
+		App->fonts->BlitText(5, 5, debugFont, "Press F6 to close debug info");
 
-		App->fonts->BlitText(10, 20, debugFont, "total loaded resources");
+		App->fonts->BlitText(5, 20, debugFont, "Total loaded resources");
 
 		// Display total textures loaded
 		sprintf_s(debugText, 150, "textures  %i", App->textures->GetTexturesCount());
@@ -88,7 +90,7 @@ update_status ModuleDebugInfo::PostUpdate()
 		App->fonts->BlitText(20, 50, debugFont, debugText);
 
 		// Display total font files loaded
-		//sprintf_s(debugText, 150, "fonts     %i", App->fonts->GetFontsCount());
+		sprintf_s(debugText, 150, "fonts     %i", App->fonts->GetFontsCount());
 		App->fonts->BlitText(20, 65, debugFont, debugText);
 
 		// Display total colliders loaded
@@ -99,10 +101,9 @@ update_status ModuleDebugInfo::PostUpdate()
 		sprintf_s(debugText, 150, "particles %i", App->particles->GetParticlesCount());
 		App->fonts->BlitText(20, 95, debugFont, debugText);
 
-		App->fonts->BlitText(10, 120, debugFont, "press F7 to traverse all modules");
+		App->fonts->BlitText(5, 120, debugFont, "Press F7 to traverse modules");
 
-		if (inspectedModule != nullptr)
-		{
+		if (inspectedModule != nullptr) {
 			DrawModuleResources(inspectedModule);
 		}
 	}
@@ -110,23 +111,23 @@ update_status ModuleDebugInfo::PostUpdate()
 	return update_status::UPDATE_CONTINUE;
 }
 
-void ModuleDebugInfo::DrawModuleResources(Module* module)
+void ModuleDebugInfo::DrawModuleResources(Module* module) 
 {
 	sprintf_s(debugText, 150, "module %s", module->name);
-	App->fonts->BlitText(20, 140, debugFont, debugText);
+	App->fonts->BlitText(5, 135, debugFont, debugText);
 
 	sprintf_s(debugText, 150, "active  total");
-	App->fonts->BlitText(155, 140, debugFont, debugText);
+	App->fonts->BlitText(150, 135, debugFont, debugText);
 
 	sprintf_s(debugText, 150, "textures          %i      %i", module->activeTextures, module->totalTextures);
-	App->fonts->BlitText(30, 155, debugFont, debugText);
+	App->fonts->BlitText(25, 150, debugFont, debugText);
 
 	sprintf_s(debugText, 150, "audio fx          %i      %i", module->activeFx, module->totalFx);
-	App->fonts->BlitText(30, 170, debugFont, debugText);
+	App->fonts->BlitText(25, 165, debugFont, debugText);
 
 	sprintf_s(debugText, 150, "fonts             %i      %i", module->activeFonts, module->totalFonts);
-	App->fonts->BlitText(30, 185, debugFont, debugText);
+	App->fonts->BlitText(25, 180, debugFont, debugText);
 
 	sprintf_s(debugText, 150, "colliders         %i      %i", module->activeColliders, module->totalColliders);
-	App->fonts->BlitText(30, 200, debugFont, debugText);
+	App->fonts->BlitText(25, 195, debugFont, debugText);
 }

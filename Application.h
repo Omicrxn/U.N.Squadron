@@ -26,12 +26,10 @@ class ModuleDebugInfo;
 
 #define NUM_MODULES 18
 
-class Application
-{
+class Application {
 
 public:
-
-	//Constructor. Creates all necessary modules for the application
+	// Constructor. Creates all necessary modules for the application
 	Application();
 	~Application();
 
@@ -56,13 +54,13 @@ public:
 	ModuleStore* store = nullptr;
 	ModuleDebugInfo* debugInfo = nullptr;
 
-	//Initializes all modules
+	// Initializes all modules
 	bool Init();
 
-	//Updates all modules (PreUpdate, Update and PostUpdate)
+	// Updates all modules (PreUpdate, Update and PostUpdate)
 	update_status Update();
 
-	//Releases all the application data
+	// Releases all the application data
 	bool CleanUp();
 
 	const int FPS = 60;
@@ -71,7 +69,7 @@ public:
 	int frameTime;
 };
 
-//To make it global and be able to access from other calses without include
+// To make it global and be able to access from other calses without include
 extern Application* App;
 
 #endif // __APPLICATION_H__

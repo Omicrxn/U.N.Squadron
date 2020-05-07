@@ -31,33 +31,36 @@ ModuleStore::~ModuleStore() {}
 
 bool ModuleStore::Start() {
 	bool ret = true;
-	//Unicorn Animation
+	
+	// Unicorn Animation
 	/*unicorn_anim.PushBack({ 5,2,112,160 });
 	unicorn_anim.PushBack({ 122,2,120,160 });
 	unicorn_anim.PushBack({ 248,2,120,160 });
 	unicorn_anim.speed = 0.1f;*/
 
-	//title rect
+	// Title rect
 	/*title = { 235,165,236,67 };*/
-	//text rect
+	
+	// Text rect
 	/*text = { 2,168,216,128 };*/
-	//selector rect
+	
+	// Selector rect
 	/*selector = { 236,240,13,16 };*/
 
-	//Background rect
+	// Background rect
 	background = { 0,0,SCREEN_WIDTH, SCREEN_HEIGHT };
 
-	//Selector rect
+	// Selector rect
 	selector = { 209,82,54,64 };
 
-	//Loading the background texture
+	// Loading the background texture
 	tex = App->textures->Load("Assets/sprites/menus/shop/store.png");
 	if (tex == nullptr) {
 		ret = false;
 	}
 	++activeTextures; ++totalTextures;
 
-	//Loading the items texture
+	// Loading the items texture
 	tex2 = App->textures->Load("Assets/sprites/menus/shop/items.png");
 	if (tex2 == nullptr) {
 		ret = false;
@@ -71,10 +74,10 @@ bool ModuleStore::Start() {
 		unicorn_anim.Reset();
 	}*/
 
-	//Playing opening music
+	// Playing opening music
 	/*App->audio->PlayMusic("Assets/music/soundtrack/opening.ogg");*/
 
-	//Loading the font to print text on screen
+	// Loading the font to print text on screen
 	yellowFont = App->fonts->Load("Assets/Fonts/FontY.png", App->HUD->lookupTable, 5);
 	++activeFonts; ++totalFonts;
 	greenFont = App->fonts->Load("Assets/Fonts/FontG.png", App->HUD->lookupTable, 5);
@@ -82,6 +85,8 @@ bool ModuleStore::Start() {
 
 	rows = 0;
 	columns = 0;
+
+	App->fonts->Enable();
 
 	return ret;
 }
@@ -187,6 +192,12 @@ bool ModuleStore::CleanUp() {
 		ret = false;
 	}
 	--totalTextures;
+
+	App->fonts->UnLoad(yellowFont);
+	--totalFonts;
+
+	App->fonts->UnLoad(greenFont);
+	--totalFonts;
 
 	App->audio->StopMusic();
 

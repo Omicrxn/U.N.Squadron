@@ -8,15 +8,13 @@
 #include "ModuleStartScreen.h"
 
 ModuleInitialScreen::ModuleInitialScreen(bool startEnabled) : Module(startEnabled) {
-	
-	name = "Initial Screen";
+	name = "Initial S";
 	
 	// Screen rect
 	logo = { 0,0,256,224 };
 	screen = { 0,0,SCREEN_WIDTH * 3,SCREEN_HEIGHT * 3 };
 
 	startTime = 0;
-	
 }
 
 ModuleInitialScreen::~ModuleInitialScreen() {}
@@ -26,6 +24,7 @@ bool ModuleInitialScreen::Start() {
 
 	logoTex = App->textures->Load("Assets/sprites/menus/Logo.png");
 	++activeTextures; ++totalTextures;
+
 	tex = App->textures->Load("Assets/sprites/menus/InitialScreen.png");
 	++activeTextures; ++totalTextures;
 

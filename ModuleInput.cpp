@@ -8,10 +8,10 @@
 #include "ModuleStartScreen.h"
 #include "ModuleLevel2.h"
 #include "ModuleWinScreen.h"
+#include "ModuleStore.h"
 #include "SDL.h"
 
-ModuleInput::ModuleInput(bool startEnabled) : Module(startEnabled)
-{
+ModuleInput::ModuleInput(bool startEnabled) : Module(startEnabled) {
 	name = "Input";
 
 	for (uint i = 0; i < MAX_KEYS; ++i)
@@ -20,44 +20,37 @@ ModuleInput::ModuleInput(bool startEnabled) : Module(startEnabled)
 }
 
 // Destructor
-ModuleInput::~ModuleInput()
-{
-}
+ModuleInput::~ModuleInput() {}
 
-bool ModuleInput::Init()
-{
-
+bool ModuleInput::Init() {
 	LOG("Init SDL input event system");
 	bool ret = true;
 	SDL_Init(0);
 
-	if (SDL_InitSubSystem(SDL_INIT_EVENTS) < 0)
-	{
+	if (SDL_InitSubSystem(SDL_INIT_EVENTS) < 0) {
 		LOG("SDL_EVENTS could not initialize! SDL_Error: %s\n", SDL_GetError());
 		ret = false;
 	}
-	if (SDL_InitSubSystem(SDL_INIT_GAMECONTROLLER) < 0)
-	{
+	
+	if (SDL_InitSubSystem(SDL_INIT_GAMECONTROLLER) < 0) {
 		LOG("SDL_INIT_GAMECONTROLLER could not initialize! SDL_Error: %s\n", SDL_GetError());
 		ret = false;
 	}
 
-	if (SDL_InitSubSystem(SDL_INIT_HAPTIC) < 0)
-	{
+	if (SDL_InitSubSystem(SDL_INIT_HAPTIC) < 0) {
 		LOG("SDL_INIT_HAPTIC could not initialize! SDL_Error: %s\n", SDL_GetError());
 		ret = false;
 	}
 
 	return ret;
 }
+
 update_status ModuleInput::PreUpdate() {
 	SDL_PumpEvents();
 	const Uint8* keys = SDL_GetKeyboardState(NULL);
 
-	for (int i = 0; i < MAX_KEYS; i++)
-	{
-		if (keys[i] == 1)
-		{
+	for (int i = 0; i < MAX_KEYS; i++) {
+		if (keys[i] == 1) {
 			if (keyboard[i] == KEY_IDLE) {
 				keyboard[i] = KEY_DOWN;
 			}
@@ -81,13 +74,10 @@ update_status ModuleInput::PreUpdate() {
 	}
 
 	// CHECKS IF WINDOW X IS CLICKED TO CLOSE OR MAXIMIZE SCREEN
-	//Read new SDL events
-
+	// Read new SDL events
 	SDL_Event event;
-	while (SDL_PollEvent(&event))
-	{
-		if (event.type == SDL_QUIT)
-		{
+	while (SDL_PollEvent(&event)) {
+		if (event.type == SDL_QUIT) {
 			return update_status::UPDATE_STOP;
 		}
 		// Maximize window (Button or F11)
@@ -99,7 +89,6 @@ update_status ModuleInput::PreUpdate() {
 		}
 		else if (event.type == SDL_CONTROLLERDEVICEADDED) {
 			HandleDeviceConnection(event.cdevice.which);
-			
 		}
 		else if (event.type == SDL_CONTROLLERDEVICEREMOVED)	{
 			HandleDeviceRemoval(event.cdevice.which);
@@ -115,11 +104,9 @@ update_status ModuleInput::PreUpdate() {
 	if (keyboard[SDL_SCANCODE_F11] == KEY_DOWN) {
 		if (maximized) {
 			SDL_RestoreWindow(App->window->sdlWindow);
-			
 		}
 		else {
 			SDL_MaximizeWindow(App->window->sdlWindow);
-
 		}
 		maximized = !maximized;
 	}
@@ -130,7 +117,10 @@ update_status ModuleInput::PreUpdate() {
 			App->transition->FadeToBlack((Module*)App->initialScreen, (Module*)App->startScreen, 60);
 		}
 		else if (App->startScreen->IsEnabled()) {
-			App->transition->FadeToBlack((Module*)App->startScreen, (Module*)App->lvl2, 60);
+			App->transition->FadeToBlack((Module*)App->startScreen, (Module*)App->store, 60);
+		}
+		else if (App->store->IsEnabled()) {
+			App->transition->FadeToBlack((Module*)App->store, (Module*)App->lvl2, 60);
 		}
 		else if (App->lvl2->IsEnabled()) {
 			App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->startScreen, 60);
@@ -140,7 +130,7 @@ update_status ModuleInput::PreUpdate() {
 		}
 	}
 
-	// Jump to Win Screen
+	// Debug functionality to Win Screen
 	if (keyboard[SDL_SCANCODE_F4] == KEY_DOWN) {
 		if (App->lvl2->IsEnabled()) {
 			App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->winScreen, 60);
@@ -174,16 +164,12 @@ bool ModuleInput::CleanUp() {
 }
 
 void ModuleInput::HandleDeviceConnection(int index) {
-	if (SDL_IsGameController(index))
-	{
-		for (int i = 0; i < MAX_PADS; ++i)
-		{
+	if (SDL_IsGameController(index)) {
+		for (int i = 0; i < MAX_PADS; ++i) {
 			GamePad& pad = pads[i];
 
-			if (pad.enabled == false)
-			{
-				if (pad.controller = SDL_GameControllerOpen(index))
-				{
+			if (pad.enabled == false) {
+				if (pad.controller = SDL_GameControllerOpen(index)) {
 					LOG("Found a gamepad with id %i named %s", i, SDL_GameControllerName(pad.controller));
 					pad.enabled = true;
 					pad.l_dz = pad.r_dz = 0.1f;
@@ -197,11 +183,9 @@ void ModuleInput::HandleDeviceConnection(int index) {
 	}
 }
 
-void ModuleInput::HandleDeviceRemoval(int index)
-{
+void ModuleInput::HandleDeviceRemoval(int index) {
 	// If an existing gamepad has the given index, deactivate all SDL device functionallity
-	for (int i = 0; i < MAX_PADS; ++i)
-	{
+	for (int i = 0; i < MAX_PADS; ++i) {
 		GamePad& pad = pads[i];
 		if (pad.enabled && pad.index == index)
 		{
@@ -212,15 +196,12 @@ void ModuleInput::HandleDeviceRemoval(int index)
 	}
 }
 
-void ModuleInput::UpdateGamepadsInput()
-{
+void ModuleInput::UpdateGamepadsInput() {
 	// Iterate through all active gamepads and update all input data
-	for (int i = 0; i < MAX_PADS; ++i)
-	{
+	for (int i = 0; i < MAX_PADS; ++i) {
 		GamePad& pad = pads[i];
 
-		if (pad.enabled == true)
-		{
+		if (pad.enabled == true) {
 			pad.a = SDL_GameControllerGetButton(pad.controller, SDL_CONTROLLER_BUTTON_A) == 1;
 			pad.b = SDL_GameControllerGetButton(pad.controller, SDL_CONTROLLER_BUTTON_B) == 1;
 			pad.x = SDL_GameControllerGetButton(pad.controller, SDL_CONTROLLER_BUTTON_X) == 1;
@@ -258,8 +239,7 @@ void ModuleInput::UpdateGamepadsInput()
 	}
 }
 
-bool ModuleInput::ShakeController(int id, int duration, float strength)
-{
+bool ModuleInput::ShakeController(int id, int duration, float strength) {
 	bool ret = false;
 
 	// Check if the given id is valid within the array bounds
@@ -273,12 +253,10 @@ bool ModuleInput::ShakeController(int id, int duration, float strength)
 	if (duration < pad.rumble_countdown && strength < pad.rumble_strength)
 		return ret;
 
-	if (SDL_HapticRumbleInit(pad.haptic) == -1)
-	{
+	if (SDL_HapticRumbleInit(pad.haptic) == -1) {
 		LOG("Cannot init rumble for controller number %d", id);
 	}
-	else
-	{
+	else {
 		SDL_HapticRumbleStop(pad.haptic);
 		SDL_HapticRumblePlay(pad.haptic, strength, duration / 60 * 1000); //Conversion from frames to ms at 60FPS
 
@@ -291,8 +269,7 @@ bool ModuleInput::ShakeController(int id, int duration, float strength)
 	return ret;
 }
 
-const char* ModuleInput::GetControllerName(int id) const
-{
+const char* ModuleInput::GetControllerName(int id) const {
 	// Check if the given id has a valid controller
 	if (id >= 0 && id < MAX_PADS && pads[id].enabled == true && pads[id].controller != nullptr)
 		return SDL_GameControllerName(pads[id].controller);

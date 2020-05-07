@@ -13,13 +13,10 @@
 #include <stdio.h>
 
 ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled) {
-	
 	name = "Player";
 }
 
-ModulePlayer::~ModulePlayer() {
-
-}
+ModulePlayer::~ModulePlayer() {}
 
 bool ModulePlayer::Start() {
 	bool ret = true;
@@ -28,24 +25,24 @@ bool ModulePlayer::Start() {
 
 	currentFuel = maxFuel;
 
-	//Loading the image into a texture
+	// Loading the image into a texture
 	texture = App->textures->Load("Assets/sprites/playablecharacters/player spaceships.png");
 	++activeTextures; ++totalTextures;
 
-	//Position of the spaceship in the screen
+	// Position of the spaceship in the screen
 	position.x = 10;
 	position.y = SCREEN_HEIGHT / 2;
 
-	//Position of the rectangle that we are getting from the image we load
+	// Position of the rectangle that we are getting from the image we load
 	playerAnim.PushBack({ 155,187,32,9 });
 	playerAnim.PushBack({ 190,186,32,12 });
 	playerAnim.PushBack({ 120,185,32,16 });
 
-	//Loading shooting sound effect
+	// Loading shooting sound effect
 	shootFx = App->audio->LoadFx("Assets/music/events/shoot.wav");
 	++activeFx; ++totalFx;
 
-	//Loading collision sound effect
+	// Loading collision sound effect
 	explosionFx = App->audio->LoadFx("Assets/music/events/collisionswithobjects.wav");
 	++activeFx; ++totalFx;
 
@@ -70,27 +67,23 @@ update_status ModulePlayer::Update() {
 	// Moving the player with the camera scroll
 	App->player->position.x += 1;
 
-	//Debug key for gamepad rumble testing purposes
-	if (App->input->keyboard[SDL_SCANCODE_1] == KEY_DOWN)
-	{
+	// Debug key for gamepad rumble testing purposes
+	if (App->input->keyboard[SDL_SCANCODE_1] == KEY_DOWN) {
 		App->input->ShakeController(0, 12, 0.33f);
 	}
 
-	//Debug key for gamepad rumble testing purposes
-	if (App->input->keyboard[SDL_SCANCODE_2] == KEY_DOWN)
-	{
+	// Debug key for gamepad rumble testing purposes
+	if (App->input->keyboard[SDL_SCANCODE_2] == KEY_DOWN) {
 		App->input->ShakeController(0, 36, 0.66f);
 	}
 
-	//Debug key for gamepad rumble testing purposes
-	if (App->input->keyboard[SDL_SCANCODE_3] == KEY_DOWN)
-	{
+	// Debug key for gamepad rumble testing purposes
+	if (App->input->keyboard[SDL_SCANCODE_3] == KEY_DOWN) {
 		App->input->ShakeController(0, 60, 1.0f);
 	}
 	
-	//God Mode
-	if (App->input->keyboard[SDL_SCANCODE_F5] == KEY_DOWN)
-	{
+	// God Mode
+	if (App->input->keyboard[SDL_SCANCODE_F5] == KEY_DOWN) {
 		godMode = !godMode;
 		if (godMode) {
 			App->collisions->DeleteCollider(collider);
@@ -104,8 +97,7 @@ update_status ModulePlayer::Update() {
 	}
 		
 	// Spawn bullet particles when pressing SPACE
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_DOWN && !destroyed)
-	{
+	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_DOWN && !destroyed) {
 		App->particles->AddParticle(App->particles->bullet, position.x + 32, position.y + 5, Collider::Type::PLAYER_SHOT);
 
 		//Playing shooting sound effect (if space was pressed)
@@ -113,49 +105,42 @@ update_status ModulePlayer::Update() {
 	}
 
 	// Moving the spaceship when pressing WASD
-	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_IDLE && App->input->keyboard[SDL_SCANCODE_S] == KEY_IDLE && App->input->keyboard[SDL_SCANCODE_UP] == KEY_IDLE && App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_IDLE)
-	{
-		if (current_anim != &playerAnim)
-		{
+	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_IDLE && App->input->keyboard[SDL_SCANCODE_S] == KEY_IDLE && App->input->keyboard[SDL_SCANCODE_UP] == KEY_IDLE && App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_IDLE) {
+		if (current_anim != &playerAnim) {
 			current_anim = &playerAnim;
 		}
 		rectAnim = current_anim->GetFrame(0);
 	}
 	
 	
-	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_REPEAT)
-	{
+	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_REPEAT) {
 		if (position.y < SCREEN_HEIGHT - 38) {
 			position.y += 3;
-			if (current_anim != &playerAnim)
-			{
+			if (current_anim != &playerAnim) {
 				current_anim = &playerAnim;
 			}
 			rectAnim = current_anim->GetFrame(2);
 		}
 		
 	}
-	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_UP] == KEY_REPEAT)
-	{
+
+	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_UP] == KEY_REPEAT) {
 		if (position.y > 39) {
 			position.y -= 3;
-			if (current_anim != &playerAnim)
-			{
+			if (current_anim != &playerAnim) {
 				current_anim = &playerAnim;
 			}
 			rectAnim = current_anim->GetFrame(1);
 		}
 	}
 	
-	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_REPEAT)
-	{
+	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_REPEAT) {
 		if (position.x > App->render->camera.x / SCREEN_SIZE) {
 			position.x -= 3;
 		}
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_REPEAT)
-	{
+	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_REPEAT) {
 		if (position.x < (App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH - 32)) {
 			position.x += 3;
 		}
@@ -166,6 +151,7 @@ update_status ModulePlayer::Update() {
 		collider->SetPos(position.x, position.y);
 	}
 
+	// Win condition (end of the level)
 	if (position.x >= 7600) {
 		App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->winScreen, 60);
 	}
@@ -177,8 +163,7 @@ update_status ModulePlayer::PostUpdate() {
 	update_status ret = UPDATE_CONTINUE;
 	
 	// Blit player
-	if (!destroyed)
-	{
+	if (!destroyed) {
 		if (!App->render->Blit(texture, position.x, position.y, &rectAnim)) {
 			ret = UPDATE_ERROR;
 		}
@@ -207,11 +192,9 @@ bool ModulePlayer::CleanUp() {
 	return ret;
 }
 
-void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
-{
+void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 	// Detect collision with a bullet or an enemy. If so, disappear and explode.
-	if (c1 == collider && destroyed == false)
-	{
+	if (c1 == collider && destroyed == false) {
 		if (currentFuel > 1) {
 			currentFuel--;
 		}
@@ -229,12 +212,10 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 
 			destroyed = true;
 		}
-		
 	}
 }
 
-void ModulePlayer::DebugDrawGamepadInfo()
-{
+void ModulePlayer::DebugDrawGamepadInfo() {
 	GamePad& pad = App->input->pads[0];
 
 	sprintf_s(App->HUD->scoreText, 150, "pad 0 %s, press 1/2/3 for rumble", (pad.enabled) ? "plugged" : "not detected");
@@ -253,6 +234,7 @@ void ModulePlayer::DebugDrawGamepadInfo()
 		(pad.l3) ? "l3" : "",
 		(pad.r3) ? "r3" : ""
 	);
+
 	App->fonts->BlitText(5, 20, App->HUD->yellowFont, App->HUD->scoreText);
 
 	sprintf_s(App->HUD->scoreText, 150, "dpad %s %s %s %s",
@@ -261,6 +243,7 @@ void ModulePlayer::DebugDrawGamepadInfo()
 		(pad.left) ? "left" : "",
 		(pad.right) ? "right" : ""
 	);
+
 	App->fonts->BlitText(5, 30, App->HUD->yellowFont, App->HUD->scoreText);
 
 	sprintf_s(App->HUD->scoreText, 150, "left trigger  %0.2f", pad.l2);
