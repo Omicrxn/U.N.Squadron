@@ -159,6 +159,7 @@
     <ClCompile Include="ModuleInitialScreen.cpp" />
     <ClCompile Include="ModuleInput.cpp" />
     <ClCompile Include="ModuleLevel2.cpp" />
+    <ClCompile Include="ModuleLooseScreen.cpp" />
     <ClCompile Include="ModuleParticles.cpp" />
     <ClCompile Include="ModuleRenderer.cpp" />
     <ClCompile Include="ModulePlayer.cpp" />
@@ -193,6 +194,7 @@
     <ClInclude Include="ModuleInitialScreen.h" />
     <ClInclude Include="ModuleInput.h" />
     <ClInclude Include="ModuleLevel2.h" />
+    <ClInclude Include="ModuleLooseScreen.h" />
     <ClInclude Include="ModuleParticles.h" />
     <ClInclude Include="ModuleRenderer.h" />
     <ClInclude Include="ModulePlayer.h" />

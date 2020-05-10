@@ -5,6 +5,7 @@
 #include "ModuleParticles.h"
 #include "ModuleRenderer.h"
 #include "ModuleStartScreen.h"
+#include "ModuleLooseScreen.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleAudio.h"
 #include "ModuleFonts.h"
@@ -205,7 +206,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 			
 			App->particles->AddParticle(App->particles->explosion, position.x, position.y, Collider::Type::NONE, 9);
 
-			App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->startScreen, 60);
+			App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->looseScreen, 60);
 
 			//Playing explosion sound effect
 			App->audio->PlayFx(3, 0);

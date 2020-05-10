@@ -15,6 +15,7 @@ class ModuleLevel2;
 class ModuleParticles;
 class ModuleInitialScreen;
 class ModuleStartScreen;
+class ModuleLooseScreen;
 class ModuleFadeToBlack;
 class ModuleCollisions;
 class ModuleRenderer;
@@ -24,7 +25,7 @@ class ModuleFonts;
 class ModuleStore;
 class ModuleDebugInfo;
 
-#define NUM_MODULES 18
+#define NUM_MODULES 19
 
 class Application {
 
@@ -43,6 +44,7 @@ public:
 	ModulePlayer* player = nullptr;
 	ModuleInitialScreen* initialScreen = nullptr;
 	ModuleStartScreen* startScreen = nullptr;
+	ModuleLooseScreen* looseScreen = nullptr;
 	ModuleWinScreen* winScreen = nullptr;
 	ModuleParticles* particles = nullptr;
 	ModuleCollisions* collisions = nullptr;

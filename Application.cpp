@@ -9,6 +9,7 @@
 #include "ModuleInitialScreen.h"
 #include "ModuleWinScreen.h"
 #include "ModuleStartScreen.h"
+#include "ModuleLooseScreen.h"
 #include "ModuleHUD.h"
 #include "ModuleCollisions.h"
 #include "ModuleFadeToBlack.h"
@@ -28,6 +29,7 @@ Application::Application() {
 	
 	modules[i++] = initialScreen = new ModuleInitialScreen(true);
 	modules[i++] = startScreen = new ModuleStartScreen(false);
+	modules[i++] = looseScreen = new ModuleLooseScreen(false);
 	modules[i++] = store = new ModuleStore(false);
 	modules[i++] = lvl2 = new ModuleLevel2(false);
 	modules[i++] = winScreen = new ModuleWinScreen(false);
