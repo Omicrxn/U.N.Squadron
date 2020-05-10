@@ -19,8 +19,7 @@ public:
 
 private:
 	SDL_Texture* tex = nullptr;
-	SDL_Rect gameOverTitle;
-	SDL_Rect endTitle;
+	SDL_Rect screen;
 	Animation plane_anim;
 	Animation* current_anim = nullptr;
 };
