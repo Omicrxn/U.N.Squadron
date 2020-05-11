@@ -48,9 +48,10 @@ While at the moment Capcom was developing vertically scrolling shooters, U.N.Squ
 |-------|--------|
 |Display Collisions|F1|
 |Mute Background Music|F2|
-|Jump Screens|F3|
+|Jump Between Screens|F3|
 |Direct Win|F4|
 |God Mode|F5|
-|Debug Information|F6|
-|Traverse Modules Information|F7|
+|Resources Information|F6|
+|Traverse Resources Information|F7|
+|Gamepad Information|F8|
 |Maximize / Resize|F11|
