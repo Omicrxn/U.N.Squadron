@@ -86,8 +86,6 @@ bool ModuleStore::Start() {
 	rows = 0;
 	columns = 0;
 
-	App->fonts->Enable();
-
 	return ret;
 }
 

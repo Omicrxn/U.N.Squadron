@@ -65,7 +65,6 @@ public:
 	bool ShakeController(int id, int duration, float strength = 0.5f);
 	const char* GetControllerName(int id) const;
 
-
 	key_state keyboard[MAX_KEYS];
 
 	// An array to fill in all detected gamepads

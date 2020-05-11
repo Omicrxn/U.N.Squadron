@@ -9,7 +9,8 @@
 
 #include "ModuleLevel2.h"
 ModuleLooseScreen::ModuleLooseScreen(bool startEnabled) : Module(startEnabled) {
-
+	name = "Loose S";
+	
 	// Screen rect
 	screen = { 0, 0, 256, 244 };
 }
@@ -21,12 +22,10 @@ bool ModuleLooseScreen::Start() {
 
 	// Destroyed plane animation
 
-
 	tex = App->textures->Load("Assets/sprites/menus/Loose_Screen/LooseScreen1.png");
 	if (tex == nullptr) {
 		ret = false;
 	}
-
 	++activeTextures; ++totalTextures;
 
 	App->render->camera.x = 0;
@@ -42,7 +41,6 @@ update_status ModuleLooseScreen::Update() {
 	update_status ret = update_status::UPDATE_CONTINUE;
 
 	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN) {
-		
 		App->transition->FadeToBlack(this, (Module*)App->startScreen, 60);
 	}
 

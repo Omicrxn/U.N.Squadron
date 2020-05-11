@@ -35,8 +35,14 @@ public:
 	// Displays the active and total resources from the selected module
 	void DrawModuleResources(Module* module);
 
+	// Draws gamepad debug info in the screen
+	void DrawGamepadInfo();
+
 public:
 	bool debugMemLeaks = false;
+
+	// Debugdraw for gamepad data
+	bool debugGamepadInfo = false;
 
 private:
 	Module* inspectedModule = nullptr;

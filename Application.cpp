@@ -43,7 +43,7 @@ Application::Application() {
 	
 
 	modules[i++] = transition = new ModuleFadeToBlack(true);
-	modules[i++] = fonts = new ModuleFonts(false);
+	modules[i++] = fonts = new ModuleFonts(true);
 	modules[i++] = debugInfo = new ModuleDebugInfo(true);
 	modules[i++] = render = new ModuleRenderer(true);
 }

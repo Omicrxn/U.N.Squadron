@@ -25,14 +25,8 @@ public:
 	// Collision callback, called when the player intersects with another collider
 	void OnCollision(Collider* c1, Collider* c2) override;
 
-	// Draws gamepad debug info in the screen
-	void DebugDrawGamepadInfo();
-
 	// A flag to detect when the player has been destroyed
 	bool destroyed = false;
-
-	// Debugdraw for gamepad data
-	bool debugGamepadInfo = false;
 
 	// Sound effects indices
 	uint shootFx = 0;
@@ -57,7 +51,7 @@ private:
 	Animation* current_anim = nullptr;
 	Animation playerAnim;
 	SDL_Rect rectAnim;
-	int maxFuel =8,currentFuel=8,playerLifes=3;
+	int maxFuel = 8, currentFuel = 8, playerLifes = 3;
 	bool godMode;
 };
 

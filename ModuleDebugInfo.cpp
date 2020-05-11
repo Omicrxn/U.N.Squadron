@@ -14,7 +14,9 @@
 #include "SDL2/include/SDL.h"
 #include <stdio.h>
 
-ModuleDebugInfo::ModuleDebugInfo(bool startEnabled) : Module(startEnabled)
+#define DebugModules 8
+
+ModuleDebugInfo::ModuleDebugInfo(bool startEnabled) : Module(startEnabled) 
 {
 	name = "Debug Info";
 }
@@ -24,14 +26,16 @@ ModuleDebugInfo::~ModuleDebugInfo() {}
 bool ModuleDebugInfo::Start() 
 {
 	debugFont = App->fonts->Load("Assets/Fonts/FontY.png", App->HUD->lookupTable, 5);
-	++totalFonts;
+	++totalFonts; ++activeFonts;
 
 	return true;
 }
 
 bool ModuleDebugInfo::CleanUp() 
 {
-	// Unload debug font!
+	// Unload debug font
+	activeFonts = 0;
+
 	App->fonts->UnLoad(debugFont);
 	--totalFonts;
 
@@ -40,36 +44,38 @@ bool ModuleDebugInfo::CleanUp()
 
 update_status ModuleDebugInfo::Update() 
 {
-	if (App->input->keyboard[SDL_SCANCODE_F6] == KEY_DOWN) {
+	if (App->input->keyboard[SDL_SCANCODE_F6] == KEY_DOWN && !debugGamepadInfo) {
 		debugMemLeaks = !debugMemLeaks;
-		counterModules = 0;
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_F7] == KEY_DOWN && counterModules <= 6) {
+	if (App->input->keyboard[SDL_SCANCODE_F7] == KEY_DOWN && counterModules <= DebugModules && debugMemLeaks) {
 		++counterModules;
 	}
 
 	if (counterModules == 1)
 		inspectedModule = (Module*)App->player;
-
-	if (counterModules == 2)
+	else if (counterModules == 2)
 		inspectedModule = (Module*)App->lvl2;
-
-	if (counterModules == 3)
+	else if (counterModules == 3)
 		inspectedModule = (Module*)App->store;
-
-	if (counterModules == 4)
+	else if (counterModules == 4)
 		inspectedModule = (Module*)App->startScreen;
-
-	if (counterModules == 5)
+	else if (counterModules == 5)
 		inspectedModule = (Module*)App->initialScreen;
-
-	if (counterModules == 6)
+	else if (counterModules == 6)
 		inspectedModule = (Module*)App->winScreen;
+	else if (counterModules == 7)
+		inspectedModule = (Module*)App->looseScreen;
+	else if (counterModules == 8)
+		inspectedModule = (Module*)App->debugInfo;
 
-	if (counterModules == 6 && App->input->keyboard[SDL_SCANCODE_F7] == KEY_DOWN) {
+	if (App->input->keyboard[SDL_SCANCODE_F7] == KEY_DOWN && counterModules == DebugModules && debugMemLeaks) {
 		counterModules = 0;
 	}
+
+	// Switch gamepad debug info
+	if (App->input->keyboard[SDL_SCANCODE_F8] == KEY_DOWN && !debugMemLeaks)
+		debugGamepadInfo = !debugGamepadInfo;
 
 	return update_status::UPDATE_CONTINUE;
 }
@@ -107,6 +113,8 @@ update_status ModuleDebugInfo::PostUpdate()
 			DrawModuleResources(inspectedModule);
 		}
 	}
+	else if (debugGamepadInfo)
+		DrawGamepadInfo();
 
 	return update_status::UPDATE_CONTINUE;
 }
@@ -130,4 +138,53 @@ void ModuleDebugInfo::DrawModuleResources(Module* module)
 
 	sprintf_s(debugText, 150, "colliders         %i      %i", module->activeColliders, module->totalColliders);
 	App->fonts->BlitText(25, 195, debugFont, debugText);
+}
+
+void ModuleDebugInfo::DrawGamepadInfo() {
+	GamePad& pad = App->input->pads[0];
+
+	sprintf_s(debugText, 150, "Pad 0 %s", (pad.enabled) ? "plugged" : "not detected");
+	App->fonts->BlitText(5, 10, debugFont, debugText);
+
+	sprintf_s(debugText, 150, "Buttons %s %s %s %s %s %s %s %s %s %s %s",
+		(pad.a) ? "A" : "",
+		(pad.b) ? "B" : "",
+		(pad.x) ? "X" : "",
+		(pad.y) ? "Y" : "",
+		(pad.start) ? "START" : "",
+		(pad.back) ? "BACK" : "",
+		(pad.guide) ? "Guide" : "",
+		(pad.l1) ? "LB" : "",
+		(pad.r1) ? "RB" : "",
+		(pad.l3) ? "L3" : "",
+		(pad.r3) ? "R3" : ""
+	);
+
+	App->fonts->BlitText(5, 20, debugFont, debugText);
+
+	sprintf_s(debugText, 150, "Dpad %s %s %s %s",
+		(pad.up) ? "Up" : "",
+		(pad.down) ? "Down" : "",
+		(pad.left) ? "Left" : "",
+		(pad.right) ? "Right" : ""
+	);
+
+	App->fonts->BlitText(5, 30, debugFont, debugText);
+
+	sprintf_s(debugText, 150, "Left trigger  %0.2f", pad.l2);
+	App->fonts->BlitText(5, 40, debugFont, debugText);
+	sprintf_s(App->HUD->scoreText, 150, "Right trigger %0.2f", pad.r2);
+	App->fonts->BlitText(5, 50, debugFont, debugText);
+
+	sprintf_s(App->HUD->scoreText, 150, "Left thumb    %.2fx, %0.2fy", pad.l_x, pad.l_y);
+	App->fonts->BlitText(5, 60, debugFont, debugText);
+
+	sprintf_s(App->HUD->scoreText, 150, "   Deadzone   %0.2f", pad.l_dz);
+	App->fonts->BlitText(5, 70, debugFont, debugText);
+
+	sprintf_s(App->HUD->scoreText, 150, "Right thumb   %.2fx, %0.2fy", pad.r_x, pad.r_y);
+	App->fonts->BlitText(5, 80, debugFont, debugText);
+
+	sprintf_s(App->HUD->scoreText, 150, "   Deadzone   %0.2f", pad.r_dz);
+	App->fonts->BlitText(5, 90, debugFont, debugText);
 }

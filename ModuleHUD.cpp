@@ -65,7 +65,7 @@ update_status ModuleHUD::PostUpdate() {
 	sprintf_s(moneyText, 10, "%7d", money);
 	sprintf_s(lifesText, 10, "%d", App->player->GetLifes());
 
-	if (!App->debugInfo->debugMemLeaks) {
+	if (!App->debugInfo->debugMemLeaks && !App->debugInfo->debugGamepadInfo) {
 		//Blit images
 		App->render->Blit(tex, 71, 6, &playerFace.GetCurrentFrame(), 1, false);
 		App->render->Blit(tex, 190, 15, &powSquare, 1, false);

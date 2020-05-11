@@ -9,6 +9,7 @@
 #include "ModuleLevel2.h"
 #include "ModuleWinScreen.h"
 #include "ModuleStore.h"
+#include "ModuleLooseScreen.h"
 #include "SDL.h"
 
 ModuleInput::ModuleInput(bool startEnabled) : Module(startEnabled) {
@@ -16,6 +17,7 @@ ModuleInput::ModuleInput(bool startEnabled) : Module(startEnabled) {
 
 	for (uint i = 0; i < MAX_KEYS; ++i)
 		keyboard[i] = KEY_IDLE;
+
 	memset(&pads[0], 0, sizeof(GamePad) * MAX_PADS);
 }
 
@@ -74,7 +76,7 @@ update_status ModuleInput::PreUpdate() {
 	}
 
 	// CHECKS IF WINDOW X IS CLICKED TO CLOSE OR MAXIMIZE SCREEN
-	// Read new SDL events
+	// Read new SDL events and Gamepad connection / removal
 	SDL_Event event;
 	while (SDL_PollEvent(&event)) {
 		if (event.type == SDL_QUIT) {
@@ -100,17 +102,6 @@ update_status ModuleInput::PreUpdate() {
 		App->audio->MuteMusic();
 	}
 
-	// F11 to full screen
-	if (keyboard[SDL_SCANCODE_F11] == KEY_DOWN) {
-		if (maximized) {
-			SDL_RestoreWindow(App->window->sdlWindow);
-		}
-		else {
-			SDL_MaximizeWindow(App->window->sdlWindow);
-		}
-		maximized = !maximized;
-	}
-	
 	// Debug functionality to jump screens
 	if (keyboard[SDL_SCANCODE_F3] == KEY_DOWN) {
 		if (App->initialScreen->IsEnabled()) {
@@ -128,6 +119,9 @@ update_status ModuleInput::PreUpdate() {
 		else if (App->winScreen->IsEnabled()) {
 			App->transition->FadeToBlack((Module*)App->winScreen, (Module*)App->startScreen, 60);
 		}
+		else if (App->looseScreen->IsEnabled()) {
+			App->transition->FadeToBlack((Module*)App->looseScreen, (Module*)App->startScreen, 60);
+		}
 	}
 
 	// Debug functionality to Win Screen
@@ -137,6 +131,17 @@ update_status ModuleInput::PreUpdate() {
 		}
 	}
 
+	// F11 to full screen
+	if (keyboard[SDL_SCANCODE_F11] == KEY_DOWN) {
+		if (maximized) {
+			SDL_RestoreWindow(App->window->sdlWindow);
+		}
+		else {
+			SDL_MaximizeWindow(App->window->sdlWindow);
+		}
+		maximized = !maximized;
+	}
+	
 	UpdateGamepadsInput();
 
 	return update_status:: UPDATE_CONTINUE;
@@ -258,7 +263,7 @@ bool ModuleInput::ShakeController(int id, int duration, float strength) {
 	}
 	else {
 		SDL_HapticRumbleStop(pad.haptic);
-		SDL_HapticRumblePlay(pad.haptic, strength, duration / 60 * 1000); //Conversion from frames to ms at 60FPS
+		SDL_HapticRumblePlay(pad.haptic, strength, duration / 60 * 1000); // Conversion from frames to ms at 60FPS
 
 		pad.rumble_countdown = duration;
 		pad.rumble_strength = strength;
