@@ -196,7 +196,7 @@ bool ModulePlayer::CleanUp() {
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 	// Detect collision with a bullet or an enemy. If so, disappear and explode.
 	if (c1 == collider && destroyed == false) {
-		if (currentFuel > 1) {
+		if (currentFuel > 0) {
 			currentFuel--;
 		}
 		else {

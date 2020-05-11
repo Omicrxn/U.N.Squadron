@@ -55,7 +55,6 @@ update_status ModuleHUD::Update() {
 	update_status ret = UPDATE_CONTINUE;
 	
 	fuelQuantity.w = 62 *App->player->GetCurrentFuel()/App->player->GetMaxFuel();
-
 	return ret;
 }
 update_status ModuleHUD::PostUpdate() {
