@@ -27,7 +27,6 @@ private:
 	Uint32 startTime;
 	Uint32 endTime;
 	Uint32 actualTime;
-	
 };
 #endif
 

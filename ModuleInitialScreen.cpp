@@ -6,13 +6,15 @@
 #include "ModuleInput.h"
 #include "ModuleAudio.h"
 #include "ModuleStartScreen.h"
+#include "ModuleFonts.h"
+#include "ModuleHUD.h"
 
 ModuleInitialScreen::ModuleInitialScreen(bool startEnabled) : Module(startEnabled) {
 	name = "Initial S";
 	
 	// Screen rect
 	logo = { 0,0,256,224 };
-	screen = { 0,0,SCREEN_WIDTH * 3,SCREEN_HEIGHT * 3 };
+	screen = { 0,0,SCREEN_WIDTH * SCREEN_SIZE,SCREEN_HEIGHT * SCREEN_SIZE };
 
 	startTime = 0;
 }
