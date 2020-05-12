@@ -48,31 +48,33 @@ update_status ModuleDebugInfo::Update()
 		debugMemLeaks = !debugMemLeaks;
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_F7] == KEY_DOWN && counterModules <= DebugModules && debugMemLeaks) {
-		++counterModules;
+	if (debugMemLeaks) {
+		if (App->input->keyboard[SDL_SCANCODE_F7] == KEY_DOWN && counterModules <= DebugModules) {
+			++counterModules;
+		}
+
+		if (counterModules == 1)
+			inspectedModule = (Module*)App->player;
+		else if (counterModules == 2)
+			inspectedModule = (Module*)App->lvl2;
+		else if (counterModules == 3)
+			inspectedModule = (Module*)App->store;
+		else if (counterModules == 4)
+			inspectedModule = (Module*)App->startScreen;
+		else if (counterModules == 5)
+			inspectedModule = (Module*)App->initialScreen;
+		else if (counterModules == 6)
+			inspectedModule = (Module*)App->winScreen;
+		else if (counterModules == 7)
+			inspectedModule = (Module*)App->looseScreen;
+		else if (counterModules == 8)
+			inspectedModule = (Module*)App->debugInfo;
+
+		if (App->input->keyboard[SDL_SCANCODE_F7] == KEY_DOWN && counterModules == DebugModules) {
+			counterModules = 0;
+		}
 	}
-
-	if (counterModules == 1)
-		inspectedModule = (Module*)App->player;
-	else if (counterModules == 2)
-		inspectedModule = (Module*)App->lvl2;
-	else if (counterModules == 3)
-		inspectedModule = (Module*)App->store;
-	else if (counterModules == 4)
-		inspectedModule = (Module*)App->startScreen;
-	else if (counterModules == 5)
-		inspectedModule = (Module*)App->initialScreen;
-	else if (counterModules == 6)
-		inspectedModule = (Module*)App->winScreen;
-	else if (counterModules == 7)
-		inspectedModule = (Module*)App->looseScreen;
-	else if (counterModules == 8)
-		inspectedModule = (Module*)App->debugInfo;
-
-	if (App->input->keyboard[SDL_SCANCODE_F7] == KEY_DOWN && counterModules == DebugModules && debugMemLeaks) {
-		counterModules = 0;
-	}
-
+	
 	// Switch gamepad debug info
 	if (App->input->keyboard[SDL_SCANCODE_F8] == KEY_DOWN && !debugMemLeaks)
 		debugGamepadInfo = !debugGamepadInfo;

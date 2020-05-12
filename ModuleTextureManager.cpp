@@ -22,7 +22,7 @@ bool ModuleTextureManager::Init() {
 	LOG("Initializing Image Library");
 	bool ret = true;
 
-	//initializing PNG support
+	// Initializing PNG support
 	int flags = IMG_INIT_PNG;
 	int init = IMG_Init(flags);
 	if ((init & flags) != flags) {
@@ -32,7 +32,7 @@ bool ModuleTextureManager::Init() {
 	return ret;
 }
 
-//Called before quitting
+// Called before quitting
 bool ModuleTextureManager::CleanUp() {
 	LOG("Freeing textures and Image library");
 
@@ -40,6 +40,7 @@ bool ModuleTextureManager::CleanUp() {
 		if (textures[i] != nullptr) {
 			SDL_DestroyTexture(textures[i]);
 			textures[i] = nullptr;
+			--texturesCount;
 		}
 
 	IMG_Quit();
