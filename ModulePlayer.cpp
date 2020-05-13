@@ -203,13 +203,18 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 			currentFuel--;
 		}
 		else {
-			if (playerLifes > 1) {
-				playerLifes--;
-			}
+			
 			
 			App->particles->AddParticle(App->particles->explosion, position.x, position.y, Collider::Type::NONE, 9);
 
-			App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->looseScreen, 60);
+			if (playerLifes > 1) {
+				playerLifes--;
+				App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->startScreen, 60);
+
+			}
+			else {
+				App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->looseScreen, 60);
+			}
 
 			//Playing explosion sound effect
 			App->audio->PlayFx(3, 0);

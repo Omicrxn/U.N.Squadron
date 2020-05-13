@@ -26,7 +26,7 @@ private:
 	SDL_Texture* tex = nullptr;
 	SDL_Rect title;
 	SDL_Rect text;
-	SDL_Rect selector;
+	Animation selector;
 	Animation unicorn_anim;
 	Animation* current_anim = nullptr;
 	iPoint selectorPos;
