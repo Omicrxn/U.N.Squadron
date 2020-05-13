@@ -31,7 +31,7 @@ bool ModuleStartScreen::Start() {
 
 	// selector rect
 	selector.PushBack({ 236,240,13,16 });
-	
+	selector.PushBack({ 236,300,13,16 });
 	selector.speed = 0.2f;
 
 
@@ -82,7 +82,7 @@ update_status ModuleStartScreen::Update(){
 		
 		switch (selectorPos.y) {
 		case 116: {
-			selector.PushBack({ 236,300,13,16 });
+			blink = true;
 			App->audio->PlayFx(1, 0);
 			if (selector.Finished()) {
 				App->transition->FadeToBlack(this, (Module*)App->store, 60);
@@ -96,6 +96,13 @@ update_status ModuleStartScreen::Update(){
 			break;
 		}
 	}
+	
+	if (blink) {
+		rect = selector.GetCurrentFrame();
+	}
+	else {
+		rect = selector.GetFrame(0);
+	}
 
 	return ret;
 }
@@ -103,10 +110,10 @@ update_status ModuleStartScreen::Update(){
 update_status ModuleStartScreen::PostUpdate() {
 	update_status ret = UPDATE_CONTINUE;
 
-	SDL_Rect rect = current_anim->GetCurrentFrame();
+	 
 
 	// Blit unicorn
-	if (!App->render->Blit(tex, 81, 50, &rect, 1, false)) {
+	if (!App->render->Blit(tex, 81, 50, &unicorn_anim.GetCurrentFrame(), 1, false)) {
 		ret = UPDATE_ERROR;
 	}
 
@@ -121,7 +128,7 @@ update_status ModuleStartScreen::PostUpdate() {
 	}
 
 	// Blit selector
-	if (!App->render->Blit(tex, selectorPos.x, selectorPos.y, &selector.GetCurrentFrame(), 1, false)) {
+	if (!App->render->Blit(tex, selectorPos.x, selectorPos.y, &rect, 1, false)) {
 		ret = UPDATE_ERROR;
 	}
 

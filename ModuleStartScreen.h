@@ -30,5 +30,7 @@ private:
 	Animation unicorn_anim;
 	Animation* current_anim = nullptr;
 	iPoint selectorPos;
+	SDL_Rect rect;
+	bool blink = false;
 };
 #endif
