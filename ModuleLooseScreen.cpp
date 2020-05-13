@@ -20,8 +20,6 @@ ModuleLooseScreen::~ModuleLooseScreen() {}
 bool ModuleLooseScreen::Start() {
 	bool ret = true;
 
-	// Destroyed plane animation
-
 	tex = App->textures->Load("Assets/sprites/menus/Loose_Screen/LooseScreen1.png");
 	if (tex == nullptr) {
 		ret = false;
