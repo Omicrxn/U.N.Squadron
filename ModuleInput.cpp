@@ -9,7 +9,7 @@
 #include "ModuleLevel2.h"
 #include "ModuleWinScreen.h"
 #include "ModuleStore.h"
-#include "ModuleLooseScreen.h"
+#include "ModuleLoseScreen.h"
 #include "SDL.h"
 
 ModuleInput::ModuleInput(bool startEnabled) : Module(startEnabled) {
@@ -119,8 +119,8 @@ update_status ModuleInput::PreUpdate() {
 		else if (App->winScreen->IsEnabled()) {
 			App->transition->FadeToBlack((Module*)App->winScreen, (Module*)App->startScreen, 60);
 		}
-		else if (App->looseScreen->IsEnabled()) {
-			App->transition->FadeToBlack((Module*)App->looseScreen, (Module*)App->startScreen, 60);
+		else if (App->loseScreen->IsEnabled()) {
+			App->transition->FadeToBlack((Module*)App->loseScreen, (Module*)App->startScreen, 60);
 		}
 	}
 

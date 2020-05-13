@@ -5,7 +5,7 @@
 #include "ModuleParticles.h"
 #include "ModuleRenderer.h"
 #include "ModuleStartScreen.h"
-#include "ModuleLooseScreen.h"
+#include "ModuleLoseScreen.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleAudio.h"
 #include "ModuleFonts.h"
@@ -203,8 +203,6 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 			currentFuel--;
 		}
 		else {
-			
-			
 			App->particles->AddParticle(App->particles->explosion, position.x, position.y, Collider::Type::NONE, 9);
 
 			if (playerLifes > 1) {
@@ -213,7 +211,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 
 			}
 			else {
-				App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->looseScreen, 60);
+				App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->loseScreen, 60);
 			}
 
 			//Playing explosion sound effect

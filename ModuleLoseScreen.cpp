@@ -1,4 +1,4 @@
-#include "ModuleLooseScreen.h"
+#include "ModuleLoseScreen.h"
 #include "Application.h"
 #include "ModuleTextureManager.h"
 #include "ModuleFadeToBlack.h"
@@ -8,19 +8,20 @@
 #include "ModuleStartScreen.h"
 
 #include "ModuleLevel2.h"
-ModuleLooseScreen::ModuleLooseScreen(bool startEnabled) : Module(startEnabled) {
-	name = "Loose S";
+
+ModuleLoseScreen::ModuleLoseScreen(bool startEnabled) : Module(startEnabled) {
+	name = "Lose S";
 	
 	// Screen rect
 	screen = { 0, 0, 256, 244 };
 }
 
-ModuleLooseScreen::~ModuleLooseScreen() {}
+ModuleLoseScreen::~ModuleLoseScreen() {}
 
-bool ModuleLooseScreen::Start() {
+bool ModuleLoseScreen::Start() {
 	bool ret = true;
 
-	tex = App->textures->Load("Assets/sprites/menus/Loose_Screen/LooseScreen1.png");
+	tex = App->textures->Load("Assets/sprites/menus/Lose_Screen/LoseScreen1.png");
 	if (tex == nullptr) {
 		ret = false;
 	}
@@ -29,13 +30,13 @@ bool ModuleLooseScreen::Start() {
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
 
-	// Playing loose audio
+	// Playing lose audio
 	App->audio->PlayMusic("Assets/music/events/thankyouforplaying(youarecrazy).wav");
 
 	return ret;
 }
 
-update_status ModuleLooseScreen::Update() {
+update_status ModuleLoseScreen::Update() {
 	update_status ret = update_status::UPDATE_CONTINUE;
 
 	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN) {
@@ -45,7 +46,7 @@ update_status ModuleLooseScreen::Update() {
 	return ret;
 }
 
-update_status ModuleLooseScreen::PostUpdate() {
+update_status ModuleLoseScreen::PostUpdate() {
 	update_status ret = UPDATE_CONTINUE;
 
 	// Blit
@@ -56,7 +57,7 @@ update_status ModuleLooseScreen::PostUpdate() {
 	return ret;
 }
 
-bool ModuleLooseScreen::CleanUp() {
+bool ModuleLoseScreen::CleanUp() {
 	bool ret = true;
 
 	activeTextures = 0;

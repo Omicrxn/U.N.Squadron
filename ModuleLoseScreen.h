@@ -6,11 +6,11 @@
 #include "Animation.h"
 
 struct SDL_Texture;
-class ModuleLooseScreen : public Module
+class ModuleLoseScreen : public Module
 {
 public:
-	ModuleLooseScreen(bool startEnabled);
-	~ModuleLooseScreen();
+	ModuleLoseScreen(bool startEnabled);
+	~ModuleLoseScreen();
 
 	bool Start();
 	update_status Update();

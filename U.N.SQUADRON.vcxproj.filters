@@ -94,7 +94,7 @@
     <ClCompile Include="ModuleDebugInfo.cpp">
       <Filter>Source Files\Modules\Core</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleLooseScreen.cpp">
+    <ClCompile Include="ModuleLoseScreen.cpp">
       <Filter>Source Files\Modules\Gameplay</Filter>
     </ClCompile>
   </ItemGroup>
@@ -199,7 +199,7 @@
     <ClInclude Include="ModuleDebugInfo.h">
       <Filter>Source Files\Modules\Core</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleLooseScreen.h">
+    <ClInclude Include="ModuleLoseScreen.h">
       <Filter>Source Files\Modules\Gameplay</Filter>
     </ClInclude>
   </ItemGroup>

@@ -55,6 +55,8 @@ private:
 
 	// The amount of fonts loaded into the array
 	uint fontsCount = 0;
+
+	SDL_Texture* tex;
 };
 
 

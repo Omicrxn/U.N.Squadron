@@ -15,7 +15,7 @@ class ModuleLevel2;
 class ModuleParticles;
 class ModuleInitialScreen;
 class ModuleStartScreen;
-class ModuleLooseScreen;
+class ModuleLoseScreen;
 class ModuleFadeToBlack;
 class ModuleCollisions;
 class ModuleRenderer;
@@ -35,8 +35,8 @@ public:
 	~Application();
 
 	Module* modules[NUM_MODULES];
-	ModuleWindow* window = nullptr;
 
+	ModuleWindow* window = nullptr;
 	ModuleInput* input = nullptr;
 	ModuleTextureManager* textures = nullptr;
 	ModuleAudio* audio = nullptr;
@@ -44,7 +44,7 @@ public:
 	ModulePlayer* player = nullptr;
 	ModuleInitialScreen* initialScreen = nullptr;
 	ModuleStartScreen* startScreen = nullptr;
-	ModuleLooseScreen* looseScreen = nullptr;
+	ModuleLoseScreen* loseScreen = nullptr;
 	ModuleWinScreen* winScreen = nullptr;
 	ModuleParticles* particles = nullptr;
 	ModuleCollisions* collisions = nullptr;

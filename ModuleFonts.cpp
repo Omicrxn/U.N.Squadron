@@ -27,7 +27,7 @@ int ModuleFonts::Load(const char* texture_path, const char* characters, uint row
 		return id;
 	}
 
-	SDL_Texture* tex = App->textures->Load(texture_path);
+	tex = App->textures->Load(texture_path);
 
 	if (tex == nullptr || strlen(characters) >= MAX_FONT_CHARS)
 	{
