@@ -24,6 +24,9 @@ public:
 	int yellowFont = -1;
 	int greenFont = -1;
 
+	// Sound effects indices
+	uint chooseFx = 0;
+
 private:
 	SDL_Texture* tex = nullptr;
 	SDL_Texture* tex2 = nullptr;

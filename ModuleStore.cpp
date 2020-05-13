@@ -31,21 +31,6 @@ ModuleStore::~ModuleStore() {}
 
 bool ModuleStore::Start() {
 	bool ret = true;
-	
-	// Unicorn Animation
-	/*unicorn_anim.PushBack({ 5,2,112,160 });
-	unicorn_anim.PushBack({ 122,2,120,160 });
-	unicorn_anim.PushBack({ 248,2,120,160 });
-	unicorn_anim.speed = 0.1f;*/
-
-	// Title rect
-	/*title = { 235,165,236,67 };*/
-	
-	// Text rect
-	/*text = { 2,168,216,128 };*/
-	
-	// Selector rect
-	/*selector = { 236,240,13,16 };*/
 
 	// Background rect
 	background = { 0,0,SCREEN_WIDTH, SCREEN_HEIGHT };
@@ -69,13 +54,9 @@ bool ModuleStore::Start() {
 
 	selectorPos = { 9,120 };
 
-	/*if (current_anim != &unicorn_anim) {
-		current_anim = &unicorn_anim;
-		unicorn_anim.Reset();
-	}*/
-
-	// Playing opening music
-	/*App->audio->PlayMusic("Assets/music/soundtrack/opening.ogg");*/
+	// Load choose option sound
+	chooseFx = App->audio->LoadFx("Assets/music/events/chooseoption.wav");
+	++activeFx; ++totalFx;
 
 	// Loading the font to print text on screen
 	yellowFont = App->fonts->Load("Assets/Fonts/FontY.png", App->HUD->lookupTable, 5);
@@ -128,24 +109,6 @@ update_status ModuleStore::Update() {
 
 update_status ModuleStore::PostUpdate() {
 	update_status ret = UPDATE_CONTINUE;
-	/*SDL_Rect rect = current_anim->GetCurrentFrame();*/
-
-	//blit unicorn
-	//if (!App->render->Blit(tex, 81, 50, &rect, 1, false)) {
-	//	ret = UPDATE_ERROR;
-	//}
-	//blit title
-	//if (!App->render->Blit(tex, 11, 16, &title, 1, false)) {
-	//	ret = UPDATE_ERROR;
-	//}
-	//blit text
-	//if (!App->render->Blit(tex, 24, 87, &text, 1, false)) {
-	//	ret = UPDATE_ERROR;
-	//}
-	//blit selector
-	//if (!App->render->Blit(tex, selectorPos.x, selectorPos.y, &selector, 1, false)) {
-	//	ret = UPDATE_ERROR;
-	//}
 
 	//Blit background
 	if (!App->render->Blit(tex, 0, 0, &background, 1, false))
@@ -194,6 +157,9 @@ bool ModuleStore::CleanUp() {
 	--totalFonts;
 
 	App->audio->StopMusic();
+
+	App->audio->UnloadFx(chooseFx);
+	--totalFx;
 
 	return ret;
 }
