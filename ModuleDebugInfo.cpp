@@ -14,7 +14,7 @@
 #include "SDL2/include/SDL.h"
 #include <stdio.h>
 
-#define DebugModules 8
+#define DebugModules 9
 
 ModuleDebugInfo::ModuleDebugInfo(bool startEnabled) : Module(startEnabled) 
 {
@@ -56,18 +56,20 @@ update_status ModuleDebugInfo::Update()
 		if (counterModules == 1)
 			inspectedModule = (Module*)App->player;
 		else if (counterModules == 2)
-			inspectedModule = (Module*)App->lvl2;
+			inspectedModule = (Module*)App->enemies;
 		else if (counterModules == 3)
-			inspectedModule = (Module*)App->store;
+			inspectedModule = (Module*)App->lvl2;
 		else if (counterModules == 4)
-			inspectedModule = (Module*)App->startScreen;
+			inspectedModule = (Module*)App->store;
 		else if (counterModules == 5)
-			inspectedModule = (Module*)App->initialScreen;
+			inspectedModule = (Module*)App->startScreen;
 		else if (counterModules == 6)
-			inspectedModule = (Module*)App->winScreen;
+			inspectedModule = (Module*)App->initialScreen;
 		else if (counterModules == 7)
-			inspectedModule = (Module*)App->looseScreen;
+			inspectedModule = (Module*)App->winScreen;
 		else if (counterModules == 8)
+			inspectedModule = (Module*)App->looseScreen;
+		else if (counterModules == 9)
 			inspectedModule = (Module*)App->debugInfo;
 
 		if (App->input->keyboard[SDL_SCANCODE_F7] == KEY_DOWN && counterModules == DebugModules) {

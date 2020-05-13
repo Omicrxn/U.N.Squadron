@@ -33,10 +33,14 @@ ModuleEnemies::~ModuleEnemies()
 bool ModuleEnemies::Start()
 {
 	texture = App->textures->Load("Assets/sprites/enemies/UNSquadronSheet9.gif ");
+	++activeTextures; ++totalTextures;
+
 	enemyDestroyedFx = App->audio->LoadFx("Assets/music/explosion.wav");
+	++activeFx; ++totalFx;
 
 	return true;
 }
+
 update_status ModuleEnemies::PreUpdate()
 {
 	// Remove all enemies scheduled for deletion
@@ -90,6 +94,17 @@ bool ModuleEnemies::CleanUp()
 			enemies[i] = nullptr;
 		}
 	}
+
+	activeTextures = activeFx = 0;
+
+	if (!App->textures->Unload(texture)) {
+		LOG("Start Screen -> Error unloading the texture.");
+		return false;
+	}
+	--totalTextures;
+
+	App->audio->UnloadFx(enemyDestroyedFx);
+	--totalFx;
 
 	return true;
 }
