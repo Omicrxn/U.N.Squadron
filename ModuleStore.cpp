@@ -51,23 +51,23 @@ bool ModuleStore::Start() {
 	background = { 0,0,SCREEN_WIDTH, SCREEN_HEIGHT };
 
 	// Selector rect
-	selector = { 209,82,54,64 };
+	selector = { 0,0,45,53 };
 
 	// Loading the background texture
-	tex = App->textures->Load("Assets/sprites/menus/shop/store.png");
+	tex = App->textures->Load("Assets/sprites/menus/shop/store.jpg");
 	if (tex == nullptr) {
 		ret = false;
 	}
 	++activeTextures; ++totalTextures;
 
 	// Loading the items texture
-	tex2 = App->textures->Load("Assets/sprites/menus/shop/items.png");
+	tex2 = App->textures->Load("Assets/sprites/menus/shop/selectionweapon.png");
 	if (tex2 == nullptr) {
 		ret = false;
 	}
 	++activeTextures; ++totalTextures;
 
-	selectorPos = { 5,115 };
+	selectorPos = { 9,120 };
 
 	/*if (current_anim != &unicorn_anim) {
 		current_anim = &unicorn_anim;
@@ -93,26 +93,22 @@ update_status ModuleStore::Update() {
 	update_status ret = update_status::UPDATE_CONTINUE;
 
 	//Hanging the control of the selector
-	if ((App->input->keyboard[SDL_SCANCODE_W] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_UP] == KEY_DOWN)
-		&& selectorPos.y > 115 && rows > 0) {
-		selectorPos.y -= 50;
+	if ((App->input->keyboard[SDL_SCANCODE_W] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_UP] == KEY_DOWN) && rows > 0) {
+		selectorPos.y -= 48;
 		rows--;
 		App->audio->PlayFx(0, 0);
 	}
-	if ((App->input->keyboard[SDL_SCANCODE_S] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_DOWN)
-		&& selectorPos.y < 165 && rows < 1) {
-		selectorPos.y += 50;
+	if ((App->input->keyboard[SDL_SCANCODE_S] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_DOWN) && rows < 1) {
+		selectorPos.y += 48;
 		rows++;
 		App->audio->PlayFx(0, 0);
 	}
-	if ((App->input->keyboard[SDL_SCANCODE_A] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_DOWN)
-		&& selectorPos.x > 5 && columns > 0) {
+	if ((App->input->keyboard[SDL_SCANCODE_A] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_DOWN) && columns > 0) {
 		selectorPos.x -= 40;
 		columns--;
 		App->audio->PlayFx(0, 0);
 	}
-	if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_DOWN)
-		&& selectorPos.x < 200 && columns < 5) {
+	if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_DOWN) && columns < 5) {
 		selectorPos.x += 40;
 		columns++;
 		App->audio->PlayFx(0, 0);
