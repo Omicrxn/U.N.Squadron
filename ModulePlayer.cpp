@@ -199,6 +199,8 @@ bool ModulePlayer::CleanUp() {
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 	// Detect collision with a bullet or an enemy. If so, disappear and explode.
 	if (c1 == collider && destroyed == false) {
+		//SDL_SetTextureColorMod(texture, 450, 450, 64);
+
 		if (currentFuel > 0) {
 			currentFuel--;
 		}
