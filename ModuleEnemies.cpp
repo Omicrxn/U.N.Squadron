@@ -13,6 +13,8 @@
 #include "SmallCamouflageJet.h"
 #include "BlueJet.h"
 #include "GreenFighterPlane.h"
+#include "StealthBomber.h"
+
 #include "ModuleParticles.h"
 
 #define SPAWN_MARGIN 50
@@ -33,6 +35,7 @@ ModuleEnemies::~ModuleEnemies()
 bool ModuleEnemies::Start()
 {
 	texture = App->textures->Load("Assets/sprites/enemies/UNSquadronSheet9.gif ");
+	sbTexture = App->textures->Load("Assets/sprites/enemies/UNSquadronSheet10.gif ");
 	++activeTextures; ++totalTextures;
 
 	enemyDestroyedFx = App->audio->LoadFx("Assets/music/explosion.wav");
@@ -223,8 +226,15 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 				case ENEMY_TYPE::SMALLCAMOUFLAGEJET:
 					enemies[i] = new SmallCamouflageJet(info.x, info.y, info.spawnRight);
 					break;
+				case ENEMY_TYPE::STEALTHBOMBER:
+					enemies[i] = new StealthBomber(info.x, info.y, info.spawnRight);
+					break;
 			}
+			if (info.type == ENEMY_TYPE::STEALTHBOMBER) {
+				enemies[i]->texture = sbTexture;
+			}else{
 			enemies[i]->texture = texture;
+			}
 			enemies[i]->destroyedFx = enemyDestroyedFx;
 			break;
 		}

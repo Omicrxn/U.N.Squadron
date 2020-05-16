@@ -32,7 +32,7 @@ bool ModuleStartScreen::Start() {
 	// selector rect
 	selector.PushBack({ 236,240,13,16 });
 	selector.PushBack({ 236,300,13,16 });
-	selector.speed = 0.2f;
+	selector.speed = 0;
 
 
 	tex = App->textures->Load("Assets/sprites/menus/Menu-Spritesheet.png");
@@ -78,16 +78,15 @@ update_status ModuleStartScreen::Update(){
 		App->audio->PlayFx(0, 0);
 	}
 	
-	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN) {
+	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN && App->transition->hasEnded()) {
 		
 		switch (selectorPos.y) {
 		case 116: {
-			blink = true;
+			selector.speed = 0.2;
 			App->audio->PlayFx(1, 0);
-			if (selector.Finished()) {
-				App->transition->FadeToBlack(this, (Module*)App->store, 60);
+			App->transition->FadeToBlack(this, (Module*)App->store, 60);
 
-			}
+			
 		} break;
 		case 135: {
 
@@ -95,13 +94,6 @@ update_status ModuleStartScreen::Update(){
 		default:
 			break;
 		}
-	}
-	
-	if (blink) {
-		rect = selector.GetCurrentFrame();
-	}
-	else {
-		rect = selector.GetFrame(0);
 	}
 
 	return ret;
@@ -128,7 +120,7 @@ update_status ModuleStartScreen::PostUpdate() {
 	}
 
 	// Blit selector
-	if (!App->render->Blit(tex, selectorPos.x, selectorPos.y, &rect, 1, false)) {
+	if (!App->render->Blit(tex, selectorPos.x, selectorPos.y, &selector.GetCurrentFrame(), 1, false)) {
 		ret = UPDATE_ERROR;
 	}
 

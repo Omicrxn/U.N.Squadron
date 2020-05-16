@@ -126,10 +126,7 @@ update_status ModulePlayer::Update() {
 		collider->SetPos(position.x, position.y);
 	}
 
-	// Win condition (end of the level)
-	if (position.x >= 7600) {
-		App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->winScreen, 60);
-	}
+	
 
 	// God Mode
 	if (App->input->keyboard[SDL_SCANCODE_F5] == KEY_DOWN) {
@@ -200,7 +197,6 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 	// Detect collision with a bullet or an enemy. If so, disappear and explode.
 	if (c1 == collider && destroyed == false) {
 		//SDL_SetTextureColorMod(texture, 450, 450, 64);
-
 		if (currentFuel > 0) {
 			currentFuel--;
 		}

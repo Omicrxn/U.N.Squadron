@@ -5,10 +5,13 @@
 #include "Path.h"
 class StealthBomber : public Enemy
 {
+public:
 	StealthBomber(int x, int y, bool spawnRight);
 	void Update() override;
-	Path path;
-	Animation damaged;
+private:
+	Path spawnPath;
+	Path normalPath;
+	Animation idle;
 	Animation shooting;
 	SDL_Rect rect;
 	unsigned int shootingFrequency;
