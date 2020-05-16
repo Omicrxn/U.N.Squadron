@@ -158,6 +158,7 @@
     <ClCompile Include="ModuleHUD.cpp" />
     <ClCompile Include="ModuleInitialScreen.cpp" />
     <ClCompile Include="ModuleInput.cpp" />
+    <ClCompile Include="ModuleLevel1.cpp" />
     <ClCompile Include="ModuleLevel2.cpp" />
     <ClCompile Include="ModuleLoseScreen.cpp" />
     <ClCompile Include="ModuleParticles.cpp" />
@@ -193,6 +194,7 @@
     <ClInclude Include="ModuleHUD.h" />
     <ClInclude Include="ModuleInitialScreen.h" />
     <ClInclude Include="ModuleInput.h" />
+    <ClInclude Include="ModuleLevel1.h" />
     <ClInclude Include="ModuleLevel2.h" />
     <ClInclude Include="ModuleLoseScreen.h" />
     <ClInclude Include="ModuleParticles.h" />

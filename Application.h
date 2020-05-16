@@ -11,6 +11,7 @@ class ModuleTextureManager;
 class ModuleWinScreen;
 class ModuleAudio;
 class ModulePlayer;
+class ModuleLevel1;
 class ModuleLevel2;
 class ModuleParticles;
 class ModuleInitialScreen;
@@ -40,6 +41,7 @@ public:
 	ModuleInput* input = nullptr;
 	ModuleTextureManager* textures = nullptr;
 	ModuleAudio* audio = nullptr;
+	ModuleLevel1* lvl1 = nullptr;
 	ModuleLevel2* lvl2 = nullptr;
 	ModulePlayer* player = nullptr;
 	ModuleInitialScreen* initialScreen = nullptr;

@@ -9,7 +9,7 @@
 #include "ModuleHUD.h"
 #include <stdio.h>
 
-#include "ModuleLevel2.h"
+#include "ModuleLevel1.h"
 
 enum weapons {
 	WEAPON_1, WEAPON_2, WEAPON_3, WEAPON_4, WEAPON_5, WEAPON_6,
@@ -98,7 +98,7 @@ update_status ModuleStore::Update() {
 	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN) {
 		if (weapon == weapons[1][5])
 		{
-			App->transition->FadeToBlack(this, (Module*)App->lvl2, 60);
+			App->transition->FadeToBlack(this, (Module*)App->lvl1, 60);
 		}
 	}
 

@@ -97,6 +97,9 @@
     <ClCompile Include="ModuleLoseScreen.cpp">
       <Filter>Source Files\Modules\Gameplay</Filter>
     </ClCompile>
+    <ClCompile Include="ModuleLevel1.cpp">
+      <Filter>Source Files\Modules\Gameplay</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -189,7 +192,6 @@
     <ClInclude Include="SmallCamouflageJet.h">
       <Filter>Source Files\Entities\Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="resource2.h" />
     <ClInclude Include="SetBulletDirection.h">
       <Filter>Source Files\Utils</Filter>
     </ClInclude>
@@ -202,6 +204,10 @@
     <ClInclude Include="ModuleLoseScreen.h">
       <Filter>Source Files\Modules\Gameplay</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleLevel1.h">
+      <Filter>Source Files\Modules\Gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="resource2.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source Files">
