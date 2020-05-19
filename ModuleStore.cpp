@@ -9,7 +9,7 @@
 #include "ModuleHUD.h"
 #include <stdio.h>
 
-#include "ModuleLevel2.h"
+#include "ModuleLevel1.h"
 
 enum weapons {
 	WEAPON_1, WEAPON_2, WEAPON_3, WEAPON_4, WEAPON_5, WEAPON_6,

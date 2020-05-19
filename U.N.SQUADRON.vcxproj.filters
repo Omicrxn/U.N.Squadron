@@ -97,8 +97,13 @@
     <ClCompile Include="ModuleLoseScreen.cpp">
       <Filter>Source Files\Modules\Gameplay</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="StealthBomber.cpp">
       <Filter>Source Files\Entities\Enemies</Filter>
+=======
+    <ClCompile Include="ModuleLevel1.cpp">
+      <Filter>Source Files\Modules\Gameplay</Filter>
+>>>>>>> dd97bf47cfca06a3aa31a99c1c4d33c04fcd9ae9
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -192,7 +197,6 @@
     <ClInclude Include="SmallCamouflageJet.h">
       <Filter>Source Files\Entities\Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="resource2.h" />
     <ClInclude Include="SetBulletDirection.h">
       <Filter>Source Files\Utils</Filter>
     </ClInclude>
@@ -205,9 +209,16 @@
     <ClInclude Include="ModuleLoseScreen.h">
       <Filter>Source Files\Modules\Gameplay</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="StealthBomber.h">
       <Filter>Source Files\Entities\Enemies</Filter>
     </ClInclude>
+=======
+    <ClInclude Include="ModuleLevel1.h">
+      <Filter>Source Files\Modules\Gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="resource2.h" />
+>>>>>>> dd97bf47cfca06a3aa31a99c1c4d33c04fcd9ae9
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source Files">

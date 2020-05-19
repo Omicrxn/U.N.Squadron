@@ -55,8 +55,8 @@ bool ModuleParticles::Start()
 	enemyExplosion.anim.speed = 0.075f;
 	//Stealth bomber firecannon
 	sbFirecannon.anim.PushBack({ 25,454,16,12 });
-	explosion.anim.loop = false;
-	explosion.anim.speed = 0.1;
+	sbFirecannon.anim.loop = false;
+	sbFirecannon.anim.speed = 0;
 	return true;
 }
 

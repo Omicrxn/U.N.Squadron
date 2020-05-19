@@ -27,11 +27,11 @@ Application::Application() {
 	modules[i++] = audio = new ModuleAudio(true);
 
 	
-	modules[i++] = initialScreen = new ModuleInitialScreen(false);
+	modules[i++] = initialScreen = new ModuleInitialScreen(true);
 	modules[i++] = startScreen = new ModuleStartScreen(false);
 	modules[i++] = loseScreen = new ModuleLoseScreen(false);
 	modules[i++] = store = new ModuleStore(false);
-	modules[i++] = lvl2 = new ModuleLevel2(true);
+	modules[i++] = lvl2 = new ModuleLevel2(false);
 	modules[i++] = winScreen = new ModuleWinScreen(false);
 	
 
