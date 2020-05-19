@@ -97,13 +97,17 @@
     <ClCompile Include="ModuleLoseScreen.cpp">
       <Filter>Source Files\Modules\Gameplay</Filter>
     </ClCompile>
-<<<<<<< HEAD
-    <ClCompile Include="StealthBomber.cpp">
-      <Filter>Source Files\Entities\Enemies</Filter>
-=======
     <ClCompile Include="ModuleLevel1.cpp">
       <Filter>Source Files\Modules\Gameplay</Filter>
->>>>>>> dd97bf47cfca06a3aa31a99c1c4d33c04fcd9ae9
+    </ClCompile>
+    <ClCompile Include="ModuleWeapons.cpp">
+      <Filter>Source Files\Modules\Gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="Weapon.cpp">
+      <Filter>Source Files\Entities\Weapons</Filter>
+    </ClCompile>
+    <ClCompile Include="Bomb.cpp">
+      <Filter>Source Files\Entities\Weapons</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -209,16 +213,19 @@
     <ClInclude Include="ModuleLoseScreen.h">
       <Filter>Source Files\Modules\Gameplay</Filter>
     </ClInclude>
-<<<<<<< HEAD
-    <ClInclude Include="StealthBomber.h">
-      <Filter>Source Files\Entities\Enemies</Filter>
-    </ClInclude>
-=======
     <ClInclude Include="ModuleLevel1.h">
       <Filter>Source Files\Modules\Gameplay</Filter>
     </ClInclude>
     <ClInclude Include="resource2.h" />
->>>>>>> dd97bf47cfca06a3aa31a99c1c4d33c04fcd9ae9
+    <ClInclude Include="ModuleWeapons.h">
+      <Filter>Source Files\Modules\Gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="Weapon.h">
+      <Filter>Source Files\Entities\Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="Bomb.h">
+      <Filter>Source Files\Entities\Weapons</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source Files">
@@ -247,6 +254,9 @@
     </Filter>
     <Filter Include="Icon">
       <UniqueIdentifier>{6887a607-af27-4015-95b8-6d64ca93ddc8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entities\Weapons">
+      <UniqueIdentifier>{813d8247-52de-4b04-8d6b-928f194e5dd6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

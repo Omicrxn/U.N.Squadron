@@ -143,6 +143,7 @@
     <ClCompile Include="BigCamouflageJet.cpp" />
     <ClCompile Include="BigOrangeJet.cpp" />
     <ClCompile Include="BlueJet.cpp" />
+    <ClCompile Include="Bomb.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Globals.cpp" />
     <ClCompile Include="GreenFighterPlane.cpp" />
@@ -167,12 +168,13 @@
     <ClCompile Include="ModuleStartScreen.cpp" />
     <ClCompile Include="ModuleStore.cpp" />
     <ClCompile Include="ModuleTextureManager.cpp" />
+    <ClCompile Include="ModuleWeapons.cpp" />
     <ClCompile Include="ModuleWindow.cpp" />
     <ClCompile Include="ModuleWinScreen.cpp" />
     <ClCompile Include="Path.cpp" />
     <ClCompile Include="SetBulletDirection.cpp" />
     <ClCompile Include="SmallCamouflageJet.cpp" />
-    <ClCompile Include="StealthBomber.cpp" />
+    <ClCompile Include="Weapon.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
@@ -180,6 +182,7 @@
     <ClInclude Include="BigCamouflageJet.h" />
     <ClInclude Include="BigOrangeJet.h" />
     <ClInclude Include="BlueJet.h" />
+    <ClInclude Include="Bomb.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="GreenFighterPlane.h" />
@@ -204,6 +207,7 @@
     <ClInclude Include="ModuleStartScreen.h" />
     <ClInclude Include="ModuleStore.h" />
     <ClInclude Include="ModuleTextureManager.h" />
+    <ClInclude Include="ModuleWeapons.h" />
     <ClInclude Include="ModuleWindow.h" />
     <ClInclude Include="ModuleWinScreen.h" />
     <ClInclude Include="p2Point.h" />
@@ -211,7 +215,7 @@
     <ClInclude Include="resource2.h" />
     <ClInclude Include="SetBulletDirection.h" />
     <ClInclude Include="SmallCamouflageJet.h" />
-    <ClInclude Include="StealthBomber.h" />
+    <ClInclude Include="Weapon.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="U.N.SQUADRON2.rc" />

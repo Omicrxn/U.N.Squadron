@@ -18,6 +18,7 @@
 #include "ModuleFonts.h"
 #include "ModuleStore.h"
 #include "ModuleDebugInfo.h"
+#include "ModuleWeapons.h"
 
 Application::Application() {
 	int i = 0;
@@ -40,6 +41,7 @@ Application::Application() {
 	modules[i++] = particles = new ModuleParticles(false);
 	modules[i++] = enemies = new ModuleEnemies(false);
 	modules[i++] = collisions = new ModuleCollisions(false);
+	modules[i++] = weapons = new ModuleWeapons(false);
 	
 
 	modules[i++] = transition = new ModuleFadeToBlack(true);

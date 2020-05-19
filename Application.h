@@ -25,8 +25,9 @@ class ModuleEnemies;
 class ModuleFonts;
 class ModuleStore;
 class ModuleDebugInfo;
+class ModuleWeapons;
 
-#define NUM_MODULES 19
+#define NUM_MODULES 20
 
 class Application {
 
@@ -57,6 +58,7 @@ public:
 	ModuleFonts* fonts = nullptr;
 	ModuleStore* store = nullptr;
 	ModuleDebugInfo* debugInfo = nullptr;
+	ModuleWeapons* weapons = nullptr;
 
 	// Initializes all modules
 	bool Init();
