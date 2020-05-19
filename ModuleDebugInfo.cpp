@@ -129,11 +129,11 @@ update_status ModuleDebugInfo::Update() {
 		}
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_F10] == KEY_DOWN) {
+	if (App->input->keyboard[SDL_SCANCODE_M] == KEY_DOWN) {
 		maxMoney = !maxMoney;
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_F] == KEY_DOWN) {
+	if (App->input->keyboard[SDL_SCANCODE_L] == KEY_DOWN) {
 		maxLifes = !maxLifes;
 	}
 
