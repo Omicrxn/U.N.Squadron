@@ -2,14 +2,7 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleWindow.h"
-#include "ModuleAudio.h"
-#include "ModuleInitialScreen.h"
-#include "ModuleFadeToBlack.h"
-#include "ModuleStartScreen.h"
-#include "ModuleLevel2.h"
-#include "ModuleWinScreen.h"
-#include "ModuleStore.h"
-#include "ModuleLoseScreen.h"
+
 #include "SDL.h"
 
 ModuleInput::ModuleInput(bool startEnabled) : Module(startEnabled) {
@@ -94,40 +87,6 @@ update_status ModuleInput::PreUpdate() {
 		}
 		else if (event.type == SDL_CONTROLLERDEVICEREMOVED)	{
 			HandleDeviceRemoval(event.cdevice.which);
-		}
-	}
-
-	// Mute Audio when F2 is pressed, press again to unmute
-	if (keyboard[SDL_SCANCODE_F2] == KEY_DOWN) {
-		App->audio->MuteMusic();
-	}
-
-	// Debug functionality to jump screens
-	if (keyboard[SDL_SCANCODE_F3] == KEY_DOWN) {
-		if (App->initialScreen->IsEnabled()) {
-			App->transition->FadeToBlack((Module*)App->initialScreen, (Module*)App->startScreen, 60);
-		}
-		else if (App->startScreen->IsEnabled()) {
-			App->transition->FadeToBlack((Module*)App->startScreen, (Module*)App->store, 60);
-		}
-		else if (App->store->IsEnabled()) {
-			App->transition->FadeToBlack((Module*)App->store, (Module*)App->lvl2, 60);
-		}
-		else if (App->lvl2->IsEnabled()) {
-			App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->startScreen, 60);
-		}
-		else if (App->winScreen->IsEnabled()) {
-			App->transition->FadeToBlack((Module*)App->winScreen, (Module*)App->startScreen, 60);
-		}
-		else if (App->loseScreen->IsEnabled()) {
-			App->transition->FadeToBlack((Module*)App->loseScreen, (Module*)App->startScreen, 60);
-		}
-	}
-
-	// Debug functionality to Win Screen
-	if (keyboard[SDL_SCANCODE_F4] == KEY_DOWN) {
-		if (App->lvl2->IsEnabled()) {
-			App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->winScreen, 60);
 		}
 	}
 

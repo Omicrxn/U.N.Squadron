@@ -5,7 +5,8 @@
 #include "ModuleParticles.h"
 #include "ModuleAudio.h"
 #include "ModuleRenderer.h"
-#include "ModuleHUD.h"
+#include "ModulePlayer.h"
+#include "ModuleDebugInfo.h"
 
 Enemy::Enemy(int x, int y,bool spawnRight) : position(x, y)
 {
@@ -44,9 +45,13 @@ void Enemy::OnCollision(Collider* collider)
 	App->particles->AddParticle(App->particles->enemyExplosion, position.x, position.y);
 	App->audio->PlayFx(3,0);
 
-	App->HUD->score += scoreGiven;
-	App->HUD->money += moneyGiven;
+	App->player->score += scoreGiven;
+
+	if (!App->debugInfo->maxMoney) {
+		App->player->money += moneyGiven;
+	}
 }
+
 void Enemy::SetToDelete()
 {
 	pendingToDelete = true;

@@ -40,7 +40,7 @@ bool ModuleInitialScreen::Start() {
 update_status ModuleInitialScreen::Update() {
 	update_status ret = update_status::UPDATE_CONTINUE;
 
-	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN) {
+	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN || App->input->pads[0].a == true) {
 		App->transition->FadeToBlack(this, (Module*)App->startScreen, 60);
 	}
 

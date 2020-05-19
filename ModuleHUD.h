@@ -30,12 +30,6 @@ public:
 	int yellowFont = -1;
 	int greenFont = -1;
 
-	// Score
-	uint score = 0;
-
-	// Money
-	uint money = 3000;
-
 private:
 	SDL_Texture* tex;
 	Animation playerFace;

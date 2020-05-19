@@ -18,25 +18,15 @@ ModuleHUD::~ModuleHUD() {}
 bool ModuleHUD::Start() {
 	bool ret = true;
 
-	score = 0;
-	money = 0;
-	
+	App->player->score = 0;
+
 	tex = App->textures->Load("Assets/sprites/hud/HUD.png");
 	++activeTextures; ++totalTextures;
 
 	//Animations
 	fuelQuantity = {2,71,62,6};
 	fuelBackground = {0,149,66,10};
-	/*fuel.PushBack({0,69,66,10});
-	fuel.PushBack({0,79,66,10});
-	fuel.PushBack({0,89,66,10});
-	fuel.PushBack({0,99,66,10});
-	fuel.PushBack({0,109,66,10});
-	fuel.PushBack({0,119,66,10});
-	fuel.PushBack({0,129,66,10});
-	fuel.PushBack({0,139,66,10});
-	fuel.PushBack({0,149,66,10});*/
-	//fuel.speed = 0.06;
+
 	weapon = { 132,206,52,8 };
 	
 	playerFace.PushBack({ 71,75,42,34 });
@@ -51,18 +41,23 @@ bool ModuleHUD::Start() {
 
 	return ret;
 }
+
 update_status ModuleHUD::Update() {
 	update_status ret = UPDATE_CONTINUE;
 	
 	fuelQuantity.w = 62 *App->player->GetCurrentFuel()/App->player->GetMaxFuel();
+
 	return ret;
 }
+
 update_status ModuleHUD::PostUpdate() {
 	update_status ret = UPDATE_CONTINUE;
 
 	// Draw UI (score & money)
-	sprintf_s(scoreText, 10, "%7d", score);
-	sprintf_s(moneyText, 10, "%7d", money);
+	sprintf_s(scoreText, 10, "%7d", App->player->score);
+	if (!App->debugInfo->maxMoney) sprintf_s(moneyText, 10, "%7d", App->player->money);
+	else sprintf_s(moneyText, 10, "    MAX");
+
 	sprintf_s(lifesText, 10, "%d", App->player->GetLifes());
 
 	if (!App->debugInfo->debugMemLeaks && !App->debugInfo->debugGamepadInfo) {
@@ -74,7 +69,7 @@ update_status ModuleHUD::PostUpdate() {
 		App->render->Blit(tex, 57, 208, &fuelQuantity, 1, false);
 		App->render->Blit(tex, 132, 208, &weapon, 1, false);
 
-		// Blit of the HUD (PROVISIONAL)
+		// Blit of the HUD
 		App->fonts->BlitText(8, 15, yellowFont, "SCORE");
 		App->fonts->BlitText(120, 15, yellowFont, "LEVEL");
 		App->fonts->BlitText(121, 31, yellowFont, "$");

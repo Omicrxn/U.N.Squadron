@@ -44,6 +44,8 @@ public:
 	// Debugdraw for gamepad data
 	bool debugGamepadInfo = false;
 
+	bool maxMoney = false;
+	bool maxLifes = false;
 private:
 	Module* inspectedModule = nullptr;
 

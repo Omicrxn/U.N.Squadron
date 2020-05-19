@@ -8,8 +8,7 @@
 #include "ModuleLoseScreen.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleAudio.h"
-#include "ModuleFonts.h"
-#include "ModuleHUD.h"
+#include "ModuleDebugInfo.h"
 
 #include <stdio.h>
 
@@ -68,8 +67,8 @@ update_status ModulePlayer::Update() {
 	// Moving the player with the camera scroll
 	App->player->position.x += 1;
 
-	// Spawn bullet particles when pressing SPACE or A
-	if ((App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_DOWN && !destroyed) || pad.a == true) {
+	// Spawn bullet particles when pressing SPACE or X
+	if ((App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_DOWN && !destroyed) || pad.x == true) {
 		App->particles->AddParticle(App->particles->bullet, position.x + 32, position.y + 5, Collider::Type::PLAYER_SHOT);
 
 		//Playing shooting sound effect (if space was pressed)
@@ -126,8 +125,6 @@ update_status ModulePlayer::Update() {
 		collider->SetPos(position.x, position.y);
 	}
 
-	
-
 	// God Mode
 	if (App->input->keyboard[SDL_SCANCODE_F5] == KEY_DOWN) {
 		godMode = !godMode;
@@ -140,21 +137,6 @@ update_status ModulePlayer::Update() {
 				collider = App->collisions->AddCollider({ position.x, position.y, 32, 16 }, Collider::Type::PLAYER, this);
 			}
 		}
-	}
-
-	// Debug key for gamepad rumble testing purposes
-	if (App->input->keyboard[SDL_SCANCODE_1] == KEY_DOWN) {
-		App->input->ShakeController(0, 12, 0.33f);
-	}
-
-	// Debug key for gamepad rumble testing purposes
-	if (App->input->keyboard[SDL_SCANCODE_2] == KEY_DOWN) {
-		App->input->ShakeController(0, 36, 0.66f);
-	}
-
-	// Debug key for gamepad rumble testing purposes
-	if (App->input->keyboard[SDL_SCANCODE_3] == KEY_DOWN) {
-		App->input->ShakeController(0, 60, 1.0f);
 	}
 
 	return ret;
@@ -203,10 +185,9 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 		else {
 			App->particles->AddParticle(App->particles->explosion, position.x, position.y, Collider::Type::NONE, 9);
 
-			if (playerLifes > 1) {
+			if (playerLifes > 1 && !App->debugInfo->maxLifes) {
 				playerLifes--;
 				App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->startScreen, 60);
-
 			}
 			else {
 				App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->loseScreen, 60);

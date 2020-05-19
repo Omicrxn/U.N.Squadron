@@ -7,6 +7,9 @@
 #include "ModuleAudio.h"
 #include "ModuleFonts.h"
 #include "ModuleHUD.h"
+#include "ModulePlayer.h"
+#include "ModuleDebugInfo.h"
+
 #include <stdio.h>
 
 #include "ModuleLevel1.h"
@@ -95,7 +98,7 @@ update_status ModuleStore::Update() {
 		App->audio->PlayFx(0, 0);
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN) {
+	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN || App->input->pads[0].a == true) {
 		if (weapon == weapons[1][5])
 		{
 			App->transition->FadeToBlack(this, (Module*)App->lvl2, 60);
@@ -119,16 +122,16 @@ update_status ModuleStore::PostUpdate() {
 		ret = UPDATE_ERROR;
 
 	//Blit money
-	sprintf_s(moneyText, 10, "%7d", App->HUD->money);
-	strcat_s(moneyText, 10, "$");
-	App->fonts->BlitText(5, 108, greenFont, moneyText);
+	App->fonts->BlitText(17, 110, greenFont, "$");
+
+	if (!App->debugInfo->maxMoney) sprintf_s(moneyText, 10, "%7d", App->player->money);
+	else sprintf_s(moneyText, 10, "    MAX");
+
+	App->fonts->BlitText(23, 110, greenFont, moneyText);
 
 	//Blit text
 	App->fonts->BlitText(170, 50, yellowFont, "Select");
 	App->fonts->BlitText(170, 60, yellowFont, "a weapon");
-
-	//Blit money
-	App->fonts->BlitText(5, 108, greenFont, moneyText);
 
 	return ret;
 }

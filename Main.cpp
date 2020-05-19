@@ -29,6 +29,7 @@ int main(int argc, char* argv[])
 		{
 		case main_states::MAIN_CREATION:
 		{
+
 			LOG("Application Creation --------------\n");
 			App = new Application();
 			state = main_states::MAIN_START;

@@ -44,9 +44,9 @@ Application::Application() {
 	modules[i++] = weapons = new ModuleWeapons(false);
 	
 
+	modules[i++] = debugInfo = new ModuleDebugInfo(true);
 	modules[i++] = transition = new ModuleFadeToBlack(true);
 	modules[i++] = fonts = new ModuleFonts(true);
-	modules[i++] = debugInfo = new ModuleDebugInfo(true);
 	modules[i++] = render = new ModuleRenderer(true);
 }
 

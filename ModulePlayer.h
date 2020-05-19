@@ -32,6 +32,12 @@ public:
 	uint shootFx = 0;
 	uint explosionFx = 0;
 
+	// Score
+	uint score = 0;
+
+	// Money
+	uint money = 0;
+
 public:
 	iPoint GetPlayerPosition() {
 		return position;
@@ -52,7 +58,7 @@ private:
 	Animation playerAnim;
 	SDL_Rect rectAnim;
 	int maxFuel = 8, currentFuel = 8, playerLifes = 3;
-	bool godMode;
+	bool godMode = false;
 };
 
 #endif // __MODULEPLAYER_H__
