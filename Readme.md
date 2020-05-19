@@ -32,7 +32,21 @@ While at the moment Capcom was developing vertically scrolling shooters, U.N.Squ
 
 4. Read the following instructions to learn the controls:
 
-### CONTROLS FOR PC
+### GAMEPAD CONTROLS
+|Function|Button|
+|-------|--------|
+|Fly your Aircraft (Up)|Joystick Up|
+|Fly your Aircraft (Down)|Joystick Down|
+|Fly your Aircraft (Left)|Joystick Left|
+|Fly your Aircraft (Right)|Joystick Right|
+|Select / Continue|A|
+|Fire the Vulcan Cannon|X|
+|Travel through the options (Up)|Joystick Up|
+|Travel through the options (Down)|Joystick Down|
+|Travel through the options (Left)|Joystick Left|
+|Travel through the options (Right)|Joystick Right|
+
+### KEYBOARD CONTROLS
 |Function|Keyboard|
 |-------|--------|
 |Fly your Aircraft (Up)|W or 🡱|
@@ -43,6 +57,8 @@ While at the moment Capcom was developing vertically scrolling shooters, U.N.Squ
 |Fire the Vulcan Cannon|Space|
 |Travel through the options (Up)|W or 🡱|
 |Travel through the options (Down)|S or 🡳|
+|Travel through the options (Left)|A or 🡰|
+|Travel through the options (Right)|D or 🡲|
 
 |Debug Functionality|Keyboard|
 |-------|--------|
@@ -54,4 +70,7 @@ While at the moment Capcom was developing vertically scrolling shooters, U.N.Squ
 |Resources Information|F6|
 |Traverse Resources Information|F7|
 |Gamepad Information|F8|
+|Direct Lose|F9|
+|Maximum Money|F10|
 |Maximize / Resize|F11|
+|Gamepad Rumble Test|7 - 8 - 9|
