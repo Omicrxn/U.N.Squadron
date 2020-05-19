@@ -54,4 +54,6 @@ While at the moment Capcom was developing vertically scrolling shooters, U.N.Squ
 |Resources Information|F6|
 |Traverse Resources Information|F7|
 |Gamepad Information|F8|
+|Direct Lose|F9|
+|Maximum Money|F10|
 |Maximize / Resize|F11|
