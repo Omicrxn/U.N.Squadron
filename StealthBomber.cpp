@@ -42,20 +42,19 @@ void StealthBomber::Update()
 	Enemy::Update();
 
 	shootingFrequency++;
-	if (shootingFrequency > 120)
+	if (shootingFrequency > 300)
 	{
 		shootingFrequency = 0;
-
-		//SetBulletDirection(this);
 		/*if (currentAnim != &shooting) {
 			currentAnim = &shooting;
 			shooting.Reset();
 		}*/
+		LOG("Shooting particle");
 		App->particles->AddParticle(App->particles->sbFirecannon, position.x + 7, position.y+32, Collider::Type::ENEMY_SHOT,0);
-		App->particles->AddParticle(App->particles->sbFirecannon, position.x + 7, position.y+40, Collider::Type::ENEMY_SHOT,120);
-		App->particles->AddParticle(App->particles->sbFirecannon, position.x + 7, position.y+45, Collider::Type::ENEMY_SHOT,200);
-		App->particles->AddParticle(App->particles->sbFirecannon, position.x + 7, position.y+60, Collider::Type::ENEMY_SHOT,300);
-		App->particles->AddParticle(App->particles->sbFirecannon, position.x + 7, position.y+72, Collider::Type::ENEMY_SHOT,400);
+		App->particles->AddParticle(App->particles->sbFirecannon, position.x + 7+5, position.y+32, Collider::Type::ENEMY_SHOT,5);
+		App->particles->AddParticle(App->particles->sbFirecannon, position.x + 7+10, position.y+32, Collider::Type::ENEMY_SHOT,10);
+		App->particles->AddParticle(App->particles->sbFirecannon, position.x + 7+15, position.y+32, Collider::Type::ENEMY_SHOT,15);
+		
 
 		//Playing shooting sound effect (if space was pressed)
 		App->audio->PlayFx(2, 0);

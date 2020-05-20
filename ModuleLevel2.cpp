@@ -70,7 +70,7 @@ bool ModuleLevel2::Start() {
 	thirdBotPos2 = { (float)thirdBottomLayer.w,(float)(SCREEN_HEIGHT-thirdBottomLayer.h) };
 	thirdSpeed = 2.0;
 	
-	App->enemies->AddEnemy(ENEMY_TYPE::MEDIUMCAMOUFLAGEJET, 400, 50);
+	/*App->enemies->AddEnemy(ENEMY_TYPE::MEDIUMCAMOUFLAGEJET, 400, 50);
 	App->enemies->AddEnemy(ENEMY_TYPE::MEDIUMCAMOUFLAGEJET, 425, 50);
 	App->enemies->AddEnemy(ENEMY_TYPE::MEDIUMCAMOUFLAGEJET, 450, 50);
 	App->enemies->AddEnemy(ENEMY_TYPE::MEDIUMCAMOUFLAGEJET, 475, 50);
@@ -214,9 +214,9 @@ bool ModuleLevel2::Start() {
 	App->enemies->AddEnemy(ENEMY_TYPE::BIGORANGEJET, 7500, SCREEN_HEIGHT - 70);
 	App->enemies->AddEnemy(ENEMY_TYPE::BIGORANGEJET, 7525, SCREEN_HEIGHT - 70);
 	App->enemies->AddEnemy(ENEMY_TYPE::BIGORANGEJET, 7550, SCREEN_HEIGHT - 70);
-	App->enemies->AddEnemy(ENEMY_TYPE::BIGORANGEJET, 7575, SCREEN_HEIGHT - 70);
+	App->enemies->AddEnemy(ENEMY_TYPE::BIGORANGEJET, 7575, SCREEN_HEIGHT - 70);*/
 	//BOSS: STEALTH BOMBER
-	//App->enemies->AddEnemy(ENEMY_TYPE::STEALTHBOMBER, 0, SCREEN_HEIGHT - 70,false);
+	App->enemies->AddEnemy(ENEMY_TYPE::STEALTHBOMBER, 0, SCREEN_HEIGHT - 70,false);
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
 	

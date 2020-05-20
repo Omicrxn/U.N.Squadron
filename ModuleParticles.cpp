@@ -57,6 +57,7 @@ bool ModuleParticles::Start()
 	sbFirecannon.anim.PushBack({ 25,454,16,12 });
 	sbFirecannon.anim.loop = false;
 	sbFirecannon.anim.speed = 0;
+	sbFirecannon.speed.x = -2;
 	return true;
 }
 

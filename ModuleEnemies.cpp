@@ -11,6 +11,7 @@
 #include "BigOrangeJet.h"
 #include "BigCamouflageJet.h"
 #include "SmallCamouflageJet.h"
+#include "StealthBomber.h"
 #include "BlueJet.h"
 #include "GreenFighterPlane.h"
 #include "ModuleParticles.h"
@@ -34,7 +35,8 @@ bool ModuleEnemies::Start()
 {
 	texture = App->textures->Load("Assets/sprites/enemies/UNSquadronSheet9.gif");
 	++activeTextures; ++totalTextures;
-
+	sbTexture = App->textures->Load("Assets/sprites/enemies/UNSquadronSheet10.gif ");
+	++activeTextures; ++totalTextures;
 	enemyDestroyedFx = App->audio->LoadFx("Assets/music/explosion.wav");
 	++activeFx; ++totalFx;
 
@@ -102,7 +104,11 @@ bool ModuleEnemies::CleanUp()
 		return false;
 	}
 	--totalTextures;
-
+	if (!App->textures->Unload(sbTexture)) {
+		LOG("Start Screen -> Error unloading the texture.");
+		return false;
+	}
+	--totalTextures;
 	App->audio->UnloadFx(enemyDestroyedFx);
 	--totalFx;
 
@@ -223,8 +229,16 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 				case ENEMY_TYPE::SMALLCAMOUFLAGEJET:
 					enemies[i] = new SmallCamouflageJet(info.x, info.y, info.spawnRight);
 					break;
+				case ENEMY_TYPE::STEALTHBOMBER:
+					enemies[i] = new StealthBomber(info.x, info.y, info.spawnRight);
+					break;
 			}
-			enemies[i]->texture = texture;
+			if (info.type == ENEMY_TYPE::STEALTHBOMBER) {
+				enemies[i]->texture = sbTexture;
+			}
+			else {
+				enemies[i]->texture = texture;
+			}
 			enemies[i]->destroyedFx = enemyDestroyedFx;
 			break;
 		}
