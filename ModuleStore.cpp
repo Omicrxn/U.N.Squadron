@@ -77,28 +77,28 @@ update_status ModuleStore::Update() {
 	update_status ret = update_status::UPDATE_CONTINUE;
 
 	//Hanging the control of the selector
-	if ((App->input->keyboard[SDL_SCANCODE_W] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_UP] == KEY_DOWN) && rows > 0) {
+	if ((App->input->keyboard[SDL_SCANCODE_W] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_UP] == KEY_DOWN || App->input->pads[0].l_y < 0.0f) && rows > 0) {
 		selectorPos.y -= 48;
 		rows--;
 		App->audio->PlayFx(0, 0);
 	}
-	if ((App->input->keyboard[SDL_SCANCODE_S] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_DOWN) && rows < 1) {
+	if ((App->input->keyboard[SDL_SCANCODE_S] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_DOWN || App->input->pads[0].l_y > 0.0f) && rows < 1) {
 		selectorPos.y += 48;
 		rows++;
 		App->audio->PlayFx(0, 0);
 	}
-	if ((App->input->keyboard[SDL_SCANCODE_A] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_DOWN) && columns > 0) {
+	if ((App->input->keyboard[SDL_SCANCODE_A] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_DOWN || App->input->pads[0].l_x < 0.0f) && columns > 0) {
 		selectorPos.x -= 40;
 		columns--;
 		App->audio->PlayFx(0, 0);
 	}
-	if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_DOWN) && columns < 5) {
+	if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_DOWN || App->input->pads[0].l_x > 0.0f) && columns < 5) {
 		selectorPos.x += 40;
 		columns++;
 		App->audio->PlayFx(0, 0);
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN || App->input->pads[0].a == true) {
+	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN || App->input->pads[0].x == true) {
 		if (weapon == weapons[1][5])
 		{
 			App->transition->FadeToBlack(this, (Module*)App->lvl2, 60);

@@ -67,18 +67,18 @@ bool ModuleStartScreen::Start() {
 update_status ModuleStartScreen::Update(){
 	update_status ret = update_status::UPDATE_CONTINUE;
 
-	if ((App->input->keyboard[SDL_SCANCODE_W] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_UP] == KEY_DOWN)
+	if ((App->input->keyboard[SDL_SCANCODE_W] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_UP] == KEY_DOWN || App->input->pads[0].l_y < 0.0f)
 		&& selectorPos.y != 116) {
 		selectorPos = { 68,116 };
 		App->audio->PlayFx(0, 0);
 	}
-	if ((App->input->keyboard[SDL_SCANCODE_S] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_DOWN)
+	if ((App->input->keyboard[SDL_SCANCODE_S] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_DOWN || App->input->pads[0].l_y > 0.0f)
 		&& selectorPos.y != 135) {
 		selectorPos = { 68,135 };
 		App->audio->PlayFx(0, 0);
 	}
 	
-	if ((App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN && App->transition->hasEnded()) || App->input->pads[0].a == true) {
+	if ((App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN && App->transition->hasEnded()) || App->input->pads[0].x == true) {
 		
 		switch (selectorPos.y) {
 		case 116: {
@@ -101,8 +101,6 @@ update_status ModuleStartScreen::Update(){
 
 update_status ModuleStartScreen::PostUpdate() {
 	update_status ret = UPDATE_CONTINUE;
-
-	 
 
 	// Blit unicorn
 	if (!App->render->Blit(tex, 81, 50, &unicorn_anim.GetCurrentFrame(), 1, false)) {

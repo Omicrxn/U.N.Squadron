@@ -39,7 +39,7 @@ bool ModuleLoseScreen::Start() {
 update_status ModuleLoseScreen::Update() {
 	update_status ret = update_status::UPDATE_CONTINUE;
 
-	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN || App->input->pads[0].a == true) {
+	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN || App->input->pads[0].x == true) {
 		App->transition->FadeToBlack(this, (Module*)App->startScreen, 60);
 	}
 
