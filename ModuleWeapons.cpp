@@ -26,7 +26,7 @@ ModuleWeapons::~ModuleWeapons()
 
 bool ModuleWeapons::Start()
 {
-	texture = App->textures->Load("Assets/sprites/enemies/UNSquadronSheet9.gif"); // Change later
+	texture = App->textures->Load("Assets/sprites/hud/HUD.png"); // Change later
 	++activeTextures; ++totalTextures;
 
 	weaponDestroyedFx = App->audio->LoadFx("Assets/music/explosion.wav"); // Change later

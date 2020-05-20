@@ -45,6 +45,9 @@ bool ModuleStore::Start() {
 	// Selector rect
 	selector = { 0,0,45,53 };
 
+	// Already selected rect
+	alreadySelected = { 0,0,33,41 };
+
 	// Loading the background texture
 	tex = App->textures->Load("Assets/sprites/menus/shop/store.jpg");
 	if (tex == nullptr) {
@@ -55,6 +58,13 @@ bool ModuleStore::Start() {
 	// Loading the items texture
 	tex2 = App->textures->Load("Assets/sprites/menus/shop/selectionweapon.png");
 	if (tex2 == nullptr) {
+		ret = false;
+	}
+	++activeTextures; ++totalTextures;
+
+	// Loading the already selected texture
+	tex3 = App->textures->Load("Assets/sprites/menus/shop/alreadyselected.png");
+	if (tex3 == nullptr) {
 		ret = false;
 	}
 	++activeTextures; ++totalTextures;
@@ -83,7 +93,7 @@ bool ModuleStore::Start() {
 update_status ModuleStore::Update() {
 	update_status ret = update_status::UPDATE_CONTINUE;
 
-	//Hanging the control of the selector
+	// Hanging the control of the selector
 	if ((App->input->keyboard[SDL_SCANCODE_W] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_UP] == KEY_DOWN || App->input->pads[0].l_y < 0.0f) && rows > 0) {
 		selectorPos.y -= 48;
 		rows--;
@@ -126,15 +136,15 @@ update_status ModuleStore::Update() {
 update_status ModuleStore::PostUpdate() {
 	update_status ret = UPDATE_CONTINUE;
 
-	//Blit background
+	// Blit background
 	if (!App->render->Blit(tex, 0, 0, &background, 1, false))
 		ret = UPDATE_ERROR;
 
-	//Blit selector
+	// Blit selector
 	if (!App->render->Blit(tex2, selectorPos.x, selectorPos.y, &selector, 1, false))
 		ret = UPDATE_ERROR;
 
-	//Blit money
+	// Blit money
 	App->fonts->BlitText(17, 110, greenFont, "$");
 
 	if (!App->debugInfo->maxMoney) sprintf_s(moneyText, 10, "%7d", App->player->money);
@@ -142,9 +152,21 @@ update_status ModuleStore::PostUpdate() {
 
 	App->fonts->BlitText(23, 110, greenFont, moneyText);
 
-	//Blit text
+	// Blit text
 	App->fonts->BlitText(170, 50, yellowFont, "Select");
 	App->fonts->BlitText(170, 60, yellowFont, "a weapon");
+
+	// Blit already selected texture
+	// WEAPON_1
+	if ((weaponSelection & (1 << 10)) != 0) {
+		if (!App->render->Blit(tex3, 15, 126, &alreadySelected, 1, false))
+			ret = UPDATE_ERROR;
+	}
+	// BOMB
+	if ((weaponSelection & (1 << 4)) != 0) {
+		if (!App->render->Blit(tex3, 15, 174, &alreadySelected, 1, false))
+			ret = UPDATE_ERROR;
+	}
 
 	return ret;
 }
@@ -161,6 +183,12 @@ bool ModuleStore::CleanUp() {
 	--totalTextures;
 
 	if (!App->textures->Unload(tex2)) {
+		LOG("Start Screen -> Error unloading the texture.");
+		ret = false;
+	}
+	--totalTextures;
+
+	if (!App->textures->Unload(tex3)) {
 		LOG("Start Screen -> Error unloading the texture.");
 		ret = false;
 	}
