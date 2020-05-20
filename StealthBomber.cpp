@@ -16,7 +16,7 @@ StealthBomber::StealthBomber(int x, int y, bool spawnRight) : Enemy(x, y, spawnR
 	shooting.PushBack({ 150, 88, 139, 79 });
 	shooting.speed = 0.05f;
 	shooting.loop = false;
-	//collider = App->collisions->AddCollider({ position.x, position.y, 30, 9 }, Collider::Type::ENEMY, (Module*)App->enemies);
+	collider = App->collisions->AddCollider({ position.x, position.y, 139, 79 }, Collider::Type::ENEMY, (Module*)App->enemies);
 	spawnPath.PushBack({ 1.5f,-0.5f }, 180, &idle);
 	spawnPath.PushBack({ 1.0f,-0.0f }, 1, &idle);
 	spawnPath.loop = false;

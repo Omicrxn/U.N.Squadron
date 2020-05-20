@@ -33,6 +33,7 @@ bool ModuleStartScreen::Start() {
 	selector.PushBack({ 236,240,13,16 });
 	selector.PushBack({ 236,300,13,16 });
 	selector.speed = 0;
+	selector.Reset();
 
 
 	tex = App->textures->Load("Assets/sprites/menus/Menu-Spritesheet.png");
@@ -85,7 +86,6 @@ update_status ModuleStartScreen::Update(){
 			selector.speed = 0.2;
 			App->audio->PlayFx(1, 0);
 			App->transition->FadeToBlack(this, (Module*)App->store, 60);
-
 			
 		} break;
 		case 135: {

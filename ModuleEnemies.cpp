@@ -5,7 +5,6 @@
 #include "ModuleRenderer.h"
 #include "ModuleTextureManager.h"
 #include "ModuleAudio.h"
-
 #include "Enemy.h"
 #include "MediumCamouflageJet.h"
 #include "BigOrangeJet.h"
@@ -249,7 +248,7 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 {
 	for(uint i = 0; i < MAX_ENEMIES; ++i)
 	{
-		if(enemies[i] != nullptr && enemies[i]->GetCollider() == c1)
+		if(enemies[i] != nullptr && enemies[i]->GetCollider() == c1 && c2->type == Collider::Type::PLAYER_SHOT)
 		{
 			enemies[i]->OnCollision(c2); //Notify the enemy of a collision
 
