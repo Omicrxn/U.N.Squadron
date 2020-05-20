@@ -39,8 +39,10 @@ While at the moment Capcom was developing vertically scrolling shooters, U.N.Squ
 |Fly your Aircraft (Down)|Joystick Down|
 |Fly your Aircraft (Left)|Joystick Left|
 |Fly your Aircraft (Right)|Joystick Right|
-|Select / Continue|A|
-|Fire the Vulcan Cannon|X|
+|Select / Continue|X|
+|Fire the Vulcan Cannon|A|
+|Fire the Active Weapon|B|
+|Change Weapon|Y|
 |Travel through the options (Up)|Joystick Up|
 |Travel through the options (Down)|Joystick Down|
 |Travel through the options (Left)|Joystick Left|
@@ -55,6 +57,8 @@ While at the moment Capcom was developing vertically scrolling shooters, U.N.Squ
 |Fly your Aircraft (Right)|D or 🡲|
 |Select / Continue|Enter|
 |Fire the Vulcan Cannon|Space|
+|Fire the Active Weapon|F|
+|Change Weapon|C|
 |Travel through the options (Up)|W or 🡱|
 |Travel through the options (Down)|S or 🡳|
 |Travel through the options (Left)|A or 🡰|
