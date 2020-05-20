@@ -9,6 +9,7 @@
 #include "Weapon.h"
 #include "Bomb.h"
 #include "ModuleParticles.h"
+#include "ModulePlayer.h"
 
 ModuleWeapons::ModuleWeapons(bool startEnabled) : Module(startEnabled)
 {
@@ -99,39 +100,19 @@ bool ModuleWeapons::CleanUp()
 	return true;
 }
 
-bool ModuleWeapons::AddWeapon(WEAPON_TYPE type, int x, int y)
+void ModuleWeapons::SpawnWeapon(WEAPON_TYPE weaponType)
 {
-	bool ret = false;
-
-	for (uint i = 0; i < MAX_WEAPONS; ++i)
-	{
-		if (spawnQueue[i].type == WEAPON_TYPE::NO_TYPE)
-		{
-			spawnQueue[i].type = type;
-			spawnQueue[i].x = x;
-			spawnQueue[i].y = y;
-			ret = true;
-			break;
-		}
-	}
-
-	return ret;
-}
-
-void ModuleWeapons::SpawnWeapon(const WeaponSpawnpoint& info)
-{
-	// Find an empty slot in the weapons array
 	for (uint i = 0; i < MAX_WEAPONS; ++i)
 	{
 		if (weapons[i] == nullptr)
 		{
-			switch (info.type)
+			switch (weaponType)
 			{
 			case WEAPON_TYPE::BOMB:
-				weapons[i] = new Bomb(info.x, info.y);
+				weapons[i] = new Bomb(App->player->GetPlayerPosition().x, App->player->GetPlayerPosition().y);
 				break;
 			}
-			weapons[i]->texture = texture;
+			weapons[i]->texture = this->texture;
 			weapons[i]->destroyedFx = weaponDestroyedFx;
 			break;
 		}

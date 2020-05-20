@@ -9,6 +9,8 @@
 #include "ModuleFadeToBlack.h"
 #include "ModuleAudio.h"
 #include "ModuleDebugInfo.h"
+#include "ModuleWeapons.h"
+#include "ModuleStore.h"
 
 #include <stdio.h>
 
@@ -49,6 +51,8 @@ bool ModulePlayer::Start() {
 	// Add a collider to the player
 	collider = App->collisions->AddCollider({ position.x, position.y, 32, 16 }, Collider::Type::PLAYER, this);
 	++activeColliders; ++totalColliders;
+
+	this->weaponSelection = App->store->weaponSelection;
 
 	return ret;
 }
@@ -117,6 +121,12 @@ update_status ModulePlayer::Update() {
 	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_REPEAT || pad.l_y > 0.0f) {
 		if (position.x < (App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH - 32)) {
 			position.x += 3;
+		}
+	}
+
+	if (App->input->keyboard[SDL_SCANCODE_F] == KEY_DOWN) {
+		if ((weaponSelection &= (1 << 4)) != 0) {
+			App->weapons->SpawnWeapon(WEAPON_TYPE::BOMB);
 		}
 	}
 

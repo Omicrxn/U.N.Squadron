@@ -53,16 +53,9 @@ public:
 	// The weapon is destroyed and an explosion particle is fired
 	void OnCollision(Collider* c1, Collider* c2) override;
 
-	// Add an weapon into the queue to be spawned later
-	bool AddWeapon(WEAPON_TYPE type, int x, int y);
-
-private:
 	// Spawns a new weapon using the data from the queue
-	void SpawnWeapon(const WeaponSpawnpoint& info);
-
-	// A queue with all spawn points information
-	WeaponSpawnpoint spawnQueue[MAX_WEAPONS];
-
+	void SpawnWeapon(WEAPON_TYPE);
+private:
 	// All spawned weapons in the scene
 	Weapon* weapons[MAX_WEAPONS] = { nullptr };
 

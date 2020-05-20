@@ -9,22 +9,26 @@
 #include "ModuleHUD.h"
 #include "ModulePlayer.h"
 #include "ModuleDebugInfo.h"
+#include "ModuleWeapons.h";
 
 #include <stdio.h>
 
 #include "ModuleLevel1.h"
 
+// A few variables to manage the correct functioning of the store...
+// Not necessary for the remaining modules (because of that they are not defined in the .h)
 enum weapons {
 	WEAPON_1, WEAPON_2, WEAPON_3, WEAPON_4, WEAPON_5, WEAPON_6,
-	WEAPON_7, WEAPON_8, WEAPON_9, WEAPON_10, WEAPON_11, EXIT
+	BOMB, WEAPON_8, WEAPON_9, WEAPON_10, WEAPON_11, EXIT
 };
 
 uint weapons[2][6] = { {WEAPON_1, WEAPON_2, WEAPON_3, WEAPON_4, WEAPON_5, WEAPON_6},
-					   {WEAPON_7, WEAPON_8, WEAPON_9, WEAPON_10, WEAPON_11, EXIT} };
+					   {BOMB, WEAPON_8, WEAPON_9, WEAPON_10, WEAPON_11, EXIT} };
 
 uint rows = 0;
 uint columns = 0;
 uint weapon = weapons[rows][columns];
+///////////////////////////////////////////////////////////////////////////////////////////
 
 ModuleStore::ModuleStore(bool startEnabled) : Module(startEnabled) {
 	name = "Store";
@@ -70,6 +74,9 @@ bool ModuleStore::Start() {
 	rows = 0;
 	columns = 0;
 
+	// Resetting the weapons selected in the previous game
+	weaponSelection = 0;
+
 	return ret;
 }
 
@@ -99,8 +106,14 @@ update_status ModuleStore::Update() {
 	}
 
 	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN || App->input->pads[0].x == true) {
-		if (weapon == weapons[1][5])
-		{
+		// BOMB
+		if (weapon == weapons[1][0] && App->player->money >= 2000) {
+			App->player->money -= 2000;
+			weaponSelection |= (1 << 4);
+		}
+
+		// EXIT
+		if (weapon == weapons[1][5]) {
 			App->transition->FadeToBlack(this, (Module*)App->lvl2, 60);
 		}
 	}
