@@ -76,7 +76,7 @@ bool ModuleStore::Start() {
 	++activeFx; ++totalFx;
 
 	// Loading the font to print text on screen
-	yellowFont = App->fonts->Load("Assets/Fonts/FontY.png", App->HUD->lookupTable, 5);
+	greyFont = App->fonts->Load("Assets/Fonts/FontW.png", App->HUD->lookupTable, 5);
 	++activeFonts; ++totalFonts;
 	greenFont = App->fonts->Load("Assets/Fonts/FontG.png", App->HUD->lookupTable, 5);
 	++activeFonts; ++totalFonts;
@@ -118,7 +118,8 @@ update_status ModuleStore::Update() {
 	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN || App->input->pads[0].x == true) {
 		// BOMB
 		if (weapon == weapons[1][0] && App->player->money >= 2000) {
-			App->player->money -= 2000;
+			if(!App->debugInfo->maxMoney)
+				App->player->money -= 2000;
 			weaponSelection |= (1 << 4);
 		}
 
@@ -153,8 +154,8 @@ update_status ModuleStore::PostUpdate() {
 	App->fonts->BlitText(23, 110, greenFont, moneyText);
 
 	// Blit text
-	App->fonts->BlitText(170, 50, yellowFont, "Select");
-	App->fonts->BlitText(170, 60, yellowFont, "a weapon");
+	App->fonts->BlitText(170, 50, greyFont, "Select");
+	App->fonts->BlitText(170, 60, greyFont, "a weapon");
 
 	// Blit already selected texture
 	// WEAPON_1
@@ -194,7 +195,7 @@ bool ModuleStore::CleanUp() {
 	}
 	--totalTextures;
 
-	App->fonts->UnLoad(yellowFont);
+	App->fonts->UnLoad(greyFont);
 	--totalFonts;
 
 	App->fonts->UnLoad(greenFont);

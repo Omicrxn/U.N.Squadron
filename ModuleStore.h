@@ -21,7 +21,7 @@ public:
 	char moneyText[10] = { "\0" };
 
 	// Id Fonts
-	int yellowFont = -1;
+	int greyFont = -1;
 	int greenFont = -1;
 
 	// Sound effects indices

@@ -55,6 +55,11 @@ public:
 
 	// Spawns a new weapon using the data from the queue
 	void SpawnWeapon(WEAPON_TYPE);
+
+	/*uint GetBombAmmo() {
+		return bombAmmo;
+	}*/
+
 private:
 	// All spawned weapons in the scene
 	Weapon* weapons[MAX_WEAPONS] = { nullptr };
@@ -64,6 +69,8 @@ private:
 
 	// The audio fx for destroying an weapon
 	int weaponDestroyedFx = 0;
+
+	// uint bombAmmo = 50;
 };
 
 #endif // __MODULE_WEAPONS_H__
