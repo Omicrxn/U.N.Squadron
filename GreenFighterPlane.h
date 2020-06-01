@@ -17,8 +17,10 @@ public:
 	void Update() override;
 
 private:
-	Path spawnPath;
-	Path normalPath;
+	Path spawnPathTop;
+	Path spawnPathBot;
+	Path idlePathTop;
+	Path idlePathBot;
 	Animation idle;
 	Animation shooting;
 	SDL_Rect rect;
