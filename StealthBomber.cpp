@@ -9,6 +9,7 @@
 
 StealthBomber::StealthBomber(int x, int y, bool spawnRight) : Enemy(x, y, spawnRight)
 {
+	//animations
 	idle.PushBack({ 3,6,139,79 });
 	shooting.PushBack({ 176, 6, 139, 79 });
 	shooting.PushBack({ 291, 6, 139, 79 });
@@ -16,13 +17,16 @@ StealthBomber::StealthBomber(int x, int y, bool spawnRight) : Enemy(x, y, spawnR
 	shooting.PushBack({ 150, 88, 139, 79 });
 	shooting.speed = 0.05f;
 	shooting.loop = false;
-	collider = App->collisions->AddCollider({ position.x, position.y, 139, 79 }, Collider::Type::ENEMY, (Module*)App->enemies);
-	spawnPath.PushBack({ 1.5f,-0.5f }, 180, &idle);
-	spawnPath.PushBack({ 1.0f,-0.0f }, 1, &idle);
+	//collision
+	collider = App->collisions->AddCollider({ position.x, position.y, 139, 79 }, Collider::Type::BOSS, (Module*)App->enemies);
+	//paths
+	spawnPath.PushBack({ 1.43f,-0.2f }, 600, &idle);
+	spawnPath.PushBack({ 1.0-0.15f,-0.25f }, 180, &idle);
 	spawnPath.loop = false;
-	normalPath.PushBack({ 2.0f, -0.5f }, 180, &idle);
-	normalPath.PushBack({ -1.5f,0.5f }, 180, &idle);
+	normalPath.PushBack({ 0.9f,0.3f }, 180, &idle);
+	normalPath.PushBack({ 1.1f, -0.3f }, 180, &idle);
 	normalPath.loop = true;
+	//other var
 	despawnLeft = false;
 	scoreGiven = 100;
 	moneyGiven = 300;
@@ -30,13 +34,35 @@ StealthBomber::StealthBomber(int x, int y, bool spawnRight) : Enemy(x, y, spawnR
 
 void StealthBomber::Update()
 {
-	spawnPath.Update();
-	normalPath.Update();
-	position = spawnPos + spawnPath.GetRelativePosition();
-	if (currentAnim != spawnPath.GetCurrentAnimation()) {
-		currentAnim = spawnPath.GetCurrentAnimation();
+	
+	
+	switch (state)
+	{
+	case SPAWNING:
+		spawnPath.Update();
+		if (spawnPath.Finished())
+		{
+			state = IDLE;
+		}
+		if (currentAnim != spawnPath.GetCurrentAnimation()) {
+			currentAnim = spawnPath.GetCurrentAnimation();
+		}
+		position = spawnPos + spawnPath.GetRelativePosition();
+		idlePosition = position;
+		break;
+	case IDLE:
+		
+		normalPath.Update();
+		
+		position = idlePosition + normalPath.GetRelativePosition();
+		if (currentAnim != normalPath.GetCurrentAnimation()) {
+			currentAnim = normalPath.GetCurrentAnimation();
+		}
+		break;
+	default:
+		break;
 	}
-
+	
 	// Call to the base class. It must be called at the end
 	// It will update the collider depending on the position
 	Enemy::Update();

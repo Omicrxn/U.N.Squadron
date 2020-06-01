@@ -225,6 +225,7 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 					break;
 				case ENEMY_TYPE::GREENFIGHTERPLANE:
 					enemies[i] = new GreenFighterPlane(info.x, info.y, info.spawnRight);
+					break;
 				case ENEMY_TYPE::SMALLCAMOUFLAGEJET:
 					enemies[i] = new SmallCamouflageJet(info.x, info.y, info.spawnRight);
 					break;

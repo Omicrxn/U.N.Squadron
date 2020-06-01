@@ -10,6 +10,23 @@ void Path::PushBack(fPoint speed, uint frames, Animation* animation)
 	totalSteps++;
 }
 
+bool Path::Finished() {
+	
+		if (currentStep == totalSteps - 1) // If its the last step
+		{
+			if (currentStepFrame  == steps[currentStep].framesDuration)//if the last step has finished its frames
+			{
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		else {
+			return false;
+		}
+	
+}
 void Path::Update()
 {
 	currentStepFrame += 1;

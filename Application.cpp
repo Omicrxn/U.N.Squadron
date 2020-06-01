@@ -28,22 +28,21 @@ Application::Application() {
 	modules[i++] = audio = new ModuleAudio(true);
 
 	
-	modules[i++] = initialScreen = new ModuleInitialScreen(true);
+	modules[i++] = initialScreen = new ModuleInitialScreen(false);
 	modules[i++] = startScreen = new ModuleStartScreen(false);
 	modules[i++] = loseScreen = new ModuleLoseScreen(false);
 	modules[i++] = store = new ModuleStore(false);
-	modules[i++] = lvl2 = new ModuleLevel2(false);
+	modules[i++] = lvl2 = new ModuleLevel2(true);
 	modules[i++] = winScreen = new ModuleWinScreen(false);
 	
 
 	modules[i++] = player = new ModulePlayer(false);
-	modules[i++] = HUD = new ModuleHUD(false);
 	modules[i++] = particles = new ModuleParticles(false);
 	modules[i++] = enemies = new ModuleEnemies(false);
 	modules[i++] = collisions = new ModuleCollisions(false);
 	modules[i++] = weapons = new ModuleWeapons(false);
 	
-
+	modules[i++] = HUD = new ModuleHUD(false);
 	modules[i++] = debugInfo = new ModuleDebugInfo(true);
 	modules[i++] = transition = new ModuleFadeToBlack(true);
 	modules[i++] = fonts = new ModuleFonts(true);

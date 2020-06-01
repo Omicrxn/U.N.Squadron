@@ -57,6 +57,7 @@ public:
 		return(r);
 	}
 
+
 	const PointOperations& operator -=(const PointOperations& v)
 	{
 		x -= v.x;

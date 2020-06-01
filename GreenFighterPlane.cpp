@@ -9,31 +9,65 @@
 
 GreenFighterPlane::GreenFighterPlane(int x, int y, bool spawnRight) : Enemy(x, y, spawnRight)
 {
-	fly.PushBack({ 163, 151, 107, 39 });
-	currentAnim = &fly;
-
-	// Have the green fighter plane describe a path in the screen
-	path.PushBack({ 0.0f, -1.0f }, 50);
-	path.PushBack({ 0.0f, 1.0f }, 100);
-	path.PushBack({ 0.0f, -1.0f }, 50);
-
-	collider = App->collisions->AddCollider({ position.x, position.y, 107, 39 }, Collider::Type::ENEMY, (Module*)App->enemies);
-
+	//animations
+	idle.PushBack({ 275,151,107,39 });
+	//collision
+	collider = App->collisions->AddCollider({ position.x, position.y, 139, 79 }, Collider::Type::BOSS, (Module*)App->enemies);
+	//paths
+	spawnPath.PushBack({ 1.12f,0.65f }, 240, &idle);
+	spawnPath.PushBack({ 1.0f,0.0f }, 10, &idle);
+	
+	spawnPath.loop = false;
+	normalPath.PushBack({ 1.13f,-0.7f }, 180, &idle);//up-right
+	normalPath.PushBack({ 1.0f,0.0f }, 10, &idle);
+	normalPath.PushBack({ 1.01f,0.7f }, 180, &idle);//down-right
+	normalPath.PushBack({ 1.0f,0.0f }, 10, &idle);
+	normalPath.PushBack({ 1.08f,-0.7f }, 180, &idle);//up-right
+	normalPath.PushBack({ 1.0f,0.0f }, 10, &idle);
+	normalPath.PushBack({ 0.82f,0.7f }, 180, &idle);//down-left
+	normalPath.PushBack({ 1.0f,0.0f }, 10, &idle);
+	normalPath.PushBack({ 1.13f,-0.7f }, 275, &idle);//up-right and despawn
+	normalPath.PushBack({ 2.0f,-0.0f }, 180, &idle);//up-right and despawn
+	normalPath.loop = false;
+	//other var
+	despawnLeft = false;
 	scoreGiven = 400;
 	moneyGiven = 1200;
 }
 
 void GreenFighterPlane::Update()
 {
-	path.Update();
-	position = spawnPos + path.GetRelativePosition();
+	switch (state)
+	{
+	case gSPAWNING:
+		spawnPath.Update();
+		if (spawnPath.Finished())
+		{
+			state = gIDLE;
+		}
+		if (currentAnim != spawnPath.GetCurrentAnimation()) {
+			currentAnim = spawnPath.GetCurrentAnimation();
+		}
+		position = spawnPos + spawnPath.GetRelativePosition();
+		idlePosition = position;
+		break;
+	case gIDLE:
 
-	// Call to the base class. It must be called at the end
-	// It will update the collider depending on the position
+		normalPath.Update();
+
+		position = idlePosition + normalPath.GetRelativePosition();
+		if (currentAnim != normalPath.GetCurrentAnimation()) {
+			currentAnim = normalPath.GetCurrentAnimation();
+		}
+		break;
+	default:
+		break;
+	}
+
 	Enemy::Update();
 
 	shootingFrequency++;
-	if (shootingFrequency > 120)
+	if (state == gIDLE && shootingFrequency > 60)
 	{
 		shootingFrequency = 0;
 
