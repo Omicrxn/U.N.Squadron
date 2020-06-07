@@ -17,6 +17,8 @@ ModuleSelector::~ModuleSelector() {}
 bool ModuleSelector::Start() {
 	bool ret = true;
 
+	selected = NONE;
+
 	// Background rect
 	background = { 0,0,SCREEN_WIDTH,SCREEN_HEIGHT };
 
@@ -87,14 +89,14 @@ update_status ModuleSelector::PostUpdate() {
 			ret = UPDATE_ERROR;
 
 		App->fonts->BlitText(80, 169, greyFont, "You selected");
-		App->fonts->BlitText(160, 181, greyFont, "level 1");
+		App->fonts->BlitText(160, 181, greyFont, "Level 1");
 	}
 	else if (selected == LEVEL2) {
 		if (!App->render->Blit(tex3, 0, 0, &background, 1, false))
 			ret = UPDATE_ERROR;
 
 		App->fonts->BlitText(80, 169, greyFont, "You selected");
-		App->fonts->BlitText(160, 181, greyFont, "level 2");
+		App->fonts->BlitText(160, 181, greyFont, "Level 2");
 	}
 
 	return ret;

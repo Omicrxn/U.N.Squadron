@@ -28,7 +28,7 @@ public:
 	int greyFont = -1;
 
 	// Selection index
-	uint selected = NONE;
+	uint selected;
 
 private:
 	SDL_Texture* tex1 = nullptr;
