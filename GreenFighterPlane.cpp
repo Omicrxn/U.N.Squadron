@@ -57,6 +57,7 @@ GreenFighterPlane::GreenFighterPlane(int x, int y, bool spawnRight) : Enemy(x, y
 	else {
 		despawnLeft = true;
 	}
+	health = 70;
 	scoreGiven = 400;
 	moneyGiven = 1200;
 }

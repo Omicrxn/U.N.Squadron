@@ -62,6 +62,7 @@ protected:
 
 	// Original spawn position. Stored for movement calculations
 	iPoint spawnPos;
+	int health = 0;
 };
 
 #endif // __ENEMY_H__

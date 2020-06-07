@@ -18,8 +18,10 @@ private:
 	Animation shooting;
 	SDL_Rect rect;
 	unsigned int shootingFrequency;
+	
 	SBState state = SPAWNING;
 	iPoint idlePosition = { 0, 0};
+	
 };
 #endif // !_STEALTHBOMBER_H_
 

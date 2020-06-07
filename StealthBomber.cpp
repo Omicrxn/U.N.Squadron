@@ -6,6 +6,8 @@
 #include "ModulePlayer.h"
 #include "ModuleLevel2.h"
 #include "SetBulletDirection.h"
+#include "ModuleDebugInfo.h"
+
 
 StealthBomber::StealthBomber(int x, int y, bool spawnRight) : Enemy(x, y, spawnRight)
 {
@@ -30,6 +32,7 @@ StealthBomber::StealthBomber(int x, int y, bool spawnRight) : Enemy(x, y, spawnR
 	despawnLeft = false;
 	scoreGiven = 100;
 	moneyGiven = 300;
+	health = 140;
 }
 
 void StealthBomber::Update()
@@ -86,3 +89,4 @@ void StealthBomber::Update()
 		App->audio->PlayFx(2, 0);
 	}
 }
+

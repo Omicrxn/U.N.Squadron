@@ -42,14 +42,22 @@ void Enemy::Draw()
 
 void Enemy::OnCollision(Collider* collider)
 {
-	App->particles->AddParticle(App->particles->enemyExplosion, position.x, position.y);
-	App->audio->PlayFx(3,0);
-
-	App->player->score += scoreGiven;
-
-	if (!App->debugInfo->maxMoney) {
-		App->player->money += moneyGiven;
+	if (health > 1) {
+		health--;
 	}
+	else {
+		App->particles->AddParticle(App->particles->enemyExplosion, position.x, position.y);
+		App->audio->PlayFx(3, 0);
+
+		App->player->score += scoreGiven;
+
+		if (!App->debugInfo->maxMoney) {
+			App->player->money += moneyGiven;
+		}
+		this->SetToDelete();
+	}
+	
+	
 }
 
 void Enemy::SetToDelete()

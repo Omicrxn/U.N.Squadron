@@ -27,4 +27,5 @@ private:
 	unsigned int shootingFrequency;
 	GFState state = gSPAWNING;
 	iPoint idlePosition = { 0, 0 };
+	
 };

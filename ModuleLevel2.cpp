@@ -217,8 +217,8 @@ bool ModuleLevel2::Start() {
 	//App->enemies->AddEnemy(ENEMY_TYPE::BIGORANGEJET, 7550, SCREEN_HEIGHT - 70);
 	//App->enemies->AddEnemy(ENEMY_TYPE::BIGORANGEJET, 7575, SCREEN_HEIGHT - 70);
     //SUB BOSS GREEN FIGHTER PLANE
-	//App->enemies->AddEnemy(ENEMY_TYPE::GREENFIGHTERPLANE, SCREEN_WIDTH/2, 0, true);
-	App->enemies->AddEnemy(ENEMY_TYPE::GREENFIGHTERPLANE, SCREEN_WIDTH/2-5, 256, true);
+	App->enemies->AddEnemy(ENEMY_TYPE::GREENFIGHTERPLANE, SCREEN_WIDTH/2, 0, true);
+	//App->enemies->AddEnemy(ENEMY_TYPE::GREENFIGHTERPLANE, SCREEN_WIDTH/2-5, 256, true);
 	//BOSS: STEALTH BOMBER
 	//App->enemies->AddEnemy(ENEMY_TYPE::STEALTHBOMBER, -139, SCREEN_HEIGHT, false);
 	App->render->camera.x = 0;
@@ -247,7 +247,7 @@ update_status ModuleLevel2::Update(){
 	
 	// Second layer movement
 	InfiniteScrolling(&secondTopPos, &secondTopPos2, &secondBotPos, &secondBotPos2, &secondTopLayer, &secondBottomLayer, secondSpeed);
-
+	
 	// Third layer movement
 	InfiniteScrolling(&thirdTopPos, &thirdTopPos2, &thirdBotPos, &thirdBotPos2, &thirdTopLayer, &thirdBottomLayer, thirdSpeed);
 
