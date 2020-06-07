@@ -27,7 +27,11 @@ bool ModuleHUD::Start() {
 	fuelQuantity = {2,71,62,6};
 	fuelBackground = {0,149,66,10};
 
-	weapon = { 132,206,52,8 };
+	// Taking the bomb coordinates of the HUD spritesheet
+	bomb = { 132,206,52,8 };
+
+	// Taking the shell coordinates of the HUD spritesheet
+	shell = { 132,84,69,11 };
 	
 	playerFace.PushBack({ 71,75,42,34 });
 	powSquare = { 170,13,60,26 };
@@ -67,7 +71,16 @@ update_status ModuleHUD::PostUpdate() {
 		App->render->Blit(tex, 16, 201, &helmet, 1, false);
 		App->render->Blit(tex, 55, 206, &fuelBackground, 1, false);
 		App->render->Blit(tex, 57, 208, &fuelQuantity, 1, false);
-		App->render->Blit(tex, 132, 208, &weapon, 1, false);
+
+		if (App->player->currentWeapon == App->player->weapons::BOMB) {
+			App->render->Blit(tex, 132, 208, &bomb, 1, false);
+			App->fonts->BlitText(224, 207, greenFont, "50");
+		}
+		else if (App->player->currentWeapon == App->player->weapons::SHELL)
+		{
+			App->render->Blit(tex, 132, 208, &shell, 1, false);
+			App->fonts->BlitText(224, 207, greenFont, "50");
+		}
 
 		// Blit of the HUD
 		App->fonts->BlitText(8, 15, yellowFont, "SCORE");
@@ -80,7 +93,6 @@ update_status ModuleHUD::PostUpdate() {
 		App->fonts->BlitText(224, 31, greenFont, "  1");
 		App->fonts->BlitText(33, 208, yellowFont, "=");
 		App->fonts->BlitText(41, 207, greenFont, lifesText);
-		App->fonts->BlitText(224, 207, greenFont, "50");
 	}
 
 	return ret;

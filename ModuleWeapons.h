@@ -56,9 +56,8 @@ public:
 	// Spawns a new weapon using the data from the queue
 	void SpawnWeapon(WEAPON_TYPE);
 
-	/*uint GetBombAmmo() {
-		return bombAmmo;
-	}*/
+	// Destroys any weapons that have moved outside the camera limits
+	void DespawnWeapon();
 
 private:
 	// All spawned weapons in the scene
@@ -69,8 +68,6 @@ private:
 
 	// The audio fx for destroying an weapon
 	int weaponDestroyedFx = 0;
-
-	// uint bombAmmo = 50;
 };
 
 #endif // __MODULE_WEAPONS_H__

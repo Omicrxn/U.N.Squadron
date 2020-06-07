@@ -38,7 +38,8 @@ private:
 	SDL_Rect fuelQuantity;
 	SDL_Rect helmet;
 	SDL_Rect powSquare;
-	SDL_Rect weapon;
+	SDL_Rect bomb;
+	SDL_Rect shell;
 };
 
 #endif // __ModuleHUD_H__

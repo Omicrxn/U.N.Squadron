@@ -14,11 +14,6 @@
 
 #include <stdio.h>
 
-enum weapons {
-	WEAPON_1, WEAPON_2, WEAPON_3, WEAPON_4, SHELL, WEAPON_6,
-	BOMB, WEAPON_8, WEAPON_9, WEAPON_10, WEAPON_11, EXIT
-};
-
 uint weaponCount;
 
 ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled) {
@@ -64,12 +59,21 @@ bool ModulePlayer::Start() {
 	if (weaponSelection == 0)
 	{
 		weaponCount == 0;
+		currentWeapon = NONE;
 	}
 	else
 	{
 		while ((weaponSelection & (1 << weaponCount)) == 0)
 		{
 			weaponCount++;
+		}
+		if (weaponCount == 4)
+		{
+			currentWeapon = BOMB;
+		}
+		else if (weaponCount == 6)
+		{
+			currentWeapon = SHELL;
 		}
 	}
 
@@ -144,14 +148,14 @@ update_status ModulePlayer::Update() {
 	}
 
 	if (App->input->keyboard[SDL_SCANCODE_F] == KEY_DOWN) {
-		switch (weaponCount)
+		switch (currentWeapon)
 		{
-		case 4:
+		case BOMB:
 			if ((weaponSelection & (1 << 4)) != 0) {
 				App->weapons->SpawnWeapon(WEAPON_TYPE::BOMB);
 			}
 			break;
-		case 6:
+		case SHELL:
 			if ((weaponSelection & (1 << 6)) != 0) {
 				App->weapons->SpawnWeapon(WEAPON_TYPE::SHELL);
 			}
@@ -166,6 +170,18 @@ update_status ModulePlayer::Update() {
 		while ((weaponSelection & (1 << weaponCount)) == 0)
 		{
 			weaponCount++;
+			if (weaponCount > 11)
+			{
+				weaponCount = 0;
+			}
+		}
+		if (weaponCount == 4)
+		{
+			currentWeapon = BOMB;
+		}
+		else if (currentWeapon == 6)
+		{
+			currentWeapon = SHELL;
 		}
 	}
 

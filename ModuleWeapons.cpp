@@ -12,6 +12,8 @@
 #include "ModuleParticles.h"
 #include "ModulePlayer.h"
 
+#define SPAWN_MARGIN 50
+
 ModuleWeapons::ModuleWeapons(bool startEnabled) : Module(startEnabled)
 {
 	name = "Weapons";
@@ -58,6 +60,8 @@ update_status ModuleWeapons::Update()
 		if (weapons[i] != nullptr)
 			weapons[i]->Update();
 	}
+
+	DespawnWeapon();
 
 	return update_status::UPDATE_CONTINUE;
 }
@@ -122,13 +126,49 @@ void ModuleWeapons::SpawnWeapon(WEAPON_TYPE weaponType)
 	}
 }
 
+void ModuleWeapons::DespawnWeapon()
+{
+	// Iterate existing weapons
+	for (uint i = 0; i < MAX_WEAPONS; ++i)
+	{
+		if (weapons[i] != nullptr)
+		{
+			// Delete the weapon when it has reached the end of the screen
+			if (weapons[i]->position.x * SCREEN_SIZE < (App->render->camera.x) - SPAWN_MARGIN)
+			{
+				LOG("DeSpawning weapon at %d", weapons[i]->position.x * SCREEN_SIZE);
+
+				weapons[i]->SetToDelete();
+			}
+			else if (weapons[i]->position.x * SCREEN_SIZE > ((App->render->camera.x) + SPAWN_MARGIN + (SCREEN_WIDTH * SCREEN_SIZE)))
+			{
+				LOG("DeSpawning weapon at %d", weapons[i]->position.x * SCREEN_SIZE);
+
+				weapons[i]->SetToDelete();
+			}
+			else if (weapons[i]->position.y * SCREEN_SIZE < (App->render->camera.y) - SPAWN_MARGIN)
+			{
+				LOG("DeSpawning weapon at %d", weapons[i]->position.x * SCREEN_SIZE);
+
+				weapons[i]->SetToDelete();
+			}
+			else if (weapons[i]->position.y * SCREEN_SIZE > ((App->render->camera.y) + SPAWN_MARGIN + (SCREEN_HEIGHT * SCREEN_SIZE)))
+			{
+				LOG("DeSpawning weapon at %d", weapons[i]->position.x * SCREEN_SIZE);
+
+				weapons[i]->SetToDelete();
+			}
+		}
+	}
+}
+
 void ModuleWeapons::OnCollision(Collider* c1, Collider* c2)
 {
 	for (uint i = 0; i < MAX_WEAPONS; ++i)
 	{
 		if (weapons[i] != nullptr && weapons[i]->GetCollider() == c1)
 		{
-			weapons[i]->OnCollision(c2); //Notify the weapon of a collision
+			weapons[i]->OnCollision(c2); // Notify the weapon of a collision
 
 			delete weapons[i];
 			weapons[i] = nullptr;

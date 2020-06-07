@@ -57,6 +57,15 @@ public:
 	// With that we'll be able to know which weapons have been selected by the player without wasting memory unnecessarily :)
 	uint weaponSelection = 0; // 00000000 00000000 00000000 00000000
 
+	// The whole list of weapons to know which one is the player selecting at each moment
+	enum weapons {
+		WEAPON_1, WEAPON_2, WEAPON_3, WEAPON_4, SHELL, WEAPON_6,
+		BOMB, WEAPON_8, WEAPON_9, WEAPON_10, WEAPON_11, NONE
+	};
+
+	// To know which is the current weapon (the last one that has been selected)
+	uint currentWeapon;
+
 private:
 	iPoint position;
 	SDL_Texture* texture = nullptr;
