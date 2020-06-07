@@ -27,7 +27,7 @@ class ModuleStore;
 class ModuleDebugInfo;
 class ModuleWeapons;
 
-#define NUM_MODULES 20
+#define NUM_MODULES 21
 
 class Application {
 

@@ -3,6 +3,7 @@
 #include "ModuleAudio.h"
 #include "ModuleInput.h"
 #include "ModuleTextureManager.h"
+#include "ModuleLevel1.h"
 #include "ModuleLevel2.h"
 #include "ModulePlayer.h"
 #include "ModuleParticles.h"
@@ -32,7 +33,8 @@ Application::Application() {
 	modules[i++] = startScreen = new ModuleStartScreen(false);
 	modules[i++] = loseScreen = new ModuleLoseScreen(false);
 	modules[i++] = store = new ModuleStore(false);
-	modules[i++] = lvl2 = new ModuleLevel2(true);
+	modules[i++] = lvl1 = new ModuleLevel1(true);
+	modules[i++] = lvl2 = new ModuleLevel2(false);
 	modules[i++] = winScreen = new ModuleWinScreen(false);
 	
 

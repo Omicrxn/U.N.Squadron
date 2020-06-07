@@ -125,7 +125,7 @@ update_status ModuleStore::Update() {
 
 		// EXIT
 		if (weapon == weapons[1][5]) {
-			App->transition->FadeToBlack(this, (Module*)App->lvl2, 60);
+			App->transition->FadeToBlack(this, (Module*)App->lvl1, 60);
 		}
 	}
 
