@@ -165,6 +165,7 @@
     <ClCompile Include="ModuleParticles.cpp" />
     <ClCompile Include="ModuleRenderer.cpp" />
     <ClCompile Include="ModulePlayer.cpp" />
+    <ClCompile Include="ModuleSelector.cpp" />
     <ClCompile Include="ModuleStartScreen.cpp" />
     <ClCompile Include="ModuleStore.cpp" />
     <ClCompile Include="ModuleTextureManager.cpp" />
@@ -206,6 +207,7 @@
     <ClInclude Include="ModuleParticles.h" />
     <ClInclude Include="ModuleRenderer.h" />
     <ClInclude Include="ModulePlayer.h" />
+    <ClInclude Include="ModuleSelector.h" />
     <ClInclude Include="ModuleStartScreen.h" />
     <ClInclude Include="ModuleStore.h" />
     <ClInclude Include="ModuleTextureManager.h" />

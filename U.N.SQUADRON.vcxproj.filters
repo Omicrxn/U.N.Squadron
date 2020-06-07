@@ -115,6 +115,9 @@
     <ClCompile Include="S.Shell.cpp">
       <Filter>Source Files\Entities\Weapons</Filter>
     </ClCompile>
+    <ClCompile Include="ModuleSelector.cpp">
+      <Filter>Source Files\Modules\Gameplay</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -237,6 +240,9 @@
     </ClInclude>
     <ClInclude Include="S.Shell.h">
       <Filter>Source Files\Entities\Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleSelector.h">
+      <Filter>Source Files\Modules\Gameplay</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

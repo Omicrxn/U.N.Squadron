@@ -18,11 +18,12 @@
 #include "ModuleLevel2.h"
 #include "ModuleWinScreen.h"
 #include "ModuleStore.h"
+#include "ModuleSelector.h"
 
 #include "SDL2/include/SDL.h"
 #include <stdio.h>
 
-#define DebugModules 9
+#define DebugModules 10
 
 ModuleDebugInfo::ModuleDebugInfo(bool startEnabled) : Module(startEnabled) 
 {
@@ -63,7 +64,10 @@ update_status ModuleDebugInfo::Update() {
 			App->transition->FadeToBlack((Module*)App->initialScreen, (Module*)App->startScreen, 60);
 		}
 		else if (App->startScreen->IsEnabled()) {
-			App->transition->FadeToBlack((Module*)App->startScreen, (Module*)App->store, 60);
+			App->transition->FadeToBlack((Module*)App->startScreen, (Module*)App->selector, 60);
+		}
+		else if (App->selector->IsEnabled()) {
+			App->transition->FadeToBlack((Module*)App->selector, (Module*)App->store, 60);
 		}
 		else if (App->store->IsEnabled()) {
 			App->transition->FadeToBlack((Module*)App->store, (Module*)App->lvl2, 60);
@@ -100,18 +104,20 @@ update_status ModuleDebugInfo::Update() {
 		else if (counterModules == 2)
 			inspectedModule = (Module*)App->startScreen;
 		else if (counterModules == 3)
-			inspectedModule = (Module*)App->store;
+			inspectedModule = (Module*)App->selector;
 		else if (counterModules == 4)
-			inspectedModule = (Module*)App->lvl2;
+			inspectedModule = (Module*)App->store;
 		else if (counterModules == 5)
-			inspectedModule = (Module*)App->player;
+			inspectedModule = (Module*)App->lvl2;
 		else if (counterModules == 6)
-			inspectedModule = (Module*)App->enemies;
+			inspectedModule = (Module*)App->player;
 		else if (counterModules == 7)
-			inspectedModule = (Module*)App->winScreen;
+			inspectedModule = (Module*)App->enemies;
 		else if (counterModules == 8)
-			inspectedModule = (Module*)App->loseScreen;
+			inspectedModule = (Module*)App->winScreen;
 		else if (counterModules == 9)
+			inspectedModule = (Module*)App->loseScreen;
+		else if (counterModules == 10)
 			inspectedModule = (Module*)App->debugInfo;
 
 		if (App->input->keyboard[SDL_SCANCODE_F7] == KEY_DOWN && counterModules == DebugModules) {

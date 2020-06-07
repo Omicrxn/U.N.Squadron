@@ -85,7 +85,7 @@ update_status ModuleStartScreen::Update(){
 		case 116: {
 			selector.speed = 0.2;
 			App->audio->PlayFx(1, 0);
-			App->transition->FadeToBlack(this, (Module*)App->store, 60);
+			App->transition->FadeToBlack(this, (Module*)App->selector, 60);
 			
 		} break;
 		case 135: {

@@ -13,8 +13,6 @@
 
 #include <stdio.h>
 
-#include "ModuleLevel1.h"
-
 // A few variables to manage the correct functioning of the store...
 // Not necessary for the remaining modules (because of that they are not defined in the .h)
 enum weapons {
