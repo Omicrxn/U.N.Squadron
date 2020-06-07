@@ -51,12 +51,6 @@ public:
 		return playerLifes;
 	}
 
-	// Bit field to store all the weapons selected to start the game
-	// The last 11 bits represent each weapon selectable for the player (from left to right)
-	// For instance, 00000000 00000000 00000000 00000001 means that WEAPON_11 has been selected
-	// With that we'll be able to know which weapons have been selected by the player without wasting memory unnecessarily :)
-	uint weaponSelection = 0; // 00000000 00000000 00000000 00000000
-
 	// The whole list of weapons to know which one is the player selecting at each moment
 	enum weapons {
 		WEAPON_1, WEAPON_2, WEAPON_3, WEAPON_4, SHELL, WEAPON_6,
@@ -74,6 +68,8 @@ private:
 	SDL_Rect rectAnim;
 	int maxFuel = 8, currentFuel = 8, playerLifes = 3;
 	bool godMode = false;
+	uint weaponCount;
+	bool hasBought;
 };
 
 #endif // __MODULEPLAYER_H__

@@ -13,21 +13,6 @@
 
 #include <stdio.h>
 
-// A few variables to manage the correct functioning of the store...
-// Not necessary for the remaining modules (because of that they are not defined in the .h)
-enum weapons {
-	WEAPON_1, WEAPON_2, WEAPON_3, WEAPON_4, SHELL, WEAPON_6,
-	BOMB, WEAPON_8, WEAPON_9, WEAPON_10, WEAPON_11, EXIT
-};
-
-uint weapons[2][6] = { {WEAPON_1, WEAPON_2, WEAPON_3, WEAPON_4, SHELL, WEAPON_6},
-					   {BOMB, WEAPON_8, WEAPON_9, WEAPON_10, WEAPON_11, EXIT} };
-
-uint rows = 0;
-uint columns = 0;
-uint weapon = weapons[rows][columns];
-///////////////////////////////////////////////////////////////////////////////////////////
-
 ModuleStore::ModuleStore(bool startEnabled) : Module(startEnabled) {
 	name = "Store";
 }

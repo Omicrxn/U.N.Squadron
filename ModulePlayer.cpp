@@ -14,8 +14,6 @@
 
 #include <stdio.h>
 
-uint weaponCount;
-
 ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled) {
 	name = "Player";
 }
@@ -54,16 +52,15 @@ bool ModulePlayer::Start() {
 	collider = App->collisions->AddCollider({ position.x, position.y, 32, 16 }, Collider::Type::PLAYER, this);
 	++activeColliders; ++totalColliders;
 
-	this->weaponSelection = App->store->weaponSelection;
-
-	if (weaponSelection == 0)
+	if (App->store->weaponSelection == 0)
 	{
-		weaponCount == 0;
+		weaponCount = 0;
 		currentWeapon = NONE;
+		hasBought = false;
 	}
 	else
 	{
-		while ((weaponSelection & (1 << weaponCount)) == 0)
+		while ((App->store->weaponSelection & (1 << weaponCount)) == 0)
 		{
 			weaponCount++;
 		}
@@ -75,6 +72,7 @@ bool ModulePlayer::Start() {
 		{
 			currentWeapon = SHELL;
 		}
+		hasBought = true;
 	}
 
 	return ret;
@@ -151,12 +149,12 @@ update_status ModulePlayer::Update() {
 		switch (currentWeapon)
 		{
 		case BOMB:
-			if ((weaponSelection & (1 << 4)) != 0) {
+			if ((App->store->weaponSelection & (1 << 4)) != 0) {
 				App->weapons->SpawnWeapon(WEAPON_TYPE::BOMB);
 			}
 			break;
 		case SHELL:
-			if ((weaponSelection & (1 << 6)) != 0) {
+			if ((App->store->weaponSelection & (1 << 6)) != 0) {
 				App->weapons->SpawnWeapon(WEAPON_TYPE::SHELL);
 			}
 			break;
@@ -165,9 +163,9 @@ update_status ModulePlayer::Update() {
 		}
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_C] == KEY_DOWN) {
+	if (App->input->keyboard[SDL_SCANCODE_C] == KEY_DOWN && hasBought) {
 		weaponCount++;
-		while ((weaponSelection & (1 << weaponCount)) == 0)
+		while ((App->store->weaponSelection & (1 << weaponCount)) == 0)
 		{
 			weaponCount++;
 			if (weaponCount > 11)
