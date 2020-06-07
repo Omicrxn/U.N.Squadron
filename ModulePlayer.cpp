@@ -14,6 +14,13 @@
 
 #include <stdio.h>
 
+enum weapons {
+	WEAPON_1, WEAPON_2, WEAPON_3, WEAPON_4, SHELL, WEAPON_6,
+	BOMB, WEAPON_8, WEAPON_9, WEAPON_10, WEAPON_11, EXIT
+};
+
+uint weaponCount;
+
 ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled) {
 	name = "Player";
 }
@@ -53,6 +60,18 @@ bool ModulePlayer::Start() {
 	++activeColliders; ++totalColliders;
 
 	this->weaponSelection = App->store->weaponSelection;
+
+	if (weaponSelection == 0)
+	{
+		weaponCount == 0;
+	}
+	else
+	{
+		while ((weaponSelection & (1 << weaponCount)) == 0)
+		{
+			weaponCount++;
+		}
+	}
 
 	return ret;
 }
@@ -125,8 +144,28 @@ update_status ModulePlayer::Update() {
 	}
 
 	if (App->input->keyboard[SDL_SCANCODE_F] == KEY_DOWN) {
-		if ((weaponSelection &= (1 << 4)) != 0) {
-			App->weapons->SpawnWeapon(WEAPON_TYPE::BOMB);
+		switch (weaponCount)
+		{
+		case 4:
+			if ((weaponSelection & (1 << 4)) != 0) {
+				App->weapons->SpawnWeapon(WEAPON_TYPE::BOMB);
+			}
+			break;
+		case 6:
+			if ((weaponSelection & (1 << 6)) != 0) {
+				App->weapons->SpawnWeapon(WEAPON_TYPE::SHELL);
+			}
+			break;
+		default:
+			break;
+		}
+	}
+
+	if (App->input->keyboard[SDL_SCANCODE_C] == KEY_DOWN) {
+		weaponCount++;
+		while ((weaponSelection & (1 << weaponCount)) == 0)
+		{
+			weaponCount++;
 		}
 	}
 

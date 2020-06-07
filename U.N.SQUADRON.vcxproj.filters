@@ -112,6 +112,9 @@
     <ClCompile Include="StealthBomber.cpp">
       <Filter>Source Files\Entities\Enemies</Filter>
     </ClCompile>
+    <ClCompile Include="S.Shell.cpp">
+      <Filter>Source Files\Entities\Weapons</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -231,6 +234,9 @@
     </ClInclude>
     <ClInclude Include="StealthBomber.h">
       <Filter>Source Files\Entities\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="S.Shell.h">
+      <Filter>Source Files\Entities\Weapons</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

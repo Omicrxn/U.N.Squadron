@@ -8,6 +8,7 @@
 
 #include "Weapon.h"
 #include "Bomb.h"
+#include "S.Shell.h"
 #include "ModuleParticles.h"
 #include "ModulePlayer.h"
 
@@ -111,6 +112,8 @@ void ModuleWeapons::SpawnWeapon(WEAPON_TYPE weaponType)
 			case WEAPON_TYPE::BOMB:
 				weapons[i] = new Bomb(App->player->GetPlayerPosition().x, App->player->GetPlayerPosition().y);
 				break;
+			case WEAPON_TYPE::SHELL:
+				weapons[i] = new Shell(App->player->GetPlayerPosition().x, App->player->GetPlayerPosition().y);
 			}
 			weapons[i]->texture = this->texture;
 			weapons[i]->destroyedFx = weaponDestroyedFx;

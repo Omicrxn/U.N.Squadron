@@ -18,11 +18,11 @@
 // A few variables to manage the correct functioning of the store...
 // Not necessary for the remaining modules (because of that they are not defined in the .h)
 enum weapons {
-	WEAPON_1, WEAPON_2, WEAPON_3, WEAPON_4, WEAPON_5, WEAPON_6,
+	WEAPON_1, WEAPON_2, WEAPON_3, WEAPON_4, SHELL, WEAPON_6,
 	BOMB, WEAPON_8, WEAPON_9, WEAPON_10, WEAPON_11, EXIT
 };
 
-uint weapons[2][6] = { {WEAPON_1, WEAPON_2, WEAPON_3, WEAPON_4, WEAPON_5, WEAPON_6},
+uint weapons[2][6] = { {WEAPON_1, WEAPON_2, WEAPON_3, WEAPON_4, SHELL, WEAPON_6},
 					   {BOMB, WEAPON_8, WEAPON_9, WEAPON_10, WEAPON_11, EXIT} };
 
 uint rows = 0;
@@ -123,9 +123,16 @@ update_status ModuleStore::Update() {
 			weaponSelection |= (1 << 4);
 		}
 
+		// S.SHELL
+		else if (weapon == weapons[0][4] && App->player->money >= 1000) {
+			if (!App->debugInfo->maxMoney)
+				App->player->money -= 1000;
+			weaponSelection |= (1 << 6);
+		}
+
 		// EXIT
 		if (weapon == weapons[1][5]) {
-			App->transition->FadeToBlack(this, (Module*)App->lvl1, 60);
+			App->transition->FadeToBlack(this, (Module*)App->lvl2, 60);
 		}
 	}
 
@@ -166,6 +173,11 @@ update_status ModuleStore::PostUpdate() {
 	// BOMB
 	if ((weaponSelection & (1 << 4)) != 0) {
 		if (!App->render->Blit(tex3, 15, 174, &alreadySelected, 1, false))
+			ret = UPDATE_ERROR;
+	}
+	// SHELL
+	if ((weaponSelection & (1 << 6)) != 0) {
+		if (!App->render->Blit(tex3, 175, 126, &alreadySelected, 1, false))
 			ret = UPDATE_ERROR;
 	}
 
