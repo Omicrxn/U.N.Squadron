@@ -35,18 +35,18 @@ While at the moment Capcom was developing vertically scrolling shooters, U.N.Squ
 ### GAMEPAD CONTROLS
 |Function|Button|
 |-------|--------|
-|Fly your Aircraft (Up)|Joystick Up|
-|Fly your Aircraft (Down)|Joystick Down|
-|Fly your Aircraft (Left)|Joystick Left|
-|Fly your Aircraft (Right)|Joystick Right|
-|Select / Continue|X|
-|Fire the Vulcan Cannon|A|
-|Fire the Active Weapon|B|
-|Change Weapon|Y|
-|Travel through the options (Up)|Joystick Up|
-|Travel through the options (Down)|Joystick Down|
-|Travel through the options (Left)|Joystick Left|
-|Travel through the options (Right)|Joystick Right|
+|Fly your Aircraft (Up)|🡱 or Joystick Up|
+|Fly your Aircraft (Down)|🡳 or Joystick Down|
+|Fly your Aircraft (Left)|🡰 or Joystick Left|
+|Fly your Aircraft (Right)|🡲 or Joystick Right|
+|Select / Continue|A|
+|Fire the Vulcan Cannon|X or R1|
+|Fire the Active Weapon|B or R2|
+|Change Weapon|Y or L1|
+|Travel through the options (Up)|🡱|
+|Travel through the options (Down)|🡳|
+|Travel through the options (Left)|🡰|
+|Travel through the options (Right)|🡲|
 
 ### KEYBOARD CONTROLS
 |Function|Keyboard|
