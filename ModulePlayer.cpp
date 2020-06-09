@@ -93,7 +93,7 @@ update_status ModulePlayer::Update() {
 	App->player->position.x += 1;
 
 	// Spawn bullet particles when pressing SPACE or X
-	if ((App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_DOWN && !destroyed) || pad.x == true) {
+	if ((App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_DOWN && !destroyed) || pad.x == true || pad.r1 == true) {
 		App->particles->AddParticle(App->particles->bullet, position.x + 32, position.y + 5, Collider::Type::PLAYER_SHOT);
 
 		//Playing shooting sound effect (if space was pressed)
@@ -113,7 +113,7 @@ update_status ModulePlayer::Update() {
 			current_anim = &playerAnim;
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_UP] == KEY_REPEAT || pad.l_y < 0.0f) {
+	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_UP] == KEY_REPEAT || pad.l_y < 0.0f|| pad.up == true) {
 		if (position.y > 39) {
 			position.y -= 3;
 			if (current_anim != &playerAnim) {
@@ -123,13 +123,13 @@ update_status ModulePlayer::Update() {
 		}
 	}
 	
-	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_REPEAT || pad.l_x < 0.0f) {
+	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_REPEAT || pad.l_x < 0.0f || pad.left == true) {
 		if (position.x > App->render->camera.x / SCREEN_SIZE) {
 			position.x -= 3;
 		}
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_REPEAT || pad.l_y > 0.0f) {
+	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_REPEAT || pad.l_y > 0.0f || pad.down == true) {
 		if (position.y < SCREEN_HEIGHT - 38) {
 			position.y += 3;
 			if (current_anim != &playerAnim) {
@@ -139,13 +139,13 @@ update_status ModulePlayer::Update() {
 		}
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_REPEAT || pad.l_y > 0.0f) {
+	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_REPEAT || pad.l_y > 0.0f || pad.right == true) {
 		if (position.x < (App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH - 32)) {
 			position.x += 3;
 		}
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_F] == KEY_DOWN) {
+	if (App->input->keyboard[SDL_SCANCODE_F] == KEY_DOWN || pad.b == true || pad.r2 == true) {
 		switch (currentWeapon)
 		{
 		case BOMB:
@@ -163,7 +163,7 @@ update_status ModulePlayer::Update() {
 		}
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_C] == KEY_DOWN && hasBought) {
+	if ((App->input->keyboard[SDL_SCANCODE_C] == KEY_DOWN || pad.y == true || pad.l1 == true) && hasBought) {
 		weaponCount++;
 		while ((App->store->weaponSelection & (1 << weaponCount)) == 0)
 		{
