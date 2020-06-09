@@ -43,10 +43,10 @@ While at the moment Capcom was developing vertically scrolling shooters, U.N.Squ
 |Fire the Vulcan Cannon|X or R1|
 |Fire the Active Weapon|B or R2|
 |Change Weapon|Y or L1|
-|Travel through the options (Up)|🡱 or Joystick Up|
-|Travel through the options (Down)|🡳 or Joystick Down|
-|Travel through the options (Left)|🡰 or Joystick Left|
-|Travel through the options (Right)|🡲 or Joystick Right|
+|Travel through the options (Up)|🡱|
+|Travel through the options (Down)|🡳|
+|Travel through the options (Left)|🡰|
+|Travel through the options (Right)|🡲|
 
 ### KEYBOARD CONTROLS
 |Function|Keyboard|
