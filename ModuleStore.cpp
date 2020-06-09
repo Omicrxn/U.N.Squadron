@@ -87,44 +87,64 @@ update_status ModuleStore::Update() {
 		rows++;
 		App->audio->PlayFx(0, 0);
 	}
-	if ((App->input->keyboard[SDL_SCANCODE_A] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_DOWN || App->input->pads[0].left == true) && columns > 0) {
-		selectorPos.x -= 40;
-		columns--;
-		App->audio->PlayFx(0, 0);
+	if ((App->input->keyboard[SDL_SCANCODE_A] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_REPEAT || App->input->pads[0].left == true) && columns > 0) {
+		if (CountdownL == 0) {
+			selectorPos.x -= 40;
+			columns--;
+			App->audio->PlayFx(0, 0);
+
+			CountdownL = MaxCountdownL;
+		}
 	}
-	if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_DOWN || App->input->pads[0].right == true) && columns < 5) {
-		selectorPos.x += 40;
-		columns++;
-		App->audio->PlayFx(0, 0);
+	if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_REPEAT || App->input->pads[0].right == true) && columns < 5) {
+		if (CountdownR == 0) {
+			selectorPos.x += 40;
+			columns++;
+			App->audio->PlayFx(0, 0);
+
+			CountdownR = MaxCountdownR;
+		}
 	}
 
 	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN || App->input->pads[0].a == true) {
 		// BOMB
-		if (weapon == weapons[1][0] && App->player->money >= 2000) {
-			if(!App->debugInfo->maxMoney || (weaponSelection & (1 << 4)) == 0)
-				App->player->money -= 100;
-			weaponSelection |= (1 << 4);
+		if (weapon == weapons[1][0]) {
+			if (!App->debugInfo->maxMoney && (weaponSelection & (1 << 4)) == 0) {
+				if (App->player->money >= 2000) {
+					App->player->money -= 100;
+				}
+				weaponSelection |= (1 << 4);
+			}
 		}
 
 		// S.SHELL
 		else if (weapon == weapons[0][4] && App->player->money >= 1000) {
-			if (!App->debugInfo->maxMoney || (weaponSelection & (1 << 6)) == 0)
-				App->player->money -= 100;
-			weaponSelection |= (1 << 6);
+			if (!App->debugInfo->maxMoney && (weaponSelection & (1 << 6)) == 0) {
+				if (App->player->money >= 1000) {
+					App->player->money -= 100;
+				}
+				weaponSelection |= (1 << 6);
+			}
 		}
 
 		// FALCON
-		else if (weapon == weapons[0][2] && App->player->money >= 1000) {
-			if (!App->debugInfo->maxMoney || (weaponSelection & (1 << 8)) == 0)
-				App->player->money -= 100;
-			weaponSelection |= (1 << 8);
+		else if (weapon == weapons[0][2]) {
+			if (!App->debugInfo->maxMoney && (weaponSelection & (1 << 8)) == 0) {
+				if (App->player->money >= 1000) {
+					App->player->money -= 100;
+				}
+				weaponSelection |= (1 << 8);
+			}
 		}
 
 		// CEILING
-		else if (weapon == weapons[1][3] && App->player->money >= 1000) {
-			if (!App->debugInfo->maxMoney || (weaponSelection & (1 << 2)) == 0)
-				App->player->money -= 100;
-			weaponSelection |= (1 << 2);
+		else if (weapon == weapons[1][3]) {
+			if (!App->debugInfo->maxMoney || (weaponSelection & (1 << 2)) == 0) {
+				if (App->player->money >= 1000) {
+					App->player->money -= 100;
+				}
+				weaponSelection |= (1 << 2);
+			}
 		}
 
 		// EXIT
@@ -134,6 +154,13 @@ update_status ModuleStore::Update() {
 	}
 
 	weapon = weapons[rows][columns];
+
+	// Update selector countdown
+	if (CountdownL > 0)
+		--CountdownL;
+
+	if (CountdownR > 0)
+		--CountdownR;
 
 	return ret;
 }
@@ -187,7 +214,6 @@ update_status ModuleStore::PostUpdate() {
 		if (!App->render->Blit(tex3, 135, 174, &alreadySelected, 1, false))
 			ret = UPDATE_ERROR;
 	}
-
 	return ret;
 }
 

@@ -36,7 +36,7 @@ public:
 	uint score = 0;
 
 	// Money
-	uint money = 3000;
+	uint money = 0;
 
 	iPoint GetPlayerPosition() {
 		return position;
@@ -80,7 +80,7 @@ private:
 	int weaponCountdown = 0;
 
 	// Countdown to handle weapon change spacing
-	int changeMaxCountdown = 10;
+	int changeMaxCountdown = 25;
 	int changeCountdown = 0;
 };
 

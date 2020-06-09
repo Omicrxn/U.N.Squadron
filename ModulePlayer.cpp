@@ -127,7 +127,7 @@ update_status ModulePlayer::Update() {
 
 	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_UP] == KEY_REPEAT || pad.l_y < 0.0f|| pad.up == true) {
 		if (position.y > 39) {
-			position.y -= 3;
+			position.y -= 2;
 			if (current_anim != &playerAnim) {
 				current_anim = &playerAnim;
 			}
@@ -137,13 +137,13 @@ update_status ModulePlayer::Update() {
 	
 	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_REPEAT || pad.l_x < 0.0f || pad.left == true) {
 		if (position.x > App->render->camera.x / SCREEN_SIZE) {
-			position.x -= 3;
+			position.x -= 2;
 		}
 	}
 
 	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_REPEAT || pad.l_y > 0.0f || pad.down == true) {
 		if (position.y < SCREEN_HEIGHT - 38) {
-			position.y += 3;
+			position.y += 2;
 			if (current_anim != &playerAnim) {
 				current_anim = &playerAnim;
 			}
@@ -153,7 +153,7 @@ update_status ModulePlayer::Update() {
 
 	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_REPEAT || pad.l_y > 0.0f || pad.right == true) {
 		if (position.x < (App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH - 32)) {
-			position.x += 3;
+			position.x += 2;
 		}
 	}
 
@@ -186,10 +186,9 @@ update_status ModulePlayer::Update() {
 			}
 			weaponCountdown = weaponMaxCountdown;
 		}
-		
 	}
 
-	if ((App->input->keyboard[SDL_SCANCODE_C] == KEY_DOWN || pad.y == true || pad.l1 == true) && hasBought) {
+	if ((App->input->keyboard[SDL_SCANCODE_C] == KEY_REPEAT || pad.y == true || pad.l1 == true) && hasBought) {
 		if (changeCountdown == 0) {
 			weaponCount++;
 			while ((App->store->weaponSelection & (1 << weaponCount)) == 0)
@@ -302,6 +301,8 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 				App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->startScreen, 60);
 			}
 			else {
+				playerLifes = 3;
+				money = 0;
 				App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->loseScreen, 60);
 			}
 
