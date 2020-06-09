@@ -1,2 +1,3 @@
-# B.A.T.L. Studios
-Github of the project: [U.N.Squadron GitHub](https://github.com/Omicrxn/U.N.Squadron "U.N.SQUADRON GITHUB")
+<h1  align="center" >B.A.T.L. STUDIOS</h1>
+
+<p>Welcome to the webpage</a></p>
