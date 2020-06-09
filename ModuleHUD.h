@@ -40,6 +40,8 @@ private:
 	SDL_Rect powSquare;
 	SDL_Rect bomb;
 	SDL_Rect shell;
+	SDL_Rect falcon;
+	SDL_Rect ceiling;
 };
 
 #endif // __ModuleHUD_H__

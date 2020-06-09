@@ -53,8 +53,8 @@ public:
 
 	// The whole list of weapons to know which one is the player selecting at each moment
 	enum weapons {
-		WEAPON_1, WEAPON_2, WEAPON_3, WEAPON_4, SHELL, WEAPON_6,
-		BOMB, WEAPON_8, WEAPON_9, WEAPON_10, WEAPON_11, NONE
+		WEAPON_1, WEAPON_2, FALCON, WEAPON_4, SHELL, WEAPON_6,
+		BOMB, WEAPON_8, WEAPON_9, CEILING, WEAPON_11, NONE
 	};
 
 	// To know which is the current weapon (the last one that has been selected)
@@ -70,6 +70,18 @@ private:
 	bool godMode = false;
 	uint weaponCount;
 	bool hasBought;
+
+	// Countdown to handle shot spacing
+	int shotMaxCountdown = 20;
+	int shotCountdown = 0;
+
+	// Countdown to handle weapon shot spacing
+	int weaponMaxCountdown = 20;
+	int weaponCountdown = 0;
+
+	// Countdown to handle weapon change spacing
+	int changeMaxCountdown = 10;
+	int changeCountdown = 0;
 };
 
 #endif // __MODULEPLAYER_H__

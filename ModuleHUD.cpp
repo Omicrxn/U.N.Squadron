@@ -32,6 +32,12 @@ bool ModuleHUD::Start() {
 
 	// Taking the shell coordinates of the HUD spritesheet
 	shell = { 132,83,21,12 };
+
+	// Taking the falcon coordinates of the HUD spritesheet
+	falcon = { 132,149,16,7 };
+
+	// Taking the ceiling coordinates of the HUD spritesheet
+	ceiling = { 132,176,15,9 };
 	
 	playerFace.PushBack({ 71,75,42,34 });
 	powSquare = { 170,13,60,26 };
@@ -74,13 +80,25 @@ update_status ModuleHUD::PostUpdate() {
 
 		if (App->player->currentWeapon == App->player->weapons::BOMB) {
 			App->render->Blit(tex, 132, 207, &bomb, 1, false);
-			App->fonts->BlitText(152, 207, yellowFont, "Bomb");
+			App->fonts->BlitText(155, 207, yellowFont, "Bomb");
 			App->fonts->BlitText(224, 207, greenFont, "50"); // Provisional
 		}
 		else if (App->player->currentWeapon == App->player->weapons::SHELL)
 		{
-			App->render->Blit(tex, 132, 204, &shell, 1, false);
+			App->render->Blit(tex, 129, 204, &shell, 1, false);
 			App->fonts->BlitText(155, 207, yellowFont, "S.Shell");
+			App->fonts->BlitText(224, 207, greenFont, "50"); // Provisional
+		}
+		else if (App->player->currentWeapon == App->player->weapons::FALCON)
+		{
+			App->render->Blit(tex, 132, 207, &falcon, 1, false);
+			App->fonts->BlitText(155, 207, yellowFont, "Falcon");
+			App->fonts->BlitText(224, 207, greenFont, "50"); // Provisional
+		}
+		else if (App->player->currentWeapon == App->player->weapons::CEILING)
+		{
+			App->render->Blit(tex, 132, 207, &ceiling, 1, false);
+			App->fonts->BlitText(155, 207, yellowFont, "Ceiling");
 			App->fonts->BlitText(224, 207, greenFont, "50"); // Provisional
 		}
 

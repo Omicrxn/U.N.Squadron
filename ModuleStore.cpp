@@ -101,16 +101,30 @@ update_status ModuleStore::Update() {
 	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN || App->input->pads[0].a == true) {
 		// BOMB
 		if (weapon == weapons[1][0] && App->player->money >= 2000) {
-			if(!App->debugInfo->maxMoney)
-				App->player->money -= 2000;
+			if(!App->debugInfo->maxMoney || (weaponSelection & (1 << 4)) == 0)
+				App->player->money -= 100;
 			weaponSelection |= (1 << 4);
 		}
 
 		// S.SHELL
 		else if (weapon == weapons[0][4] && App->player->money >= 1000) {
-			if (!App->debugInfo->maxMoney)
-				App->player->money -= 1000;
+			if (!App->debugInfo->maxMoney || (weaponSelection & (1 << 6)) == 0)
+				App->player->money -= 100;
 			weaponSelection |= (1 << 6);
+		}
+
+		// FALCON
+		else if (weapon == weapons[0][2] && App->player->money >= 1000) {
+			if (!App->debugInfo->maxMoney || (weaponSelection & (1 << 8)) == 0)
+				App->player->money -= 100;
+			weaponSelection |= (1 << 8);
+		}
+
+		// CEILING
+		else if (weapon == weapons[1][3] && App->player->money >= 1000) {
+			if (!App->debugInfo->maxMoney || (weaponSelection & (1 << 2)) == 0)
+				App->player->money -= 100;
+			weaponSelection |= (1 << 2);
 		}
 
 		// EXIT
@@ -161,6 +175,16 @@ update_status ModuleStore::PostUpdate() {
 	// SHELL
 	if ((weaponSelection & (1 << 6)) != 0) {
 		if (!App->render->Blit(tex3, 175, 126, &alreadySelected, 1, false))
+			ret = UPDATE_ERROR;
+	}
+	// FALCON
+	if ((weaponSelection & (1 << 8)) != 0) {
+		if (!App->render->Blit(tex3, 95, 126, &alreadySelected, 1, false))
+			ret = UPDATE_ERROR;
+	}
+	// CEILING
+	if ((weaponSelection & (1 << 2)) != 0) {
+		if (!App->render->Blit(tex3, 135, 174, &alreadySelected, 1, false))
 			ret = UPDATE_ERROR;
 	}
 

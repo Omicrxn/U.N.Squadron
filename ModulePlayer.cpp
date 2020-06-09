@@ -64,13 +64,21 @@ bool ModulePlayer::Start() {
 		{
 			weaponCount++;
 		}
-		if (weaponCount == 4)
+		if (weaponCount == 2)
+		{
+			currentWeapon = CEILING;
+		}
+		else if (weaponCount == 4)
 		{
 			currentWeapon = BOMB;
 		}
 		else if (weaponCount == 6)
 		{
 			currentWeapon = SHELL;
+		}
+		else if (weaponCount == 8)
+		{
+			currentWeapon = FALCON;
 		}
 		hasBought = true;
 	}
@@ -92,12 +100,16 @@ update_status ModulePlayer::Update() {
 	// Moving the player with the camera scroll
 	App->player->position.x += 1;
 
-	// Spawn bullet particles when pressing SPACE or X
-	if ((App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_DOWN && !destroyed) || pad.x == true || pad.r1 == true) {
-		App->particles->AddParticle(App->particles->bullet, position.x + 32, position.y + 5, Collider::Type::PLAYER_SHOT);
+	// Spawn bullet particles when pressing SPACE or X/R1
+	if ((App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_REPEAT && !destroyed) || pad.x == true || pad.r1 == true) {
+		if (shotCountdown == 0) {
+			App->particles->AddParticle(App->particles->bullet, position.x + 32, position.y + 5, Collider::Type::PLAYER_SHOT);
 
-		//Playing shooting sound effect (if space was pressed)
-		App->audio->PlayFx(2, 0);
+			// Playing shooting sound effect (if space was pressed)
+			App->audio->PlayFx(2, 0);
+
+			shotCountdown = shotMaxCountdown;
+		}
 	}
 
 	// Moving the spaceship when pressing WASD or using the Gamepad
@@ -145,41 +157,66 @@ update_status ModulePlayer::Update() {
 		}
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_F] == KEY_DOWN || pad.b == true || pad.r2 == true) {
-		switch (currentWeapon)
-		{
-		case BOMB:
-			if ((App->store->weaponSelection & (1 << 4)) != 0) {
-				App->weapons->SpawnWeapon(WEAPON_TYPE::BOMB);
+	if (App->input->keyboard[SDL_SCANCODE_F] == KEY_REPEAT || pad.b == true || pad.r2 == true) {
+		if (weaponCountdown == 0) {
+			switch (currentWeapon)
+			{
+			case BOMB:
+				if ((App->store->weaponSelection & (1 << 4)) != 0) {
+					App->weapons->SpawnWeapon(WEAPON_TYPE::BOMB);
+				}
+				break;
+			case SHELL:
+				if ((App->store->weaponSelection & (1 << 6)) != 0) {
+					App->weapons->SpawnWeapon(WEAPON_TYPE::SHELL);
+				}
+				break;
+			case FALCON:
+				if ((App->store->weaponSelection & (1 << 8)) != 0) {
+					App->weapons->SpawnWeapon(WEAPON_TYPE::FALCON);
+				}
+				break;
+			case CEILING:
+				if ((App->store->weaponSelection & (1 << 2)) != 0) {
+					App->weapons->SpawnWeapon(WEAPON_TYPE::CEILING);
+				}
+				break;
+			default:
+				break;
 			}
-			break;
-		case SHELL:
-			if ((App->store->weaponSelection & (1 << 6)) != 0) {
-				App->weapons->SpawnWeapon(WEAPON_TYPE::SHELL);
-			}
-			break;
-		default:
-			break;
+			weaponCountdown = weaponMaxCountdown;
 		}
+		
 	}
 
 	if ((App->input->keyboard[SDL_SCANCODE_C] == KEY_DOWN || pad.y == true || pad.l1 == true) && hasBought) {
-		weaponCount++;
-		while ((App->store->weaponSelection & (1 << weaponCount)) == 0)
-		{
+		if (changeCountdown == 0) {
 			weaponCount++;
-			if (weaponCount > 11)
+			while ((App->store->weaponSelection & (1 << weaponCount)) == 0)
 			{
-				weaponCount = 0;
+				weaponCount++;
+				if (weaponCount > 11)
+				{
+					weaponCount = 0;
+				}
 			}
-		}
-		if (weaponCount == 4)
-		{
-			currentWeapon = BOMB;
-		}
-		else if (currentWeapon == 6)
-		{
-			currentWeapon = SHELL;
+			if (weaponCount == 2)
+			{
+				currentWeapon = CEILING;
+			}
+			else if (weaponCount == 4)
+			{
+				currentWeapon = BOMB;
+			}
+			else if (weaponCount == 6)
+			{
+				currentWeapon = SHELL;
+			}
+			else if (weaponCount == 8)
+			{
+				currentWeapon = FALCON;
+			}
+			changeCountdown = changeMaxCountdown;
 		}
 	}
 
@@ -201,6 +238,18 @@ update_status ModulePlayer::Update() {
 			}
 		}
 	}
+
+	// Update shot countdown
+	if (shotCountdown > 0)
+		--shotCountdown;
+
+	// Update weapon shot countdown
+	if (weaponCountdown > 0)
+		--weaponCountdown;
+
+	// Update weapon change countdown
+	if (changeCountdown > 0)
+		--changeCountdown;
 
 	return ret;
 }

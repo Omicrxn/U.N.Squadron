@@ -9,6 +9,9 @@
 #include "Weapon.h"
 #include "Bomb.h"
 #include "S.Shell.h"
+#include "Falcon.h"
+#include "Ceiling.h"
+
 #include "ModuleParticles.h"
 #include "ModulePlayer.h"
 
@@ -118,6 +121,13 @@ void ModuleWeapons::SpawnWeapon(WEAPON_TYPE weaponType)
 				break;
 			case WEAPON_TYPE::SHELL:
 				weapons[i] = new Shell(App->player->GetPlayerPosition().x, App->player->GetPlayerPosition().y);
+				break;
+			case WEAPON_TYPE::FALCON:
+				weapons[i] = new Falcon(App->player->GetPlayerPosition().x, App->player->GetPlayerPosition().y);
+				break;
+			case WEAPON_TYPE::CEILING:
+				weapons[i] = new Ceiling(App->player->GetPlayerPosition().x, App->player->GetPlayerPosition().y);
+				break;
 			}
 			weapons[i]->texture = this->texture;
 			weapons[i]->destroyedFx = weaponDestroyedFx;

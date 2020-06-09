@@ -46,6 +46,10 @@ private:
 	Animation* current_anim = nullptr;
 	iPoint selectorPos;
 
+	// Countdown to handle selector spacing
+	int shotMaxCountdown = 20;
+	int shotCountdown = 0;
+
 	// A few variables to manage the correct functioning of the store...
 	// Not necessary for the remaining modules (because of that they are not defined in the .h)
 	enum weapons {
