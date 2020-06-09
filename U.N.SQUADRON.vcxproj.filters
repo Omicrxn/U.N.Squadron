@@ -118,6 +118,12 @@
     <ClCompile Include="ModuleSelector.cpp">
       <Filter>Source Files\Modules\Gameplay</Filter>
     </ClCompile>
+    <ClCompile Include="Falcon.cpp">
+      <Filter>Source Files\Entities\Weapons</Filter>
+    </ClCompile>
+    <ClCompile Include="Ceiling.cpp">
+      <Filter>Source Files\Entities\Weapons</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -243,6 +249,12 @@
     </ClInclude>
     <ClInclude Include="ModuleSelector.h">
       <Filter>Source Files\Modules\Gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="Falcon.h">
+      <Filter>Source Files\Entities\Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="Ceiling.h">
+      <Filter>Source Files\Entities\Weapons</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

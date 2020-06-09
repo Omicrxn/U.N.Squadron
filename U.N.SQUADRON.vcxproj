@@ -144,7 +144,9 @@
     <ClCompile Include="BigOrangeJet.cpp" />
     <ClCompile Include="BlueJet.cpp" />
     <ClCompile Include="Bomb.cpp" />
+    <ClCompile Include="Ceiling.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="Falcon.cpp" />
     <ClCompile Include="Globals.cpp" />
     <ClCompile Include="GreenFighterPlane.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -186,7 +188,9 @@
     <ClInclude Include="BigOrangeJet.h" />
     <ClInclude Include="BlueJet.h" />
     <ClInclude Include="Bomb.h" />
+    <ClInclude Include="Ceiling.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Falcon.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="GreenFighterPlane.h" />
     <ClInclude Include="MediumCamouflageJet.h" />

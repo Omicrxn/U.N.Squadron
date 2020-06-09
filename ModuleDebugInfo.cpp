@@ -143,21 +143,6 @@ update_status ModuleDebugInfo::Update() {
 		maxLifes = !maxLifes;
 	}
 
-	// Debug key for gamepad rumble testing purposes
-	if (App->input->keyboard[SDL_SCANCODE_7] == KEY_DOWN) {
-		App->input->ShakeController(0, 12, 0.33f);
-	}
-
-	// Debug key for gamepad rumble testing purposes
-	if (App->input->keyboard[SDL_SCANCODE_8] == KEY_DOWN) {
-		App->input->ShakeController(0, 36, 0.66f);
-	}
-
-	// Debug key for gamepad rumble testing purposes
-	if (App->input->keyboard[SDL_SCANCODE_9] == KEY_DOWN) {
-		App->input->ShakeController(0, 60, 1.0f);
-	}
-
 	return update_status::UPDATE_CONTINUE;
 }
 

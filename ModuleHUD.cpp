@@ -23,15 +23,21 @@ bool ModuleHUD::Start() {
 	tex = App->textures->Load("Assets/sprites/hud/HUD.png");
 	++activeTextures; ++totalTextures;
 
-	//Animations
+	// Animations
 	fuelQuantity = {2,71,62,6};
 	fuelBackground = {0,149,66,10};
 
 	// Taking the bomb coordinates of the HUD spritesheet
-	bomb = { 132,206,52,8 };
+	bomb = { 132,206,15,6 };
 
 	// Taking the shell coordinates of the HUD spritesheet
-	shell = { 132,84,69,11 };
+	shell = { 132,83,21,12 };
+
+	// Taking the falcon coordinates of the HUD spritesheet
+	falcon = { 132,149,16,7 };
+
+	// Taking the ceiling coordinates of the HUD spritesheet
+	ceiling = { 132,176,15,9 };
 	
 	playerFace.PushBack({ 71,75,42,34 });
 	powSquare = { 170,13,60,26 };
@@ -73,13 +79,27 @@ update_status ModuleHUD::PostUpdate() {
 		App->render->Blit(tex, 57, 208, &fuelQuantity, 1, false);
 
 		if (App->player->currentWeapon == App->player->weapons::BOMB) {
-			App->render->Blit(tex, 132, 208, &bomb, 1, false);
-			App->fonts->BlitText(224, 207, greenFont, "50");
+			App->render->Blit(tex, 132, 207, &bomb, 1, false);
+			App->fonts->BlitText(155, 207, yellowFont, "Bomb");
+			App->fonts->BlitText(224, 207, greenFont, "50"); // Provisional
 		}
 		else if (App->player->currentWeapon == App->player->weapons::SHELL)
 		{
-			App->render->Blit(tex, 132, 208, &shell, 1, false);
-			App->fonts->BlitText(224, 207, greenFont, "50");
+			App->render->Blit(tex, 129, 204, &shell, 1, false);
+			App->fonts->BlitText(155, 207, yellowFont, "S.Shell");
+			App->fonts->BlitText(224, 207, greenFont, "50"); // Provisional
+		}
+		else if (App->player->currentWeapon == App->player->weapons::FALCON)
+		{
+			App->render->Blit(tex, 132, 207, &falcon, 1, false);
+			App->fonts->BlitText(155, 207, yellowFont, "Falcon");
+			App->fonts->BlitText(224, 207, greenFont, "50"); // Provisional
+		}
+		else if (App->player->currentWeapon == App->player->weapons::CEILING)
+		{
+			App->render->Blit(tex, 132, 207, &ceiling, 1, false);
+			App->fonts->BlitText(155, 207, yellowFont, "Ceiling");
+			App->fonts->BlitText(224, 207, greenFont, "50"); // Provisional
 		}
 
 		// Blit of the HUD
@@ -88,10 +108,10 @@ update_status ModuleHUD::PostUpdate() {
 		App->fonts->BlitText(121, 31, yellowFont, "$");
 		App->fonts->BlitText(8, 31, greenFont, scoreText);
 		App->fonts->BlitText(128, 31, greenFont, moneyText);
-		App->fonts->BlitText(176, 15, greenFont, "2");
+		App->fonts->BlitText(176, 15, greenFont, "2"); // Provisional
 		App->fonts->BlitText(193, 31, greenFont, "max");
 		App->fonts->BlitText(224, 31, greenFont, "  1");
-		App->fonts->BlitText(33, 208, yellowFont, "=");
+		App->fonts->BlitText(32, 208, yellowFont, "=");
 		App->fonts->BlitText(41, 207, greenFont, lifesText);
 	}
 
