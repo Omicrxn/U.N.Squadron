@@ -36,8 +36,11 @@ public:
 
 private:
 	SDL_Texture* tex;
+	SDL_Texture* tex2;
 	Animation playerFace;
 	Animation dangerAnim;
+	Animation playerIn;
+	Animation playerOut;
 	SDL_Rect fuelBackground;
 	SDL_Rect fuelQuantity;
 	SDL_Rect helmet;

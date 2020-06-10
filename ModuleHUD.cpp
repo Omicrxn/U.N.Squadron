@@ -23,6 +23,9 @@ bool ModuleHUD::Start() {
 	tex = App->textures->Load("Assets/sprites/hud/HUD.png");
 	++activeTextures; ++totalTextures;
 
+	tex2 = App->textures->Load("Assets/sprites/hud/CharacterStart.png");
+	++activeTextures; ++totalTextures;
+
 	// Animations
 	fuelQuantity = {2,71,62,6};
 	fuelBackground = {0,149,66,10};
@@ -42,6 +45,15 @@ bool ModuleHUD::Start() {
 	playerFace.PushBack({ 71,75,42,34 });
 	powSquare = { 170,13,60,26 };
 	helmet = { 16,168,15,14 };
+
+	for (int i = 0; i < 12; ++i) {
+		playerIn.PushBack ({42 * i, 0, 42, 34});
+		playerOut.PushBack({ 42 * i, 34, 42, 34 });
+	}
+	playerIn.speed = 0.3f;
+	playerOut.speed = 0.2f;
+
+
 
 	yellowFont = App->fonts->Load("Assets/Fonts/FontY.png", lookupTable, 5);
 	++activeFonts; ++totalFonts;
@@ -84,6 +96,18 @@ update_status ModuleHUD::PostUpdate() {
 		App->render->Blit(tex, 16, 201, &helmet, 1, false);
 		App->render->Blit(tex, 55, 206, &fuelBackground, 1, false);
 		App->render->Blit(tex, 57, 208, &fuelQuantity, 1, false);
+		if (playerIn.Finished() == false) {
+			if (!App->render->Blit(tex2, 71, 6, &playerIn.GetCurrentFrame(), 1, false)) {
+				ret = UPDATE_ERROR;
+			}
+		}
+		if (App->player->GetCurrentFuel() == 0) {
+			if (playerOut.Finished() == false) {
+				if (!App->render->Blit(tex2, 71, 6, &playerOut.GetCurrentFrame(), 1, false)) {
+					ret = UPDATE_ERROR;
+				}
+			}
+		}
 
 		// Passing the weapons ammo from uint to char
 		sprintf_s(falconAmmoText, 5, "%d", App->player->falconAmmo);
@@ -143,6 +167,9 @@ bool ModuleHUD::CleanUp() {
 	--totalFonts;
 
 	App->textures->Unload(tex);
+	--totalTextures;
+
+	App->textures->Unload(tex2);
 	--totalTextures;
 
 	return ret;
