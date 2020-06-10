@@ -32,7 +32,7 @@ ModuleWeapons::~ModuleWeapons()
 
 bool ModuleWeapons::Start()
 {
-	texture = App->textures->Load("Assets/sprites/hud/HUD.png"); // Change later
+	texture = App->textures->Load("Assets/sprites/weapons/weapons.jpg");
 	++activeTextures; ++totalTextures;
 
 	weaponDestroyedFx = App->audio->LoadFx("Assets/music/explosion.wav"); // Change later
