@@ -124,6 +124,12 @@
     <ClCompile Include="Ceiling.cpp">
       <Filter>Source Files\Entities\Weapons</Filter>
     </ClCompile>
+    <ClCompile Include="SB_bombs.cpp">
+      <Filter>Source Files\Entities\Weapons</Filter>
+    </ClCompile>
+    <ClCompile Include="GF_Hook.cpp">
+      <Filter>Source Files\Entities\Weapons</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -254,6 +260,12 @@
       <Filter>Source Files\Entities\Weapons</Filter>
     </ClInclude>
     <ClInclude Include="Ceiling.h">
+      <Filter>Source Files\Entities\Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="SB_bombs.h">
+      <Filter>Source Files\Entities\Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="GF_Hook.h">
       <Filter>Source Files\Entities\Weapons</Filter>
     </ClInclude>
   </ItemGroup>

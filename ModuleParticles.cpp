@@ -25,9 +25,9 @@ bool ModuleParticles::Start()
 	particlesTexture = App->textures->Load("Assets/sprites/explosions/explosions.png");
 	++totalTextures;
 
-	/*LOG("Loading weapons particles");
+	LOG("Loading weapons particles");
 	weaponsParticlesTexture = App->textures->Load("Assets/sprites/weapons/weapons.png");
-	++totalTextures;*/
+	++totalTextures;
 
 	// Bullets Animaton 
 	bullet1.anim.PushBack({ 456, 8, 13, 3 });
@@ -69,11 +69,12 @@ bool ModuleParticles::Start()
 	sbFirecannon.speed.x = -2;
 
 	// Falcon explosion animation
-	/*falconExplosion.anim.PushBack({ 27, 313, 24, 25 });
+	falconExplosion.anim.PushBack({ 27, 313, 24, 25 });
 	falconExplosion.anim.PushBack({ 97, 310, 31, 29 });
 	falconExplosion.anim.PushBack({ 159, 310, 31, 28 });
 	falconExplosion.anim.PushBack({ 217, 315, 35, 27 });
-	falconExplosion.anim.speed = 0.075f;*/
+	falconExplosion.anim.speed = 0.075f;
+	falconExplosion.isWeapon = true;
 
 	// Bomb explosions animation
 	bombExplosion.anim.PushBack({ 28, 57, 28, 33 });
@@ -82,7 +83,9 @@ bool ModuleParticles::Start()
 	bombExplosion.anim.PushBack({ 111, 57, 26, 33 });
 	bombExplosion.anim.PushBack({ 138, 57, 28, 33 });
 	bombExplosion.anim.PushBack({ 167, 57, 28, 33 });
-	bombExplosion.anim.speed = 0.075f;
+	//bombExplosion.anim.speed = 0.075f;
+	bombExplosion.anim.speed = 0.001f;
+	bombExplosion.isWeapon = true;
 
 	return true;
 }
@@ -152,7 +155,14 @@ update_status ModuleParticles::PostUpdate()
 
 		if (particle != nullptr && particle->isAlive)
 		{
-			App->render->Blit(particlesTexture, particle->position.x, particle->position.y, &(particle->anim.GetCurrentFrame()));
+			if (particle->isWeapon) {
+				App->render->Blit(weaponsParticlesTexture, particle->position.x, particle->position.y, &(particle->anim.GetCurrentFrame()));
+
+			}
+			else {
+				App->render->Blit(particlesTexture, particle->position.x, particle->position.y, &(particle->anim.GetCurrentFrame()));
+
+			}
 		}
 	}
 

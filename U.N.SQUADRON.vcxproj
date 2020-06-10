@@ -147,6 +147,7 @@
     <ClCompile Include="Ceiling.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Falcon.cpp" />
+    <ClCompile Include="GF_Hook.cpp" />
     <ClCompile Include="Globals.cpp" />
     <ClCompile Include="GreenFighterPlane.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -176,6 +177,7 @@
     <ClCompile Include="ModuleWinScreen.cpp" />
     <ClCompile Include="Path.cpp" />
     <ClCompile Include="S.Shell.cpp" />
+    <ClCompile Include="SB_bombs.cpp" />
     <ClCompile Include="SetBulletDirection.cpp" />
     <ClCompile Include="SmallCamouflageJet.cpp" />
     <ClCompile Include="StealthBomber.cpp" />
@@ -191,6 +193,7 @@
     <ClInclude Include="Ceiling.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Falcon.h" />
+    <ClInclude Include="GF_Hook.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="GreenFighterPlane.h" />
     <ClInclude Include="MediumCamouflageJet.h" />
@@ -222,6 +225,7 @@
     <ClInclude Include="Path.h" />
     <ClInclude Include="resource2.h" />
     <ClInclude Include="S.Shell.h" />
+    <ClInclude Include="SB_bombs.h" />
     <ClInclude Include="SetBulletDirection.h" />
     <ClInclude Include="SmallCamouflageJet.h" />
     <ClInclude Include="StealthBomber.h" />
