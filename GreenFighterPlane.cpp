@@ -6,6 +6,7 @@
 #include "ModuleAudio.h"
 #include "ModulePlayer.h"
 #include "SetBulletDirection.h"
+#include "ModuleWeapons.h"
 
 GreenFighterPlane::GreenFighterPlane(int x, int y, bool spawnRight) : Enemy(x, y, spawnRight)
 {
@@ -110,7 +111,7 @@ void GreenFighterPlane::Update()
 	if (state == gIDLE && shootingFrequency > 60)
 	{
 		shootingFrequency = 0;
-
+		App->weapons->SpawnWeapon(WEAPON_TYPE:GF_HOOK);
 		//SetBulletDirection(this);
 
 		//App->particles->AddParticle(App->particles->enemyBullet, position.x + 32, position.y, Collider::Type::ENEMY_SHOT);
