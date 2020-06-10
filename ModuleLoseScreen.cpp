@@ -26,6 +26,10 @@ bool ModuleLoseScreen::Start() {
 	anim.PushBack({ 1280,0,256,224 });
 	anim.PushBack({ 1536,0,256,224 });
 	anim.PushBack({ 1792,0,256,224 });
+	anim.PushBack({ 2048,0,256,224 });
+	anim.PushBack({ 2304,0,256,224 });
+	anim.PushBack({ 2560,0,256,224 });
+
 	anim.speed = 0.1f;
 
 	tex = App->textures->Load("Assets/sprites/menus/LoseScreen.png");
@@ -34,8 +38,6 @@ bool ModuleLoseScreen::Start() {
 	}
 	++activeTextures; ++totalTextures;
 
-	App->render->camera.x = 0;
-	App->render->camera.y = 0;
 
 	// Playing lose audio
 	App->audio->PlayMusic("Assets/music/events/thankyouforplaying(youarecrazy).wav");
@@ -57,7 +59,7 @@ update_status ModuleLoseScreen::PostUpdate() {
 	update_status ret = UPDATE_CONTINUE;
 
 	// Blit
-	if (!App->render->Blit(tex, 0, 0, &anim.GetCurrentFrame(), 1, false)) {
+	if (!App->render->Blit(tex, 0, 0, &anim.GetCurrentFrame(), 0.0f, false)) {
 		ret = UPDATE_ERROR;
 	}
 
