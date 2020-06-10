@@ -38,7 +38,7 @@ bool ModuleParticles::Start()
 	bullet1.anim.loop = bullet2.anim.loop = bullet3.anim.loop = bullet4.anim.loop = true;
 	bullet1.speed.x = bullet2.speed.x = bullet3.speed.x = bullet4.speed.x = 6.0f;
 	bullet1.lifetime = bullet2.lifetime = bullet3.lifetime = bullet4.lifetime = 180;
-
+	bullet1.isWeapon = false;
 	// Enemy Bullet Animaton
 	enemyBullet.anim.PushBack({ 44, 370, 5 , 7 });
 	enemyBullet.anim.PushBack({ 78, 372, 5, 5 });
@@ -46,7 +46,7 @@ bool ModuleParticles::Start()
 	enemyBullet.anim.loop = true;
 	enemyBullet.anim.speed = 0.05f;
 	enemyBullet.lifetime = 180;
-
+	bombExplosion.isWeapon = false;
 	// Explosion Animation
 	explosion.anim.PushBack({ 27, 256, 34, 39 });
 	explosion.anim.PushBack({ 98, 261, 44, 36 });
@@ -54,20 +54,20 @@ bool ModuleParticles::Start()
 	explosion.anim.PushBack({ 223, 262, 31, 29 });
 	explosion.anim.loop = true;
 	explosion.anim.speed = 0.075f;
-
+	explosion.isWeapon = false;
 	// Explosion of the enemies
 	enemyExplosion.anim.PushBack({ 27, 313, 24, 25 });
 	enemyExplosion.anim.PushBack({ 97, 310, 31, 29 });
 	enemyExplosion.anim.PushBack({ 159, 310, 31, 28 });
 	enemyExplosion.anim.PushBack({ 217, 315, 35, 27 });
 	enemyExplosion.anim.speed = 0.075f;
-
+	enemyExplosion.isWeapon = false;
 	// Stealth bomber firecannon
 	sbFirecannon.anim.PushBack({ 25,454,16,12 });
 	sbFirecannon.anim.loop = false;
 	sbFirecannon.anim.speed = 0;
 	sbFirecannon.speed.x = -2;
-
+	sbFirecannon.isWeapon = false;
 	// Falcon explosion animation
 	falconExplosion.anim.PushBack({ 27, 313, 24, 25 });
 	falconExplosion.anim.PushBack({ 97, 310, 31, 29 });
@@ -83,8 +83,8 @@ bool ModuleParticles::Start()
 	bombExplosion.anim.PushBack({ 111, 57, 26, 33 });
 	bombExplosion.anim.PushBack({ 138, 57, 28, 33 });
 	bombExplosion.anim.PushBack({ 167, 57, 28, 33 });
-	//bombExplosion.anim.speed = 0.075f;
-	bombExplosion.anim.speed = 0.001f;
+	bombExplosion.anim.speed = 0.075f;
+	bombExplosion.anim.loop = false;
 	bombExplosion.isWeapon = true;
 
 	return true;
@@ -106,6 +106,8 @@ bool ModuleParticles::CleanUp()
 	}
 
 	App->textures->Unload(particlesTexture);
+	--totalTextures;
+	App->textures->Unload(weaponsParticlesTexture);
 	--totalTextures;
 
 	return true;

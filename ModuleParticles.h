@@ -52,7 +52,7 @@ public:
 	Uint32 lifetime = 0;
 	// The particle's collider
 	Collider* collider = nullptr;
-	bool isWeapon = false;
+	bool isWeapon;
 };
 
 class ModuleParticles : public Module

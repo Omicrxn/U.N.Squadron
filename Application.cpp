@@ -39,10 +39,10 @@ Application::Application() {
 	modules[i++] = winScreen = new ModuleWinScreen(false);
 	modules[i++] = loseScreen = new ModuleLoseScreen(false);
 	
-
+	modules[i++] = enemies = new ModuleEnemies(false);
 	modules[i++] = player = new ModulePlayer(false);
 	modules[i++] = particles = new ModuleParticles(false);
-	modules[i++] = enemies = new ModuleEnemies(false);
+	
 	modules[i++] = collisions = new ModuleCollisions(false);
 	modules[i++] = weapons = new ModuleWeapons(false);
 	
