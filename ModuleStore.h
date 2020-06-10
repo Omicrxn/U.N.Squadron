@@ -47,21 +47,21 @@ private:
 	iPoint selectorPos;
 
 	// Countdown to handle selector spacing
-	int MaxCountdownR = 17;
+	int MaxCountdownR = 15;
 	int CountdownR = 0;
 
-	int MaxCountdownL = 17;
+	int MaxCountdownL = 15;
 	int CountdownL = 0;
 
 	// A few variables to manage the correct functioning of the store...
 	// Not necessary for the remaining modules (because of that they are not defined in the .h)
 	enum weapons {
-		WEAPON_1, WEAPON_2, WEAPON_3, WEAPON_4, SHELL, WEAPON_6,
-		BOMB, WEAPON_8, WEAPON_9, WEAPON_10, WEAPON_11, EXIT
+		WEAPON_1, WEAPON_2, FALCON, WEAPON_4, SHELL, WEAPON_6,
+		BOMB, WEAPON_8, CEILING, WEAPON_10, WEAPON_11, EXIT
 	};
 
-	uint weapons[2][6] = { {WEAPON_1, WEAPON_2, WEAPON_3, WEAPON_4, SHELL, WEAPON_6},
-						   {BOMB, WEAPON_8, WEAPON_9, WEAPON_10, WEAPON_11, EXIT} };
+	uint weapons[2][6] = { {WEAPON_1, WEAPON_2, FALCON, WEAPON_4, SHELL, WEAPON_6},
+						   {BOMB, WEAPON_8, CEILING, WEAPON_10, WEAPON_11, EXIT} };
 
 	uint rows = 0;
 	uint columns = 0;

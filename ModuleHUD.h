@@ -42,6 +42,11 @@ private:
 	SDL_Rect shell;
 	SDL_Rect falcon;
 	SDL_Rect ceiling;
+
+	char falconAmmoText[5] = { '\0' };
+	char shellAmmoText[5] = {'\0'};
+	char bombAmmoText[5] = { '\0' };
+	char ceilingAmmoText[5] = { '\0' };
 };
 
 #endif // __ModuleHUD_H__

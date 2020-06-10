@@ -54,11 +54,16 @@ public:
 	// The whole list of weapons to know which one is the player selecting at each moment
 	enum weapons {
 		WEAPON_1, WEAPON_2, FALCON, WEAPON_4, SHELL, WEAPON_6,
-		BOMB, WEAPON_8, WEAPON_9, CEILING, WEAPON_11, NONE
+		BOMB, WEAPON_8, CEILING, WEAPON_10, WEAPON_11, NONE
 	};
 
 	// To know which is the current weapon (the last one that has been selected)
 	uint currentWeapon;
+
+	uint falconAmmo = 50;
+	uint shellAmmo = 50;
+	uint bombAmmo = 50;
+	uint ceilingAmmo = 50;
 
 private:
 	iPoint position;

@@ -54,31 +54,33 @@ bool ModulePlayer::Start() {
 
 	if (App->store->weaponSelection == 0)
 	{
-		weaponCount = 0;
 		currentWeapon = NONE;
 		hasBought = false;
 	}
 	else
 	{
+		// 00000000 00000000 00000000 00000000
+		//                          F  S B C
+		weaponCount = 10;
 		while ((App->store->weaponSelection & (1 << weaponCount)) == 0)
 		{
-			weaponCount++;
-		}
-		if (weaponCount == 2)
-		{
-			currentWeapon = CEILING;
-		}
-		else if (weaponCount == 4)
-		{
-			currentWeapon = BOMB;
-		}
-		else if (weaponCount == 6)
-		{
-			currentWeapon = SHELL;
-		}
-		else if (weaponCount == 8)
-		{
-			currentWeapon = FALCON;
+			weaponCount--;
+			if (weaponCount == 8)
+			{
+				currentWeapon = FALCON;
+			}
+			else if (weaponCount == 6)
+			{
+				currentWeapon = SHELL;
+			}
+			else if (weaponCount == 4)
+			{
+				currentWeapon = BOMB;
+			}
+			else if (weaponCount == 2)
+			{
+				currentWeapon = CEILING;
+			}
 		}
 		hasBought = true;
 	}
@@ -161,24 +163,28 @@ update_status ModulePlayer::Update() {
 		if (weaponCountdown == 0) {
 			switch (currentWeapon)
 			{
-			case BOMB:
-				if ((App->store->weaponSelection & (1 << 4)) != 0) {
-					App->weapons->SpawnWeapon(WEAPON_TYPE::BOMB);
+			case FALCON:
+				if ((App->store->weaponSelection & (1 << 8)) != 0 && falconAmmo > 0) {
+					App->weapons->SpawnWeapon(WEAPON_TYPE::FALCON);
+					falconAmmo--;
 				}
 				break;
 			case SHELL:
-				if ((App->store->weaponSelection & (1 << 6)) != 0) {
+				if ((App->store->weaponSelection & (1 << 6)) != 0 && shellAmmo > 0) {
 					App->weapons->SpawnWeapon(WEAPON_TYPE::SHELL);
+					shellAmmo--;
 				}
 				break;
-			case FALCON:
-				if ((App->store->weaponSelection & (1 << 8)) != 0) {
-					App->weapons->SpawnWeapon(WEAPON_TYPE::FALCON);
+			case BOMB:
+				if ((App->store->weaponSelection & (1 << 4)) != 0 && bombAmmo > 0) {
+					App->weapons->SpawnWeapon(WEAPON_TYPE::BOMB);
+					bombAmmo--;
 				}
 				break;
 			case CEILING:
-				if ((App->store->weaponSelection & (1 << 2)) != 0) {
+				if ((App->store->weaponSelection & (1 << 2)) != 0 && ceilingAmmo > 0) {
 					App->weapons->SpawnWeapon(WEAPON_TYPE::CEILING);
+					ceilingAmmo--;
 				}
 				break;
 			default:
@@ -190,30 +196,30 @@ update_status ModulePlayer::Update() {
 
 	if ((App->input->keyboard[SDL_SCANCODE_C] == KEY_REPEAT || pad.y == true || pad.l1 == true) && hasBought) {
 		if (changeCountdown == 0) {
-			weaponCount++;
+			weaponCount--;
 			while ((App->store->weaponSelection & (1 << weaponCount)) == 0)
 			{
-				weaponCount++;
-				if (weaponCount > 11)
+				weaponCount--;
+				if (weaponCount == 0)
 				{
-					weaponCount = 0;
+					weaponCount = 10;
 				}
-			}
-			if (weaponCount == 2)
-			{
-				currentWeapon = CEILING;
-			}
-			else if (weaponCount == 4)
-			{
-				currentWeapon = BOMB;
-			}
-			else if (weaponCount == 6)
-			{
-				currentWeapon = SHELL;
-			}
-			else if (weaponCount == 8)
-			{
-				currentWeapon = FALCON;
+				else if (weaponCount == 8)
+				{
+					currentWeapon = FALCON;
+				}
+				else if (weaponCount == 6)
+				{
+					currentWeapon = SHELL;
+				}
+				else if (weaponCount == 4)
+				{
+					currentWeapon = BOMB;
+				}
+				if (weaponCount == 2)
+				{
+					currentWeapon = CEILING;
+				}
 			}
 			changeCountdown = changeMaxCountdown;
 		}

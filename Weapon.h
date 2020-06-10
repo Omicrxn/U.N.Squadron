@@ -46,9 +46,6 @@ public:
 	// A flag for the weapon removal. Important! We do not delete objects instantly
 	bool pendingToDelete = false;
 
-	// To know if the weapons are coming from the right
-	bool despawnLeft;
-
 protected:
 	// A ptr to the current animation
 	Animation* currentAnim = nullptr;

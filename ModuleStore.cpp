@@ -107,42 +107,58 @@ update_status ModuleStore::Update() {
 	}
 
 	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN || App->input->pads[0].a == true) {
-		// BOMB
-		if (weapon == weapons[1][0]) {
-			if (!App->debugInfo->maxMoney && (weaponSelection & (1 << 4)) == 0) {
-				if (App->player->money >= 2000) {
-					App->player->money -= 100;
+		// FALCON
+		if (weapon == weapons[0][2]) {
+			if (!App->debugInfo->maxMoney && (weaponSelection & (1 << 8)) == 0) {
+				if (App->player->money >= 9000) {
+					App->player->money -= 9000;
+					weaponSelection |= (1 << 8);
 				}
-				weaponSelection |= (1 << 4);
+			}
+			else if (App->debugInfo->maxMoney)
+			{
+				weaponSelection |= (1 << 8);
 			}
 		}
 
 		// S.SHELL
-		else if (weapon == weapons[0][4] && App->player->money >= 1000) {
+		else if (weapon == weapons[0][4]) {
 			if (!App->debugInfo->maxMoney && (weaponSelection & (1 << 6)) == 0) {
-				if (App->player->money >= 1000) {
-					App->player->money -= 100;
+				if (App->player->money >= 20000) {
+					App->player->money -= 20000;
+					weaponSelection |= (1 << 6);
 				}
+			}
+			else if (App->debugInfo->maxMoney)
+			{
 				weaponSelection |= (1 << 6);
 			}
 		}
 
-		// FALCON
-		else if (weapon == weapons[0][2]) {
-			if (!App->debugInfo->maxMoney && (weaponSelection & (1 << 8)) == 0) {
-				if (App->player->money >= 1000) {
-					App->player->money -= 100;
+		// BOMB
+		if (weapon == weapons[1][0]) {
+			if (!App->debugInfo->maxMoney && (weaponSelection & (1 << 4)) == 0) {
+				if (App->player->money >= 2000) {
+					App->player->money -= 2000;
+					weaponSelection |= (1 << 4);
 				}
-				weaponSelection |= (1 << 8);
+			}
+			else if (App->debugInfo->maxMoney)
+			{
+				weaponSelection |= (1 << 4);
 			}
 		}
 
 		// CEILING
 		else if (weapon == weapons[1][3]) {
-			if (!App->debugInfo->maxMoney || (weaponSelection & (1 << 2)) == 0) {
-				if (App->player->money >= 1000) {
-					App->player->money -= 100;
+			if (!App->debugInfo->maxMoney && (weaponSelection & (1 << 2)) == 0) {
+				if (App->player->money >= 15000) {
+					App->player->money -= 15000;
+					weaponSelection |= (1 << 2);
 				}
+			}
+			else if (App->debugInfo->maxMoney)
+			{
 				weaponSelection |= (1 << 2);
 			}
 		}
@@ -189,14 +205,9 @@ update_status ModuleStore::PostUpdate() {
 	App->fonts->BlitText(170, 60, greyFont, "a weapon");
 
 	// Blit already selected texture
-	// WEAPON_1
-	if ((weaponSelection & (1 << 10)) != 0) {
-		if (!App->render->Blit(tex3, 15, 126, &alreadySelected, 1, false))
-			ret = UPDATE_ERROR;
-	}
-	// BOMB
-	if ((weaponSelection & (1 << 4)) != 0) {
-		if (!App->render->Blit(tex3, 15, 174, &alreadySelected, 1, false))
+	// FALCON
+	if ((weaponSelection & (1 << 8)) != 0) {
+		if (!App->render->Blit(tex3, 95, 126, &alreadySelected, 1, false))
 			ret = UPDATE_ERROR;
 	}
 	// SHELL
@@ -204,9 +215,9 @@ update_status ModuleStore::PostUpdate() {
 		if (!App->render->Blit(tex3, 175, 126, &alreadySelected, 1, false))
 			ret = UPDATE_ERROR;
 	}
-	// FALCON
-	if ((weaponSelection & (1 << 8)) != 0) {
-		if (!App->render->Blit(tex3, 95, 126, &alreadySelected, 1, false))
+	// BOMB
+	if ((weaponSelection & (1 << 4)) != 0) {
+		if (!App->render->Blit(tex3, 15, 174, &alreadySelected, 1, false))
 			ret = UPDATE_ERROR;
 	}
 	// CEILING

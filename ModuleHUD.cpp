@@ -78,28 +78,35 @@ update_status ModuleHUD::PostUpdate() {
 		App->render->Blit(tex, 55, 206, &fuelBackground, 1, false);
 		App->render->Blit(tex, 57, 208, &fuelQuantity, 1, false);
 
-		if (App->player->currentWeapon == App->player->weapons::BOMB) {
-			App->render->Blit(tex, 132, 207, &bomb, 1, false);
-			App->fonts->BlitText(155, 207, yellowFont, "Bomb");
-			App->fonts->BlitText(224, 207, greenFont, "50"); // Provisional
+		// Passing the weapons ammo from uint to char
+		sprintf_s(falconAmmoText, 5, "%d", App->player->falconAmmo);
+		sprintf_s(shellAmmoText, 5, "%d", App->player->shellAmmo);
+		sprintf_s(bombAmmoText, 5, "%d", App->player->bombAmmo);
+		sprintf_s(ceilingAmmoText, 5, "%d", App->player->ceilingAmmo);
+
+		// Printing the current weapon and its price
+		if (App->player->currentWeapon == App->player->weapons::FALCON)
+		{
+			App->render->Blit(tex, 132, 207, &falcon, 1, false);
+			App->fonts->BlitText(155, 207, yellowFont, "Falcon");
+			App->fonts->BlitText(224, 207, greenFont, falconAmmoText);
 		}
 		else if (App->player->currentWeapon == App->player->weapons::SHELL)
 		{
 			App->render->Blit(tex, 129, 204, &shell, 1, false);
 			App->fonts->BlitText(155, 207, yellowFont, "S.Shell");
-			App->fonts->BlitText(224, 207, greenFont, "50"); // Provisional
+			App->fonts->BlitText(224, 207, greenFont, shellAmmoText);
 		}
-		else if (App->player->currentWeapon == App->player->weapons::FALCON)
-		{
-			App->render->Blit(tex, 132, 207, &falcon, 1, false);
-			App->fonts->BlitText(155, 207, yellowFont, "Falcon");
-			App->fonts->BlitText(224, 207, greenFont, "50"); // Provisional
+		else if (App->player->currentWeapon == App->player->weapons::BOMB) {
+			App->render->Blit(tex, 132, 207, &bomb, 1, false);
+			App->fonts->BlitText(155, 207, yellowFont, "Bomb");
+			App->fonts->BlitText(224, 207, greenFont, bombAmmoText);
 		}
 		else if (App->player->currentWeapon == App->player->weapons::CEILING)
 		{
 			App->render->Blit(tex, 132, 207, &ceiling, 1, false);
 			App->fonts->BlitText(155, 207, yellowFont, "Ceiling");
-			App->fonts->BlitText(224, 207, greenFont, "50"); // Provisional
+			App->fonts->BlitText(224, 207, greenFont, ceilingAmmoText);
 		}
 
 		// Blit of the HUD

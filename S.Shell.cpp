@@ -10,7 +10,7 @@ Shell::Shell(int x, int y) : Weapon(x, y)
 {
 	drop.PushBack({ 132, 84, 21, 11 });
 
-	path.PushBack({ 3.0f, 0.0f }, 100, &drop);
+	path.PushBack({ 5.0f, 0.0f }, 100, &drop);
 
 	collider = App->collisions->AddCollider({ position.x, position.y, 30, 9 }, Collider::Type::PLAYER_SHOT, (Module*)App->weapons);
 }

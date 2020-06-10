@@ -58,7 +58,7 @@ update_status ModuleSelector::Update() {
 		if ((App->input->keyboard[SDL_SCANCODE_S] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_DOWN || App->input->pads[0].down == true)) {
 			selected = LEVEL2;
 		}
-		else if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN || App->input->pads[0].x == true) {
+		else if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN || App->input->pads[0].a == true) {
 			App->transition->FadeToBlack(this, (Module*)App->store, 60);
 		}
 	}
@@ -66,7 +66,7 @@ update_status ModuleSelector::Update() {
 		if ((App->input->keyboard[SDL_SCANCODE_W] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_UP] == KEY_DOWN || App->input->pads[0].up == true)) {
 			selected = LEVEL1;
 		}
-		else if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN || App->input->pads[0].x == true) {
+		else if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN || App->input->pads[0].a == true) {
 			App->transition->FadeToBlack(this, (Module*)App->store, 60);
 		}
 	}
