@@ -85,6 +85,11 @@ bool ModulePlayer::Start() {
 		hasBought = true;
 	}
 
+	falconAmmo = 50;
+	shellAmmo = 50;
+	bombAmmo = 50;
+	ceilingAmmo = 50;
+
 	return ret;
 }
 

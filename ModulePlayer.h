@@ -60,10 +60,10 @@ public:
 	// To know which is the current weapon (the last one that has been selected)
 	uint currentWeapon;
 
-	uint falconAmmo = 50;
-	uint shellAmmo = 50;
-	uint bombAmmo = 50;
-	uint ceilingAmmo = 50;
+	uint falconAmmo;
+	uint shellAmmo;
+	uint bombAmmo;
+	uint ceilingAmmo;
 
 private:
 	iPoint position;
