@@ -139,8 +139,14 @@ update_status ModuleDebugInfo::Update() {
 		maxMoney = !maxMoney;
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_L] == KEY_DOWN) {
-		maxLifes = !maxLifes;
+	// Max Ammo
+	//if (App->input->keyboard[SDL_SCANCODE_9] == KEY_DOWN) {
+
+	//}
+
+	if (App->input->keyboard[SDL_SCANCODE_P] == KEY_DOWN) {
+		++App->player->level;
+		if (App->player->level == 5) App->player->level = 1;
 	}
 
 	return update_status::UPDATE_CONTINUE;

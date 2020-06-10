@@ -110,7 +110,18 @@ update_status ModulePlayer::Update() {
 	// Spawn bullet particles when pressing SPACE or X/R1
 	if ((App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_REPEAT && !destroyed) || pad.x == true || pad.r1 == true) {
 		if (shotCountdown == 0) {
-			App->particles->AddParticle(App->particles->bullet, position.x + 32, position.y + 5, Collider::Type::PLAYER_SHOT);
+			if (level == 1) {
+				App->particles->AddParticle(App->particles->bullet1, position.x, position.y, Collider::Type::PLAYER_SHOT);
+			}
+			else if (level == 2) {
+				App->particles->AddParticle(App->particles->bullet2, position.x, position.y, Collider::Type::PLAYER_SHOT);
+			}
+			else if (level == 3) {
+				App->particles->AddParticle(App->particles->bullet3, position.x, position.y, Collider::Type::PLAYER_SHOT);
+			}
+			else if (level == 4) {
+				App->particles->AddParticle(App->particles->bullet4, position.x, position.y, Collider::Type::PLAYER_SHOT);
+			}
 
 			// Playing shooting sound effect (if space was pressed)
 			App->audio->PlayFx(2, 0);

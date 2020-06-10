@@ -38,6 +38,9 @@ public:
 	// Money
 	uint money = 0;
 
+	// POW Level
+	uint level = 1;
+
 	iPoint GetPlayerPosition() {
 		return position;
 	}
