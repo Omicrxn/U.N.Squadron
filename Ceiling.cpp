@@ -31,3 +31,8 @@ void Ceiling::Update()
 	// It will update the collider depending on the position
 	Weapon::Update();
 }
+
+void Ceiling::OnCollision(Collider* collider)
+{
+	
+}
