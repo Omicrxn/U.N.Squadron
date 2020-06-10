@@ -62,17 +62,20 @@ bool ModuleParticles::Start()
 	enemyExplosion.anim.PushBack({ 217, 315, 35, 27 });
 	enemyExplosion.anim.speed = 0.075f;
 	enemyExplosion.isWeapon = false;
+
 	// Stealth bomber firecannon
 	sbFirecannon.anim.PushBack({ 25,454,16,12 });
 	sbFirecannon.anim.loop = false;
 	sbFirecannon.anim.speed = 0;
 	sbFirecannon.speed.x = -2;
 	sbFirecannon.isWeapon = false;
+
 	// Falcon explosion animation
-	falconExplosion.anim.PushBack({ 27, 313, 24, 25 });
-	falconExplosion.anim.PushBack({ 97, 310, 31, 29 });
-	falconExplosion.anim.PushBack({ 159, 310, 31, 28 });
-	falconExplosion.anim.PushBack({ 217, 315, 35, 27 });
+	falconExplosion.anim.PushBack({ 154, 0, 23, 26 });
+	falconExplosion.anim.PushBack({ 178, 0, 24, 26 });
+	falconExplosion.anim.PushBack({ 203, 0, 26, 28 });
+	falconExplosion.anim.PushBack({ 230, 0, 26, 28 });
+	falconExplosion.anim.PushBack({ 284, 0, 26, 28 });
 	falconExplosion.anim.speed = 0.075f;
 	falconExplosion.isWeapon = true;
 
@@ -86,6 +89,15 @@ bool ModuleParticles::Start()
 	bombExplosion.anim.speed = 0.075f;
 	bombExplosion.anim.loop = false;
 	bombExplosion.isWeapon = true;
+
+	// Ceiling explosions animation
+	ceilingExplosion.anim.PushBack({ 210, 151, 8, 5 });
+	ceilingExplosion.anim.PushBack({ 190, 148, 19, 8 });
+	ceilingExplosion.anim.PushBack({ 0, 149, 16, 7 });
+	ceilingExplosion.anim.PushBack({ 222, 142, 14, 14 });
+	ceilingExplosion.anim.speed = 0.075f;
+	ceilingExplosion.anim.loop = false;
+	ceilingExplosion.isWeapon = true;
 
 	return true;
 }

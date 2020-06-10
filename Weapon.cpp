@@ -41,15 +41,7 @@ void Weapon::Draw()
 
 void Weapon::OnCollision(Collider* collider)
 {
-	if (App->player->currentWeapon == App->player->BOMB)
-	{
-		App->particles->AddParticle(App->particles->bombExplosion, position.x, position.y);
-	}
-	else
-	{
-		App->particles->AddParticle(App->particles->enemyExplosion, position.x, position.y);
-	}
-	App->audio->PlayFx(3, 0);
+	
 }
 
 void Weapon::SetToDelete()
