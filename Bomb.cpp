@@ -8,7 +8,8 @@
 
 Bomb::Bomb(int x, int y) : Weapon(x, y)
 {
-	drop.PushBack({ 132, 207, 15, 5 });
+	drop.PushBack({ 0, 74, 13, 10 });
+	drop.PushBack({ 14, 70, 13, 14 });
 
 	path.PushBack({ 1.0f, 1.5f }, 100, &drop);
 
