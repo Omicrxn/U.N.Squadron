@@ -67,5 +67,13 @@ private:
 	uint columns = 0;
 	uint weapon = weapons[rows][columns];
 	///////////////////////////////////////////////////////////////////////////////////////////
+
+	enum storeState {
+		IDLE, BOUGHT, NOMONEY, BYE
+	};
+
+	storeState currentState = IDLE;
+
+	uint storeStateCounter = 0;
 };
 #endif // __MODULESTORE_H__

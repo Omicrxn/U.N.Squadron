@@ -113,12 +113,17 @@ update_status ModuleStore::Update() {
 				if (App->player->money >= 9000) {
 					App->player->money -= 9000;
 					weaponSelection |= (1 << 8);
+					currentState = BOUGHT;
+				}
+				else {
+					currentState = NOMONEY;
 				}
 			}
-			else if (App->debugInfo->maxMoney)
-			{
+			else if (App->debugInfo->maxMoney) {
 				weaponSelection |= (1 << 8);
+				currentState = BOUGHT;
 			}
+			storeStateCounter = 0;
 		}
 
 		// S.SHELL
@@ -127,12 +132,17 @@ update_status ModuleStore::Update() {
 				if (App->player->money >= 20000) {
 					App->player->money -= 20000;
 					weaponSelection |= (1 << 6);
+					currentState = BOUGHT;
+				}
+				else {
+					currentState = NOMONEY;
 				}
 			}
-			else if (App->debugInfo->maxMoney)
-			{
+			else if (App->debugInfo->maxMoney) {
 				weaponSelection |= (1 << 6);
+				currentState = BOUGHT;
 			}
+			storeStateCounter = 0;
 		}
 
 		// BOMB
@@ -141,12 +151,17 @@ update_status ModuleStore::Update() {
 				if (App->player->money >= 2000) {
 					App->player->money -= 2000;
 					weaponSelection |= (1 << 4);
+					currentState = BOUGHT;
+				}
+				else {
+					currentState = NOMONEY;
 				}
 			}
-			else if (App->debugInfo->maxMoney)
-			{
+			else if (App->debugInfo->maxMoney) {
 				weaponSelection |= (1 << 4);
+				currentState = BOUGHT;
 			}
+			storeStateCounter = 0;
 		}
 
 		// CEILING
@@ -155,17 +170,24 @@ update_status ModuleStore::Update() {
 				if (App->player->money >= 15000) {
 					App->player->money -= 15000;
 					weaponSelection |= (1 << 2);
+					currentState = BOUGHT;
+				}
+				else {
+					currentState = NOMONEY;
 				}
 			}
-			else if (App->debugInfo->maxMoney)
-			{
+			else if (App->debugInfo->maxMoney) {
 				weaponSelection |= (1 << 2);
+				currentState = BOUGHT;
 			}
+			storeStateCounter = 0;
 		}
 
 		// EXIT
 		if (weapon == weapons[1][5]) {
 			App->transition->FadeToBlack(this, (Module*)App->lvl2, 60);
+			currentState = BYE;
+			storeStateCounter = 0;
 		}
 	}
 
@@ -177,6 +199,16 @@ update_status ModuleStore::Update() {
 
 	if (CountdownR > 0)
 		--CountdownR;
+
+	if (storeStateCounter < 100)
+	{
+		storeStateCounter++;
+	}
+
+	if (storeStateCounter == 100)
+	{
+		currentState = IDLE;
+	}
 
 	return ret;
 }
@@ -201,8 +233,28 @@ update_status ModuleStore::PostUpdate() {
 	App->fonts->BlitText(23, 110, greenFont, moneyText);
 
 	// Blit text
-	App->fonts->BlitText(170, 50, greyFont, "Select");
-	App->fonts->BlitText(170, 60, greyFont, "a weapon");
+	if (currentState == IDLE)
+	{
+		App->fonts->BlitText(170, 50, greyFont, "Select");
+		App->fonts->BlitText(170, 60, greyFont, "a weapon");
+	}
+	else if (currentState == BOUGHT)
+	{
+		App->fonts->BlitText(170, 50, greyFont, "Nice");
+		App->fonts->BlitText(170, 60, greyFont, "choice!");
+	}
+	else if (currentState == NOMONEY)
+	{
+		App->fonts->BlitText(170, 40, greyFont, "You dont");
+		App->fonts->BlitText(170, 50, greyFont, "have");
+		App->fonts->BlitText(170, 60, greyFont, "enough");
+		App->fonts->BlitText(170, 70, greyFont, "money...");
+	}
+	else if (currentState == BYE)
+	{
+		App->fonts->BlitText(170, 50, greyFont, "Good");
+		App->fonts->BlitText(170, 60, greyFont, "bye!");
+	}
 
 	// Blit already selected texture
 	// FALCON
