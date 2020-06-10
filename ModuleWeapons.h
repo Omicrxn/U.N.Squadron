@@ -8,7 +8,7 @@
 // Create new weapon types:
 enum class WEAPON_TYPE
 {
-	NO_TYPE, BOMB, SHELL, FALCON, CEILING
+	NO_TYPE, BOMB, SHELL, FALCON, CEILING, GF_HOOK, SB_BOMBS
 };
 
 struct WeaponSpawnpoint
