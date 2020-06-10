@@ -69,10 +69,11 @@ bool ModuleParticles::Start()
 	sbFirecannon.speed.x = -2;
 
 	// Falcon explosion animation
-	falconExplosion.anim.PushBack({ 27, 313, 24, 25 });
-	falconExplosion.anim.PushBack({ 97, 310, 31, 29 });
-	falconExplosion.anim.PushBack({ 159, 310, 31, 28 });
-	falconExplosion.anim.PushBack({ 217, 315, 35, 27 });
+	falconExplosion.anim.PushBack({ 154, 0, 23, 26 });
+	falconExplosion.anim.PushBack({ 178, 0, 24, 26 });
+	falconExplosion.anim.PushBack({ 203, 0, 26, 28 });
+	falconExplosion.anim.PushBack({ 230, 0, 26, 28 });
+	falconExplosion.anim.PushBack({ 284, 0, 26, 28 });
 	falconExplosion.anim.speed = 0.075f;
 	falconExplosion.isWeapon = true;
 
@@ -84,7 +85,7 @@ bool ModuleParticles::Start()
 	bombExplosion.anim.PushBack({ 138, 57, 28, 33 });
 	bombExplosion.anim.PushBack({ 167, 57, 28, 33 });
 	//bombExplosion.anim.speed = 0.075f;
-	bombExplosion.anim.speed = 0.001f;
+	bombExplosion.anim.speed = 0.01f;
 	bombExplosion.isWeapon = true;
 
 	return true;

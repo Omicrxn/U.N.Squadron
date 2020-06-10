@@ -27,3 +27,9 @@ void Bomb::Update()
 	// It will update the collider depending on the position
 	Weapon::Update();
 }
+
+void Bomb::OnCollision(Collider* collider)
+{
+	App->particles->AddParticle(App->particles->bombExplosion, position.x, position.y);
+	App->audio->PlayFx(3, 0);
+}
