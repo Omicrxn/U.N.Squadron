@@ -17,28 +17,23 @@ ModuleSelector::~ModuleSelector() {}
 bool ModuleSelector::Start() {
 	bool ret = true;
 
-	selected = NONE;
+	selected = LEVEL2;
 
 	// Background rect
 	background = { 0,0,SCREEN_WIDTH,SCREEN_HEIGHT };
 
-	tex1 = App->textures->Load("Assets/sprites/menus/Levels1.png");
+	tex1 = App->textures->Load("Assets/sprites/menus/Level1.png");
 	if (tex1 == nullptr) {
 		ret = false;
 	}
 	++activeTextures; ++totalTextures;
 
-	tex2 = App->textures->Load("Assets/sprites/menus/Levels2.png");
+	tex2 = App->textures->Load("Assets/sprites/menus/Level2.png");
 	if (tex2 == nullptr) {
 		ret = false;
 	}
 	++activeTextures; ++totalTextures;
 
-	tex3 = App->textures->Load("Assets/sprites/menus/Levels3.png");
-	if (tex3 == nullptr) {
-		ret = false;
-	}
-	++activeTextures; ++totalTextures;
 
 	greyFont = App->fonts->Load("Assets/Fonts/FontW.png", App->HUD->lookupTable, 5);
 	++activeFonts; ++totalFonts;
@@ -49,13 +44,8 @@ bool ModuleSelector::Start() {
 update_status ModuleSelector::Update() {
 	update_status ret = update_status::UPDATE_CONTINUE;
 
-	if (selected == NONE) {
-		if ((App->input->keyboard[SDL_SCANCODE_W] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_UP] == KEY_DOWN || App->input->pads[0].up == true) || (App->input->keyboard[SDL_SCANCODE_S] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_DOWN || App->input->pads[0].down == true)) {
-			selected = LEVEL1;
-		}
-	}
-	else if (selected == LEVEL1) {
-		if ((App->input->keyboard[SDL_SCANCODE_S] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_DOWN || App->input->pads[0].down == true)) {
+	if (selected == LEVEL1) {
+		if (App->input->keyboard[SDL_SCANCODE_A] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_DOWN || App->input->pads[0].left == true || App->input->keyboard[SDL_SCANCODE_S] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_DOWN || App->input->pads[0].down == true) {
 			selected = LEVEL2;
 		}
 		else if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN || App->input->pads[0].a == true) {
@@ -63,7 +53,7 @@ update_status ModuleSelector::Update() {
 		}
 	}
 	else if (selected == LEVEL2) {
-		if ((App->input->keyboard[SDL_SCANCODE_W] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_UP] == KEY_DOWN || App->input->pads[0].up == true)) {
+		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_DOWN || App->input->pads[0].right == true || App->input->keyboard[SDL_SCANCODE_W] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_UP] == KEY_DOWN || App->input->pads[0].up == true) {
 			selected = LEVEL1;
 		}
 		else if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN || App->input->pads[0].a == true) {
@@ -77,22 +67,15 @@ update_status ModuleSelector::Update() {
 update_status ModuleSelector::PostUpdate() {
 	update_status ret = UPDATE_CONTINUE;
 
-	if (selected == NONE) {
+	if (selected == LEVEL1) {
 		if (!App->render->Blit(tex1, 0, 0, &background, 1, false))
-			ret = UPDATE_ERROR;
-
-		App->fonts->BlitText(80, 169, greyFont, "Select your");
-		App->fonts->BlitText(144, 181, greyFont, "target area!");
-	}
-	else if (selected == LEVEL1) {
-		if (!App->render->Blit(tex2, 0, 0, &background, 1, false))
 			ret = UPDATE_ERROR;
 
 		App->fonts->BlitText(80, 169, greyFont, "You selected");
 		App->fonts->BlitText(160, 181, greyFont, "Level 1");
 	}
 	else if (selected == LEVEL2) {
-		if (!App->render->Blit(tex3, 0, 0, &background, 1, false))
+		if (!App->render->Blit(tex2, 0, 0, &background, 1, false))
 			ret = UPDATE_ERROR;
 
 		App->fonts->BlitText(80, 169, greyFont, "You selected");
@@ -114,12 +97,6 @@ bool ModuleSelector::CleanUp() {
 	--totalTextures;
 
 	if (!App->textures->Unload(tex2)) {
-		LOG("Start Screen -> Error unloading the texture.");
-		ret = false;
-	}
-	--totalTextures;
-
-	if (!App->textures->Unload(tex3)) {
 		LOG("Start Screen -> Error unloading the texture.");
 		ret = false;
 	}
