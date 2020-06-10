@@ -11,6 +11,8 @@
 #include "S.Shell.h"
 #include "Falcon.h"
 #include "Ceiling.h"
+#include "GF_Hook.h"
+#include "SB_Bomb.h"
 
 #include "ModuleParticles.h"
 #include "ModulePlayer.h"
@@ -108,7 +110,7 @@ bool ModuleWeapons::CleanUp()
 	return true;
 }
 
-void ModuleWeapons::SpawnWeapon(WEAPON_TYPE weaponType)
+void ModuleWeapons::SpawnWeapon(WEAPON_TYPE weaponType,int x,int y)
 {
 	for (uint i = 0; i < MAX_WEAPONS; ++i)
 	{
@@ -127,6 +129,12 @@ void ModuleWeapons::SpawnWeapon(WEAPON_TYPE weaponType)
 				break;
 			case WEAPON_TYPE::CEILING:
 				weapons[i] = new Ceiling(App->player->GetPlayerPosition().x, App->player->GetPlayerPosition().y);
+				break;
+			case WEAPON_TYPE::GF_HOOK:
+				weapons[i] = new GF_Hook(x, y);
+				break;
+			case WEAPON_TYPE::SB_BOMBS:
+				weapons[i] = new SB_Bomb(x,y);
 				break;
 			}
 			weapons[i]->texture = this->texture;

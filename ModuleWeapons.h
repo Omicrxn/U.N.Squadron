@@ -54,7 +54,7 @@ public:
 	void OnCollision(Collider* c1, Collider* c2) override;
 
 	// Spawns a new weapon using the data from the queue
-	void SpawnWeapon(WEAPON_TYPE);
+	void SpawnWeapon(WEAPON_TYPE weaponType,int x=0, int y=0);
 
 	// Destroys any weapons that have moved outside the camera limits
 	void DespawnWeapon();

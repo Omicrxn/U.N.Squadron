@@ -177,7 +177,7 @@
     <ClCompile Include="ModuleWinScreen.cpp" />
     <ClCompile Include="Path.cpp" />
     <ClCompile Include="S.Shell.cpp" />
-    <ClCompile Include="SB_bombs.cpp" />
+    <ClCompile Include="SB_Bomb.cpp" />
     <ClCompile Include="SetBulletDirection.cpp" />
     <ClCompile Include="SmallCamouflageJet.cpp" />
     <ClCompile Include="StealthBomber.cpp" />
@@ -225,7 +225,7 @@
     <ClInclude Include="Path.h" />
     <ClInclude Include="resource2.h" />
     <ClInclude Include="S.Shell.h" />
-    <ClInclude Include="SB_bombs.h" />
+    <ClInclude Include="SB_Bomb.h" />
     <ClInclude Include="SetBulletDirection.h" />
     <ClInclude Include="SmallCamouflageJet.h" />
     <ClInclude Include="StealthBomber.h" />

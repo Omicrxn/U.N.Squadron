@@ -111,7 +111,7 @@ void GreenFighterPlane::Update()
 	if (state == gIDLE && shootingFrequency > 60)
 	{
 		shootingFrequency = 0;
-		App->weapons->SpawnWeapon(WEAPON_TYPE:GF_HOOK);
+		App->weapons->SpawnWeapon(WEAPON_TYPE::GF_HOOK,position.x,position.y);
 		//SetBulletDirection(this);
 
 		//App->particles->AddParticle(App->particles->enemyBullet, position.x + 32, position.y, Collider::Type::ENEMY_SHOT);

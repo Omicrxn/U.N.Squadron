@@ -1,16 +1,16 @@
 #pragma once
-#ifndef __GF_HOOK_H__
-#define __GF_HOOK_H__
+#ifndef __SB_BOMB_H__
+#define __SB_BOMB_H__
 
 #include "Weapon.h"
 #include "Path.h"
-class GF_Hook : public Weapon
+class SB_Bomb : public Weapon
 {
 
 public:
 	// Constructor (x y coordinates in the world)
 	// Creates animation and movement data and the collider
-	GF_Hook(int x, int y);
+	SB_Bomb(int x, int y);
 
 	// The weapon is going to follow the different steps in the path
 	// Position will be updated depending on the speed defined at each step
@@ -25,4 +25,4 @@ private:
 	// We are keeping it an animation for consistency with other weapons
 	Animation hook;
 };
-#endif // !__GF_HOOK_H__
+#endif // !__SB_BOMB_H__

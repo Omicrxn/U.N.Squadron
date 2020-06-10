@@ -1,11 +1,10 @@
-#include "GF_Hook.h"
+#include "SB_Bomb.h"
 #include "Application.h"
 #include "ModuleCollisions.h"
 #include "ModuleParticles.h"
 #include "ModuleAudio.h"
 #include "ModulePlayer.h"
-
-GF_Hook::GF_Hook(int x, int y) : Weapon(x, y)
+SB_Bomb::SB_Bomb(int x, int y) : Weapon(x, y)
 {
 	hook.PushBack({ 0, 219, 16, 5 });
 	hook.PushBack({ 24, 211, 16, 21 });
@@ -15,7 +14,7 @@ GF_Hook::GF_Hook(int x, int y) : Weapon(x, y)
 	collider = App->collisions->AddCollider({ position.x, position.y, 30, 9 }, Collider::Type::PLAYER_SHOT, (Module*)App->weapons);
 }
 
-void GF_Hook::Update()
+void SB_Bomb::Update()
 {
 	path.Update();
 	position = spawnPos + path.GetRelativePosition();
