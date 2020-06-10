@@ -38,7 +38,8 @@ bool ModuleParticles::Start()
 	bullet1.anim.loop = bullet2.anim.loop = bullet3.anim.loop = bullet4.anim.loop = true;
 	bullet1.speed.x = bullet2.speed.x = bullet3.speed.x = bullet4.speed.x = 6.0f;
 	bullet1.lifetime = bullet2.lifetime = bullet3.lifetime = bullet4.lifetime = 180;
-	bullet1.isWeapon = false;
+	bullet1.isWeapon = bullet2.isWeapon = bullet3.isWeapon = bullet4.isWeapon = false;
+
 	// Enemy Bullet Animaton
 	enemyBullet.anim.PushBack({ 44, 370, 5 , 7 });
 	enemyBullet.anim.PushBack({ 78, 372, 5, 5 });
@@ -47,6 +48,7 @@ bool ModuleParticles::Start()
 	enemyBullet.anim.speed = 0.05f;
 	enemyBullet.lifetime = 180;
 	bombExplosion.isWeapon = false;
+
 	// Explosion Animation
 	explosion.anim.PushBack({ 27, 256, 34, 39 });
 	explosion.anim.PushBack({ 98, 261, 44, 36 });
@@ -98,6 +100,7 @@ bool ModuleParticles::Start()
 	ceilingExplosion.anim.speed = 0.075f;
 	ceilingExplosion.anim.loop = false;
 	ceilingExplosion.isWeapon = true;
+	ceilingExplosion.speed.x = 1;
 
 	return true;
 }

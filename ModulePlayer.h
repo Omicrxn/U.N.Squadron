@@ -97,6 +97,9 @@ private:
 	// Countdown to handle weapon change spacing
 	int changeMaxCountdown = 25;
 	int changeCountdown = 0;
+
+	// Ceiling countdown
+	uint ceilingCountdown;
 };
 
 #endif // __MODULEPLAYER_H__

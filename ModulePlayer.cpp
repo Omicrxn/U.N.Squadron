@@ -199,8 +199,10 @@ update_status ModulePlayer::Update() {
 				break;
 			case CEILING:
 				if ((App->store->weaponSelection & (1 << 2)) != 0 && ceilingAmmo > 0) {
-					App->weapons->SpawnWeapon(WEAPON_TYPE::CEILING);
+					App->weapons->SpawnWeapon(WEAPON_TYPE::CEILING, position.x, position.y - 4);
+					App->particles->AddParticle(App->particles->ceilingExplosion, position.x + 2, position.y - 4);
 					ceilingAmmo--;
+					ceilingCountdown = 60;
 				}
 				break;
 			default:
@@ -271,6 +273,21 @@ update_status ModulePlayer::Update() {
 	// Update weapon change countdown
 	if (changeCountdown > 0)
 		--changeCountdown;
+
+	if (ceilingCountdown > 0)
+	{
+		if (ceilingCountdown == 40)
+		{
+			App->weapons->SpawnWeapon(WEAPON_TYPE::CEILING, position.x + 16, position.y - 4);
+			App->particles->AddParticle(App->particles->ceilingExplosion, position.x + 2, position.y - 4);
+		}
+		else if (ceilingCountdown == 20)
+		{
+			App->weapons->SpawnWeapon(WEAPON_TYPE::CEILING, position.x + 32, position.y - 4);
+			App->particles->AddParticle(App->particles->ceilingExplosion, position.x + 2, position.y - 4);
+		}
+		ceilingCountdown--;
+	}
 
 	return ret;
 }

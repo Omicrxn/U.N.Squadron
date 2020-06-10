@@ -110,7 +110,7 @@ bool ModuleWeapons::CleanUp()
 	return true;
 }
 
-void ModuleWeapons::SpawnWeapon(WEAPON_TYPE weaponType,int x,int y)
+void ModuleWeapons::SpawnWeapon(WEAPON_TYPE weaponType, int x, int y)
 {
 	for (uint i = 0; i < MAX_WEAPONS; ++i)
 	{
@@ -128,13 +128,13 @@ void ModuleWeapons::SpawnWeapon(WEAPON_TYPE weaponType,int x,int y)
 				weapons[i] = new Falcon(App->player->GetPlayerPosition().x, App->player->GetPlayerPosition().y);
 				break;
 			case WEAPON_TYPE::CEILING:
-				weapons[i] = new Ceiling(App->player->GetPlayerPosition().x, App->player->GetPlayerPosition().y);
+				weapons[i] = new Ceiling(x, y);
 				break;
 			case WEAPON_TYPE::GF_HOOK:
 				weapons[i] = new GF_Hook(x, y);
 				break;
 			case WEAPON_TYPE::SB_BOMBS:
-				weapons[i] = new SB_Bomb(x,y);
+				weapons[i] = new SB_Bomb(x, y);
 				break;
 			}
 			weapons[i]->texture = this->texture;

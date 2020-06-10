@@ -82,3 +82,9 @@ void Falcon::Update()
 	// It will update the collider depending on the position
 	Weapon::Update();
 }
+
+void Falcon::OnCollision(Collider* collider)
+{
+	App->particles->AddParticle(App->particles->falconExplosion, position.x, position.y);
+	App->audio->PlayFx(3, 0);
+}
