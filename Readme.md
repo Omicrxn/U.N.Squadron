@@ -77,5 +77,6 @@ While at the moment Capcom was developing vertically scrolling shooters, U.N.Squ
 |Direct Lose|F9|
 |Maximum Money|M|
 |Maximum Lifes|L|
+|Increase POW Level|P|
+|Maximum Ammo|9|
 |Maximize / Resize|F11|
-|Gamepad Rumble Test|7 - 8 - 9|
