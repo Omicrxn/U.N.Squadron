@@ -19,7 +19,6 @@ public:
 
 private:
 	SDL_Texture* tex = nullptr;
-	SDL_Rect screen;
-	Animation plane_anim;
+	Animation anim;
 	Animation* current_anim = nullptr;
 };

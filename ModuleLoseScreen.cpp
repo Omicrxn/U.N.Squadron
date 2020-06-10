@@ -11,9 +11,6 @@
 
 ModuleLoseScreen::ModuleLoseScreen(bool startEnabled) : Module(startEnabled) {
 	name = "Lose S";
-	
-	// Screen rect
-	screen = { 0, 0, 256, 244 };
 }
 
 ModuleLoseScreen::~ModuleLoseScreen() {}
@@ -21,7 +18,17 @@ ModuleLoseScreen::~ModuleLoseScreen() {}
 bool ModuleLoseScreen::Start() {
 	bool ret = true;
 
-	tex = App->textures->Load("Assets/sprites/menus/Lose_Screen/LoseScreen1.png");
+	anim.PushBack({ 0,0,256,224 });
+	anim.PushBack({ 256,0,256,224 });
+	anim.PushBack({ 512,0,256,224 });
+	anim.PushBack({ 768,0,256,224 });
+	anim.PushBack({ 1024,0,256,224 });
+	anim.PushBack({ 1280,0,256,224 });
+	anim.PushBack({ 1536,0,256,224 });
+	anim.PushBack({ 1792,0,256,224 });
+	anim.speed = 0.1f;
+
+	tex = App->textures->Load("Assets/sprites/menus/LoseScreen.png");
 	if (tex == nullptr) {
 		ret = false;
 	}
@@ -50,7 +57,7 @@ update_status ModuleLoseScreen::PostUpdate() {
 	update_status ret = UPDATE_CONTINUE;
 
 	// Blit
-	if (!App->render->Blit(tex, 0, 0, &screen, 1, false)) {
+	if (!App->render->Blit(tex, 0, 0, &anim.GetCurrentFrame(), 1, false)) {
 		ret = UPDATE_ERROR;
 	}
 
