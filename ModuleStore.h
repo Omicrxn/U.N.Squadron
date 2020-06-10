@@ -37,11 +37,13 @@ private:
 	SDL_Texture* tex = nullptr;
 	SDL_Texture* tex2 = nullptr;
 	SDL_Texture* tex3 = nullptr;
+	SDL_Texture* tex4 = nullptr;
 	SDL_Rect title;
 	SDL_Rect text;
 	SDL_Rect selector;
 	SDL_Rect background;
 	SDL_Rect alreadySelected;
+	Animation talkStore;
 	Animation unicorn_anim;
 	Animation* current_anim = nullptr;
 	iPoint selectorPos;

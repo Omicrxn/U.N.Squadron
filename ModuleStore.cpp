@@ -31,6 +31,12 @@ bool ModuleStore::Start() {
 	// Already selected rect
 	alreadySelected = { 0,0,33,41 };
 
+	// Unicorn Animation
+	talkStore.PushBack({ 0,0,72,119 });
+	talkStore.PushBack({ 73,0,72,119 });
+	talkStore.PushBack({ 219,0,72,119 });
+	talkStore.speed = 0.01f;
+
 	// Loading the background texture
 	tex = App->textures->Load("Assets/sprites/menus/shop/store.jpg");
 	if (tex == nullptr) {
@@ -48,6 +54,13 @@ bool ModuleStore::Start() {
 	// Loading the already selected texture
 	tex3 = App->textures->Load("Assets/sprites/menus/shop/alreadyselected.png");
 	if (tex3 == nullptr) {
+		ret = false;
+	}
+	++activeTextures; ++totalTextures;
+
+	// Loading the talk store textures
+	tex4 = App->textures->Load("Assets/sprites/menus/shop/talk store.png");
+	if (tex4 == nullptr) {
 		ret = false;
 	}
 	++activeTextures; ++totalTextures;
@@ -376,6 +389,12 @@ update_status ModuleStore::PostUpdate() {
 		if (!App->render->Blit(tex3, 135, 174, &alreadySelected, 1, false))
 			ret = UPDATE_ERROR;
 	}
+
+	// Printing shopkeeper animation
+	if (!App->render->Blit(tex4, 80, 0, &talkStore.GetCurrentFrame(), 1, false)) {
+		ret = UPDATE_ERROR;
+	}
+
 	return ret;
 }
 
@@ -397,6 +416,12 @@ bool ModuleStore::CleanUp() {
 	--totalTextures;
 
 	if (!App->textures->Unload(tex3)) {
+		LOG("Start Screen -> Error unloading the texture.");
+		ret = false;
+	}
+	--totalTextures;
+
+	if (!App->textures->Unload(tex4)) {
 		LOG("Start Screen -> Error unloading the texture.");
 		ret = false;
 	}
