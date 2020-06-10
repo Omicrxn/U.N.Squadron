@@ -22,7 +22,9 @@ private:
 
 	// This weapon has one sprite and one frame
 	// We are keeping it an animation for consistency with other weapons
-	Animation drop;
+	Animation drop1;
+	Animation drop2;
+	Animation drop3;
 };
 
 #endif // __FALCON_H__

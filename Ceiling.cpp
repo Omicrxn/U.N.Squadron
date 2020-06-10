@@ -8,7 +8,10 @@
 
 Ceiling::Ceiling(int x, int y) : Weapon(x, y)
 {
-	drop.PushBack({ 132, 176, 15, 9 });
+	drop.PushBack({ 213, 97, 8, 20 });
+	drop.PushBack({ 229, 91, 4, 22 });
+
+	drop.speed = 0.1f;
 
 	path.PushBack({ 1.0f, -0.5f }, 5, &drop);
 	path.PushBack({ 1.0f, -1.0f }, 10, &drop);
