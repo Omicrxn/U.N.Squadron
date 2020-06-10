@@ -57,18 +57,25 @@ update_status ModuleHUD::Update() {
 	
 	fuelQuantity.w = 62 *App->player->GetCurrentFuel()/App->player->GetMaxFuel();
 
+	// Draw HUD
+	sprintf_s(scoreText, 10, "%7d", App->player->score);
+	if (!App->debugInfo->maxMoney) sprintf_s(moneyText, 10, "%7d", App->player->money);
+	else sprintf_s(moneyText, 10, "    max");
+
+	sprintf_s(lifesText, 10, "%d", App->player->GetLifes());
+
+	sprintf_s(totalText, 4, "%3d", App->player->total);
+
+	sprintf_s(levelText, 2, "%1d", App->player->level);
+
+	if (!App->player->maxPow) sprintf_s(powText, 4, "%3d", App->player->pow);
+	else sprintf_s(powText, 4, "max");
+
 	return ret;
 }
 
 update_status ModuleHUD::PostUpdate() {
 	update_status ret = UPDATE_CONTINUE;
-
-	// Draw UI (score & money)
-	sprintf_s(scoreText, 10, "%7d", App->player->score);
-	if (!App->debugInfo->maxMoney) sprintf_s(moneyText, 10, "%7d", App->player->money);
-	else sprintf_s(moneyText, 10, "    MAX");
-
-	sprintf_s(lifesText, 10, "%d", App->player->GetLifes());
 
 	if (!App->debugInfo->debugMemLeaks && !App->debugInfo->debugGamepadInfo) {
 		//Blit images
@@ -115,9 +122,9 @@ update_status ModuleHUD::PostUpdate() {
 		App->fonts->BlitText(121, 31, yellowFont, "$");
 		App->fonts->BlitText(8, 31, greenFont, scoreText);
 		App->fonts->BlitText(128, 31, greenFont, moneyText);
-		App->fonts->BlitText(176, 15, greenFont, "2"); // Provisional
-		App->fonts->BlitText(193, 31, greenFont, "max");
-		App->fonts->BlitText(224, 31, greenFont, "  1");
+		App->fonts->BlitText(176, 15, greenFont, levelText);
+		App->fonts->BlitText(193, 31, greenFont, powText);
+		App->fonts->BlitText(224, 31, greenFont, totalText);
 		App->fonts->BlitText(32, 208, yellowFont, "=");
 		App->fonts->BlitText(41, 207, greenFont, lifesText);
 	}

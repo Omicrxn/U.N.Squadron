@@ -24,6 +24,10 @@ public:
 	char moneyText[10] = { "\0" };
 	char lifesText[10] = { "\0" };
 
+	char powText[4] = { "\0" };
+	char totalText[4] = { "\0" };
+	char levelText[2] = { "\0" };
+
 	char lookupTable[91] = { "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz  0123456789.,ªº?!*$%&()+-/:;<=>@·    " };
 
 	// Id Fonts

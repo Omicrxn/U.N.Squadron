@@ -38,6 +38,13 @@ public:
 	// Money
 	uint money = 0;
 
+	// POW
+	uint pow = 4;
+	bool maxPow = false;
+
+	// Total POW
+	uint total = 0;
+
 	// POW Level
 	uint level = 1;
 
@@ -80,7 +87,7 @@ private:
 	bool hasBought;
 
 	// Countdown to handle shot spacing
-	int shotMaxCountdown = 20;
+	int shotMaxCountdown = 15;
 	int shotCountdown = 0;
 
 	// Countdown to handle weapon shot spacing
