@@ -6,6 +6,7 @@
 #include "ModuleAudio.h"
 #include "ModuleRenderer.h"
 #include "ModuleHUD.h"
+#include "ModulePlayer.h"
 
 Weapon::Weapon(int x, int y) : position(x, y)
 {
@@ -40,9 +41,17 @@ void Weapon::Draw()
 
 void Weapon::OnCollision(Collider* collider)
 {
-	App->particles->AddParticle(App->particles->enemyExplosion, position.x, position.y);
+	if (App->player->currentWeapon == App->player->BOMB)
+	{
+		App->particles->AddParticle(App->particles->bombExplosion, position.x, position.y);
+	}
+	else
+	{
+		App->particles->AddParticle(App->particles->enemyExplosion, position.x, position.y);
+	}
 	App->audio->PlayFx(3, 0);
 }
+
 void Weapon::SetToDelete()
 {
 	pendingToDelete = true;

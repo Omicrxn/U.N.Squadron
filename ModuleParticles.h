@@ -2,7 +2,6 @@
 #ifndef __MODULEPARTICLES_H__
 #define __MODULEPARTICLES_H__
 
-
 #include "Application.h"
 #include "Animation.h"
 #include "p2Point.h"
@@ -11,6 +10,7 @@
 #include "ModuleCollisions.h"
 
 #define MAX_ACTIVE_PARTICLES 200
+
 struct SDL_Texture;
 
 struct Collider;
@@ -102,11 +102,14 @@ private:
 	// An index to the last added particle
 	uint lastParticle = 0;
 
-	// Total amount of particles laoded into the array
+	// Total amount of particles loaded into the array
 	uint particlesCount = 0;
 
+	// Weapons particles spritesheet loaded into an SDL Texture
+	SDL_Texture* weaponsParticlesTexture = nullptr;
+
 public:
-	//Template particle for an explosion
+	// Template particle for an explosion
 	Particle explosion;
 	Particle enemyExplosion;
 	Particle bullet1;
@@ -118,5 +121,10 @@ public:
 	Particle sbFirecannon;
 	Particle sbExplosion;
 	Particle sbBombs;
+
+	Particle falconExplosion;
+	Particle shellExplosion;
+	Particle bombExplosion;
+	Particle ceilingExplosion;
 };
 #endif

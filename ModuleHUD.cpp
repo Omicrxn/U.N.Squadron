@@ -51,7 +51,7 @@ bool ModuleHUD::Start() {
 		playerOut.PushBack({ 42 * i, 34, 42, 34 });
 	}
 	playerIn.speed = 0.3f;
-	playerOut.speed = 0.2f;
+	playerOut.speed = 0.3f;
 
 
 
@@ -101,7 +101,7 @@ update_status ModuleHUD::PostUpdate() {
 				ret = UPDATE_ERROR;
 			}
 		}
-		if (App->player->GetCurrentFuel() == 0) {
+		if (playerOut.Finished() == false && App->player->GetCurrentFuel() == 0) {
 			if (playerOut.Finished() == false) {
 				if (!App->render->Blit(tex2, 71, 6, &playerOut.GetCurrentFrame(), 1, false)) {
 					ret = UPDATE_ERROR;

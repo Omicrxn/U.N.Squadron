@@ -36,7 +36,7 @@ public:
 	uint score = 0;
 
 	// Money
-	uint money = 0;
+	uint money = 3000;
 
 	// POW
 	uint pow = 4;

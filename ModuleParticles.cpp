@@ -25,6 +25,10 @@ bool ModuleParticles::Start()
 	particlesTexture = App->textures->Load("Assets/sprites/explosions/explosions.png");
 	++totalTextures;
 
+	/*LOG("Loading weapons particles");
+	weaponsParticlesTexture = App->textures->Load("Assets/sprites/weapons/weapons.png");
+	++totalTextures;*/
+
 	// Bullets Animaton 
 	bullet1.anim.PushBack({ 456, 8, 13, 3 });
 	bullet2.anim.PushBack({ 470, 6, 12, 6 });
@@ -35,7 +39,7 @@ bool ModuleParticles::Start()
 	bullet1.speed.x = bullet2.speed.x = bullet3.speed.x = bullet4.speed.x = 6.0f;
 	bullet1.lifetime = bullet2.lifetime = bullet3.lifetime = bullet4.lifetime = 180;
 
-	//Enemy Bullet Animaton
+	// Enemy Bullet Animaton
 	enemyBullet.anim.PushBack({ 44, 370, 5 , 7 });
 	enemyBullet.anim.PushBack({ 78, 372, 5, 5 });
 	enemyBullet.anim.PushBack({ 110, 371, 15, 6 });
@@ -43,7 +47,7 @@ bool ModuleParticles::Start()
 	enemyBullet.anim.speed = 0.05f;
 	enemyBullet.lifetime = 180;
 
-	//Explosion Animation
+	// Explosion Animation
 	explosion.anim.PushBack({ 27, 256, 34, 39 });
 	explosion.anim.PushBack({ 98, 261, 44, 36 });
 	explosion.anim.PushBack({ 164, 263, 33, 27 });
@@ -51,17 +55,35 @@ bool ModuleParticles::Start()
 	explosion.anim.loop = true;
 	explosion.anim.speed = 0.075f;
 
-	//Explosion of the enemies
+	// Explosion of the enemies
 	enemyExplosion.anim.PushBack({ 27, 313, 24, 25 });
 	enemyExplosion.anim.PushBack({ 97, 310, 31, 29 });
 	enemyExplosion.anim.PushBack({ 159, 310, 31, 28 });
 	enemyExplosion.anim.PushBack({ 217, 315, 35, 27 });
 	enemyExplosion.anim.speed = 0.075f;
-	//Stealth bomber firecannon
+
+	// Stealth bomber firecannon
 	sbFirecannon.anim.PushBack({ 25,454,16,12 });
 	sbFirecannon.anim.loop = false;
 	sbFirecannon.anim.speed = 0;
 	sbFirecannon.speed.x = -2;
+
+	// Falcon explosion animation
+	/*falconExplosion.anim.PushBack({ 27, 313, 24, 25 });
+	falconExplosion.anim.PushBack({ 97, 310, 31, 29 });
+	falconExplosion.anim.PushBack({ 159, 310, 31, 28 });
+	falconExplosion.anim.PushBack({ 217, 315, 35, 27 });
+	falconExplosion.anim.speed = 0.075f;*/
+
+	// Bomb explosions animation
+	bombExplosion.anim.PushBack({ 28, 57, 28, 33 });
+	bombExplosion.anim.PushBack({ 57, 57, 24, 33 });
+	bombExplosion.anim.PushBack({ 82, 57, 28, 33 });
+	bombExplosion.anim.PushBack({ 111, 57, 26, 33 });
+	bombExplosion.anim.PushBack({ 138, 57, 28, 33 });
+	bombExplosion.anim.PushBack({ 167, 57, 28, 33 });
+	bombExplosion.anim.speed = 0.075f;
+
 	return true;
 }
 
