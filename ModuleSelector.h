@@ -8,7 +8,7 @@
 #include "p2Point.h"
 
 enum selection {
-	NONE, LEVEL1, LEVEL2
+	LEVEL1, LEVEL2
 };
 
 struct SDL_Texture;
@@ -33,7 +33,6 @@ public:
 private:
 	SDL_Texture* tex1 = nullptr;
 	SDL_Texture* tex2 = nullptr;
-	SDL_Texture* tex3 = nullptr;
 
 	SDL_Rect background;
 };
