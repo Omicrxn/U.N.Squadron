@@ -8,9 +8,16 @@
 
 Shell::Shell(int x, int y) : Weapon(x, y)
 {
-	drop.PushBack({ 132, 84, 21, 11 });
+	drop1.PushBack({ 0, 36, 16, 16 });
+	drop1.PushBack({ 17, 36, 28, 16 });
+	drop1.PushBack({ 46, 30, 48, 26 });
+	drop1.PushBack({ 95, 29, 80, 26 });
+	drop2.PushBack({ 176, 34, 77, 14 });
 
-	path.PushBack({ 5.0f, 0.0f }, 100, &drop);
+	drop1.speed = 0.05f;
+
+	path.PushBack({ 5.0f, 0.0f }, 10, &drop1);
+	path.PushBack({ 5.0f, 0.0f }, 90, &drop2);
 
 	collider = App->collisions->AddCollider({ position.x, position.y, 30, 9 }, Collider::Type::PLAYER_SHOT, (Module*)App->weapons);
 }

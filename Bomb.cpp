@@ -8,10 +8,11 @@
 
 Bomb::Bomb(int x, int y) : Weapon(x, y)
 {
-	drop.PushBack({ 0, 74, 13, 10 });
-	drop.PushBack({ 14, 70, 13, 14 });
+	drop1.PushBack({ 0, 80, 13, 10 });
+	drop2.PushBack({ 14, 76, 13, 14 });
 
-	path.PushBack({ 1.0f, 1.5f }, 100, &drop);
+	path.PushBack({ 1.5f, 2.0f }, 25, &drop1);
+	path.PushBack({ 1.5f, 2.0f }, 75, &drop2);
 
 	collider = App->collisions->AddCollider({ position.x, position.y, 30, 9 }, Collider::Type::PLAYER_SHOT, (Module*)App->weapons);
 }
