@@ -106,6 +106,35 @@ update_status ModuleStore::Update() {
 		}
 	}
 
+	// Handle the store state depending on the selector position
+	if (currentState != BOUGHT && currentState != ALREADYBOUGHT && currentState != NOMONEY && currentState != BYE)
+	{
+		if (weapon == weapons[0][2])
+		{
+			currentState = FALCONSELECT;
+		}
+		else if (weapon == weapons[0][4])
+		{
+			currentState = SHELLSELECT;
+		}
+		else if (weapon == weapons[1][0])
+		{
+			currentState = BOMBSELECT;
+		}
+		else if (weapon == weapons[1][3])
+		{
+			currentState = CEILINGSELECT;
+		}
+		else if (weapon == weapons[1][5])
+		{
+			currentState = EXITSELECT;
+		}
+		else
+		{
+			currentState = CANTHANDLE;
+		}
+	}
+
 	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN || App->input->pads[0].a == true) {
 		// FALCON
 		if (weapon == weapons[0][2]) {
@@ -120,8 +149,15 @@ update_status ModuleStore::Update() {
 				}
 			}
 			else if (App->debugInfo->maxMoney) {
-				weaponSelection |= (1 << 8);
-				currentState = BOUGHT;
+				if ((weaponSelection & (1 << 8)) == 0)
+				{
+					weaponSelection |= (1 << 8);
+					currentState = BOUGHT;
+				}
+				else
+				{
+					currentState = ALREADYBOUGHT;
+				}
 			}
 			storeStateCounter = 0;
 		}
@@ -139,8 +175,15 @@ update_status ModuleStore::Update() {
 				}
 			}
 			else if (App->debugInfo->maxMoney) {
-				weaponSelection |= (1 << 6);
-				currentState = BOUGHT;
+				if ((weaponSelection & (1 << 6)) == 0)
+				{
+					weaponSelection |= (1 << 6);
+					currentState = BOUGHT;
+				}
+				else
+				{
+					currentState = ALREADYBOUGHT;
+				}
 			}
 			storeStateCounter = 0;
 		}
@@ -158,8 +201,15 @@ update_status ModuleStore::Update() {
 				}
 			}
 			else if (App->debugInfo->maxMoney) {
-				weaponSelection |= (1 << 4);
-				currentState = BOUGHT;
+				if ((weaponSelection & (1 << 4)) == 0)
+				{
+					weaponSelection |= (1 << 4);
+					currentState = BOUGHT;
+				}
+				else
+				{
+					currentState = ALREADYBOUGHT;
+				}
 			}
 			storeStateCounter = 0;
 		}
@@ -177,8 +227,15 @@ update_status ModuleStore::Update() {
 				}
 			}
 			else if (App->debugInfo->maxMoney) {
-				weaponSelection |= (1 << 2);
-				currentState = BOUGHT;
+				if ((weaponSelection & (1 << 2)) == 0)
+				{
+					weaponSelection |= (1 << 2);
+					currentState = BOUGHT;
+				}
+				else
+				{
+					currentState = ALREADYBOUGHT;
+				}
 			}
 			storeStateCounter = 0;
 		}
@@ -200,13 +257,17 @@ update_status ModuleStore::Update() {
 	if (CountdownR > 0)
 		--CountdownR;
 
-	if (storeStateCounter < 100)
+	if (currentState == BOUGHT || currentState == ALREADYBOUGHT|| currentState == NOMONEY || currentState == BYE)
 	{
-		storeStateCounter++;
+		if (storeStateCounter < 100)
+		{
+			storeStateCounter++;
+		}
 	}
-
+	
 	if (storeStateCounter == 100)
 	{
+		storeStateCounter = 0;
 		currentState = IDLE;
 	}
 
@@ -233,27 +294,65 @@ update_status ModuleStore::PostUpdate() {
 	App->fonts->BlitText(23, 110, greenFont, moneyText);
 
 	// Blit text
-	if (currentState == IDLE)
+	if (currentState == FALCONSELECT)
 	{
-		App->fonts->BlitText(170, 50, greyFont, "Select");
-		App->fonts->BlitText(170, 60, greyFont, "a weapon");
+		App->fonts->BlitText(160, 30, greyFont, "FALCON");
+		App->fonts->BlitText(160, 40, greyFont, "");
+		App->fonts->BlitText(160, 50, greyFont, "30pcs!");
+	}
+	else if (currentState == SHELLSELECT)
+	{
+		App->fonts->BlitText(160, 30, greyFont, "SUPER");
+		App->fonts->BlitText(160, 40, greyFont, "   SHELL");
+		App->fonts->BlitText(160, 50, greyFont, "");
+		App->fonts->BlitText(160, 60, greyFont, "10pcs!");
+	}
+	else if (currentState == BOMBSELECT)
+	{
+		App->fonts->BlitText(160, 30, greyFont, "BOMB");
+		App->fonts->BlitText(160, 40, greyFont, "");
+		App->fonts->BlitText(160, 50, greyFont, "50pcs!");
+	}
+	else if (currentState == CEILINGSELECT)
+	{
+		App->fonts->BlitText(160, 30, greyFont, "SAILING");
+		App->fonts->BlitText(160, 40, greyFont, "  MISSILE");
+		App->fonts->BlitText(160, 50, greyFont, "");
+		App->fonts->BlitText(160, 60, greyFont, "50pcs!");
 	}
 	else if (currentState == BOUGHT)
 	{
-		App->fonts->BlitText(170, 50, greyFont, "Nice");
-		App->fonts->BlitText(170, 60, greyFont, "choice!");
+		App->fonts->BlitText(160, 50, greyFont, "Thanks!");
+	}
+	else if (currentState == ALREADYBOUGHT)
+	{
+		App->fonts->BlitText(160, 40, greyFont, "You");
+		App->fonts->BlitText(160, 50, greyFont, "already");
+		App->fonts->BlitText(160, 60, greyFont, "have it!");
 	}
 	else if (currentState == NOMONEY)
 	{
-		App->fonts->BlitText(170, 40, greyFont, "You dont");
-		App->fonts->BlitText(170, 50, greyFont, "have");
-		App->fonts->BlitText(170, 60, greyFont, "enough");
-		App->fonts->BlitText(170, 70, greyFont, "money...");
+		App->fonts->BlitText(160, 40, greyFont, "You dont");
+		App->fonts->BlitText(160, 50, greyFont, "have");
+		App->fonts->BlitText(160, 60, greyFont, "enough");
+		App->fonts->BlitText(160, 70, greyFont, "money...");
+	}
+	else if (currentState == CANTHANDLE)
+	{
+		App->fonts->BlitText(160, 40, greyFont, "Your");
+		App->fonts->BlitText(160, 50, greyFont, "plane");
+		App->fonts->BlitText(160, 60, greyFont, "cant");
+		App->fonts->BlitText(160, 70, greyFont, "handle it!");
+	}
+	else if (currentState == EXITSELECT) {
+		App->fonts->BlitText(160, 40, greyFont, "Do you");
+		App->fonts->BlitText(160, 50, greyFont, "want to");
+		App->fonts->BlitText(160, 60, greyFont, "leave?");
 	}
 	else if (currentState == BYE)
 	{
-		App->fonts->BlitText(170, 50, greyFont, "Good");
-		App->fonts->BlitText(170, 60, greyFont, "bye!");
+		App->fonts->BlitText(160, 50, greyFont, "Good");
+		App->fonts->BlitText(160, 60, greyFont, "bye!");
 	}
 
 	// Blit already selected texture

@@ -69,10 +69,10 @@ private:
 	///////////////////////////////////////////////////////////////////////////////////////////
 
 	enum storeState {
-		IDLE, BOUGHT, NOMONEY, BYE
+		FALCONSELECT, SHELLSELECT, BOMBSELECT, CEILINGSELECT, CANTHANDLE, BOUGHT, ALREADYBOUGHT, NOMONEY, EXITSELECT, BYE, IDLE
 	};
 
-	storeState currentState = IDLE;
+	storeState currentState = CANTHANDLE;
 
 	uint storeStateCounter = 0;
 };

@@ -85,8 +85,8 @@ bool ModulePlayer::Start() {
 		hasBought = true;
 	}
 
-	falconAmmo = 50;
-	shellAmmo = 50;
+	falconAmmo = 30;
+	shellAmmo = 10;
 	bombAmmo = 50;
 	ceilingAmmo = 50;
 
