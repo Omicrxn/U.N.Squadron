@@ -101,7 +101,8 @@ void StealthBomber::Update()
 			currentAnim = &shooting;
 			shooting.Reset();
 		}
-		App->weapons->SpawnWeapon(WEAPON_TYPE::SB_BOMB, position.x+65, position.y+18);
+		//App->weapons->SpawnWeapon(WEAPON_TYPE::SB_BOMB, position.x+65, position.y+18);
+		//App->weapons->SpawnWeapon(WEAPON_TYPE::SB_BOMB, position.x+65, position.y+46);
 		App->weapons->SpawnWeapon(WEAPON_TYPE::SB_BOMB, position.x+65, position.y+46);
 
 	}

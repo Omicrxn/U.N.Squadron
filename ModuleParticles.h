@@ -123,7 +123,8 @@ public:
 	Particle sbExplosion;
 	Particle sbSparks;
 	Particle sbBombs;
-	Particle sbSparks;
+	Particle sbBombExplosion;
+
 
 	Particle falconExplosion;
 	Particle shellExplosion;

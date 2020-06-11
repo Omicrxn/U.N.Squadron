@@ -15,7 +15,7 @@ SB_Bomb::SB_Bomb(int x, int y) : Weapon(x, y)
 	path.PushBack({1.0f, 0.0f }, 10, &bomb);
 	path.loop = false;
 
-	collider = App->collisions->AddCollider({ position.x, position.y, 30, 9 }, Collider::Type::ENEMY_SHOT, (Module*)App->weapons);
+	collider = App->collisions->AddCollider({ position.x, position.y, 11, 12 }, Collider::Type::ENEMY_SHOT, (Module*)App->weapons);
 }
 
 void SB_Bomb::Update()
@@ -30,7 +30,14 @@ void SB_Bomb::Update()
 	if (path.Finished()) {
 
 		App->particles->AddParticle(App->particles->enemyExplosion, position.x, position.y, Collider::Type::ENEMY_SHOT,0);
+		App->weapons->SpawnShrapnel(position.x,position.y,0);
 		App->weapons->SpawnShrapnel(position.x,position.y,1);
+		App->weapons->SpawnShrapnel(position.x,position.y,2);
+		App->weapons->SpawnShrapnel(position.x,position.y,3);
+		App->weapons->SpawnShrapnel(position.x,position.y,4);
+		App->weapons->SpawnShrapnel(position.x,position.y,5);
+		App->weapons->SpawnShrapnel(position.x,position.y,6);
+		App->weapons->SpawnShrapnel(position.x,position.y,7);
 		this->pendingToDelete = true;
 	}
 }

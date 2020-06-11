@@ -152,7 +152,7 @@ void ModuleWeapons::SpawnShrapnel(int x, int y,unsigned int number){
 	{
 		if (weapons[i] == nullptr)
 		{
-				weapons[i] = new SB_BombShrapnel(x, y);
+				weapons[i] = new SB_BombShrapnel(x, y,number);
 				
 			weapons[i]->texture = this->texture;
 			weapons[i]->destroyedFx = weaponDestroyedFx;
