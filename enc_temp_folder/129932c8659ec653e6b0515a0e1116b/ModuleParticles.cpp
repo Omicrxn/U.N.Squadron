@@ -62,18 +62,14 @@ bool ModuleParticles::Start()
 	enemyExplosion.anim.PushBack({ 159, 310, 31, 28 });
 	enemyExplosion.anim.PushBack({ 217, 315, 35, 27 });
 	enemyExplosion.anim.speed = 0.075f;
+	enemyExplosion.isWeapon = true;
 	// Stealth bomber firecannon
 	sbFirecannon.anim.PushBack({ 0,193,15,12 });
 	sbFirecannon.anim.loop = false;
 	sbFirecannon.anim.speed = 0;
 	sbFirecannon.speed.x = -2;
 	sbFirecannon.isWeapon = true;
-	//Stealth bomber explosion when shooting
-	 sbSparks.anim.PushBack({ 21,191,13,15 });
-	 sbSparks.anim.loop = false;
-	 sbSparks.anim.speed = 0;
-	 sbSparks.speed.x = -2;
-	 sbSparks.isWeapon = true;
+
 	// Falcon explosion animation
 	falconExplosion.anim.PushBack({ 154, 0, 23, 26 });
 	falconExplosion.anim.PushBack({ 178, 0, 24, 26 });

@@ -90,10 +90,9 @@ void StealthBomber::Update()
 		App->particles->AddParticle(App->particles->sbFirecannon, position.x + 7 + 15, position.y + 32, Collider::Type::ENEMY_SHOT, 15);
 
 
-<<<<<<< Updated upstream
+
 		//Playing shooting sound effect
-		App->audio->PlayFx(0, 0);
-=======
+
 		//Playing shooting sound effect (if space was pressed)
 		//App->audio->PlayFx(2, 0);
 	}
@@ -105,7 +104,7 @@ void StealthBomber::Update()
 		}
 		App->weapons->SpawnWeapon(WEAPON_TYPE::SB_BOMBS, position.x+65, position.y+18);
 		App->weapons->SpawnWeapon(WEAPON_TYPE::SB_BOMBS, position.x+65, position.y+46);
->>>>>>> Stashed changes
+
 	}
 	// Call to the base class. It must be called at the end
 	// It will update the collider depending on the position

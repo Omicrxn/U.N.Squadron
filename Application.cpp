@@ -30,7 +30,7 @@ Application::Application() {
 	modules[i++] = audio = new ModuleAudio(true);
 
 	
-	modules[i++] = initialScreen = new ModuleInitialScreen(true);
+	modules[i++] = initialScreen = new ModuleInitialScreen(false);
 	modules[i++] = startScreen = new ModuleStartScreen(false);
 	modules[i++] = selector = new ModuleSelector(false);
 	modules[i++] = store = new ModuleStore(false);
