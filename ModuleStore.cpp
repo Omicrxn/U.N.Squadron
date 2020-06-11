@@ -324,7 +324,6 @@ update_status ModuleStore::PostUpdate() {
 
 	// Blit money
 	App->fonts->BlitText(17, 110, greenFont, "$");
-
 	App->fonts->BlitText(23, 110, greenFont, moneyText);
 
 	// Blit text
@@ -379,14 +378,16 @@ update_status ModuleStore::PostUpdate() {
 		App->fonts->BlitText(160, 70, greyFont, "handle it!");
 	}
 	else if (currentState == EXITSELECT) {
-		App->fonts->BlitText(160, 40, greyFont, "Do you");
-		App->fonts->BlitText(160, 50, greyFont, "want to");
-		App->fonts->BlitText(160, 60, greyFont, "leave?");
+		App->fonts->BlitText(160, 40, greyFont, "Are you");
+		App->fonts->BlitText(160, 50, greyFont, "leaving");
+		App->fonts->BlitText(160, 60, greyFont, "already?");
 	}
 	else if (currentState == BYE)
 	{
-		App->fonts->BlitText(160, 50, greyFont, "Good");
-		App->fonts->BlitText(160, 60, greyFont, "bye!");
+		App->fonts->BlitText(160, 40, greyFont, "Thanks!");
+		App->fonts->BlitText(160, 60, greyFont, "");
+		App->fonts->BlitText(160, 70, greyFont, "You be");
+		App->fonts->BlitText(160, 80, greyFont, "careful now!");
 	}
 
 	// Blit already selected texture
