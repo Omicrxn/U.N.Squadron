@@ -124,7 +124,7 @@ update_status ModulePlayer::Update() {
 			}
 
 			// Playing shooting sound effect (if space was pressed)
-			App->audio->PlayFx(2, 0);
+			App->audio->PlayFx(0, 0);
 
 			shotCountdown = shotMaxCountdown;
 		}
@@ -209,6 +209,9 @@ update_status ModulePlayer::Update() {
 				break;
 			}
 			weaponCountdown = weaponMaxCountdown;
+
+			// Playing shooting sound effect
+			App->audio->PlayFx(0, 0);
 		}
 	}
 
@@ -289,6 +292,15 @@ update_status ModulePlayer::Update() {
 		ceilingCountdown--;
 	}
 
+	if (hasBeenHitCounter < 30)
+	{
+		hasBeenHitCounter++;
+	}
+	else if (hasBeenHitCounter == 30)
+	{
+		hasBeenHit = false;
+	}
+
 	return ret;
 }
 
@@ -349,10 +361,13 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 				App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->loseScreen, 60);
 			}
 
-			//Playing explosion sound effect
-			App->audio->PlayFx(3, 0);
-
 			destroyed = true;
 		}
+
+		hasBeenHit = true;
+		hasBeenHitCounter = 0;
+
+		//Playing explosion sound effect
+		App->audio->PlayFx(1, 0);
 	}
 }

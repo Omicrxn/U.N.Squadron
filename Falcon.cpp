@@ -68,6 +68,14 @@ Falcon::Falcon(int x, int y) : Weapon(x, y)
 		path.PushBack({ 4.0f, 0.0f }, 15, &drop);
 		path.PushBack({ 5.0f, 0.0f }, 60, &drop);
 	}*/
+	else
+	{
+		path.PushBack({ 1.0f, 2.0f }, 10, &drop1);
+		path.PushBack({ 2.0f, 2.0f }, 5, &drop2);
+		path.PushBack({ 3.0f, 1.5f }, 10, &drop2);
+		path.PushBack({ 4.0f, 0.0f }, 15, &drop3);
+		path.PushBack({ 5.0f, 0.0f }, 60, &drop3);
+	}
 
 	collider = App->collisions->AddCollider({ position.x, position.y, 30, 9 }, Collider::Type::PLAYER_SHOT, (Module*)App->weapons);
 }

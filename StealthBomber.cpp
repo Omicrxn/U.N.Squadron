@@ -85,8 +85,8 @@ void StealthBomber::Update()
 		App->particles->AddParticle(App->particles->sbFirecannon, position.x + 7+15, position.y+32, Collider::Type::ENEMY_SHOT,15);
 		
 
-		//Playing shooting sound effect (if space was pressed)
-		App->audio->PlayFx(2, 0);
+		//Playing shooting sound effect
+		App->audio->PlayFx(0, 0);
 	}
 }
 

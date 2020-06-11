@@ -39,6 +39,9 @@ bool ModuleSelector::Start() {
 	greyFont = App->fonts->Load("Assets/Fonts/FontW.png", App->HUD->lookupTable, 5);
 	++activeFonts; ++totalFonts;
 
+	// Playing selector and store music
+	App->audio->PlayMusic("Assets/music/soundtrack/shop.ogg");
+
 	return ret;
 }
 

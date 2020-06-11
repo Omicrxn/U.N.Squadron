@@ -47,7 +47,7 @@ void Enemy::OnCollision(Collider* collider)
 	}
 	else {
 		App->particles->AddParticle(App->particles->enemyExplosion, position.x, position.y);
-		App->audio->PlayFx(3, 0);
+		App->audio->PlayFx(1, 0);
 
 		App->player->score += scoreGiven;
 

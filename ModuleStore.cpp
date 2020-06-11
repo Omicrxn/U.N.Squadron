@@ -276,7 +276,7 @@ update_status ModuleStore::Update() {
 		if (weapon == weapons[1][5]) {
 			exitPressed = true;
 			if(App->selector->GetSelected()) App->transition->FadeToBlack(this, (Module*)App->lvl2, 60);
-			else App->transition->FadeToBlack(this, (Module*)App->lvl1, 60);
+			else App->transition->FadeToBlack(this, (Module*)App->lvl2, 60);
 			currentState = BYE;
 			storeStateCounter = 0;
 		}

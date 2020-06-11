@@ -75,6 +75,8 @@ public:
 	uint bombAmmo;
 	uint ceilingAmmo;
 
+	bool hasBeenHit;
+	uint hasBeenHitCounter;
 private:
 	iPoint position;
 	SDL_Texture* texture = nullptr;

@@ -44,7 +44,7 @@ bool ModuleParticles::Start()
 	enemyBullet.anim.PushBack({ 78, 372, 5, 5 });
 	enemyBullet.anim.PushBack({ 110, 371, 15, 6 });
 	enemyBullet.anim.loop = true;
-	enemyBullet.anim.speed = 0.05f;
+	enemyBullet.anim.speed = 0.075f;
 	enemyBullet.lifetime = 180;
 	
 
@@ -63,13 +63,11 @@ bool ModuleParticles::Start()
 	enemyExplosion.anim.PushBack({ 217, 315, 35, 27 });
 	enemyExplosion.anim.speed = 0.075f;
 
-
 	// Stealth bomber firecannon
 	sbFirecannon.anim.PushBack({ 25,454,16,12 });
 	sbFirecannon.anim.loop = false;
 	sbFirecannon.anim.speed = 0;
 	sbFirecannon.speed.x = -2;
-
 
 	// Falcon explosion animation
 	falconExplosion.anim.PushBack({ 154, 0, 23, 26 });
@@ -78,6 +76,7 @@ bool ModuleParticles::Start()
 	falconExplosion.anim.PushBack({ 230, 0, 26, 28 });
 	falconExplosion.anim.PushBack({ 284, 0, 26, 28 });
 	falconExplosion.anim.speed = 0.075f;
+	bombExplosion.anim.loop = false;
 	falconExplosion.isWeapon = true;
 
 	// Bomb explosions animation
@@ -89,6 +88,7 @@ bool ModuleParticles::Start()
 	bombExplosion.anim.PushBack({ 167, 57, 28, 33 });
 	bombExplosion.anim.speed = 0.075f;
 	bombExplosion.anim.loop = false;
+	bombExplosion.isWeapon = true;
 
 	// Ceiling explosions animation
 	ceilingExplosion.anim.PushBack({ 210, 151, 8, 5 });
@@ -96,25 +96,12 @@ bool ModuleParticles::Start()
 	ceilingExplosion.anim.PushBack({ 0, 149, 16, 7 });
 	ceilingExplosion.anim.PushBack({ 222, 142, 14, 14 });
 	ceilingExplosion.anim.speed = 0.075f;
+	ceilingExplosion.speed.x = 1;
 	ceilingExplosion.anim.loop = false;
 	ceilingExplosion.isWeapon = true;
-	ceilingExplosion.speed.x = 1;
 
 	return true;
 }
-
-//update_status ModuleParticles::Update()
-//{
-//	/*ceilingExplosion.anim.
-//
-//	App->particles->AddParticle(App->particles->ceilingExplosion, position.x, position.y - 4);
-//
-//	App->particles->AddParticle(App->particles->ceilingExplosion, position.x + 4, position.y - 4);
-//
-//	App->particles->AddParticle(App->particles->ceilingExplosion, position.x + 8, position.y - 4);*/
-//	
-//	}
-//}
 
 bool ModuleParticles::CleanUp()
 {

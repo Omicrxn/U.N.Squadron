@@ -29,6 +29,7 @@ private:
 	Animation dangerAnim;
 	Animation playerIn;
 	Animation playerOut;
+	Animation playerHasBeenHit;
 	SDL_Rect fuelBackground;
 	SDL_Rect fuelQuantity;
 	SDL_Rect helmet;
