@@ -45,7 +45,7 @@ bool ModuleLevel1::Start() {
 	floorSpeed = 0.5;
 
 	App->render->camera.x = 0;
-	App->render->camera.y = -700;
+	App->render->camera.y = 0;
 
 	App->particles->Enable();
 	App->player->Enable();
@@ -107,6 +107,7 @@ bool ModuleLevel1::CleanUp() {
 	App->HUD->Disable();
 	App->collisions->Disable();
 	App->fonts->Disable();
+	App->weapons->Disable();
 	
 	return ret;
 }
