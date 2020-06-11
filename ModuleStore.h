@@ -20,10 +20,6 @@ public:
 
 	char moneyText[10] = { "\0" };
 
-	// Id Fonts
-	int greyFont = -1;
-	int greenFont = -1;
-
 	// Sound effects indices
 	uint chooseFx = 0;
 
@@ -47,6 +43,10 @@ private:
 	Animation unicorn_anim;
 	Animation* current_anim = nullptr;
 	iPoint selectorPos;
+
+	// Id Fonts
+	int greyFont = -1;
+	int greenFont = -1;
 
 	bool exitPressed = false;
 

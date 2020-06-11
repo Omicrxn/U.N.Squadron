@@ -35,7 +35,6 @@ bool ModuleSelector::Start() {
 	}
 	++activeTextures; ++totalTextures;
 
-
 	greyFont = App->fonts->Load("Assets/Fonts/FontW.png", App->HUD->lookupTable, 5);
 	++activeFonts; ++totalFonts;
 
@@ -57,7 +56,7 @@ update_status ModuleSelector::Update() {
 			App->transition->FadeToBlack(this, (Module*)App->store, 60);
 		}
 	}
-	else if (selected) {
+	else {
 		if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_DOWN || App->input->pads[0].right == true || App->input->keyboard[SDL_SCANCODE_W] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_UP] == KEY_DOWN || App->input->pads[0].up == true) && !enterPressed) {
 			selected = false;
 		}
@@ -76,16 +75,26 @@ update_status ModuleSelector::PostUpdate() {
 	if (!selected) {
 		if (!App->render->Blit(tex1, 0, 0, &background, 1, false))
 			ret = UPDATE_ERROR;
-
-		App->fonts->BlitText(80, 169, greyFont, "You selected");
-		App->fonts->BlitText(160, 181, greyFont, "Level 1");
+		
+		if (enterPressed) {
+			App->fonts->BlitText(72, 150, greyFont, "Select your");
+		}
+		else {
+			App->fonts->BlitText(72, 169, greyFont, "Select your");
+			App->fonts->BlitText(136, 181, greyFont, "target area!");
+		}
 	}
 	else {
 		if (!App->render->Blit(tex2, 0, 0, &background, 1, false))
 			ret = UPDATE_ERROR;
 
-		App->fonts->BlitText(80, 169, greyFont, "You selected");
-		App->fonts->BlitText(160, 181, greyFont, "Level 2");
+		if (enterPressed) {
+			App->fonts->BlitText(72, 150, greyFont, "The target is");
+		}
+		else {
+			App->fonts->BlitText(72, 169, greyFont, "Select your");
+			App->fonts->BlitText(136, 181, greyFont, "target area!");
+		}
 	}
 
 	return ret;

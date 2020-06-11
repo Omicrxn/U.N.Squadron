@@ -6,6 +6,7 @@
 #include "Module.h"
 #include "Animation.h"
 struct SDL_Texture;
+
 class ModuleHUD : public Module
 {
 public:

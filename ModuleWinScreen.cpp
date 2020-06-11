@@ -4,7 +4,9 @@
 #include "ModuleFadeToBlack.h"
 #include "ModuleRenderer.h"
 #include "ModuleInput.h"
+#include "ModuleAudio.h"
 #include "ModuleStartScreen.h"
+
 ModuleWinScreen::ModuleWinScreen(bool startEnabled) : Module(startEnabled) {
 	name = "Win S";
 
@@ -23,6 +25,9 @@ bool ModuleWinScreen::Start() {
 	}
 	++activeTextures; ++totalTextures;
 
+	// Playing win audio
+	App->audio->PlayMusic("Assets/music/events/gameover.wav");
+
 	return ret;
 }
 
@@ -30,7 +35,7 @@ update_status ModuleWinScreen::Update() {
 	update_status ret = update_status::UPDATE_CONTINUE;
 	
 	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN || App->input->pads[0].a == true) {
-		App->transition->FadeToBlack(this, (Module*)App->startScreen, 60);
+		App->transition->FadeToBlack(this, (Module*)App->selector, 60);
 	}
 	
 	return ret;
@@ -57,6 +62,8 @@ bool ModuleWinScreen::CleanUp() {
 		ret = false;
 	}
 	--totalTextures;
+
+	App->audio->StopMusic();
 
 	return ret;
 }

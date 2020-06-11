@@ -21,4 +21,10 @@ private:
 	SDL_Texture* tex = nullptr;
 	Animation anim;
 	Animation* current_anim = nullptr;
+
+	// Id Fonts
+	int greyFont = -1;
+	int greenFont = -1;
+	bool continue3;
+	bool pressed = false;
 };

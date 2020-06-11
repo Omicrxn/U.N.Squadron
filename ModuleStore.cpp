@@ -387,7 +387,8 @@ update_status ModuleStore::PostUpdate() {
 		App->fonts->BlitText(160, 40, greyFont, "Thanks!");
 		App->fonts->BlitText(160, 60, greyFont, "");
 		App->fonts->BlitText(160, 70, greyFont, "You be");
-		App->fonts->BlitText(160, 80, greyFont, "careful now!");
+		App->fonts->BlitText(160, 80, greyFont, "careful");
+		App->fonts->BlitText(160, 90, greyFont, "now!");
 	}
 
 	// Blit already selected texture

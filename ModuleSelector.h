@@ -31,7 +31,6 @@ public:
 		return selected;
 	}
 
-	// Selection index
 	bool selected;
 
 private:
