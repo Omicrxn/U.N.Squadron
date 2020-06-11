@@ -86,6 +86,8 @@ bool ModuleStore::Start() {
 	// Resetting the weapons selected in the previous game
 	weaponSelection = 0;
 
+	App->audio->PlayMusic("Assets/music/soundtrack/shop.ogg");
+
 	return ret;
 }
 
@@ -276,7 +278,7 @@ update_status ModuleStore::Update() {
 		if (weapon == weapons[1][5]) {
 			exitPressed = true;
 			if(App->selector->GetSelected()) App->transition->FadeToBlack(this, (Module*)App->lvl2, 60);
-			else App->transition->FadeToBlack(this, (Module*)App->lvl2, 60);
+			else App->transition->FadeToBlack(this, (Module*)App->lvl1, 60);
 			currentState = BYE;
 			storeStateCounter = 0;
 		}

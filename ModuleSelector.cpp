@@ -38,8 +38,7 @@ bool ModuleSelector::Start() {
 	greyFont = App->fonts->Load("Assets/Fonts/FontW.png", App->HUD->lookupTable, 5);
 	++activeFonts; ++totalFonts;
 
-	// Playing selector and store music
-	App->audio->PlayMusic("Assets/music/soundtrack/shop.ogg");
+	App->audio->PlayMusic("Assets/music/soundtrack/player_select.ogg");
 
 	return ret;
 }
@@ -76,25 +75,15 @@ update_status ModuleSelector::PostUpdate() {
 		if (!App->render->Blit(tex1, 0, 0, &background, 1, false))
 			ret = UPDATE_ERROR;
 		
-		if (enterPressed) {
-			App->fonts->BlitText(72, 150, greyFont, "Select your");
-		}
-		else {
-			App->fonts->BlitText(72, 169, greyFont, "Select your");
-			App->fonts->BlitText(136, 181, greyFont, "target area!");
-		}
+		App->fonts->BlitText(80, 169, greyFont, "You selected");
+		App->fonts->BlitText(160, 181, greyFont, "Level 1");
 	}
 	else {
 		if (!App->render->Blit(tex2, 0, 0, &background, 1, false))
 			ret = UPDATE_ERROR;
 
-		if (enterPressed) {
-			App->fonts->BlitText(72, 150, greyFont, "The target is");
-		}
-		else {
-			App->fonts->BlitText(72, 169, greyFont, "Select your");
-			App->fonts->BlitText(136, 181, greyFont, "target area!");
-		}
+		App->fonts->BlitText(80, 169, greyFont, "You selected");
+		App->fonts->BlitText(160, 181, greyFont, "Level 2");
 	}
 
 	return ret;
@@ -119,6 +108,8 @@ bool ModuleSelector::CleanUp() {
 
 	App->fonts->UnLoad(greyFont);
 	--totalFonts;
+
+	App->audio->StopMusic();
 
 	return ret;
 }

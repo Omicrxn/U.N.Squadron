@@ -94,7 +94,7 @@ void StealthBomber::Update()
 		//Playing shooting sound effect
 
 		//Playing shooting sound effect (if space was pressed)
-		//App->audio->PlayFx(2, 0);
+		App->audio->PlayFx(0, 0);
 	}
 	if (shootingFrequency2 == 180 && state == IDLE) {
 		shootingFrequency2 = 0;
