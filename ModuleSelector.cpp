@@ -18,6 +18,7 @@ bool ModuleSelector::Start() {
 	bool ret = true;
 
 	selected = true;
+	enterPressed = false;
 
 	// Background rect
 	background = { 0,0,SCREEN_WIDTH,SCREEN_HEIGHT };
@@ -44,19 +45,21 @@ bool ModuleSelector::Start() {
 update_status ModuleSelector::Update() {
 	update_status ret = update_status::UPDATE_CONTINUE;
 
-	if (selected == false) {
-		if (App->input->keyboard[SDL_SCANCODE_A] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_DOWN || App->input->pads[0].left == true || App->input->keyboard[SDL_SCANCODE_S] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_DOWN || App->input->pads[0].down == true) {
+	if (!selected) {
+		if ((App->input->keyboard[SDL_SCANCODE_A] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_DOWN || App->input->pads[0].left == true || App->input->keyboard[SDL_SCANCODE_S] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_DOWN || App->input->pads[0].down == true) && !enterPressed) {
 			selected = true;
 		}
 		else if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN || App->input->pads[0].a == true) {
+			enterPressed = true;
 			App->transition->FadeToBlack(this, (Module*)App->store, 60);
 		}
 	}
 	else if (selected) {
-		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_DOWN || App->input->pads[0].right == true || App->input->keyboard[SDL_SCANCODE_W] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_UP] == KEY_DOWN || App->input->pads[0].up == true) {
+		if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_DOWN || App->input->pads[0].right == true || App->input->keyboard[SDL_SCANCODE_W] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_UP] == KEY_DOWN || App->input->pads[0].up == true) && !enterPressed) {
 			selected = false;
 		}
 		else if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN || App->input->pads[0].a == true) {
+			enterPressed = true;
 			App->transition->FadeToBlack(this, (Module*)App->store, 60);
 		}
 	}
@@ -67,14 +70,14 @@ update_status ModuleSelector::Update() {
 update_status ModuleSelector::PostUpdate() {
 	update_status ret = UPDATE_CONTINUE;
 
-	if (selected == false) {
+	if (!selected) {
 		if (!App->render->Blit(tex1, 0, 0, &background, 1, false))
 			ret = UPDATE_ERROR;
 
 		App->fonts->BlitText(80, 169, greyFont, "You selected");
 		App->fonts->BlitText(160, 181, greyFont, "Level 1");
 	}
-	else if (selected) {
+	else {
 		if (!App->render->Blit(tex2, 0, 0, &background, 1, false))
 			ret = UPDATE_ERROR;
 

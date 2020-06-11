@@ -23,6 +23,8 @@ ModuleStore::~ModuleStore() {}
 bool ModuleStore::Start() {
 	bool ret = true;
 
+	exitPressed = false;
+
 	// Background rect
 	background = { 0,0,SCREEN_WIDTH, SCREEN_HEIGHT };
 
@@ -91,17 +93,17 @@ update_status ModuleStore::Update() {
 	update_status ret = update_status::UPDATE_CONTINUE;
 
 	// Hanging the control of the selector
-	if ((App->input->keyboard[SDL_SCANCODE_W] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_UP] == KEY_DOWN || App->input->pads[0].up == true) && rows > 0) {
+	if ((App->input->keyboard[SDL_SCANCODE_W] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_UP] == KEY_DOWN || App->input->pads[0].up == true) && rows > 0 && !exitPressed) {
 		selectorPos.y -= 48;
 		rows--;
 		App->audio->PlayFx(0, 0);
 	}
-	if ((App->input->keyboard[SDL_SCANCODE_S] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_DOWN || App->input->pads[0].down == true) && rows < 1) {
+	if ((App->input->keyboard[SDL_SCANCODE_S] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_DOWN || App->input->pads[0].down == true) && rows < 1 && !exitPressed) {
 		selectorPos.y += 48;
 		rows++;
 		App->audio->PlayFx(0, 0);
 	}
-	if ((App->input->keyboard[SDL_SCANCODE_A] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_REPEAT || App->input->pads[0].left == true) && columns > 0) {
+	if ((App->input->keyboard[SDL_SCANCODE_A] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_REPEAT || App->input->pads[0].left == true) && columns > 0 && !exitPressed) {
 		if (CountdownL == 0) {
 			selectorPos.x -= 40;
 			columns--;
@@ -110,7 +112,7 @@ update_status ModuleStore::Update() {
 			CountdownL = MaxCountdownL;
 		}
 	}
-	if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_REPEAT || App->input->pads[0].right == true) && columns < 5) {
+	if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_REPEAT || App->input->pads[0].right == true) && columns < 5 && !exitPressed) {
 		if (CountdownR == 0) {
 			selectorPos.x += 40;
 			columns++;
@@ -272,6 +274,7 @@ update_status ModuleStore::Update() {
 
 		// EXIT
 		if (weapon == weapons[1][5]) {
+			exitPressed = true;
 			if(App->selector->GetSelected()) App->transition->FadeToBlack(this, (Module*)App->lvl2, 60);
 			else App->transition->FadeToBlack(this, (Module*)App->lvl1, 60);
 			currentState = BYE;

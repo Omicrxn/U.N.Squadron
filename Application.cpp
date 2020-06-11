@@ -32,8 +32,8 @@ Application::Application() {
 	
 	modules[i++] = initialScreen = new ModuleInitialScreen(false);
 	modules[i++] = startScreen = new ModuleStartScreen(false);
-	modules[i++] = selector = new ModuleSelector(true);
-	modules[i++] = store = new ModuleStore(false);
+	modules[i++] = selector = new ModuleSelector(false);
+	modules[i++] = store = new ModuleStore(true);
 	modules[i++] = lvl1 = new ModuleLevel1(false);
 	modules[i++] = lvl2 = new ModuleLevel2(false);
 	modules[i++] = winScreen = new ModuleWinScreen(false);

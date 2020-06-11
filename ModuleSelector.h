@@ -31,10 +31,10 @@ public:
 		return selected;
 	}
 
-private:
 	// Selection index
 	bool selected;
 
+private:
 	bool enterPressed = false;
 
 	SDL_Texture* tex1 = nullptr;

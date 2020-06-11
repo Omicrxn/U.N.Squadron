@@ -19,11 +19,12 @@
 #include "ModuleWinScreen.h"
 #include "ModuleStore.h"
 #include "ModuleSelector.h"
+#include "ModuleLevel1.h"
 
 #include "SDL2/include/SDL.h"
 #include <stdio.h>
 
-#define DebugModules 10
+#define DebugModules 12
 
 ModuleDebugInfo::ModuleDebugInfo(bool startEnabled) : Module(startEnabled) 
 {
@@ -70,10 +71,14 @@ update_status ModuleDebugInfo::Update() {
 			App->transition->FadeToBlack((Module*)App->selector, (Module*)App->store, 60);
 		}
 		else if (App->store->IsEnabled()) {
-			App->transition->FadeToBlack((Module*)App->store, (Module*)App->lvl2, 60);
+			if(App->selector->GetSelected()) App->transition->FadeToBlack((Module*)App->store, (Module*)App->lvl2, 60);
+			else App->transition->FadeToBlack((Module*)App->store, (Module*)App->lvl1, 60);
 		}
 		else if (App->lvl2->IsEnabled()) {
 			App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->startScreen, 60);
+		}
+		else if (App->lvl1->IsEnabled()) {
+			App->transition->FadeToBlack((Module*)App->lvl1, (Module*)App->startScreen, 60);
 		}
 		else if (App->winScreen->IsEnabled()) {
 			App->transition->FadeToBlack((Module*)App->winScreen, (Module*)App->startScreen, 60);
@@ -87,6 +92,9 @@ update_status ModuleDebugInfo::Update() {
 	if (App->input->keyboard[SDL_SCANCODE_F4] == KEY_DOWN) {
 		if (App->lvl2->IsEnabled()) {
 			App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->winScreen, 60);
+		}
+		if (App->lvl1->IsEnabled()) {
+			App->transition->FadeToBlack((Module*)App->lvl1, (Module*)App->winScreen, 60);
 		}
 	}
 
@@ -110,14 +118,18 @@ update_status ModuleDebugInfo::Update() {
 		else if (counterModules == 5)
 			inspectedModule = (Module*)App->lvl2;
 		else if (counterModules == 6)
-			inspectedModule = (Module*)App->player;
+			inspectedModule = (Module*)App->lvl1;
 		else if (counterModules == 7)
-			inspectedModule = (Module*)App->enemies;
+			inspectedModule = (Module*)App->player;
 		else if (counterModules == 8)
-			inspectedModule = (Module*)App->winScreen;
+			inspectedModule = (Module*)App->enemies;
 		else if (counterModules == 9)
-			inspectedModule = (Module*)App->loseScreen;
+			inspectedModule = (Module*)App->weapons;
 		else if (counterModules == 10)
+			inspectedModule = (Module*)App->winScreen;
+		else if (counterModules == 11)
+			inspectedModule = (Module*)App->loseScreen;
+		else if (counterModules == 12)
 			inspectedModule = (Module*)App->debugInfo;
 
 		if (App->input->keyboard[SDL_SCANCODE_F7] == KEY_DOWN && counterModules == DebugModules) {
@@ -132,6 +144,9 @@ update_status ModuleDebugInfo::Update() {
 	if (App->input->keyboard[SDL_SCANCODE_F9] == KEY_DOWN) {
 		if (App->lvl2->IsEnabled()) {
 			App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->loseScreen, 60);
+		}
+		if (App->lvl1->IsEnabled()) {
+			App->transition->FadeToBlack((Module*)App->lvl1, (Module*)App->loseScreen, 60);
 		}
 	}
 
@@ -155,6 +170,9 @@ update_status ModuleDebugInfo::Update() {
 		++App->player->level;
 		if (App->player->level == 5) App->player->level = 1;
 	}
+
+	if (App->input->keyboard[SDL_SCANCODE_1] == KEY_DOWN && App->store->IsEnabled()) App->selector->selected = false;
+	if (App->input->keyboard[SDL_SCANCODE_2] == KEY_DOWN && App->store->IsEnabled()) App->selector->selected = true;
 
 	return update_status::UPDATE_CONTINUE;
 }

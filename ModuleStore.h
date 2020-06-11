@@ -48,6 +48,8 @@ private:
 	Animation* current_anim = nullptr;
 	iPoint selectorPos;
 
+	bool exitPressed = false;
+
 	// Countdown to handle selector spacing
 	int MaxCountdownR = 15;
 	int CountdownR = 0;
