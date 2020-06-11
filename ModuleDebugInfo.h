@@ -46,6 +46,8 @@ public:
 
 	bool maxMoney = false;
 	bool maxLifes = false;
+	bool maxAmmo = false;
+
 private:
 	Module* inspectedModule = nullptr;
 

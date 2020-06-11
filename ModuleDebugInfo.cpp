@@ -135,15 +135,22 @@ update_status ModuleDebugInfo::Update() {
 		}
 	}
 
+	// Max Lifes
+	if (App->input->keyboard[SDL_SCANCODE_L] == KEY_DOWN) {
+		maxLifes = !maxLifes;
+	}
+
+	// Max Money
 	if (App->input->keyboard[SDL_SCANCODE_M] == KEY_DOWN) {
 		maxMoney = !maxMoney;
 	}
 
 	// Max Ammo
-	//if (App->input->keyboard[SDL_SCANCODE_9] == KEY_DOWN) {
+	if (App->input->keyboard[SDL_SCANCODE_N] == KEY_DOWN) {
+		maxAmmo = !maxAmmo;
+	}
 
-	//}
-
+	// Increase POW Level
 	if (App->input->keyboard[SDL_SCANCODE_P] == KEY_DOWN) {
 		++App->player->level;
 		if (App->player->level == 5) App->player->level = 1;
@@ -166,15 +173,17 @@ update_status ModuleDebugInfo::PostUpdate()
 		// Display player's money
 		if (maxMoney) App->fonts->BlitText(140, 35, debugFont, "Infinite Money");
 		else {
-			sprintf_s(debugText, 150, "money  %i", App->player->money);
+			sprintf_s(debugText, 150, "Money  %i", App->player->money);
 			App->fonts->BlitText(140, 35, debugFont, debugText);
 		}
 		// Display player's lifes
 		if (maxLifes) App->fonts->BlitText(140, 50, debugFont, "Infinite Lifes");
 		else {
-			sprintf_s(debugText, 150, "lifes  %i", App->player->GetLifes());
+			sprintf_s(debugText, 150, "Lifes  %i", App->player->GetLifes());
 			App->fonts->BlitText(140, 50, debugFont, debugText);
 		}
+
+		if (maxAmmo) App->fonts->BlitText(140, 65, debugFont, "Infinite Ammo");
 		
 		// Display total audio files loaded
 		sprintf_s(debugText, 150, "audio fx  %i", App->audio->GetFxCount());

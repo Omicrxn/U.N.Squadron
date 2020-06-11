@@ -53,8 +53,6 @@ bool ModuleHUD::Start() {
 	playerIn.speed = 0.3f;
 	playerOut.speed = 0.3f;
 
-
-
 	yellowFont = App->fonts->Load("Assets/Fonts/FontY.png", lookupTable, 5);
 	++activeFonts; ++totalFonts;
 
@@ -83,6 +81,12 @@ update_status ModuleHUD::Update() {
 	if (!App->player->maxPow) sprintf_s(powText, 4, "%3d", App->player->pow);
 	else sprintf_s(powText, 4, "max");
 
+	// Passing the weapons ammo from uint to char
+	sprintf_s(falconAmmoText, 5, "%d", App->player->falconAmmo);
+	sprintf_s(shellAmmoText, 5, "%d", App->player->shellAmmo);
+	sprintf_s(bombAmmoText, 5, "%d", App->player->bombAmmo);
+	sprintf_s(ceilingAmmoText, 5, "%d", App->player->ceilingAmmo);
+
 	return ret;
 }
 
@@ -96,6 +100,7 @@ update_status ModuleHUD::PostUpdate() {
 		App->render->Blit(tex, 16, 201, &helmet, 1, false);
 		App->render->Blit(tex, 55, 206, &fuelBackground, 1, false);
 		App->render->Blit(tex, 57, 208, &fuelQuantity, 1, false);
+		
 		if (playerIn.Finished() == false) {
 			if (!App->render->Blit(tex2, 71, 6, &playerIn.GetCurrentFrame(), 1, false)) {
 				ret = UPDATE_ERROR;
@@ -108,12 +113,6 @@ update_status ModuleHUD::PostUpdate() {
 				}
 			}
 		}
-
-		// Passing the weapons ammo from uint to char
-		sprintf_s(falconAmmoText, 5, "%d", App->player->falconAmmo);
-		sprintf_s(shellAmmoText, 5, "%d", App->player->shellAmmo);
-		sprintf_s(bombAmmoText, 5, "%d", App->player->bombAmmo);
-		sprintf_s(ceilingAmmoText, 5, "%d", App->player->ceilingAmmo);
 
 		// Printing the current weapon and its price
 		if (App->player->currentWeapon == App->player->weapons::FALCON)

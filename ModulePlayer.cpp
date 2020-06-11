@@ -199,8 +199,8 @@ update_status ModulePlayer::Update() {
 				break;
 			case CEILING:
 				if ((App->store->weaponSelection & (1 << 2)) != 0 && ceilingAmmo > 0) {
-					App->weapons->SpawnWeapon(WEAPON_TYPE::CEILING, position.x, position.y - 4);
-					App->particles->AddParticle(App->particles->ceilingExplosion, position.x + 2, position.y - 4);
+					App->weapons->SpawnWeapon(WEAPON_TYPE::CEILING, position.x + 4, position.y - 4);
+					App->particles->AddParticle(App->particles->ceilingExplosion, position.x, position.y - 4);
 					ceilingAmmo--;
 					ceilingCountdown = 60;
 				}
@@ -278,13 +278,13 @@ update_status ModulePlayer::Update() {
 	{
 		if (ceilingCountdown == 40)
 		{
-			App->weapons->SpawnWeapon(WEAPON_TYPE::CEILING, position.x + 16, position.y - 4);
-			App->particles->AddParticle(App->particles->ceilingExplosion, position.x + 2, position.y - 4);
+			App->weapons->SpawnWeapon(WEAPON_TYPE::CEILING, position.x + 8, position.y - 4);
+			App->particles->AddParticle(App->particles->ceilingExplosion, position.x + 4, position.y - 4);
 		}
 		else if (ceilingCountdown == 20)
 		{
-			App->weapons->SpawnWeapon(WEAPON_TYPE::CEILING, position.x + 32, position.y - 4);
-			App->particles->AddParticle(App->particles->ceilingExplosion, position.x + 2, position.y - 4);
+			App->weapons->SpawnWeapon(WEAPON_TYPE::CEILING, position.x + 12, position.y - 4);
+			App->particles->AddParticle(App->particles->ceilingExplosion, position.x + 8, position.y - 4);
 		}
 		ceilingCountdown--;
 	}
