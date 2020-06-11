@@ -6,12 +6,15 @@
 #include "ModulePlayer.h"
 SB_Bomb::SB_Bomb(int x, int y) : Weapon(x, y)
 {
-	hook.PushBack({ 0, 219, 16, 5 });
-	hook.PushBack({ 24, 211, 16, 21 });
-	hook.PushBack({ 55, 210, 16, 21 });
-	path.PushBack({ 1.0f, 1.5f }, 100, &hook);
+	bomb.PushBack({ 0, 176, 9, 10 });
+	bomb.PushBack({ 14, 176, 9, 10 });
+	bomb.PushBack({ 27, 176, 11, 12 });
+	bomb.speed = 0.1f;
+	path.PushBack({ 0.1f, -1.1f }, 60, &bomb);
+	path.PushBack({1.0f, 0.0f }, 10, &bomb);
+	path.loop = false;
 
-	collider = App->collisions->AddCollider({ position.x, position.y, 30, 9 }, Collider::Type::PLAYER_SHOT, (Module*)App->weapons);
+	collider = App->collisions->AddCollider({ position.x, position.y, 30, 9 }, Collider::Type::ENEMY_SHOT, (Module*)App->weapons);
 }
 
 void SB_Bomb::Update()

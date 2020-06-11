@@ -4,7 +4,7 @@
 #include "Enemy.h"
 #include "Path.h"
 enum SBState {
-	SPAWNING, IDLE
+	SPAWNING, IDLE,SHOOTING
 };
 class StealthBomber : public Enemy
 {
@@ -18,6 +18,7 @@ private:
 	Animation shooting;
 	SDL_Rect rect;
 	unsigned int shootingFrequency;
+	unsigned int shootingFrequency2;
 	
 	SBState state = SPAWNING;
 	iPoint idlePosition = { 0, 0};

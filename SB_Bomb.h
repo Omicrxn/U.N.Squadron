@@ -23,6 +23,6 @@ private:
 
 	// This weapon has one sprite and one frame
 	// We are keeping it an animation for consistency with other weapons
-	Animation hook;
+	Animation bomb;
 };
 #endif // !__SB_BOMB_H__
