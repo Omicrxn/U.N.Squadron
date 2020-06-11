@@ -27,10 +27,16 @@ public:
 	// Id Fonts
 	int greyFont = -1;
 
-	// Selection index
-	uint selected;
+	bool GetSelected() {
+		return selected;
+	}
 
 private:
+	// Selection index
+	bool selected;
+
+	bool enterPressed = false;
+
 	SDL_Texture* tex1 = nullptr;
 	SDL_Texture* tex2 = nullptr;
 

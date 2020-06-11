@@ -182,26 +182,26 @@ update_status ModulePlayer::Update() {
 			case FALCON:
 				if ((App->store->weaponSelection & (1 << 8)) != 0 && falconAmmo > 0) {
 					App->weapons->SpawnWeapon(WEAPON_TYPE::FALCON);
-					falconAmmo--;
+					if (!App->debugInfo->maxAmmo) falconAmmo--;
 				}
 				break;
 			case SHELL:
 				if ((App->store->weaponSelection & (1 << 6)) != 0 && shellAmmo > 0) {
 					App->weapons->SpawnWeapon(WEAPON_TYPE::SHELL);
-					shellAmmo--;
+					if (!App->debugInfo->maxAmmo) shellAmmo--;
 				}
 				break;
 			case BOMB:
 				if ((App->store->weaponSelection & (1 << 4)) != 0 && bombAmmo > 0) {
 					App->weapons->SpawnWeapon(WEAPON_TYPE::BOMB);
-					bombAmmo--;
+					if (!App->debugInfo->maxAmmo) bombAmmo--;
 				}
 				break;
 			case CEILING:
 				if ((App->store->weaponSelection & (1 << 2)) != 0 && ceilingAmmo > 0) {
 					App->weapons->SpawnWeapon(WEAPON_TYPE::CEILING, position.x + 4, position.y - 4);
 					App->particles->AddParticle(App->particles->ceilingExplosion, position.x, position.y - 4);
-					ceilingAmmo--;
+					if(!App->debugInfo->maxAmmo) ceilingAmmo--;
 					ceilingCountdown = 60;
 				}
 				break;
@@ -342,6 +342,9 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 			else {
 				playerLifes = 3;
 				money = 0;
+				pow = 4;
+				total = 0;
+				level = 1;
 				App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->loseScreen, 60);
 			}
 

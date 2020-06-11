@@ -79,7 +79,7 @@ update_status ModuleStartScreen::Update(){
 		App->audio->PlayFx(0, 0);
 	}
 	
-	if ((App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN && App->transition->hasEnded()) || App->input->pads[0].a == true) {
+	if ((App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN || App->input->pads[0].a == true) && App->transition->hasEnded()) {
 		
 		switch (selectorPos.y) {
 		case 116: {

@@ -9,7 +9,8 @@
 #include "ModuleHUD.h"
 #include "ModulePlayer.h"
 #include "ModuleDebugInfo.h"
-#include "ModuleWeapons.h";
+#include "ModuleWeapons.h"
+#include "ModuleSelector.h"
 
 #include <stdio.h>
 
@@ -271,7 +272,8 @@ update_status ModuleStore::Update() {
 
 		// EXIT
 		if (weapon == weapons[1][5]) {
-			App->transition->FadeToBlack(this, (Module*)App->lvl2, 60);
+			if(App->selector->GetSelected()) App->transition->FadeToBlack(this, (Module*)App->lvl2, 60);
+			else App->transition->FadeToBlack(this, (Module*)App->lvl1, 60);
 			currentState = BYE;
 			storeStateCounter = 0;
 		}
@@ -300,6 +302,9 @@ update_status ModuleStore::Update() {
 		currentState = IDLE;
 	}
 
+	if (!App->debugInfo->maxMoney) sprintf_s(moneyText, 10, "%7d", App->player->money);
+	else sprintf_s(moneyText, 10, "    MAX");
+
 	return ret;
 }
 
@@ -316,9 +321,6 @@ update_status ModuleStore::PostUpdate() {
 
 	// Blit money
 	App->fonts->BlitText(17, 110, greenFont, "$");
-
-	if (!App->debugInfo->maxMoney) sprintf_s(moneyText, 10, "%7d", App->player->money);
-	else sprintf_s(moneyText, 10, "    MAX");
 
 	App->fonts->BlitText(23, 110, greenFont, moneyText);
 
