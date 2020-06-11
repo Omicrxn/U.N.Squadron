@@ -77,8 +77,8 @@ While at the moment Capcom was developing vertically scrolling shooters, U.N.Squ
 |Traverse Resources Information|F7|
 |Gamepad Information|F8|
 |Direct Lose|F9|
-|Maximum Money|M|
-|Maximum Lifes|L|
+|Infinite Money|M|
+|Infinite Lifes|L|
 |Increase POW Level|P|
-|Maximum Ammo|N|
+|Infinite Ammo|N|
 |Maximize / Resize|F11|
