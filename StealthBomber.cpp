@@ -84,10 +84,9 @@ void StealthBomber::Update()
 
 		shootingFrequency = 0;
 		LOG("Shooting particle");
-		App->particles->AddParticle(App->particles->sbFirecannon, position.x + 7, position.y + 32, Collider::Type::ENEMY_SHOT, 0);
-		App->particles->AddParticle(App->particles->sbFirecannon, position.x + 7 + 5, position.y + 32, Collider::Type::ENEMY_SHOT, 5);
-		App->particles->AddParticle(App->particles->sbFirecannon, position.x + 7 + 10, position.y + 32, Collider::Type::ENEMY_SHOT, 10);
-		App->particles->AddParticle(App->particles->sbFirecannon, position.x + 7 + 15, position.y + 32, Collider::Type::ENEMY_SHOT, 15);
+		App->particles->AddParticle(App->particles->sbSparks, position.x-1, position.y + 24, Collider::Type::ENEMY_SHOT, 0);
+		App->particles->AddParticle(App->particles->sbFirecannon, position.x-1-24, position.y + 24, Collider::Type::ENEMY_SHOT, 5);
+		
 
 
 
@@ -102,8 +101,8 @@ void StealthBomber::Update()
 			currentAnim = &shooting;
 			shooting.Reset();
 		}
-		App->weapons->SpawnWeapon(WEAPON_TYPE::SB_BOMBS, position.x+65, position.y+18);
-		App->weapons->SpawnWeapon(WEAPON_TYPE::SB_BOMBS, position.x+65, position.y+46);
+		App->weapons->SpawnWeapon(WEAPON_TYPE::SB_BOMB, position.x+65, position.y+18);
+		App->weapons->SpawnWeapon(WEAPON_TYPE::SB_BOMB, position.x+65, position.y+46);
 
 	}
 	// Call to the base class. It must be called at the end

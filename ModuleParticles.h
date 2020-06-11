@@ -121,6 +121,7 @@ public:
 	Particle greenFighterBullet;
 	Particle sbFirecannon;
 	Particle sbExplosion;
+	Particle sbSparks;
 	Particle sbBombs;
 
 	Particle falconExplosion;

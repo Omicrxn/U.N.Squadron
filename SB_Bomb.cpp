@@ -4,6 +4,7 @@
 #include "ModuleParticles.h"
 #include "ModuleAudio.h"
 #include "ModulePlayer.h"
+#include "ModuleWeapons.h"
 SB_Bomb::SB_Bomb(int x, int y) : Weapon(x, y)
 {
 	bomb.PushBack({ 0, 176, 9, 10 });
@@ -26,4 +27,10 @@ void SB_Bomb::Update()
 	// Call to the base class. It must be called at the end
 	// It will update the collider depending on the position
 	Weapon::Update();
+	if (path.Finished()) {
+
+		App->particles->AddParticle(App->particles->enemyExplosion, position.x, position.y, Collider::Type::ENEMY_SHOT,0);
+		App->weapons->SpawnShrapnel(position.x,position.y,1);
+		this->pendingToDelete = true;
+	}
 }

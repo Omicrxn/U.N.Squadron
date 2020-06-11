@@ -13,9 +13,11 @@
 #include "Ceiling.h"
 #include "GF_Hook.h"
 #include "SB_Bomb.h"
+#include "SB_BombShrapnel.h"
 
 #include "ModuleParticles.h"
 #include "ModulePlayer.h"
+#include<cassert>
 
 #define SPAWN_MARGIN 50
 
@@ -133,10 +135,25 @@ void ModuleWeapons::SpawnWeapon(WEAPON_TYPE weaponType, int x, int y)
 			case WEAPON_TYPE::GF_HOOK:
 				weapons[i] = new GF_Hook(x, y);
 				break;
-			case WEAPON_TYPE::SB_BOMBS:
+			case WEAPON_TYPE::SB_BOMB:
 				weapons[i] = new SB_Bomb(x, y);
 				break;
 			}
+			weapons[i]->texture = this->texture;
+			weapons[i]->destroyedFx = weaponDestroyedFx;
+			break;
+		}
+	}
+}
+
+void ModuleWeapons::SpawnShrapnel(int x, int y,unsigned int number){
+	assert(number <= 7);
+	for (uint i = 0; i < MAX_WEAPONS; ++i)
+	{
+		if (weapons[i] == nullptr)
+		{
+				weapons[i] = new SB_BombShrapnel(x, y);
+				
 			weapons[i]->texture = this->texture;
 			weapons[i]->destroyedFx = weaponDestroyedFx;
 			break;
