@@ -74,6 +74,12 @@ bool ModuleStore::Start() {
 	chooseFx = App->audio->LoadFx("Assets/music/events/chooseoption.wav");
 	++activeFx; ++totalFx;
 
+	boughtFx = App->audio->LoadFx("Assets/music/events/bought.wav");
+	++activeFx; ++totalFx;
+
+	noMoneyFx = App->audio->LoadFx("Assets/music/events/nomoney.wav");
+	++activeFx; ++totalFx;
+
 	// Loading the font to print text on screen
 	greyFont = App->fonts->Load("Assets/Fonts/FontW.png", App->HUD->lookupTable, 5);
 	++activeFonts; ++totalFonts;
@@ -161,24 +167,29 @@ update_status ModuleStore::Update() {
 					App->player->money -= 9000;
 					weaponSelection |= (1 << 8);
 					currentState = BOUGHT;
+					App->audio->PlayFx(1, 0);
 				}
 				else {
 					currentState = NOMONEY;
+					App->audio->PlayFx(2, 0);
 				}
 			}
 			else if (!App->debugInfo->maxMoney && (weaponSelection & (1 << 8)) != 0)
 			{
 				currentState = ALREADYBOUGHT;
+				App->audio->PlayFx(2, 0);
 			}
 			else if (App->debugInfo->maxMoney) {
 				if ((weaponSelection & (1 << 8)) == 0)
 				{
 					weaponSelection |= (1 << 8);
 					currentState = BOUGHT;
+					App->audio->PlayFx(1, 0);
 				}
 				else
 				{
 					currentState = ALREADYBOUGHT;
+					App->audio->PlayFx(2, 0);
 				}
 			}
 			storeStateCounter = 0;
@@ -191,24 +202,29 @@ update_status ModuleStore::Update() {
 					App->player->money -= 20000;
 					weaponSelection |= (1 << 6);
 					currentState = BOUGHT;
+					App->audio->PlayFx(1, 0);
 				}
 				else {
 					currentState = NOMONEY;
+					App->audio->PlayFx(2, 0);
 				}
 			}
 			else if (!App->debugInfo->maxMoney && (weaponSelection & (1 << 6)) != 0)
 			{
 				currentState = ALREADYBOUGHT;
+				App->audio->PlayFx(2, 0);
 			}
 			else if (App->debugInfo->maxMoney) {
 				if ((weaponSelection & (1 << 6)) == 0)
 				{
 					weaponSelection |= (1 << 6);
 					currentState = BOUGHT;
+					App->audio->PlayFx(1, 0);
 				}
 				else
 				{
 					currentState = ALREADYBOUGHT;
+					App->audio->PlayFx(2, 0);
 				}
 			}
 			storeStateCounter = 0;
@@ -221,24 +237,29 @@ update_status ModuleStore::Update() {
 					App->player->money -= 2000;
 					weaponSelection |= (1 << 4);
 					currentState = BOUGHT;
+					App->audio->PlayFx(1, 0);
 				}
 				else {
 					currentState = NOMONEY;
+					App->audio->PlayFx(2, 0);
 				}
 			}
 			else if (!App->debugInfo->maxMoney && (weaponSelection & (1 << 4)) != 0)
 			{
 				currentState = ALREADYBOUGHT;
+				App->audio->PlayFx(2, 0);
 			}
 			else if (App->debugInfo->maxMoney) {
 				if ((weaponSelection & (1 << 4)) == 0)
 				{
 					weaponSelection |= (1 << 4);
 					currentState = BOUGHT;
+					App->audio->PlayFx(1, 0);
 				}
 				else
 				{
 					currentState = ALREADYBOUGHT;
+					App->audio->PlayFx(2, 0);
 				}
 			}
 			storeStateCounter = 0;
@@ -251,24 +272,29 @@ update_status ModuleStore::Update() {
 					App->player->money -= 15000;
 					weaponSelection |= (1 << 2);
 					currentState = BOUGHT;
+					App->audio->PlayFx(1, 0);
 				}
 				else {
 					currentState = NOMONEY;
+					App->audio->PlayFx(2, 0);
 				}
 			}
 			else if (!App->debugInfo->maxMoney && (weaponSelection & (1 << 2)) != 0)
 			{
 				currentState = ALREADYBOUGHT;
+				App->audio->PlayFx(2, 0);
 			}
 			else if (App->debugInfo->maxMoney) {
 				if ((weaponSelection & (1 << 2)) == 0)
 				{
 					weaponSelection |= (1 << 2);
 					currentState = BOUGHT;
+					App->audio->PlayFx(1, 0);
 				}
 				else
 				{
 					currentState = ALREADYBOUGHT;
+					App->audio->PlayFx(2, 0);
 				}
 			}
 			storeStateCounter = 0;
