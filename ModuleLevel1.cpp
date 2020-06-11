@@ -21,31 +21,38 @@ ModuleLevel1::~ModuleLevel1() {}
 bool ModuleLevel1::Start() {
 	bool ret = true;
 
-	backgroundTexture = App->textures->Load("Assets/sprites/scenarios/Level1.png");
+	backgroundTexture = App->textures->Load("Assets/sprites/scenarios/BonusLevel.png");
 	++activeTextures; ++totalTextures;
 
 	// Music
-	App->audio->PlayMusic("Assets/music/soundtrack/front-line-base.ogg");
-	sky = { 11,8,256,111 };
-	mountains ={ 11,132,256,32 };
-	//Background and position in screen
-	// top
-	mountainsPos = { 0, (float)sky.h };
-	mountainsTwoPos = { (float)mountains.w, (float)sky.h };
-	mountainsSpeed = 0.15;
+	App->audio->PlayMusic("Assets/music/soundtrack/cave.ogg");
+	
+	sky = { 0, 0, 3301, 168 };
+	mountains = { 0, 227, 3301, 224 };
+	floor = { 0, 454, 3301, 48 };
 
-	//secondTopPos = { 256, 0 };
-	//secondTopPos2 = { (float)secondtopLayer.w, 0 };
-	//topSpeed = 0.5;
+	// Position
+	skyPos = { 0, -120 };
+	skyPos2 = { (float)sky.w, -120 };
+	skySpeed = 0.5;
 
-	//// bot
-	//firstBotPos = { 0, 145 };
-	//firstBotPos2 = { (float)firstBottomLayer.w, 145};
-	//firstSpeed = 0.5;
+	mountainsPos = { 0, -42 };
+	mountainsPos2 = { (float)mountains.w, -42 };
+	mountainsSpeed = 0.5;
 
-	//secondBotPos = { 256, 145 };
-	//secondBotPos2 = { (float)secondBottomLayer.w, 145 };
-	//secondSpeed = 0.5;
+	floorPos = { 0, 180 };
+	floorPos2 = { (float)floor.w, 180 };
+	floorSpeed = 0.5;
+
+	App->render->camera.x = 0;
+	App->render->camera.y = -700;
+
+	App->particles->Enable();
+	App->player->Enable();
+	App->enemies->Enable();
+	App->HUD->Enable();
+	App->collisions->Enable();
+	App->weapons->Enable();
 
 	return ret;
 }
@@ -55,8 +62,6 @@ update_status ModuleLevel1::Update() {
 
 	App->render->camera.x += SCREEN_SIZE;
 
-	//First scrolling
-	InfiniteScrolling(&mountainsPos, &mountainsTwoPos, &mountains, mountainsSpeed);
 	return ret;
 }
 
@@ -64,36 +69,22 @@ update_status ModuleLevel1::PostUpdate() {
 	update_status ret = UPDATE_CONTINUE;
 
 	/*Render Sky*/
-	if (!App->render->Blit(backgroundTexture, 0, 0, &sky, 0)) {
+	if (!App->render->Blit(backgroundTexture, (int)skyPos.x, (int)skyPos.y, &sky, skySpeed)) {
 		LOG("Cannot blit the texture in ModulePlayer %s\n", SDL_GetError());
 		ret = update_status::UPDATE_ERROR;
 	}
 	/*Render Mountains*/
-	if (!App->render->Blit(backgroundTexture, mountainsPos.x, mountainsPos.y, &mountains, mountainsSpeed)) {
+	if (!App->render->Blit(backgroundTexture, (int)mountainsPos.x, (int)mountainsPos.y, &mountains, mountainsSpeed)) {
 		LOG("Cannot blit the texture in ModulePlayer %s\n", SDL_GetError());
 		ret = update_status::UPDATE_ERROR;
 	}
-	if (!App->render->Blit(backgroundTexture, mountainsTwoPos.x, mountainsTwoPos.y, &mountains, mountainsSpeed)) {
+	/*Render Floor*/
+	if (!App->render->Blit(backgroundTexture, (int)floorPos.x, (int)floorPos.y, &floor, floorSpeed)) {
 		LOG("Cannot blit the texture in ModulePlayer %s\n", SDL_GetError());
 		ret = update_status::UPDATE_ERROR;
-	}
-	return ret;
-}
-
-void ModuleLevel1::InfiniteScrolling(fPoint* top, fPoint* top2, SDL_Rect* topLayer, float speed) {
-
-	if ((App->render->camera.x * speed) >= top2->x * SCREEN_SIZE && top->x * SCREEN_SIZE <= top2->x * SCREEN_SIZE) {
-		top->x = top2->x + topLayer->w;
-		
-	}
-	else if ((App->render->camera.x * speed) >= top->x * SCREEN_SIZE && top2->x * SCREEN_SIZE <= top->x * SCREEN_SIZE) {
-		top2->x = top->x + topLayer->w;
-		
 	}
 	
-	top = nullptr;
-	top2 = nullptr;
-	topLayer = nullptr;
+	return ret;
 }
 
 bool ModuleLevel1::CleanUp() {

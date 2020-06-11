@@ -21,16 +21,14 @@ public:
 	update_status PostUpdate();
 	bool CleanUp();
 
-	void InfiniteScrolling(fPoint* top, fPoint* top2, SDL_Rect* topLayer, float speed);
-
 	SDL_Texture* backgroundTexture = nullptr;
 	SDL_Rect sky;
 	SDL_Rect mountains;
-	
+	SDL_Rect floor;
 
-	fPoint mountainsPos;
-	fPoint mountainsTwoPos;
-	float mountainsSpeed;
+	fPoint skyPos, mountainsPos, floorPos;
+	fPoint skyPos2, mountainsPos2, floorPos2;
+	float mountainsSpeed, skySpeed, floorSpeed;
 
 };
 
