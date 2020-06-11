@@ -31,11 +31,11 @@ public:
 		return selected;
 	}
 
-	// Selection index
-	bool selected;
+	bool selected = true;
 
 private:
 	bool enterPressed = false;
+	bool enterPressedTwice = false;
 
 	SDL_Texture* tex1 = nullptr;
 	SDL_Texture* tex2 = nullptr;

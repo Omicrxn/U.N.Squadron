@@ -5,6 +5,8 @@
 #include "ModuleRenderer.h"
 #include "ModuleInput.h"
 #include "ModuleAudio.h"
+#include "ModuleFonts.h"
+#include "ModuleHUD.h"
 #include "ModuleStartScreen.h"
 
 #include "ModuleLevel2.h"
@@ -17,6 +19,9 @@ ModuleLoseScreen::~ModuleLoseScreen() {}
 
 bool ModuleLoseScreen::Start() {
 	bool ret = true;
+
+	continue3 = true;
+	pressed = false;
 
 	anim.PushBack({ 0,0,256,224 });
 	anim.PushBack({ 256,0,256,224 });
@@ -38,6 +43,12 @@ bool ModuleLoseScreen::Start() {
 	}
 	++activeTextures; ++totalTextures;
 
+	// Loading the font to print text on screen
+	greyFont = App->fonts->Load("Assets/Fonts/FontW.png", App->HUD->lookupTable, 5);
+	++activeFonts; ++totalFonts;
+
+	greenFont = App->fonts->Load("Assets/Fonts/FontG.png", App->HUD->lookupTable, 5);
+	++activeFonts; ++totalFonts;
 
 	// Playing lose audio
 	App->audio->PlayMusic("Assets/music/events/thankyouforplaying(youarecrazy).wav");
@@ -48,10 +59,24 @@ bool ModuleLoseScreen::Start() {
 update_status ModuleLoseScreen::Update() {
 	update_status ret = update_status::UPDATE_CONTINUE;
 
-	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN || App->input->pads[0].a == true) {
-		App->transition->FadeToBlack(this, (Module*)App->startScreen, 60);
+	if (continue3) {
+		if ((App->input->keyboard[SDL_SCANCODE_S] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_DOWN || App->input->pads[0].down == true) && !pressed) {
+			continue3 = false;
+		}
+		else if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN || App->input->pads[0].a == true) {
+			pressed = true;
+			App->transition->FadeToBlack(this, (Module*)App->selector, 60);
+		}
 	}
-
+	else {
+		if ((App->input->keyboard[SDL_SCANCODE_W] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_UP] == KEY_DOWN || App->input->pads[0].up == true) && !pressed) {
+			continue3 = true;
+		}
+		else if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN || App->input->pads[0].a == true) {
+			pressed = true;
+			App->transition->FadeToBlack(this, (Module*)App->startScreen, 60);
+		}
+	}
 	return ret;
 }
 
@@ -63,19 +88,34 @@ update_status ModuleLoseScreen::PostUpdate() {
 		ret = UPDATE_ERROR;
 	}
 
+	if (continue3) {
+		App->fonts->BlitText(96, 183, greenFont, "CONTINUE 3");
+		App->fonts->BlitText(96, 199, greyFont, "END");
+	}
+	else {
+		App->fonts->BlitText(96, 183, greyFont, "CONTINUE 3");
+		App->fonts->BlitText(96, 199, greenFont, "END");
+	}
+
 	return ret;
 }
 
 bool ModuleLoseScreen::CleanUp() {
 	bool ret = true;
 
-	activeTextures = 0;
+	activeTextures = activeFonts = 0;
 
 	if (!App->textures->Unload(tex)) {
 		LOG("Loose Screen -> Error unloading the texture.");
 		ret = false;
 	}
 	--totalTextures;
+
+	App->fonts->UnLoad(greyFont);
+	--totalFonts;
+
+	App->fonts->UnLoad(greenFont);
+	--totalFonts;
 
 	App->audio->StopMusic();
 

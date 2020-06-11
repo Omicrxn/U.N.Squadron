@@ -60,7 +60,7 @@ update_status ModuleDebugInfo::Update() {
 	}
 
 	// Debug functionality to jump screens
-	if (App->input->keyboard[SDL_SCANCODE_F3] == KEY_DOWN) {
+	if (App->input->keyboard[SDL_SCANCODE_F4] == KEY_DOWN) {
 		if (App->initialScreen->IsEnabled()) {
 			App->transition->FadeToBlack((Module*)App->initialScreen, (Module*)App->startScreen, 60);
 		}
@@ -75,21 +75,30 @@ update_status ModuleDebugInfo::Update() {
 			else App->transition->FadeToBlack((Module*)App->store, (Module*)App->lvl1, 60);
 		}
 		else if (App->lvl2->IsEnabled()) {
-			App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->startScreen, 60);
+			App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->selector, 60);
 		}
 		else if (App->lvl1->IsEnabled()) {
-			App->transition->FadeToBlack((Module*)App->lvl1, (Module*)App->startScreen, 60);
+			App->transition->FadeToBlack((Module*)App->lvl1, (Module*)App->selector, 60);
 		}
 		else if (App->winScreen->IsEnabled()) {
-			App->transition->FadeToBlack((Module*)App->winScreen, (Module*)App->startScreen, 60);
+			App->transition->FadeToBlack((Module*)App->winScreen, (Module*)App->selector, 60);
 		}
 		else if (App->loseScreen->IsEnabled()) {
-			App->transition->FadeToBlack((Module*)App->loseScreen, (Module*)App->startScreen, 60);
+			App->transition->FadeToBlack((Module*)App->loseScreen, (Module*)App->selector, 60);
+		}
+	}
+
+	if (App->input->keyboard[SDL_SCANCODE_F5] == KEY_DOWN) {
+		if (App->lvl2->IsEnabled()) {
+			App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->startScreen, 60);
+		}
+		if (App->lvl1->IsEnabled()) {
+			App->transition->FadeToBlack((Module*)App->lvl1, (Module*)App->startScreen, 60);
 		}
 	}
 
 	// Debug functionality to Win Screen
-	if (App->input->keyboard[SDL_SCANCODE_F4] == KEY_DOWN) {
+	if (App->input->keyboard[SDL_SCANCODE_F6] == KEY_DOWN) {
 		if (App->lvl2->IsEnabled()) {
 			App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->winScreen, 60);
 		}
@@ -98,12 +107,21 @@ update_status ModuleDebugInfo::Update() {
 		}
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_F6] == KEY_DOWN && !debugGamepadInfo) {
+	if (App->input->keyboard[SDL_SCANCODE_F7] == KEY_DOWN) {
+		if (App->lvl2->IsEnabled()) {
+			App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->loseScreen, 60);
+		}
+		if (App->lvl1->IsEnabled()) {
+			App->transition->FadeToBlack((Module*)App->lvl1, (Module*)App->loseScreen, 60);
+		}
+	}
+
+	if (App->input->keyboard[SDL_SCANCODE_F8] == KEY_DOWN && !debugGamepadInfo) {
 		debugMemLeaks = !debugMemLeaks;
 	}
 
 	if (debugMemLeaks) {
-		if (App->input->keyboard[SDL_SCANCODE_F7] == KEY_DOWN && counterModules <= DebugModules) {
+		if (App->input->keyboard[SDL_SCANCODE_F9] == KEY_DOWN && counterModules <= DebugModules) {
 			++counterModules;
 		}
 
@@ -132,23 +150,15 @@ update_status ModuleDebugInfo::Update() {
 		else if (counterModules == 12)
 			inspectedModule = (Module*)App->debugInfo;
 
-		if (App->input->keyboard[SDL_SCANCODE_F7] == KEY_DOWN && counterModules == DebugModules) {
+		if (App->input->keyboard[SDL_SCANCODE_F9] == KEY_DOWN && counterModules == DebugModules) {
 			counterModules = 0;
 		}
 	}
 
 	// Switch gamepad debug info
-	if (App->input->keyboard[SDL_SCANCODE_F8] == KEY_DOWN && !debugMemLeaks)
+	if (App->input->keyboard[SDL_SCANCODE_F10] == KEY_DOWN && !debugMemLeaks)
 		debugGamepadInfo = !debugGamepadInfo;
 
-	if (App->input->keyboard[SDL_SCANCODE_F9] == KEY_DOWN) {
-		if (App->lvl2->IsEnabled()) {
-			App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->loseScreen, 60);
-		}
-		if (App->lvl1->IsEnabled()) {
-			App->transition->FadeToBlack((Module*)App->lvl1, (Module*)App->loseScreen, 60);
-		}
-	}
 
 	// Max Lifes
 	if (App->input->keyboard[SDL_SCANCODE_L] == KEY_DOWN) {
@@ -180,7 +190,7 @@ update_status ModuleDebugInfo::Update() {
 update_status ModuleDebugInfo::PostUpdate() 
 {
 	if (debugMemLeaks) {
-		App->fonts->BlitText(5, 5, debugFont, "Press F6 to close debug info");
+		App->fonts->BlitText(5, 5, debugFont, "Press F8 to close debug info");
 
 		App->fonts->BlitText(5, 20, debugFont, "Total loaded resources");
 
@@ -202,7 +212,17 @@ update_status ModuleDebugInfo::PostUpdate()
 		}
 
 		if (maxAmmo) App->fonts->BlitText(140, 65, debugFont, "Infinite Ammo");
-		
+		else App->fonts->BlitText(140, 65, debugFont, "Limited Ammo");
+
+		sprintf_s(debugText, 150, "Level  %i", App->player->level);
+		App->fonts->BlitText(140, 80, debugFont, debugText);
+
+		sprintf_s(debugText, 150, "POW    %i", App->player->pow);
+		App->fonts->BlitText(140, 95, debugFont, debugText);
+
+		sprintf_s(debugText, 150, "Total  %i", App->player->total);
+		App->fonts->BlitText(140, 110, debugFont, debugText);
+
 		// Display total audio files loaded
 		sprintf_s(debugText, 150, "audio fx  %i", App->audio->GetFxCount());
 		App->fonts->BlitText(20, 50, debugFont, debugText);
@@ -219,7 +239,7 @@ update_status ModuleDebugInfo::PostUpdate()
 		sprintf_s(debugText, 150, "particles %i", App->particles->GetParticlesCount());
 		App->fonts->BlitText(20, 95, debugFont, debugText);
 
-		App->fonts->BlitText(5, 120, debugFont, "Press F7 to traverse modules");
+		App->fonts->BlitText(5, 120, debugFont, "Press F9 to traverse modules");
 
 		if (inspectedModule != nullptr) {
 			DrawModuleResources(inspectedModule);

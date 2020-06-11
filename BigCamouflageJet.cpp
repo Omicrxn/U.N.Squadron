@@ -38,7 +38,6 @@ BigCamouflageJet::BigCamouflageJet(int x, int y,bool spawnRight) : Enemy(x, y,sp
 		}
 		
 	}
-	
 
 	collider = App->collisions->AddCollider({ position.x, position.y, 32, 19 }, Collider::Type::ENEMY, (Module*)App->enemies);
 

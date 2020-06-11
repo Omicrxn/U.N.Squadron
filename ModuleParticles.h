@@ -20,7 +20,7 @@ struct Particle
 public:
 	// Constructor
 	Particle();
-	
+
 	// Copy constructor
 	Particle(const Particle& p);
 
@@ -123,6 +123,7 @@ public:
 	Particle sbExplosion;
 	Particle sbSparks;
 	Particle sbBombs;
+	Particle sbSparks;
 
 	Particle falconExplosion;
 	Particle shellExplosion;

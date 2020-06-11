@@ -74,6 +74,12 @@ bool ModuleStore::Start() {
 	chooseFx = App->audio->LoadFx("Assets/music/events/chooseoption.wav");
 	++activeFx; ++totalFx;
 
+	boughtFx = App->audio->LoadFx("Assets/music/events/bought.wav");
+	++activeFx; ++totalFx;
+
+	noMoneyFx = App->audio->LoadFx("Assets/music/events/nomoney.wav");
+	++activeFx; ++totalFx;
+
 	// Loading the font to print text on screen
 	greyFont = App->fonts->Load("Assets/Fonts/FontW.png", App->HUD->lookupTable, 5);
 	++activeFonts; ++totalFonts;
@@ -85,6 +91,8 @@ bool ModuleStore::Start() {
 
 	// Resetting the weapons selected in the previous game
 	weaponSelection = 0;
+
+	App->audio->PlayMusic("Assets/music/soundtrack/shop.ogg");
 
 	return ret;
 }
@@ -159,24 +167,29 @@ update_status ModuleStore::Update() {
 					App->player->money -= 9000;
 					weaponSelection |= (1 << 8);
 					currentState = BOUGHT;
+					App->audio->PlayFx(1, 0);
 				}
 				else {
 					currentState = NOMONEY;
+					App->audio->PlayFx(2, 0);
 				}
 			}
 			else if (!App->debugInfo->maxMoney && (weaponSelection & (1 << 8)) != 0)
 			{
 				currentState = ALREADYBOUGHT;
+				App->audio->PlayFx(2, 0);
 			}
 			else if (App->debugInfo->maxMoney) {
 				if ((weaponSelection & (1 << 8)) == 0)
 				{
 					weaponSelection |= (1 << 8);
 					currentState = BOUGHT;
+					App->audio->PlayFx(1, 0);
 				}
 				else
 				{
 					currentState = ALREADYBOUGHT;
+					App->audio->PlayFx(2, 0);
 				}
 			}
 			storeStateCounter = 0;
@@ -189,24 +202,29 @@ update_status ModuleStore::Update() {
 					App->player->money -= 20000;
 					weaponSelection |= (1 << 6);
 					currentState = BOUGHT;
+					App->audio->PlayFx(1, 0);
 				}
 				else {
 					currentState = NOMONEY;
+					App->audio->PlayFx(2, 0);
 				}
 			}
 			else if (!App->debugInfo->maxMoney && (weaponSelection & (1 << 6)) != 0)
 			{
 				currentState = ALREADYBOUGHT;
+				App->audio->PlayFx(2, 0);
 			}
 			else if (App->debugInfo->maxMoney) {
 				if ((weaponSelection & (1 << 6)) == 0)
 				{
 					weaponSelection |= (1 << 6);
 					currentState = BOUGHT;
+					App->audio->PlayFx(1, 0);
 				}
 				else
 				{
 					currentState = ALREADYBOUGHT;
+					App->audio->PlayFx(2, 0);
 				}
 			}
 			storeStateCounter = 0;
@@ -219,24 +237,29 @@ update_status ModuleStore::Update() {
 					App->player->money -= 2000;
 					weaponSelection |= (1 << 4);
 					currentState = BOUGHT;
+					App->audio->PlayFx(1, 0);
 				}
 				else {
 					currentState = NOMONEY;
+					App->audio->PlayFx(2, 0);
 				}
 			}
 			else if (!App->debugInfo->maxMoney && (weaponSelection & (1 << 4)) != 0)
 			{
 				currentState = ALREADYBOUGHT;
+				App->audio->PlayFx(2, 0);
 			}
 			else if (App->debugInfo->maxMoney) {
 				if ((weaponSelection & (1 << 4)) == 0)
 				{
 					weaponSelection |= (1 << 4);
 					currentState = BOUGHT;
+					App->audio->PlayFx(1, 0);
 				}
 				else
 				{
 					currentState = ALREADYBOUGHT;
+					App->audio->PlayFx(2, 0);
 				}
 			}
 			storeStateCounter = 0;
@@ -249,24 +272,29 @@ update_status ModuleStore::Update() {
 					App->player->money -= 15000;
 					weaponSelection |= (1 << 2);
 					currentState = BOUGHT;
+					App->audio->PlayFx(1, 0);
 				}
 				else {
 					currentState = NOMONEY;
+					App->audio->PlayFx(2, 0);
 				}
 			}
 			else if (!App->debugInfo->maxMoney && (weaponSelection & (1 << 2)) != 0)
 			{
 				currentState = ALREADYBOUGHT;
+				App->audio->PlayFx(2, 0);
 			}
 			else if (App->debugInfo->maxMoney) {
 				if ((weaponSelection & (1 << 2)) == 0)
 				{
 					weaponSelection |= (1 << 2);
 					currentState = BOUGHT;
+					App->audio->PlayFx(1, 0);
 				}
 				else
 				{
 					currentState = ALREADYBOUGHT;
+					App->audio->PlayFx(2, 0);
 				}
 			}
 			storeStateCounter = 0;
@@ -276,7 +304,7 @@ update_status ModuleStore::Update() {
 		if (weapon == weapons[1][5]) {
 			exitPressed = true;
 			if(App->selector->GetSelected()) App->transition->FadeToBlack(this, (Module*)App->lvl2, 60);
-			else App->transition->FadeToBlack(this, (Module*)App->lvl2, 60);
+			else App->transition->FadeToBlack(this, (Module*)App->lvl1, 60);
 			currentState = BYE;
 			storeStateCounter = 0;
 		}
@@ -387,7 +415,8 @@ update_status ModuleStore::PostUpdate() {
 		App->fonts->BlitText(160, 40, greyFont, "Thanks!");
 		App->fonts->BlitText(160, 60, greyFont, "");
 		App->fonts->BlitText(160, 70, greyFont, "You be");
-		App->fonts->BlitText(160, 80, greyFont, "careful now!");
+		App->fonts->BlitText(160, 80, greyFont, "careful");
+		App->fonts->BlitText(160, 90, greyFont, "now!");
 	}
 
 	// Blit already selected texture

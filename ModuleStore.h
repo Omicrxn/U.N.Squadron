@@ -20,12 +20,10 @@ public:
 
 	char moneyText[10] = { "\0" };
 
-	// Id Fonts
-	int greyFont = -1;
-	int greenFont = -1;
-
 	// Sound effects indices
 	uint chooseFx = 0;
+	uint boughtFx = 0;
+	uint noMoneyFx = 0;
 
 	// Bit field to store all the weapons selected to start the game
 	// The last 11 bits represent each weapon selectable for the player (from left to right)
@@ -47,6 +45,10 @@ private:
 	Animation unicorn_anim;
 	Animation* current_anim = nullptr;
 	iPoint selectorPos;
+
+	// Id Fonts
+	int greyFont = -1;
+	int greenFont = -1;
 
 	bool exitPressed = false;
 

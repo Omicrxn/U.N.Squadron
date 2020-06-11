@@ -56,11 +56,11 @@ bool ModuleHUD::Start() {
 	powSquare = { 170,13,60,26 };
 	helmet = { 16,168,15,14 };
 
-	playerIn.speed = 0.3f;
+	playerIn.speed = 0.25f;
 	playerIn.loop = false;
 	playerIn.Reset();
 
-	playerOut.speed = 0.3f;
+	playerOut.speed = 0.25f;
 	playerOut.loop = false;
 	playerOut.Reset();
 
