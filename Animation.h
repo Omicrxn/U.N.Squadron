@@ -12,7 +12,6 @@ public:
 	float speed = 1.0f;
 	SDL_Rect frames[MAX_FRAMES]; //array of sdl_rect to store each sprite of the animation
 
-
 private:
 	float currentFrame = 0.0f;
 	int lastFrame = 0;

@@ -161,6 +161,10 @@ update_status ModuleStore::Update() {
 					currentState = NOMONEY;
 				}
 			}
+			else if (!App->debugInfo->maxMoney && (weaponSelection & (1 << 8)) != 0)
+			{
+				currentState = ALREADYBOUGHT;
+			}
 			else if (App->debugInfo->maxMoney) {
 				if ((weaponSelection & (1 << 8)) == 0)
 				{
@@ -186,6 +190,10 @@ update_status ModuleStore::Update() {
 				else {
 					currentState = NOMONEY;
 				}
+			}
+			else if (!App->debugInfo->maxMoney && (weaponSelection & (1 << 6)) != 0)
+			{
+				currentState = ALREADYBOUGHT;
 			}
 			else if (App->debugInfo->maxMoney) {
 				if ((weaponSelection & (1 << 6)) == 0)
@@ -213,6 +221,10 @@ update_status ModuleStore::Update() {
 					currentState = NOMONEY;
 				}
 			}
+			else if (!App->debugInfo->maxMoney && (weaponSelection & (1 << 4)) != 0)
+			{
+				currentState = ALREADYBOUGHT;
+			}
 			else if (App->debugInfo->maxMoney) {
 				if ((weaponSelection & (1 << 4)) == 0)
 				{
@@ -238,6 +250,10 @@ update_status ModuleStore::Update() {
 				else {
 					currentState = NOMONEY;
 				}
+			}
+			else if (!App->debugInfo->maxMoney && (weaponSelection & (1 << 2)) != 0)
+			{
+				currentState = ALREADYBOUGHT;
 			}
 			else if (App->debugInfo->maxMoney) {
 				if ((weaponSelection & (1 << 2)) == 0)

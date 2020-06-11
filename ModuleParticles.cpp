@@ -39,7 +39,6 @@ bool ModuleParticles::Start()
 	bullet1.speed.x = bullet2.speed.x = bullet3.speed.x = bullet4.speed.x = 6.0f;
 	bullet1.lifetime = bullet2.lifetime = bullet3.lifetime = bullet4.lifetime = 180;
 
-
 	// Enemy Bullet Animaton
 	enemyBullet.anim.PushBack({ 44, 370, 5 , 7 });
 	enemyBullet.anim.PushBack({ 78, 372, 5, 5 });
@@ -90,7 +89,6 @@ bool ModuleParticles::Start()
 	bombExplosion.anim.PushBack({ 167, 57, 28, 33 });
 	bombExplosion.anim.speed = 0.075f;
 	bombExplosion.anim.loop = false;
-	
 
 	// Ceiling explosions animation
 	ceilingExplosion.anim.PushBack({ 210, 151, 8, 5 });
@@ -104,6 +102,19 @@ bool ModuleParticles::Start()
 
 	return true;
 }
+
+//update_status ModuleParticles::Update()
+//{
+//	/*ceilingExplosion.anim.
+//
+//	App->particles->AddParticle(App->particles->ceilingExplosion, position.x, position.y - 4);
+//
+//	App->particles->AddParticle(App->particles->ceilingExplosion, position.x + 4, position.y - 4);
+//
+//	App->particles->AddParticle(App->particles->ceilingExplosion, position.x + 8, position.y - 4);*/
+//	
+//	}
+//}
 
 bool ModuleParticles::CleanUp()
 {
