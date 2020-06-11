@@ -1,5 +1,7 @@
 # B.A.T.L. Studios
-Github of the project: [U.N.Squadron GitHub](https://github.com/Omicrxn/U.N.Squadron "U.N.SQUADRON GITHUB")
+Github of the project: [U.N. Squadron GitHub](https://github.com/Omicrxn/U.N.Squadron)
+
+Website of the Project: [U.N. Squadron Website](https://omicrxn.github.io/U.N.Squadron/)
 # Team Members
 |NAME|ROLE|GITHUB|
 |----|----|------|
@@ -78,5 +80,5 @@ While at the moment Capcom was developing vertically scrolling shooters, U.N.Squ
 |Maximum Money|M|
 |Maximum Lifes|L|
 |Increase POW Level|P|
-|Maximum Ammo|9|
+|Maximum Ammo|N|
 |Maximize / Resize|F11|
