@@ -70,15 +70,16 @@ While at the moment Capcom was developing vertically scrolling shooters, U.N.Squ
 |-------|--------|
 |Display Collisions|F1|
 |Mute Background Music|F2|
-|Jump Between Screens|F3|
-|Direct Win|F4|
-|God Mode|F5|
-|Resources Information|F6|
-|Traverse Resources Information|F7|
-|Gamepad Information|F8|
-|Direct Lose|F9|
+|God Mode|F3|
+|Jump Between Screens|F4|
+|Jump from level to Start|F5|
+|Direct Win|F6|
+|Direct Lose|F7|
+|Resources Information|F8|
+|Traverse Resources Information|F9|
+|Gamepad Information|F10|
+|Maximize / Resize|F11|
 |Infinite Money|M|
 |Infinite Lifes|L|
-|Increase POW Level|P|
 |Infinite Ammo|N|
-|Maximize / Resize|F11|
+|Increase POW Level|P|
