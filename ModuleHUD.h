@@ -20,19 +20,7 @@ public:
 
 	bool CleanUp();
 
-	char scoreText[150] = { "\0" };
-	char moneyText[10] = { "\0" };
-	char lifesText[10] = { "\0" };
-
-	char powText[4] = { "\0" };
-	char totalText[4] = { "\0" };
-	char levelText[2] = { "\0" };
-
 	char lookupTable[91] = { "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz  0123456789.,ªº?!*$%&()+-/:;<=>@·    " };
-
-	// Id Fonts
-	int yellowFont = -1;
-	int greenFont = -1;
 
 private:
 	SDL_Texture* tex;
@@ -54,6 +42,18 @@ private:
 	char shellAmmoText[5] = {'\0'};
 	char bombAmmoText[5] = { '\0' };
 	char ceilingAmmoText[5] = { '\0' };
+
+	char scoreText[150] = { "\0" };
+	char moneyText[10] = { "\0" };
+	char lifesText[10] = { "\0" };
+
+	char powText[4] = { "\0" };
+	char totalText[4] = { "\0" };
+	char levelText[2] = { "\0" };
+
+	// Id Fonts
+	int yellowFont = -1;
+	int greenFont = -1;
 };
 
 #endif // __ModuleHUD_H__
