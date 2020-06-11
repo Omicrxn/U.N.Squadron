@@ -111,7 +111,7 @@ update_status ModulePlayer::Update() {
 	if ((App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_REPEAT && !destroyed) || pad.x == true || pad.r1 == true) {
 		if (shotCountdown == 0) {
 			if (level == 1) {
-				App->particles->AddParticle(App->particles->bullet1, position.x + 7, position.y + 5, Collider::Type::PLAYER_SHOT);
+ 				App->particles->AddParticle(App->particles->bullet1, position.x + 7, position.y + 5, Collider::Type::PLAYER_SHOT);
 			}
 			else if (level == 2) {
 				App->particles->AddParticle(App->particles->bullet2, position.x + 7, position.y + 3, Collider::Type::PLAYER_SHOT);

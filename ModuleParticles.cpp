@@ -38,7 +38,7 @@ bool ModuleParticles::Start()
 	bullet1.anim.loop = bullet2.anim.loop = bullet3.anim.loop = bullet4.anim.loop = true;
 	bullet1.speed.x = bullet2.speed.x = bullet3.speed.x = bullet4.speed.x = 6.0f;
 	bullet1.lifetime = bullet2.lifetime = bullet3.lifetime = bullet4.lifetime = 180;
-	bullet1.isWeapon = bullet2.isWeapon = bullet3.isWeapon = bullet4.isWeapon = false;
+
 
 	// Enemy Bullet Animaton
 	enemyBullet.anim.PushBack({ 44, 370, 5 , 7 });
@@ -47,7 +47,7 @@ bool ModuleParticles::Start()
 	enemyBullet.anim.loop = true;
 	enemyBullet.anim.speed = 0.05f;
 	enemyBullet.lifetime = 180;
-	bombExplosion.isWeapon = false;
+	
 
 	// Explosion Animation
 	explosion.anim.PushBack({ 27, 256, 34, 39 });
@@ -56,21 +56,21 @@ bool ModuleParticles::Start()
 	explosion.anim.PushBack({ 223, 262, 31, 29 });
 	explosion.anim.loop = true;
 	explosion.anim.speed = 0.075f;
-	explosion.isWeapon = false;
+	
 	// Explosion of the enemies
 	enemyExplosion.anim.PushBack({ 27, 313, 24, 25 });
 	enemyExplosion.anim.PushBack({ 97, 310, 31, 29 });
 	enemyExplosion.anim.PushBack({ 159, 310, 31, 28 });
 	enemyExplosion.anim.PushBack({ 217, 315, 35, 27 });
 	enemyExplosion.anim.speed = 0.075f;
-	enemyExplosion.isWeapon = false;
+
 
 	// Stealth bomber firecannon
 	sbFirecannon.anim.PushBack({ 25,454,16,12 });
 	sbFirecannon.anim.loop = false;
 	sbFirecannon.anim.speed = 0;
 	sbFirecannon.speed.x = -2;
-	sbFirecannon.isWeapon = false;
+
 
 	// Falcon explosion animation
 	falconExplosion.anim.PushBack({ 154, 0, 23, 26 });
@@ -90,7 +90,7 @@ bool ModuleParticles::Start()
 	bombExplosion.anim.PushBack({ 167, 57, 28, 33 });
 	bombExplosion.anim.speed = 0.075f;
 	bombExplosion.anim.loop = false;
-	bombExplosion.isWeapon = true;
+	
 
 	// Ceiling explosions animation
 	ceilingExplosion.anim.PushBack({ 210, 151, 8, 5 });
@@ -218,7 +218,7 @@ Particle::Particle()
 }
 
 Particle::Particle(const Particle& p) : anim(p.anim), position(p.position), speed(p.speed),
-frameCount(p.frameCount), lifetime(p.lifetime)
+frameCount(p.frameCount), lifetime(p.lifetime),isWeapon(p.isWeapon)
 {
 
 }
