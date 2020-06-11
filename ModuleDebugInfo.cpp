@@ -190,7 +190,7 @@ update_status ModuleDebugInfo::Update() {
 update_status ModuleDebugInfo::PostUpdate() 
 {
 	if (debugMemLeaks) {
-		App->fonts->BlitText(5, 5, debugFont, "Press F6 to close debug info");
+		App->fonts->BlitText(5, 5, debugFont, "Press F8 to close debug info");
 
 		App->fonts->BlitText(5, 20, debugFont, "Total loaded resources");
 
@@ -212,7 +212,17 @@ update_status ModuleDebugInfo::PostUpdate()
 		}
 
 		if (maxAmmo) App->fonts->BlitText(140, 65, debugFont, "Infinite Ammo");
-		
+		else App->fonts->BlitText(140, 65, debugFont, "Limited Ammo");
+
+		sprintf_s(debugText, 150, "Level  %i", App->player->level);
+		App->fonts->BlitText(140, 80, debugFont, debugText);
+
+		sprintf_s(debugText, 150, "POW    %i", App->player->pow);
+		App->fonts->BlitText(140, 95, debugFont, debugText);
+
+		sprintf_s(debugText, 150, "Total  %i", App->player->total);
+		App->fonts->BlitText(140, 110, debugFont, debugText);
+
 		// Display total audio files loaded
 		sprintf_s(debugText, 150, "audio fx  %i", App->audio->GetFxCount());
 		App->fonts->BlitText(20, 50, debugFont, debugText);
@@ -229,7 +239,7 @@ update_status ModuleDebugInfo::PostUpdate()
 		sprintf_s(debugText, 150, "particles %i", App->particles->GetParticlesCount());
 		App->fonts->BlitText(20, 95, debugFont, debugText);
 
-		App->fonts->BlitText(5, 120, debugFont, "Press F7 to traverse modules");
+		App->fonts->BlitText(5, 120, debugFont, "Press F9 to traverse modules");
 
 		if (inspectedModule != nullptr) {
 			DrawModuleResources(inspectedModule);
