@@ -11,6 +11,11 @@
 ModuleHUD::ModuleHUD(bool startEnabled) : Module(startEnabled) {
 
 	name = "HUD";
+	for (int i = 0; i < 12; ++i) {
+		playerIn.PushBack ({42 * i, 0, 42, 34});
+		playerOut.PushBack({ 42 * i, 34, 42, 34 });
+	}
+	playerOut.PushBack({ 0,0,0,0 });
 }
 
 ModuleHUD::~ModuleHUD() {}
@@ -46,12 +51,13 @@ bool ModuleHUD::Start() {
 	powSquare = { 170,13,60,26 };
 	helmet = { 16,168,15,14 };
 
-	for (int i = 0; i < 12; ++i) {
-		playerIn.PushBack ({42 * i, 0, 42, 34});
-		playerOut.PushBack({ 42 * i, 34, 42, 34 });
-	}
+	
 	playerIn.speed = 0.3f;
 	playerOut.speed = 0.3f;
+	playerIn.loop = false;
+	playerOut.loop = false;
+	playerIn.Reset();
+	playerOut.Reset();
 
 	yellowFont = App->fonts->Load("Assets/Fonts/FontY.png", lookupTable, 5);
 	++activeFonts; ++totalFonts;
@@ -95,24 +101,26 @@ update_status ModuleHUD::PostUpdate() {
 
 	if (!App->debugInfo->debugMemLeaks && !App->debugInfo->debugGamepadInfo) {
 		//Blit images
-		App->render->Blit(tex, 71, 6, &playerFace.GetCurrentFrame(), 1, false);
+		
 		App->render->Blit(tex, 190, 15, &powSquare, 1, false);
 		App->render->Blit(tex, 16, 201, &helmet, 1, false);
 		App->render->Blit(tex, 55, 206, &fuelBackground, 1, false);
 		App->render->Blit(tex, 57, 208, &fuelQuantity, 1, false);
-		
-		if (playerIn.Finished() == false) {
+
+		if(playerIn.Finished() && App->player->GetCurrentFuel() > 0){
+			App->render->Blit(tex, 71, 6, &playerFace.GetCurrentFrame(), 1, false);
+		}else if(playerIn.Finished() && App->player->GetCurrentFuel() == 0){
+
+			if (!App->render->Blit(tex2, 71, 6, &playerOut.GetCurrentFrame(), 1, false)) {
+					ret = UPDATE_ERROR;
+			}
+
+		}else{
 			if (!App->render->Blit(tex2, 71, 6, &playerIn.GetCurrentFrame(), 1, false)) {
 				ret = UPDATE_ERROR;
 			}
 		}
-		if (playerOut.Finished() == false && App->player->GetCurrentFuel() == 0) {
-			if (playerOut.Finished() == false) {
-				if (!App->render->Blit(tex2, 71, 6, &playerOut.GetCurrentFrame(), 1, false)) {
-					ret = UPDATE_ERROR;
-				}
-			}
-		}
+		
 
 		// Printing the current weapon and its price
 		if (App->player->currentWeapon == App->player->weapons::FALCON)
