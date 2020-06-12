@@ -37,7 +37,14 @@ private:
 
 	// This weapon has one sprite and one frame
 	// We are keeping it an animation for consistency with other weapons
-	Animation shrapnel;
+	Animation shrapnel0;
+	Animation shrapnel1;
+	Animation shrapnel2;
+	Animation shrapnel3;
+	Animation shrapnel4;
+	Animation shrapnel5;
+	Animation shrapnel6;
+	Animation shrapnel7;
 	unsigned int shrapnelNum = 0;
 };
 #endif // !__SB_BOMBSHRAPNEL_H__

@@ -29,15 +29,15 @@ void SB_Bomb::Update()
 	Weapon::Update();
 	if (path.Finished()) {
 
-		App->particles->AddParticle(App->particles->enemyExplosion, position.x, position.y, Collider::Type::ENEMY_SHOT,0);
-		App->weapons->SpawnShrapnel(position.x,position.y,0);
-		App->weapons->SpawnShrapnel(position.x,position.y,1);
-		App->weapons->SpawnShrapnel(position.x,position.y,2);
-		App->weapons->SpawnShrapnel(position.x,position.y,3);
-		App->weapons->SpawnShrapnel(position.x,position.y,4);
-		App->weapons->SpawnShrapnel(position.x,position.y,5);
-		App->weapons->SpawnShrapnel(position.x,position.y,6);
-		App->weapons->SpawnShrapnel(position.x,position.y,7);
+		App->particles->AddParticle(App->particles->sbBombExplosion, position.x-10, position.y-6, Collider::Type::ENEMY_SHOT,0);
+		App->weapons->SpawnShrapnel(position.x,position.y,0);//h-l
+	    App->weapons->SpawnShrapnel(position.x+4,position.y+2,1);//d-u-l
+		App->weapons->SpawnShrapnel(position.x,position.y,2);//u
+		App->weapons->SpawnShrapnel(position.x-4,position.y+2,3);//d-u-r
+		App->weapons->SpawnShrapnel(position.x,position.y,4);//h-r
+		App->weapons->SpawnShrapnel(position.x-4,position.y,5);//d-l-r
+		App->weapons->SpawnShrapnel(position.x,position.y,6);//
+		App->weapons->SpawnShrapnel(position.x+4,position.y,7);
 		this->pendingToDelete = true;
 	}
 }
