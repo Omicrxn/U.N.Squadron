@@ -47,7 +47,11 @@ bool ModulePlayer::Start() {
 	++activeFx; ++totalFx;
 
 	// Loading collision sound effect
-	explosionFx = App->audio->LoadFx("Assets/music/events/collisionswithobjects.wav");
+	hitFx = App->audio->LoadFx("Assets/music/events/collisionswithobjects.wav");
+	++activeFx; ++totalFx;
+
+	// Loading collision sound effect
+	dieFx = App->audio->LoadFx("Assets/music/events/die.wav");
 	++activeFx; ++totalFx;
 
 	// Add a collider to the player
@@ -225,8 +229,6 @@ update_status ModulePlayer::Update() {
 					App->particles->AddParticle(App->particles->ceilingExplosion, position.x, position.y - 4);
 					if(!App->debugInfo->maxAmmo) ceilingAmmo--;
 					ceilingCountdown = 60;
-					// Playing shooting sound effect
-					App->audio->PlayFx(0, 0);
 				}
 				break;
 			default:
@@ -348,7 +350,9 @@ bool ModulePlayer::CleanUp() {
 
 	App->audio->UnloadFx(shootFx);
 	--totalFx;
-	App->audio->UnloadFx(explosionFx);
+	App->audio->UnloadFx(hitFx);
+	--totalFx;
+	App->audio->UnloadFx(dieFx);
 	--totalFx;
 
 	App->collisions->DeleteCollider(collider);
@@ -364,11 +368,15 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 		//SDL_SetTextureColorMod(texture, 450, 450, 64);
 		if (currentFuel > 1) {
 			currentFuel--;
+
+			//Playing explosion sound effect
+			App->audio->PlayFx(3, 0);
 		}
 		else {
 			currentFuel--;
 			App->particles->AddParticle(App->particles->explosion, position.x, position.y, Collider::Type::NONE, 9);
-
+			//Playing explosion sound effect
+			App->audio->PlayFx(4, 0);
 			if (playerLifes > 1 && !App->debugInfo->maxLifes) {
 				playerLifes--;
 				App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->startScreen, 60);
@@ -381,14 +389,9 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 				level = 1;
 				App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->loseScreen, 60);
 			}
-
 			destroyed = true;
 		}
-
 		hasBeenHit = true;
 		hasBeenHitCounter = 0;
-
-		//Playing explosion sound effect
-		App->audio->PlayFx(2, 0);
 	}
 }

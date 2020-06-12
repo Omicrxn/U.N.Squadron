@@ -36,7 +36,7 @@ bool ModuleParticles::Start()
 	bullet4.anim.PushBack({ 498, 0, 13, 17 });
 
 	bullet1.anim.loop = bullet2.anim.loop = bullet3.anim.loop = bullet4.anim.loop = true;
-	bullet1.speed.x = bullet2.speed.x = bullet3.speed.x = bullet4.speed.x = 6.0f;
+	bullet1.speed.x = bullet2.speed.x = bullet3.speed.x = bullet4.speed.x = 7.0f;
 	bullet1.lifetime = bullet2.lifetime = bullet3.lifetime = bullet4.lifetime = 180;
 
 	// Enemy Bullet Animaton

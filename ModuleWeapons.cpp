@@ -39,7 +39,7 @@ bool ModuleWeapons::Start()
 	texture = App->textures->Load("Assets/sprites/weapons/weapons.png");
 	++activeTextures; ++totalTextures;
 
-	weaponDestroyedFx = App->audio->LoadFx("Assets/music/explosion.wav"); // Change later
+	weaponDestroyedFx = App->audio->LoadFx("Assets/music/explosionWeapon.wav"); // Change later
 	++activeFx; ++totalFx;
 
 	return true;
