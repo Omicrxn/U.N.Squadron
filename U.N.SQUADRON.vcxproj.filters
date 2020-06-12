@@ -133,7 +133,10 @@
     <ClCompile Include="SB_BombShrapnel.cpp">
       <Filter>Source Files\Entities\Weapons</Filter>
     </ClCompile>
-    <ClCompile Include="Powerup.cpp">
+    <ClCompile Include="PowerupBlue.cpp">
+      <Filter>Source Files\Entities\Weapons</Filter>
+    </ClCompile>
+    <ClCompile Include="PowerupOrange.cpp">
       <Filter>Source Files\Entities\Weapons</Filter>
     </ClCompile>
   </ItemGroup>
@@ -277,7 +280,10 @@
     <ClInclude Include="SB_BombShrapnel.h">
       <Filter>Source Files\Entities\Weapons</Filter>
     </ClInclude>
-    <ClInclude Include="Powerup.h">
+    <ClInclude Include="PowerupBlue.h">
+      <Filter>Source Files\Entities\Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="PowerupOrange.h">
       <Filter>Source Files\Entities\Weapons</Filter>
     </ClInclude>
   </ItemGroup>

@@ -14,6 +14,8 @@
 #include "GF_Hook.h"
 #include "SB_Bomb.h"
 #include "SB_BombShrapnel.h"
+#include "PowerupOrange.h"
+#include "PowerupBlue.h"
 
 #include "ModuleParticles.h"
 #include "ModulePlayer.h"
@@ -137,6 +139,12 @@ void ModuleWeapons::SpawnWeapon(WEAPON_TYPE weaponType, int x, int y)
 				break;
 			case WEAPON_TYPE::SB_BOMB:
 				weapons[i] = new SB_Bomb(x, y);
+				break;
+			case WEAPON_TYPE::POWERUP_ORANGE:
+				weapons[i] = new PowerupBlue(x, y);
+				break;
+			case WEAPON_TYPE::POWERUP_BLUE:
+				weapons[i] = new PowerupBlue(x, y);
 				break;
 			}
 			weapons[i]->texture = this->texture;
