@@ -102,6 +102,9 @@ private:
 
 	// Ceiling countdown
 	uint ceilingCountdown;
+
+
+	friend class ModuleLevel1;
 };
 
 #endif // __MODULEPLAYER_H__

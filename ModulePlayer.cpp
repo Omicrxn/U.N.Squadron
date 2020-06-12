@@ -105,7 +105,9 @@ update_status ModulePlayer::Update() {
 	GamePad& pad = App->input->pads[0];
 
 	// Moving the player with the camera scroll
-	App->player->position.x += 1;
+	/*App->player->position.x += 1;*/
+	//App->player->position.x += 1;
+	//App->player->position.y += 1;
 
 	// Spawn bullet particles when pressing SPACE or X/R1
 	if ((App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_REPEAT && !destroyed) || pad.x == true || pad.r1 == true) {
@@ -144,6 +146,8 @@ update_status ModulePlayer::Update() {
 	}
 
 	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_UP] == KEY_REPEAT || pad.l_y < 0.0f|| pad.up == true) {
+		
+		
 		if (position.y > 39) {
 			position.y -= 2;
 			if (current_anim != &playerAnim) {
@@ -203,15 +207,14 @@ update_status ModulePlayer::Update() {
 					App->particles->AddParticle(App->particles->ceilingExplosion, position.x, position.y - 4);
 					if(!App->debugInfo->maxAmmo) ceilingAmmo--;
 					ceilingCountdown = 60;
+					// Playing shooting sound effect
+					App->audio->PlayFx(0, 0);
 				}
 				break;
 			default:
 				break;
 			}
 			weaponCountdown = weaponMaxCountdown;
-
-			// Playing shooting sound effect
-			App->audio->PlayFx(0, 0);
 		}
 	}
 
@@ -368,6 +371,6 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 		hasBeenHitCounter = 0;
 
 		//Playing explosion sound effect
-		App->audio->PlayFx(1, 0);
+		App->audio->PlayFx(2, 0);
 	}
 }

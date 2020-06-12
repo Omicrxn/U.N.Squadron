@@ -32,16 +32,16 @@ bool ModuleLevel1::Start() {
 	floor = { 0, 454, 3301, 48 };
 
 	// Position
-	skyPos = { 0, -120 };
-	skyPos2 = { (float)sky.w, -120 };
+	skyPos = { 0, 0 };
+	skyPos2 = { (float)sky.w, 0 };
 	skySpeed = 0.5;
 
-	mountainsPos = { 0, -42 };
-	mountainsPos2 = { (float)mountains.w, -42 };
+	mountainsPos = { 0, 85 };
+	mountainsPos2 = { (float)mountains.w, 85 };
 	mountainsSpeed = 0.5;
 
-	floorPos = { 0, 180 };
-	floorPos2 = { (float)floor.w, 180 };
+	floorPos = { 0, 308 };
+	floorPos2 = { (float)floor.w, 308 };
 	floorSpeed = 0.5;
 
 	App->render->camera.x = 0;
@@ -60,8 +60,24 @@ bool ModuleLevel1::Start() {
 update_status ModuleLevel1::Update() {
 	update_status ret = update_status::UPDATE_CONTINUE;
 
-	App->render->camera.x += SCREEN_SIZE;
-
+	if (App->render->camera.y < 780) {
+		App->player->position.x += 1;
+		App->player->position.y += 1;
+		App->render->camera.x += SCREEN_SIZE;
+		App->render->camera.y += SCREEN_SIZE;
+	}
+	else if (App->render->camera.y > 780) {
+		if (App->render->camera.x < 3700)
+		{
+		// App->render->camera.y -= SCREEN_SIZE;
+		App->render->camera.x += SCREEN_SIZE;
+		}
+		if (App->render->camera.x > 3700) {
+			App->render->camera.x += SCREEN_SIZE;
+			App->render->camera.y -= SCREEN_SIZE;
+		}
+	}
+	
 	return ret;
 }
 
