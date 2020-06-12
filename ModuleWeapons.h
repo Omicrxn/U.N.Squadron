@@ -8,7 +8,7 @@
 // Create new weapon types:
 enum class WEAPON_TYPE
 {
-	NO_TYPE, BOMB, SHELL, FALCON, CEILING, GF_HOOK, SB_BOMBS
+	NO_TYPE, BOMB, SHELL, FALCON, CEILING, GF_HOOK, SB_BOMB,SB_SHRAPNEL
 };
 
 struct WeaponSpawnpoint
@@ -58,6 +58,7 @@ public:
 
 	// Destroys any weapons that have moved outside the camera limits
 	void DespawnWeapon();
+	void SpawnShrapnel(int x, int y, unsigned int number);
 
 private:
 	// All spawned weapons in the scene

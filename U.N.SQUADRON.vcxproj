@@ -178,6 +178,7 @@
     <ClCompile Include="Path.cpp" />
     <ClCompile Include="S.Shell.cpp" />
     <ClCompile Include="SB_Bomb.cpp" />
+    <ClCompile Include="SB_BombShrapnel.cpp" />
     <ClCompile Include="SetBulletDirection.cpp" />
     <ClCompile Include="SmallCamouflageJet.cpp" />
     <ClCompile Include="StealthBomber.cpp" />
@@ -227,6 +228,7 @@
     <ClInclude Include="S.Shell.h" />
     <ClInclude Include="SB_Bomb.h" />
     <ClInclude Include="SetBulletDirection.h" />
+    <ClInclude Include="SB_BombShrapnel.h" />
     <ClInclude Include="SmallCamouflageJet.h" />
     <ClInclude Include="StealthBomber.h" />
     <ClInclude Include="Weapon.h" />

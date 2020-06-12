@@ -41,7 +41,7 @@ bool ModulePlayer::Start() {
 	playerAnim.PushBack({ 120,185,32,16 });
 
 	// Loading shooting sound effect
-	shootFx = App->audio->LoadFx("Assets/music/events/shoot.wav");
+	shootFx = App->audio->LoadFx("Assets/music/events/shoot1.wav");
 	++activeFx; ++totalFx;
 
 	// Loading collision sound effect

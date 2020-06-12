@@ -89,7 +89,7 @@ private:
 	bool hasBought;
 
 	// Countdown to handle shot spacing
-	int shotMaxCountdown = 15;
+	int shotMaxCountdown = 10;
 	int shotCountdown = 0;
 
 	// Countdown to handle weapon shot spacing
