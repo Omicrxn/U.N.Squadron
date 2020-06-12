@@ -11,6 +11,8 @@
 #include "ModuleDebugInfo.h"
 #include "ModuleWeapons.h"
 #include "ModuleStore.h"
+#include "ModuleLevel1.h"
+#include "ModuleLevel2.h"
 
 #include <stdio.h>
 
@@ -105,9 +107,10 @@ update_status ModulePlayer::Update() {
 	GamePad& pad = App->input->pads[0];
 
 	// Moving the player with the camera scroll
-	/*App->player->position.x += 1;*/
-	//App->player->position.x += 1;
-	//App->player->position.y += 1;
+	if (App->lvl2->IsEnabled())
+	{
+		position.x++;
+	}
 
 	// Spawn bullet particles when pressing SPACE or X/R1
 	if ((App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_REPEAT && !destroyed) || pad.x == true || pad.r1 == true) {
@@ -147,8 +150,15 @@ update_status ModulePlayer::Update() {
 
 	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_UP] == KEY_REPEAT || pad.l_y < 0.0f|| pad.up == true) {
 		
-		
-		if (position.y > 39) {
+		if (position.y > 42 && App->lvl2->IsEnabled()) {
+			position.y -= 2;
+			if (current_anim != &playerAnim) {
+				current_anim = &playerAnim;
+			}
+			rectAnim = current_anim->GetFrame(1);
+		}
+		else if (position.y > (App->render->camera.y / SCREEN_SIZE + 42) && App->lvl1->IsEnabled())
+		{
 			position.y -= 2;
 			if (current_anim != &playerAnim) {
 				current_anim = &playerAnim;
@@ -164,7 +174,15 @@ update_status ModulePlayer::Update() {
 	}
 
 	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_REPEAT || pad.l_y > 0.0f || pad.down == true) {
-		if (position.y < SCREEN_HEIGHT - 38) {
+		if (position.y < SCREEN_HEIGHT - 38 && App->lvl2->IsEnabled()) {
+			position.y += 2;
+			if (current_anim != &playerAnim) {
+				current_anim = &playerAnim;
+			}
+			rectAnim = current_anim->GetFrame(2);
+		}
+		else if (position.y < (App->render->camera.y / SCREEN_SIZE + SCREEN_HEIGHT - 38) && App->lvl1->IsEnabled())
+		{
 			position.y += 2;
 			if (current_anim != &playerAnim) {
 				current_anim = &playerAnim;

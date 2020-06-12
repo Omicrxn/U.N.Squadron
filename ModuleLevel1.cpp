@@ -60,21 +60,23 @@ bool ModuleLevel1::Start() {
 update_status ModuleLevel1::Update() {
 	update_status ret = update_status::UPDATE_CONTINUE;
 
-	if (App->render->camera.y < 780) {
-		App->player->position.x += 1;
-		App->player->position.y += 1;
+	if (App->render->camera.y <= 780) {
+		App->player->position.x++;
+		App->player->position.y++;
 		App->render->camera.x += SCREEN_SIZE;
 		App->render->camera.y += SCREEN_SIZE;
 	}
 	else if (App->render->camera.y > 780) {
-		if (App->render->camera.x < 3700)
+		if (App->render->camera.x <= 2000)
 		{
-		// App->render->camera.y -= SCREEN_SIZE;
-		App->render->camera.x += SCREEN_SIZE;
+			// App->render->camera.y -= SCREEN_SIZE;
+			App->render->camera.x += SCREEN_SIZE;
+			App->player->position.x++;
 		}
-		if (App->render->camera.x > 3700) {
+		if (App->render->camera.x > 2000) {
 			App->render->camera.x += SCREEN_SIZE;
 			App->render->camera.y -= SCREEN_SIZE;
+			App->player->position.y--;
 		}
 	}
 	
