@@ -54,10 +54,6 @@ bool ModulePlayer::Start() {
 	dieFx = App->audio->LoadFx("Assets/music/events/die.wav");
 	++activeFx; ++totalFx;
 
-	// Loading collision sound effect
-	weaponFx = App->audio->LoadFx("Assets/music/events/explosionWeapon.wav");
-	++activeFx; ++totalFx;
-
 	// Add a collider to the player
 	collider = App->collisions->AddCollider({ position.x, position.y, 32, 16 }, Collider::Type::PLAYER, this);
 	++activeColliders; ++totalColliders;
@@ -357,8 +353,6 @@ bool ModulePlayer::CleanUp() {
 	App->audio->UnloadFx(hitFx);
 	--totalFx;
 	App->audio->UnloadFx(dieFx);
-	--totalFx;
-	App->audio->UnloadFx(weaponFx);
 	--totalFx;
 
 	App->collisions->DeleteCollider(collider);

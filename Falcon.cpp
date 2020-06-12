@@ -94,5 +94,5 @@ void Falcon::Update()
 void Falcon::OnCollision(Collider* collider)
 {
 	App->particles->AddParticle(App->particles->falconExplosion, position.x, position.y);
-	App->audio->PlayFx(5, 0);
+	App->audio->PlayFx(4, 0);
 }

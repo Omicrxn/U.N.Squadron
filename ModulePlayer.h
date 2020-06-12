@@ -32,7 +32,6 @@ public:
 	uint shootFx = 0;
 	uint hitFx = 0;
 	uint dieFx = 0;
-	uint weaponFx = 0;
 
 	// Score
 	uint score = 0;
