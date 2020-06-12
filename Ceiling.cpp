@@ -34,5 +34,5 @@ void Ceiling::Update()
 
 void Ceiling::OnCollision(Collider* collider)
 {
-	
+	App->audio->PlayFx(5, 0);
 }
