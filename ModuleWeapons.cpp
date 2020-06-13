@@ -135,10 +135,10 @@ void ModuleWeapons::SpawnWeapon(WEAPON_TYPE weaponType, int x, int y)
 				weapons[i] = new Ceiling(x, y);
 				break;
 			case WEAPON_TYPE::POWERUP_ORANGE:
-				weapons[i] = new PowerupOrange(orangeSpawn.x, orangeSpawn.y);
+				weapons[i] = new PowerupOrange(x, y);
 				break;
 			case WEAPON_TYPE::POWERUP_BLUE:
-				weapons[i] = new PowerupBlue(blueSpawn.x, blueSpawn.y);
+				weapons[i] = new PowerupBlue(x, y);
 				break;
 			}
 			weapons[i]->texture = this->texture;
@@ -148,7 +148,7 @@ void ModuleWeapons::SpawnWeapon(WEAPON_TYPE weaponType, int x, int y)
 	}
 }
 
-void ModuleWeapons::SpawnWeapon(WEAPON_TYPE weaponType,int x, int y,unsigned int number){
+void ModuleWeapons::SpawnWeapon(WEAPON_TYPE weaponType,int x, int y, unsigned int number) {
 	assert(number <= 7);
 	for (uint i = 0; i < MAX_WEAPONS; ++i)
 	{

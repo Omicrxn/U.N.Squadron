@@ -9,6 +9,9 @@
 #include "ModuleDebugInfo.h"
 #include "ModuleWeapons.h"
 
+#include <stdlib.h>
+#include <time.h>
+
 Enemy::Enemy(int x, int y,bool spawnRight) : position(x, y)
 {
 	spawnPos = position;
@@ -56,13 +59,12 @@ void Enemy::OnCollision(Collider* collider)
 			App->player->money += moneyGiven;
 		}
 
+		powerupSpawn = rand() % 20;
 		if (powerupSpawn == 1) {
-			App->weapons->orangeSpawn.x = this->position.x;
-			App->weapons->orangeSpawn.y = this->position.y;
+			App->weapons->SpawnWeapon(WEAPON_TYPE::POWERUP_ORANGE, this->position.x, this->position.y);
 		}
 		else if (powerupSpawn == 2) {
-			App->weapons->blueSpawn.x = this->position.x;
-			App->weapons->blueSpawn.y = this->position.y;
+			App->weapons->SpawnWeapon(WEAPON_TYPE::POWERUP_BLUE, this->position.x, this->position.y);
 		}
 
 		this->SetToDelete();

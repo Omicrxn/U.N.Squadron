@@ -60,9 +60,6 @@ public:
 	void DespawnWeapon();
 	void SpawnWeapon(WEAPON_TYPE weaponType,int x, int y, unsigned int number);
 
-	iPoint orangeSpawn;
-	iPoint blueSpawn;
-
 private:
 	// All spawned weapons in the scene
 	Weapon* weapons[MAX_WEAPONS] = { nullptr };

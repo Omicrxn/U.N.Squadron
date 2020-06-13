@@ -65,7 +65,6 @@ public:
 
 	// Add an enemy into the queue to be spawned later
 	bool AddEnemy(ENEMY_TYPE type, int x, int y, bool spawnRight = true);
-	bool AddEnemy(ENEMY_TYPE type, int x, int y, bool spawnRight = true);
 
 	// Iterates the queue and checks for camera position
 	void HandleEnemiesSpawn();

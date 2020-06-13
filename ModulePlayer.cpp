@@ -301,11 +301,11 @@ update_status ModulePlayer::Update() {
 
 
 	if (App->input->keyboard[SDL_SCANCODE_N] == KEY_DOWN) {
-		App->weapons->SpawnWeapon(WEAPON_TYPE::POWERUP_ORANGE);
+		App->weapons->SpawnWeapon(WEAPON_TYPE::POWERUP_ORANGE, position.x + 40, position.y);
 	}
 
 	if (App->input->keyboard[SDL_SCANCODE_M] == KEY_DOWN) {
-		App->weapons->SpawnWeapon(WEAPON_TYPE::POWERUP_BLUE);
+		App->weapons->SpawnWeapon(WEAPON_TYPE::POWERUP_BLUE, position.x + 40, position.y);
 	}
 
 	// Update shot countdown
@@ -349,10 +349,10 @@ update_status ModulePlayer::Update() {
 	if (pow3 < 0) pow3 = 0;
 	if (pow4 < 0) pow4 = 0;
 
-	if (pow1 <= 0 && level == 1) ++level;
-	if (pow2 <= 0 && level == 2) ++level;
-	if (pow3 <= 0 && level == 3) ++level;
-	if (pow4 <= 0 && level == 4) maxPow = true;
+	if (pow1 == 0 && level == 1) ++level;
+	if (pow2 == 0 && level == 2) ++level;
+	if (pow3 == 0 && level == 3) ++level;
+	if (pow4 == 0 && level == 4) maxPow = true;
 
 	return ret;
 }
@@ -427,7 +427,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 			hasBeenHitCounter = 0;
 		}
 		else if (c2->type == Collider::Type::POWERUP_ORANGE) {
-			if (level == 1 && pow1 > 0)--pow1;
+			if (level == 1 && pow1 > 0) --pow1;
 			if (level == 2 && pow2 > 0) --pow2;
 			if (level == 3 && pow3 > 0) --pow3;
 			if (!maxPow && level == 4 && pow4 > 0) --pow4;
@@ -435,14 +435,20 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 			++total;
 		}
 		else if (c2->type == Collider::Type::POWERUP_BLUE) {
-			if (level == 1 && pow1 > 0) pow1 -= 3;
-			if (level == 2 && pow2 > 0) pow2 -= 3;
-			if (level == 3 && pow3 > 0) pow3 -= 3;
-			if (!maxPow && level == 4 && pow4 > 0) pow4 -= 3;
+			if (level == 1 && (pow1 <= 2 || pow1 <= 1)) pow1 = 0;
+			else if (level == 1 && pow1 >= 3) pow1 -= 3;
+			
+			if (level == 2 && (pow2 <= 2 || pow2 <= 1)) pow2 = 0;
+			else if (level == 2 && pow2 >= 3) pow2 -= 3;
+			
+			if (level == 3 && (pow3 <= 2 || pow3 <= 1)) pow3 = 0;
+			else if (level == 3 && pow3 >= 3) pow3 -= 3;
+			
+			if (level == 4 && (pow4 <= 2 || pow1 <= 1)) pow4 = 0;
+			else if (!maxPow && level == 4 && pow4 >= 3) pow4 -= 3;
 
 			++total;
 		}
-		
 	}
 }
 
