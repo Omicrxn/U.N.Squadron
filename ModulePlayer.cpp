@@ -380,6 +380,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 		else {
 			currentFuel--;
 			App->particles->AddParticle(App->particles->explosion, position.x, position.y, Collider::Type::NONE, 9);
+
 			//Playing explosion sound effect
 			App->audio->PlayFx(4, 0);
 			if (playerLifes > 1 && !App->debugInfo->maxLifes) {
