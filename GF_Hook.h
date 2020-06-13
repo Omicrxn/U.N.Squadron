@@ -10,7 +10,7 @@ class GF_Hook : public Weapon
 public:
 	// Constructor (x y coordinates in the world)
 	// Creates animation and movement data and the collider
-	GF_Hook(int x, int y);
+	GF_Hook(int x, int y, unsigned int number);
 
 	// The weapon is going to follow the different steps in the path
 	// Position will be updated depending on the speed defined at each step
@@ -19,10 +19,12 @@ public:
 private:
 	// A set of steps that define the position in the screen
 	// And an animation for each step
-	Path path;
+	Path path0;
+	Path path1;
 
 	// This weapon has one sprite and one frame
 	// We are keeping it an animation for consistency with other weapons
 	Animation hook;
+	unsigned int hookNum;
 };
 #endif // !__GF_HOOK_H__

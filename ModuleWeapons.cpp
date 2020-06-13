@@ -134,9 +134,6 @@ void ModuleWeapons::SpawnWeapon(WEAPON_TYPE weaponType, int x, int y)
 			case WEAPON_TYPE::CEILING:
 				weapons[i] = new Ceiling(x, y);
 				break;
-			case WEAPON_TYPE::GF_HOOK:
-				weapons[i] = new GF_Hook(x, y);
-				break;
 			case WEAPON_TYPE::POWERUP_ORANGE:
 				weapons[i] = new PowerupBlue(x, y);
 				break;
@@ -159,7 +156,9 @@ void ModuleWeapons::SpawnWeapon(WEAPON_TYPE weaponType,int x, int y,unsigned int
 		{
 			switch (weaponType)
 			{
-			
+			case WEAPON_TYPE::GF_HOOK:
+				weapons[i] = new GF_Hook(x, y,number);
+				break;
 			case WEAPON_TYPE::SB_BOMB:
 				weapons[i] = new SB_Bomb(x, y,number);
 				break;
