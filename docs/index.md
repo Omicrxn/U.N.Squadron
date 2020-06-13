@@ -26,3 +26,34 @@ Our team is named BATL Studio, and it is formed by:
 
 # Short gameplay of the game
 
+# GAMEPAD CONTROLS
+|Function|Button|
+|-------|--------|
+|Fly your Aircraft (Up)|🡱 or Joystick Up|
+|Fly your Aircraft (Down)|🡳 or Joystick Down|
+|Fly your Aircraft (Left)|🡰 or Joystick Left|
+|Fly your Aircraft (Right)|🡲 or Joystick Right|
+|Select / Continue|A|
+|Fire the Vulcan Cannon|X or R1|
+|Fire the Active Weapon|B or R2|
+|Change Weapon|Y or L1|
+|Travel through the options (Up)|🡱|
+|Travel through the options (Down)|🡳|
+|Travel through the options (Left)|🡰|
+|Travel through the options (Right)|🡲|
+
+# KEYBOARD CONTROLS
+|Function|Keyboard|
+|-------|--------|
+|Fly your Aircraft (Up)|W or 🡱|
+|Fly your Aircraft (Down)|S or 🡳|
+|Fly your Aircraft (Left)|A or 🡰|
+|Fly your Aircraft (Right)|D or 🡲|
+|Select / Continue|Enter|
+|Fire the Vulcan Cannon|Space|
+|Fire the Active Weapon|F|
+|Change Weapon|C|
+|Travel through the options (Up)|W or 🡱|
+|Travel through the options (Down)|S or 🡳|
+|Travel through the options (Left)|A or 🡰|
+|Travel through the options (Right)|D or 🡲|
