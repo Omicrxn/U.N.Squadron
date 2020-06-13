@@ -134,12 +134,6 @@ void ModuleWeapons::SpawnWeapon(WEAPON_TYPE weaponType, int x, int y)
 			case WEAPON_TYPE::CEILING:
 				weapons[i] = new Ceiling(x, y);
 				break;
-			case WEAPON_TYPE::GF_HOOK:
-				weapons[i] = new GF_Hook(x, y);
-				break;
-			case WEAPON_TYPE::SB_BOMB:
-				weapons[i] = new SB_Bomb(x, y);
-				break;
 			case WEAPON_TYPE::POWERUP_ORANGE:
 				weapons[i] = new PowerupBlue(x, y);
 				break;
@@ -154,13 +148,24 @@ void ModuleWeapons::SpawnWeapon(WEAPON_TYPE weaponType, int x, int y)
 	}
 }
 
-void ModuleWeapons::SpawnShrapnel(int x, int y,unsigned int number){
+void ModuleWeapons::SpawnWeapon(WEAPON_TYPE weaponType,int x, int y,unsigned int number){
 	assert(number <= 7);
 	for (uint i = 0; i < MAX_WEAPONS; ++i)
 	{
 		if (weapons[i] == nullptr)
 		{
-				weapons[i] = new SB_BombShrapnel(x, y,number);
+			switch (weaponType)
+			{
+			case WEAPON_TYPE::GF_HOOK:
+				weapons[i] = new GF_Hook(x, y,number);
+				break;
+			case WEAPON_TYPE::SB_BOMB:
+				weapons[i] = new SB_Bomb(x, y,number);
+				break;
+			case WEAPON_TYPE::SB_SHRAPNEL:
+				weapons[i] = new SB_BombShrapnel(x, y, number);
+				break;
+			}
 				
 			weapons[i]->texture = this->texture;
 			weapons[i]->destroyedFx = weaponDestroyedFx;
