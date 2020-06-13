@@ -135,10 +135,10 @@ void ModuleWeapons::SpawnWeapon(WEAPON_TYPE weaponType, int x, int y)
 				weapons[i] = new Ceiling(x, y);
 				break;
 			case WEAPON_TYPE::POWERUP_ORANGE:
-				weapons[i] = new PowerupOrange(App->player->GetPlayerPosition().x + 40, App->player->GetPlayerPosition().y);
+				weapons[i] = new PowerupOrange(orangeSpawn.x, orangeSpawn.y);
 				break;
 			case WEAPON_TYPE::POWERUP_BLUE:
-				weapons[i] = new PowerupBlue(App->player->GetPlayerPosition().x + 40, App->player->GetPlayerPosition().y);
+				weapons[i] = new PowerupBlue(blueSpawn.x, blueSpawn.y);
 				break;
 			}
 			weapons[i]->texture = this->texture;

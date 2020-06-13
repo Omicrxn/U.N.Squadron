@@ -79,7 +79,7 @@ update_status ModuleLoseScreen::Update() {
 		else if ((App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN || App->input->pads[0].a == true) && App->transition->hasEnded()) {
 			pressed = true;
 			App->audio->PlayFx(loseFx, 0);
-			App->transition->FadeToBlack(this, (Module*)App->startScreen, 90);
+			App->transition->FadeToBlack(this, (Module*)App->initialScreen, 90);
 		}
 	}
 	return ret;

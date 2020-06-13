@@ -7,6 +7,7 @@
 #include "ModuleRenderer.h"
 #include "ModulePlayer.h"
 #include "ModuleDebugInfo.h"
+#include "ModuleWeapons.h"
 
 Enemy::Enemy(int x, int y,bool spawnRight) : position(x, y)
 {
@@ -54,6 +55,16 @@ void Enemy::OnCollision(Collider* collider)
 		if (!App->debugInfo->maxMoney) {
 			App->player->money += moneyGiven;
 		}
+
+		if (powerupSpawn == 1) {
+			App->weapons->orangeSpawn.x = this->position.x;
+			App->weapons->orangeSpawn.y = this->position.y;
+		}
+		else if (powerupSpawn == 2) {
+			App->weapons->blueSpawn.x = this->position.x;
+			App->weapons->blueSpawn.y = this->position.y;
+		}
+
 		this->SetToDelete();
 	}
 }

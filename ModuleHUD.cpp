@@ -68,7 +68,6 @@ bool ModuleHUD::Start() {
 	playerHasBeenHit.loop = false;
 	playerHasBeenHit.Reset();
 
-
 	yellowFont = App->fonts->Load("Assets/Fonts/FontY.png", lookupTable, 5);
 	++activeFonts; ++totalFonts;
 
@@ -98,10 +97,19 @@ update_status ModuleHUD::Update() {
 	else sprintf_s(powText, 4, "max");
 
 	// Passing the weapons ammo from uint to char
-	sprintf_s(falconAmmoText, 5, "%d", App->player->falconAmmo);
-	sprintf_s(shellAmmoText, 5, "%d", App->player->shellAmmo);
-	sprintf_s(bombAmmoText, 5, "%d", App->player->bombAmmo);
-	sprintf_s(ceilingAmmoText, 5, "%d", App->player->ceilingAmmo);
+	if (!App->player->maxAmmo) {
+		sprintf_s(falconAmmoText, 5, "%d", App->player->falconAmmo);
+		sprintf_s(shellAmmoText, 5, "%d", App->player->shellAmmo);
+		sprintf_s(bombAmmoText, 5, "%d", App->player->bombAmmo);
+		sprintf_s(ceilingAmmoText, 5, "%d", App->player->ceilingAmmo);
+	}
+	else {
+		sprintf_s(falconAmmoText, 5, "max");
+		sprintf_s(shellAmmoText, 5, "max");
+		sprintf_s(bombAmmoText, 5, "max");
+		sprintf_s(ceilingAmmoText, 5, "max");
+	}
+
 
 	return ret;
 }

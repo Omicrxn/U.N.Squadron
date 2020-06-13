@@ -53,6 +53,9 @@ public:
 	// To know if the enemies are coming from the right
 	bool despawnLeft;
 
+	// 0 is NONE, 1 is Orange and 2 is Blue
+	uint powerupSpawn = 0;
+
 protected:
 	// A ptr to the current animation
 	Animation* currentAnim = nullptr;

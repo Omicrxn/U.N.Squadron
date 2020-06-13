@@ -11,8 +11,8 @@ PowerupBlue::PowerupBlue(int x, int y) : Weapon(x, y)
 	animPowerBlue.PushBack({ 497, 30, 15, 15 });
 	animPowerBlue.speed = 0.07f;
 
-	pathBlue.PushBack({ 0.5f, 0.5f }, 60, &animPowerBlue);
-	pathBlue.PushBack({ 0.5f, -0.5f }, 60, &animPowerBlue);
+	pathBlue.PushBack({ 0.5f, 0.8f }, 70, &animPowerBlue);
+	pathBlue.PushBack({ 0.5f, -0.8f }, 70, &animPowerBlue);
 
 	collider = App->collisions->AddCollider({ position.x, position.y, 15, 15 }, Collider::Type::POWERUP_BLUE, (Module*)App->weapons);
 }

@@ -111,6 +111,12 @@ bool ModuleEnemies::CleanUp()
 		return false;
 	}
 	--totalTextures;
+	if (!App->textures->Unload(truckTexture)) {
+		LOG("Start Screen -> Error unloading the texture.");
+		return false;
+	}
+	--totalTextures;
+
 	App->audio->UnloadFx(enemyDestroyedFx);
 	--totalFx;
 

@@ -334,7 +334,7 @@ update_status ModuleStore::Update() {
 	}
 
 	if (!App->debugInfo->maxMoney) sprintf_s(moneyText, 10, "%7d", App->player->money);
-	else sprintf_s(moneyText, 10, "    MAX");
+	else sprintf_s(moneyText, 10, "    max");
 
 	return ret;
 }
@@ -452,7 +452,7 @@ update_status ModuleStore::PostUpdate() {
 bool ModuleStore::CleanUp() {
 	bool ret = true;
 
-	activeTextures = activeFonts = 0;
+	activeTextures = activeFonts = activeFx = 0;
 
 	if (!App->textures->Unload(tex)) {
 		LOG("Start Screen -> Error unloading the texture.");
@@ -480,13 +480,16 @@ bool ModuleStore::CleanUp() {
 
 	App->fonts->UnLoad(greyFont);
 	--totalFonts;
-
 	App->fonts->UnLoad(greenFont);
 	--totalFonts;
 
 	App->audio->StopMusic();
 
 	App->audio->UnloadFx(chooseFx);
+	--totalFx;
+	App->audio->UnloadFx(boughtFx);
+	--totalFx;
+	App->audio->UnloadFx(noMoneyFx);
 	--totalFx;
 
 	return ret;

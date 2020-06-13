@@ -84,7 +84,7 @@ update_status ModuleDebugInfo::Update() {
 			App->transition->FadeToBlack((Module*)App->winScreen, (Module*)App->selector, 60);
 		}
 		else if (App->loseScreen->IsEnabled()) {
-			App->transition->FadeToBlack((Module*)App->loseScreen, (Module*)App->selector, 60);
+			App->transition->FadeToBlack((Module*)App->loseScreen, (Module*)App->initialScreen, 60);
 		}
 	}
 
@@ -161,24 +161,13 @@ update_status ModuleDebugInfo::Update() {
 
 
 	// Max Lifes
-	if (App->input->keyboard[SDL_SCANCODE_L] == KEY_DOWN) {
+	if (App->input->keyboard[SDL_SCANCODE_8] == KEY_DOWN) {
 		maxLifes = !maxLifes;
 	}
 
 	// Max Money
-	if (App->input->keyboard[SDL_SCANCODE_M] == KEY_DOWN) {
+	if (App->input->keyboard[SDL_SCANCODE_9] == KEY_DOWN) {
 		maxMoney = !maxMoney;
-	}
-
-	// Max Ammo
-	if (App->input->keyboard[SDL_SCANCODE_N] == KEY_DOWN) {
-		maxAmmo = !maxAmmo;
-	}
-
-	// Increase POW Level
-	if (App->input->keyboard[SDL_SCANCODE_P] == KEY_DOWN) {
-		++App->player->level;
-		if (App->player->level == 5) App->player->level = 1;
 	}
 
 	if (App->input->keyboard[SDL_SCANCODE_1] == KEY_DOWN && App->store->IsEnabled()) App->selector->selected = false;
@@ -211,7 +200,7 @@ update_status ModuleDebugInfo::PostUpdate()
 			App->fonts->BlitText(140, 50, debugFont, debugText);
 		}
 
-		if (maxAmmo) App->fonts->BlitText(140, 65, debugFont, "Infinite Ammo");
+		if (App->player->maxAmmo) App->fonts->BlitText(140, 65, debugFont, "Infinite Ammo");
 		else App->fonts->BlitText(140, 65, debugFont, "Limited Ammo");
 
 		sprintf_s(debugText, 150, "Level  %i", App->player->level);

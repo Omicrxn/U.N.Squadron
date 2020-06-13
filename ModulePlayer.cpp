@@ -208,26 +208,26 @@ update_status ModulePlayer::Update() {
 			case FALCON:
 				if ((App->store->weaponSelection & (1 << 8)) != 0 && falconAmmo > 0) {
 					App->weapons->SpawnWeapon(WEAPON_TYPE::FALCON);
-					if (!App->debugInfo->maxAmmo) falconAmmo--;
+					if (!maxAmmo) falconAmmo--;
 				}
 				break;
 			case SHELL:
 				if ((App->store->weaponSelection & (1 << 6)) != 0 && shellAmmo > 0) {
 					App->weapons->SpawnWeapon(WEAPON_TYPE::SHELL);
-					if (!App->debugInfo->maxAmmo) shellAmmo--;
+					if (!maxAmmo) shellAmmo--;
 				}
 				break;
 			case BOMB:
 				if ((App->store->weaponSelection & (1 << 4)) != 0 && bombAmmo > 0) {
 					App->weapons->SpawnWeapon(WEAPON_TYPE::BOMB);
-					if (!App->debugInfo->maxAmmo) bombAmmo--;
+					if (!maxAmmo) bombAmmo--;
 				}
 				break;
 			case CEILING:
 				if ((App->store->weaponSelection & (1 << 2)) != 0 && ceilingAmmo > 0) {
 					App->weapons->SpawnWeapon(WEAPON_TYPE::CEILING, position.x + 4, position.y - 4);
 					App->particles->AddParticle(App->particles->ceilingExplosion, position.x, position.y - 4);
-					if(!App->debugInfo->maxAmmo) ceilingAmmo--;
+					if(!maxAmmo) ceilingAmmo--;
 					ceilingCountdown = 60;
 				}
 				break;
@@ -288,8 +288,24 @@ update_status ModulePlayer::Update() {
 		}
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_J] == KEY_DOWN) {
+	// Max Ammo
+	if (App->input->keyboard[SDL_SCANCODE_7] == KEY_DOWN) {
+		maxAmmo = !maxAmmo;
+	}
+
+	// Change POW Level
+	if (App->input->keyboard[SDL_SCANCODE_1] == KEY_DOWN) level = 1;
+	if (App->input->keyboard[SDL_SCANCODE_2] == KEY_DOWN) level = 2;
+	if (App->input->keyboard[SDL_SCANCODE_3] == KEY_DOWN) level = 3;
+	if (App->input->keyboard[SDL_SCANCODE_4] == KEY_DOWN) level = 4;
+
+
+	if (App->input->keyboard[SDL_SCANCODE_N] == KEY_DOWN) {
 		App->weapons->SpawnWeapon(WEAPON_TYPE::POWERUP_ORANGE);
+	}
+
+	if (App->input->keyboard[SDL_SCANCODE_M] == KEY_DOWN) {
+		App->weapons->SpawnWeapon(WEAPON_TYPE::POWERUP_BLUE);
 	}
 
 	// Update shot countdown
@@ -357,7 +373,7 @@ update_status ModulePlayer::PostUpdate() {
 bool ModulePlayer::CleanUp() {
 	bool ret = true;
 
-	activeTextures = activeColliders = activeFonts = activeFx = 0;
+	activeTextures = activeFx = activeColliders = 0;
 
 	App->textures->Unload(texture);
 	--totalTextures;
