@@ -16,7 +16,8 @@ enum class ENEMY_TYPE
 	BLUEJET,
 	GREENFIGHTERPLANE,
 	SMALLCAMOUFLAGEJET,
-	STEALTHBOMBER
+	STEALTHBOMBER,
+	TRUCK
 };
 
 struct EnemySpawnpoint
@@ -86,6 +87,8 @@ private:
 	SDL_Texture* texture = nullptr;
 	//Texture for the Stealth Bomber Boss
 	SDL_Texture* sbTexture = nullptr;
+	// Texture for the enemies of level 1
+	SDL_Texture* truckTexture = nullptr;
 
 	// The audio fx for destroying an enemy
 	int enemyDestroyedFx = 0;

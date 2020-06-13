@@ -183,6 +183,7 @@
     <ClCompile Include="SetBulletDirection.cpp" />
     <ClCompile Include="SmallCamouflageJet.cpp" />
     <ClCompile Include="StealthBomber.cpp" />
+    <ClCompile Include="Truck.cpp" />
     <ClCompile Include="Weapon.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -233,6 +234,7 @@
     <ClInclude Include="SB_BombShrapnel.h" />
     <ClInclude Include="SmallCamouflageJet.h" />
     <ClInclude Include="StealthBomber.h" />
+    <ClInclude Include="Truck.h" />
     <ClInclude Include="Weapon.h" />
   </ItemGroup>
   <ItemGroup>

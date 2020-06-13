@@ -30,6 +30,7 @@ public:
 	fPoint skyPos2, mountainsPos2, floorPos2;
 	float mountainsSpeed, skySpeed, floorSpeed;
 
+	unsigned int numSpawnedEnemies = 0;
 };
 
 #endif

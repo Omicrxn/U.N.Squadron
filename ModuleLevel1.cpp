@@ -11,6 +11,7 @@
 #include "ModuleCollisions.h"
 #include "ModuleFonts.h"
 #include "ModuleWeapons.h"
+#include "Truck.h"
 
 ModuleLevel1::ModuleLevel1(bool startEnabled) : Module(startEnabled) {
 	name = "Level 1";
@@ -20,6 +21,8 @@ ModuleLevel1::~ModuleLevel1() {}
 
 bool ModuleLevel1::Start() {
 	bool ret = true;
+
+	numSpawnedEnemies = 0;
 
 	backgroundTexture = App->textures->Load("Assets/sprites/scenarios/BonusLevel.png");
 	++activeTextures; ++totalTextures;
@@ -44,6 +47,8 @@ bool ModuleLevel1::Start() {
 	floorPos2 = { (float)floor.w, 308 };
 	floorSpeed = 0.5;
 
+	App->enemies->AddEnemy(ENEMY_TYPE::TRUCK, 1500, 770);
+
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
 
@@ -67,16 +72,15 @@ update_status ModuleLevel1::Update() {
 		App->render->camera.y += SCREEN_SIZE;
 	}
 	else if (App->render->camera.y > 780) {
-		if (App->render->camera.x <= 2000)
-		{
-			// App->render->camera.y -= SCREEN_SIZE;
+		if (App->render->camera.x <= 2000) {
 			App->render->camera.x += SCREEN_SIZE;
 			App->player->position.x++;
 		}
 		if (App->render->camera.x > 2000) {
+			App->player->position.y--;
+			App->player->position.x++;
 			App->render->camera.x += SCREEN_SIZE;
 			App->render->camera.y -= SCREEN_SIZE;
-			App->player->position.y--;
 		}
 	}
 	

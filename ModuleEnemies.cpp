@@ -12,6 +12,7 @@
 #include "SmallCamouflageJet.h"
 #include "StealthBomber.h"
 #include "BlueJet.h"
+#include "Truck.h"
 #include "GreenFighterPlane.h"
 #include "ModuleParticles.h"
 
@@ -35,6 +36,8 @@ bool ModuleEnemies::Start()
 	texture = App->textures->Load("Assets/sprites/enemies/UNSquadronSheet9.gif");
 	++activeTextures; ++totalTextures;
 	sbTexture = App->textures->Load("Assets/sprites/enemies/UNSquadronSheet10.gif ");
+	++activeTextures; ++totalTextures;
+	truckTexture = App->textures->Load("Assets/sprites/enemies/UNSquadronSheet24.gif");
 	++activeTextures; ++totalTextures;
 	enemyDestroyedFx = App->audio->LoadFx("Assets/music/explosion.wav");
 	++activeFx; ++totalFx;
@@ -231,6 +234,9 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 					break;
 				case ENEMY_TYPE::STEALTHBOMBER:
 					enemies[i] = new StealthBomber(info.x, info.y, info.spawnRight);
+					break;
+				case ENEMY_TYPE::TRUCK:
+					enemies[i] = new Truck(info.x, info.y, info.spawnRight);
 					break;
 			}
 			if (info.type == ENEMY_TYPE::STEALTHBOMBER) {

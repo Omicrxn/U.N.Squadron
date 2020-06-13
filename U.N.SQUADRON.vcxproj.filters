@@ -136,6 +136,9 @@
     <ClCompile Include="Powerup.cpp">
       <Filter>Source Files\Entities\Weapons</Filter>
     </ClCompile>
+    <ClCompile Include="Truck.cpp">
+      <Filter>Source Files\Entities\Enemies</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -279,6 +282,9 @@
     </ClInclude>
     <ClInclude Include="Powerup.h">
       <Filter>Source Files\Entities\Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="Truck.h">
+      <Filter>Source Files\Entities\Enemies</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
