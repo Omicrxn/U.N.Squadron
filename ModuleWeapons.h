@@ -58,7 +58,7 @@ public:
 
 	// Destroys any weapons that have moved outside the camera limits
 	void DespawnWeapon();
-	void SpawnShrapnel(int x, int y, unsigned int number);
+	void SpawnWeapon(WEAPON_TYPE weaponType,int x, int y, unsigned int number);
 
 private:
 	// All spawned weapons in the scene
