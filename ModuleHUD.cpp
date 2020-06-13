@@ -94,7 +94,7 @@ update_status ModuleHUD::Update() {
 
 	sprintf_s(levelText, 2, "%1d", App->player->level);
 
-	if (!App->player->maxPow) sprintf_s(powText, 4, "%3d", App->player->pow);
+	if (!App->player->maxPow) sprintf_s(powText, 4, "%3d", App->player->GetCurrentPOW());
 	else sprintf_s(powText, 4, "max");
 
 	// Passing the weapons ammo from uint to char

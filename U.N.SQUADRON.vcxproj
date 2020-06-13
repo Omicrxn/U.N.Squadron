@@ -176,7 +176,8 @@
     <ClCompile Include="ModuleWindow.cpp" />
     <ClCompile Include="ModuleWinScreen.cpp" />
     <ClCompile Include="Path.cpp" />
-    <ClCompile Include="Powerup.cpp" />
+    <ClCompile Include="PowerupBlue.cpp" />
+    <ClCompile Include="PowerupOrange.cpp" />
     <ClCompile Include="S.Shell.cpp" />
     <ClCompile Include="SB_Bomb.cpp" />
     <ClCompile Include="SB_BombShrapnel.cpp" />
@@ -226,7 +227,8 @@
     <ClInclude Include="ModuleWinScreen.h" />
     <ClInclude Include="p2Point.h" />
     <ClInclude Include="Path.h" />
-    <ClInclude Include="Powerup.h" />
+    <ClInclude Include="PowerupBlue.h" />
+    <ClInclude Include="PowerupOrange.h" />
     <ClInclude Include="resource2.h" />
     <ClInclude Include="S.Shell.h" />
     <ClInclude Include="SB_Bomb.h" />

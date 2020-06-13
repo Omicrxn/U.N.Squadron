@@ -32,7 +32,6 @@ public:
 	uint shootFx = 0;
 	uint hitFx = 0;
 	uint dieFx = 0;
-	uint weaponFx = 0;
 
 	// Score
 	uint score = 0;
@@ -41,7 +40,7 @@ public:
 	uint money = 3000;
 
 	// POW
-	uint pow = 4;
+	uint pow1 = 4, pow2 = 11, pow3 = 13, pow4 = 16;
 	bool maxPow = false;
 
 	// Total POW
@@ -62,6 +61,7 @@ public:
 	int GetLifes() {
 		return playerLifes;
 	}
+	uint GetCurrentPOW();
 
 	// The whole list of weapons to know which one is the player selecting at each moment
 	enum weapons {

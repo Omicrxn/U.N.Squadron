@@ -31,5 +31,5 @@ void Bomb::Update()
 void Bomb::OnCollision(Collider* collider)
 {
 	App->particles->AddParticle(App->particles->bombExplosion, position.x, position.y);
-	App->audio->PlayFx(5, 0);
+	App->audio->PlayFx(4, 0);
 }

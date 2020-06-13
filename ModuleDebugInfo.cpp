@@ -217,7 +217,7 @@ update_status ModuleDebugInfo::PostUpdate()
 		sprintf_s(debugText, 150, "Level  %i", App->player->level);
 		App->fonts->BlitText(140, 80, debugFont, debugText);
 
-		sprintf_s(debugText, 150, "POW    %i", App->player->pow);
+		sprintf_s(debugText, 150, "POW    %i", App->player->GetCurrentPOW());
 		App->fonts->BlitText(140, 95, debugFont, debugText);
 
 		sprintf_s(debugText, 150, "Total  %i", App->player->total);

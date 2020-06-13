@@ -54,10 +54,6 @@ bool ModulePlayer::Start() {
 	dieFx = App->audio->LoadFx("Assets/music/events/die.wav");
 	++activeFx; ++totalFx;
 
-	// Loading collision sound effect
-	weaponFx = App->audio->LoadFx("Assets/music/events/explosionWeapon.wav");
-	++activeFx; ++totalFx;
-
 	// Add a collider to the player
 	collider = App->collisions->AddCollider({ position.x, position.y, 32, 16 }, Collider::Type::PLAYER, this);
 	++activeColliders; ++totalColliders;
@@ -328,6 +324,11 @@ update_status ModulePlayer::Update() {
 		hasBeenHit = false;
 	}
 
+	if (pow1 == 0) level = 2;
+	if (pow2 == 0) level = 3;
+	if (pow3 == 0) level = 4;
+	if (pow4 == 0) maxPow = true;
+
 	return ret;
 }
 
@@ -357,8 +358,6 @@ bool ModulePlayer::CleanUp() {
 	App->audio->UnloadFx(hitFx);
 	--totalFx;
 	App->audio->UnloadFx(dieFx);
-	--totalFx;
-	App->audio->UnloadFx(weaponFx);
 	--totalFx;
 
 	App->collisions->DeleteCollider(collider);
@@ -390,7 +389,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 			else {
 				playerLifes = 3;
 				money = 0;
-				pow = 4;
+				pow1 = 4, pow2 = 11, pow3 = 13, pow4 = 16;
 				total = 0;
 				level = 1;
 				App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->loseScreen, 60);
@@ -400,4 +399,11 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 		hasBeenHit = true;
 		hasBeenHitCounter = 0;
 	}
+}
+
+uint ModulePlayer::GetCurrentPOW() {
+	if (level == 1) return pow1;
+	if (level == 2) return pow2;
+	if (level == 3) return pow3;
+	if (level == 4) return pow4;
 }
