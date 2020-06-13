@@ -79,6 +79,7 @@ update_status ModuleLevel1::Update() {
 		if (App->render->camera.x > 2000) {
 			App->player->position.y--;
 			App->player->position.x++;
+
 			App->render->camera.x += SCREEN_SIZE;
 			App->render->camera.y -= SCREEN_SIZE;
 		}
