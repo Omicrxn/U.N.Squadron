@@ -30,27 +30,17 @@ bool ModuleLevel1::Start() {
 	// Music
 	App->audio->PlayMusic("Assets/music/soundtrack/cave.ogg");
 	
-	sky = { 0, 0, 3301, 168 };
-	mountains = { 0, 227, 3301, 224 };
-	floor = { 0, 454, 3301, 48 };
+	sky = { 0, 0, 13204, 288 };
+	mountains = { 0, 291, 13204, 224 };
+	floor = { 0, 518, 13204, 48 };
 
-	// Position
-	skyPos = { 0, 0 };
-	skyPos2 = { (float)sky.w, 0 };
-	skySpeed = 0.5;
-
-	mountainsPos = { 0, 85 };
-	mountainsPos2 = { (float)mountains.w, 85 };
-	mountainsSpeed = 0.5;
-
-	floorPos = { 0, 308 };
-	floorPos2 = { (float)floor.w, 308 };
-	floorSpeed = 0.5;
-
-	App->enemies->AddEnemy(ENEMY_TYPE::TRUCK, 1500, 770);
+	App->enemies->AddEnemy(ENEMY_TYPE::TRUCK, 100, 100);
 
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
+
+	currentPosition = LEFTUP;
+	currentDirection = RIGHTDIR;
 
 	App->particles->Enable();
 	App->player->Enable();
@@ -65,23 +55,116 @@ bool ModuleLevel1::Start() {
 update_status ModuleLevel1::Update() {
 	update_status ret = update_status::UPDATE_CONTINUE;
 
-	if (App->render->camera.y <= 780) {
-		App->player->position.x++;
-		App->player->position.y++;
-		App->render->camera.x += SCREEN_SIZE;
-		App->render->camera.y += SCREEN_SIZE;
-	}
-	else if (App->render->camera.y > 780) {
-		if (App->render->camera.x <= 2000) {
-			App->render->camera.x += SCREEN_SIZE;
-			App->player->position.x++;
+	// Setting the current position and the current direction
+	if (currentDirection == RIGHTDIR)
+	{
+		if (App->render->camera.x <= 6602) {
+			if (App->render->camera.y <= 791) {
+				currentPosition = LEFTUP;
+			}
+			else if (App->render->camera.y > 791) {
+				currentPosition = LEFTDOWN;
+			}
 		}
-		if (App->render->camera.x > 2000) {
-			App->player->position.y--;
-			App->player->position.x++;
+		else if (App->render->camera.x > 6602) {
+			if (App->render->camera.y >= 791) {
+				if (App->render->camera.x <= 5000 + SCREEN_WIDTH) {
+					currentPosition = RIGHTDOWN;
+				}
+				else if (App->render->camera.x > 5000 + SCREEN_WIDTH) {
+					currentPosition = RIGHTUP;
+				}
+			}
+			else if (App->render->camera.y < 791) {
+				currentPosition = RIGHTUP;
+				if (App->render->camera.x + SCREEN_WIDTH >= 13204 && currentDirection == RIGHTDIR) {
+					currentDirection = LEFTDIR;
+				}
+			}
+		}
+	}
+	else if (currentDirection == LEFTDIR)
+	{
+		if (App->render->camera.x <= 6602) {
+			if (App->render->camera.y <= 791) {
+				currentPosition = LEFTUP;
+				if (App->render->camera.x < 0) {
+					currentDirection = RIGHTDIR;
+				}
+			}
+			else if (App->render->camera.y > 791) {
+				if (App->render->camera.x >= 5000) {
+					currentPosition = LEFTDOWN;
+				}
+				else if (App->render->camera.x < 5000) {
+					currentPosition = LEFTUP;
+				}
+			}
+		}
+		else if (App->render->camera.x > 6602) {
+			if (App->render->camera.y >= 791) {
+				currentPosition = RIGHTDOWN;
+			}
+			else if (App->render->camera.y < 791) {
+				currentPosition = RIGHTUP;
+				if (App->render->camera.x + SCREEN_WIDTH >= 13204 && currentDirection == RIGHTDIR) {
+					currentDirection = LEFTDIR;
+				}
+			}
+		}
+	}
 
-			App->render->camera.x += SCREEN_SIZE;
-			App->render->camera.y -= SCREEN_SIZE;
+	//Handling the movement of the camera and the player at each moment
+	if (currentDirection == RIGHTDIR) {
+		if (currentPosition == LEFTUP) {
+			App->render->camera.x += cameraSpeed * SCREEN_SIZE;
+			App->render->camera.y += (cameraSpeed / proportion) * SCREEN_SIZE;
+
+			App->player->position.x += cameraSpeed;
+			App->player->position.y += cameraSpeed / proportion;
+		}
+		else if (currentPosition == LEFTDOWN) {
+			App->render->camera.x += cameraSpeed * SCREEN_SIZE;
+
+			App->player->position.x += cameraSpeed;
+		}
+		else if (currentPosition == RIGHTDOWN) {
+			App->render->camera.x += cameraSpeed * SCREEN_SIZE;
+
+			App->player->position.x += cameraSpeed;
+		}
+		else if (currentPosition == RIGHTUP) {
+			App->render->camera.x += cameraSpeed * SCREEN_SIZE;
+			App->render->camera.y -= (cameraSpeed / proportion) * SCREEN_SIZE;
+
+			App->player->position.x += cameraSpeed;
+			App->player->position.y -= cameraSpeed / proportion;
+		}
+	}
+	else if (currentDirection == LEFTDIR) {
+		if (currentPosition == RIGHTUP) {
+			App->render->camera.x -= cameraSpeed * SCREEN_SIZE;
+			App->render->camera.y += (cameraSpeed / proportion) * SCREEN_SIZE;
+
+			App->player->position.x -= cameraSpeed;
+			App->player->position.y += cameraSpeed / proportion;
+		}
+		else if (currentPosition == RIGHTDOWN) {
+			App->render->camera.x -= cameraSpeed * SCREEN_SIZE;
+
+			App->player->position.x -= cameraSpeed;
+		}
+		else if (currentPosition == LEFTDOWN) {
+			App->render->camera.x -= cameraSpeed * SCREEN_SIZE;
+
+			App->player->position.x -= cameraSpeed;
+		}
+		else if (currentPosition == LEFTUP) {
+			App->render->camera.x -= cameraSpeed * SCREEN_SIZE;
+			App->render->camera.y -= (cameraSpeed / proportion) * SCREEN_SIZE;
+
+			App->player->position.x -= cameraSpeed;
+			App->player->position.y -= cameraSpeed / proportion;
 		}
 	}
 	
@@ -92,18 +175,18 @@ update_status ModuleLevel1::PostUpdate() {
 	update_status ret = UPDATE_CONTINUE;
 
 	/*Render Sky*/
-	if (!App->render->Blit(backgroundTexture, (int)skyPos.x, (int)skyPos.y, &sky, skySpeed)) {
-		LOG("Cannot blit the texture in ModulePlayer %s\n", SDL_GetError());
+	if (!App->render->Blit(backgroundTexture, 0, -70, &sky, 0.3)) {
+		LOG("Cannot blit the texture in ModuleLevel1 %s\n", SDL_GetError());
 		ret = update_status::UPDATE_ERROR;
 	}
 	/*Render Mountains*/
-	if (!App->render->Blit(backgroundTexture, (int)mountainsPos.x, (int)mountainsPos.y, &mountains, mountainsSpeed)) {
-		LOG("Cannot blit the texture in ModulePlayer %s\n", SDL_GetError());
+	if (!App->render->Blit(backgroundTexture, 0, 84, &mountains, 0.5)) {
+		LOG("Cannot blit the texture in ModuleLevel1 %s\n", SDL_GetError());
 		ret = update_status::UPDATE_ERROR;
 	}
 	/*Render Floor*/
-	if (!App->render->Blit(backgroundTexture, (int)floorPos.x, (int)floorPos.y, &floor, floorSpeed)) {
-		LOG("Cannot blit the texture in ModulePlayer %s\n", SDL_GetError());
+	if (!App->render->Blit(backgroundTexture, 0, 308, &floor, 0.5)) {
+		LOG("Cannot blit the texture in ModuleLevel1 %s\n", SDL_GetError());
 		ret = update_status::UPDATE_ERROR;
 	}
 	

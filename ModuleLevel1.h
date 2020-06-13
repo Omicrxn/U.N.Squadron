@@ -26,11 +26,22 @@ public:
 	SDL_Rect mountains;
 	SDL_Rect floor;
 
-	fPoint skyPos, mountainsPos, floorPos;
-	fPoint skyPos2, mountainsPos2, floorPos2;
-	float mountainsSpeed, skySpeed, floorSpeed;
-
 	unsigned int numSpawnedEnemies = 0;
+
+private:
+	enum position {
+		LEFTUP, LEFTDOWN, RIGHTUP, RIGHTDOWN
+	};
+
+	enum direction
+	{
+		LEFTDIR, RIGHTDIR
+	};
+
+	uint currentPosition;
+	uint currentDirection;
+	uint cameraSpeed = 7;
+	uint proportion = 3;
 };
 
 #endif
