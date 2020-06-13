@@ -59,7 +59,7 @@ void Enemy::OnCollision(Collider* collider)
 			App->player->money += moneyGiven;
 		}
 
-		powerupSpawn = rand() % 23;
+		powerupSpawn = rand() % 20;
 		if (powerupSpawn == 1) {
 			App->weapons->SpawnWeapon(WEAPON_TYPE::POWERUP_ORANGE, this->position.x, this->position.y);
 		}

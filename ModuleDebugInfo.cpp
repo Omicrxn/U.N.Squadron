@@ -206,8 +206,11 @@ update_status ModuleDebugInfo::PostUpdate()
 		sprintf_s(debugText, 150, "Level  %i", App->player->level);
 		App->fonts->BlitText(140, 80, debugFont, debugText);
 
-		sprintf_s(debugText, 150, "Total  %i", App->player->total);
+		sprintf_s(debugText, 150, "POW    %i", App->player->GetCurrentPOW());
 		App->fonts->BlitText(140, 95, debugFont, debugText);
+
+		sprintf_s(debugText, 150, "Total  %i", App->player->total);
+		App->fonts->BlitText(140, 110, debugFont, debugText);
 
 		// Display total audio files loaded
 		sprintf_s(debugText, 150, "audio fx  %i", App->audio->GetFxCount());

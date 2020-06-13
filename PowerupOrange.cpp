@@ -11,8 +11,8 @@ PowerupOrange::PowerupOrange(int x, int y) : Weapon(x, y)
 	animPowerOrange.PushBack({ 497, 30, 15, 15 });
 	animPowerOrange.speed = 0.07f;
 
-	pathOrange.PushBack({ 0.5f, 0.8f }, 50, &animPowerOrange);
-	pathOrange.PushBack({ 0.5f, -0.8f }, 50, &animPowerOrange);
+	pathOrange.PushBack({ 0.5f, 0.8f }, 70, &animPowerOrange);
+	pathOrange.PushBack({ 0.5f, -0.8f }, 70, &animPowerOrange);
 
 	collider = App->collisions->AddCollider({ position.x, position.y, 15, 15 }, Collider::Type::POWERUP_ORANGE, (Module*)App->weapons);
 }
