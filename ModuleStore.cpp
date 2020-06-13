@@ -104,18 +104,18 @@ update_status ModuleStore::Update() {
 	if ((App->input->keyboard[SDL_SCANCODE_W] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_UP] == KEY_DOWN || App->input->pads[0].up == true) && rows > 0 && !exitPressed) {
 		selectorPos.y -= 48;
 		rows--;
-		App->audio->PlayFx(0, 0);
+		App->audio->PlayFx(chooseFx, 0);
 	}
 	if ((App->input->keyboard[SDL_SCANCODE_S] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_DOWN || App->input->pads[0].down == true) && rows < 1 && !exitPressed) {
 		selectorPos.y += 48;
 		rows++;
-		App->audio->PlayFx(0, 0);
+		App->audio->PlayFx(chooseFx, 0);
 	}
 	if ((App->input->keyboard[SDL_SCANCODE_A] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_REPEAT || App->input->pads[0].left == true) && columns > 0 && !exitPressed) {
 		if (CountdownL == 0) {
 			selectorPos.x -= 40;
 			columns--;
-			App->audio->PlayFx(0, 0);
+			App->audio->PlayFx(chooseFx, 0);
 
 			CountdownL = MaxCountdownL;
 		}
@@ -124,7 +124,7 @@ update_status ModuleStore::Update() {
 		if (CountdownR == 0) {
 			selectorPos.x += 40;
 			columns++;
-			App->audio->PlayFx(0, 0);
+			App->audio->PlayFx(chooseFx, 0);
 
 			CountdownR = MaxCountdownR;
 		}
@@ -167,29 +167,29 @@ update_status ModuleStore::Update() {
 					App->player->money -= 9000;
 					weaponSelection |= (1 << 8);
 					currentState = BOUGHT;
-					App->audio->PlayFx(1, 0);
+					App->audio->PlayFx(boughtFx, 0);
 				}
 				else {
 					currentState = NOMONEY;
-					App->audio->PlayFx(2, 0);
+					App->audio->PlayFx(noMoneyFx, 0);
 				}
 			}
 			else if (!App->debugInfo->maxMoney && (weaponSelection & (1 << 8)) != 0)
 			{
 				currentState = ALREADYBOUGHT;
-				App->audio->PlayFx(2, 0);
+				App->audio->PlayFx(noMoneyFx, 0);
 			}
 			else if (App->debugInfo->maxMoney) {
 				if ((weaponSelection & (1 << 8)) == 0)
 				{
 					weaponSelection |= (1 << 8);
 					currentState = BOUGHT;
-					App->audio->PlayFx(1, 0);
+					App->audio->PlayFx(boughtFx, 0);
 				}
 				else
 				{
 					currentState = ALREADYBOUGHT;
-					App->audio->PlayFx(2, 0);
+					App->audio->PlayFx(noMoneyFx, 0);
 				}
 			}
 			storeStateCounter = 0;
@@ -202,29 +202,29 @@ update_status ModuleStore::Update() {
 					App->player->money -= 20000;
 					weaponSelection |= (1 << 6);
 					currentState = BOUGHT;
-					App->audio->PlayFx(1, 0);
+					App->audio->PlayFx(boughtFx, 0);
 				}
 				else {
 					currentState = NOMONEY;
-					App->audio->PlayFx(2, 0);
+					App->audio->PlayFx(noMoneyFx, 0);
 				}
 			}
 			else if (!App->debugInfo->maxMoney && (weaponSelection & (1 << 6)) != 0)
 			{
 				currentState = ALREADYBOUGHT;
-				App->audio->PlayFx(2, 0);
+				App->audio->PlayFx(noMoneyFx, 0);
 			}
 			else if (App->debugInfo->maxMoney) {
 				if ((weaponSelection & (1 << 6)) == 0)
 				{
 					weaponSelection |= (1 << 6);
 					currentState = BOUGHT;
-					App->audio->PlayFx(1, 0);
+					App->audio->PlayFx(boughtFx, 0);
 				}
 				else
 				{
 					currentState = ALREADYBOUGHT;
-					App->audio->PlayFx(2, 0);
+					App->audio->PlayFx(noMoneyFx, 0);
 				}
 			}
 			storeStateCounter = 0;
@@ -237,29 +237,29 @@ update_status ModuleStore::Update() {
 					App->player->money -= 2000;
 					weaponSelection |= (1 << 4);
 					currentState = BOUGHT;
-					App->audio->PlayFx(1, 0);
+					App->audio->PlayFx(boughtFx, 0);
 				}
 				else {
 					currentState = NOMONEY;
-					App->audio->PlayFx(2, 0);
+					App->audio->PlayFx(noMoneyFx, 0);
 				}
 			}
 			else if (!App->debugInfo->maxMoney && (weaponSelection & (1 << 4)) != 0)
 			{
 				currentState = ALREADYBOUGHT;
-				App->audio->PlayFx(2, 0);
+				App->audio->PlayFx(noMoneyFx, 0);
 			}
 			else if (App->debugInfo->maxMoney) {
 				if ((weaponSelection & (1 << 4)) == 0)
 				{
 					weaponSelection |= (1 << 4);
 					currentState = BOUGHT;
-					App->audio->PlayFx(1, 0);
+					App->audio->PlayFx(boughtFx, 0);
 				}
 				else
 				{
 					currentState = ALREADYBOUGHT;
-					App->audio->PlayFx(2, 0);
+					App->audio->PlayFx(noMoneyFx, 0);
 				}
 			}
 			storeStateCounter = 0;
@@ -272,29 +272,29 @@ update_status ModuleStore::Update() {
 					App->player->money -= 15000;
 					weaponSelection |= (1 << 2);
 					currentState = BOUGHT;
-					App->audio->PlayFx(1, 0);
+					App->audio->PlayFx(boughtFx, 0);
 				}
 				else {
 					currentState = NOMONEY;
-					App->audio->PlayFx(2, 0);
+					App->audio->PlayFx(noMoneyFx, 0);
 				}
 			}
 			else if (!App->debugInfo->maxMoney && (weaponSelection & (1 << 2)) != 0)
 			{
 				currentState = ALREADYBOUGHT;
-				App->audio->PlayFx(2, 0);
+				App->audio->PlayFx(noMoneyFx, 0);
 			}
 			else if (App->debugInfo->maxMoney) {
 				if ((weaponSelection & (1 << 2)) == 0)
 				{
 					weaponSelection |= (1 << 2);
 					currentState = BOUGHT;
-					App->audio->PlayFx(1, 0);
+					App->audio->PlayFx(boughtFx, 0);
 				}
 				else
 				{
 					currentState = ALREADYBOUGHT;
-					App->audio->PlayFx(2, 0);
+					App->audio->PlayFx(noMoneyFx, 0);
 				}
 			}
 			storeStateCounter = 0;

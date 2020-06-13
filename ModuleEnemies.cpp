@@ -39,7 +39,7 @@ bool ModuleEnemies::Start()
 	++activeTextures; ++totalTextures;
 	truckTexture = App->textures->Load("Assets/sprites/enemies/UNSquadronSheet24.gif");
 	++activeTextures; ++totalTextures;
-	enemyDestroyedFx = App->audio->LoadFx("Assets/music/explosion.wav");
+	enemyDestroyedFx = App->audio->LoadFx("Assets/music/events/enemiesexplotion.wav");
 	++activeFx; ++totalFx;
 
 	return true;

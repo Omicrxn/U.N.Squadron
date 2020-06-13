@@ -74,8 +74,5 @@ void BlueJet::Update()
 		SetBulletDirection(this);
 
 		App->particles->AddParticle(App->particles->enemyBullet, position.x + 32, position.y, Collider::Type::ENEMY_SHOT);
-
-		//Playing shooting sound effect
-		App->audio->PlayFx(0, 0);
 	}
 }

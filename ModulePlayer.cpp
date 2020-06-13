@@ -133,7 +133,7 @@ update_status ModulePlayer::Update() {
 			}
 
 			// Playing shooting sound effect (if space was pressed)
-			App->audio->PlayFx(0, 0);
+			App->audio->PlayFx(shootFx, 0);
 
 			shotCountdown = shotMaxCountdown;
 		}
@@ -288,6 +288,10 @@ update_status ModulePlayer::Update() {
 		}
 	}
 
+	if (App->input->keyboard[SDL_SCANCODE_J] == KEY_DOWN) {
+		App->weapons->SpawnWeapon(WEAPON_TYPE::POWERUP_ORANGE);
+	}
+
 	// Update shot countdown
 	if (shotCountdown > 0)
 		--shotCountdown;
@@ -324,10 +328,15 @@ update_status ModulePlayer::Update() {
 		hasBeenHit = false;
 	}
 
-	if (pow1 == 0) level = 2;
-	if (pow2 == 0) level = 3;
-	if (pow3 == 0) level = 4;
-	if (pow4 == 0) maxPow = true;
+	if (pow1 < 0) pow1 = 0;
+	if (pow2 < 0) pow2 = 0;
+	if (pow3 < 0) pow3 = 0;
+	if (pow4 < 0) pow4 = 0;
+
+	if (pow1 <= 0 && level == 1) ++level;
+	if (pow2 <= 0 && level == 2) ++level;
+	if (pow3 <= 0 && level == 3) ++level;
+	if (pow4 <= 0 && level == 4) maxPow = true;
 
 	return ret;
 }
@@ -370,41 +379,60 @@ bool ModulePlayer::CleanUp() {
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 	// Detect collision with a bullet or an enemy. If so, disappear and explode.
 	if (c1 == collider && destroyed == false) {
-		//SDL_SetTextureColorMod(texture, 450, 450, 64);
-		if (currentFuel > 1) {
-			currentFuel--;
+		if (c2->type == Collider::Type::PLAYER_SHOT) {
+			//SDL_SetTextureColorMod(texture, 450, 450, 64);
+			if (currentFuel > 1) {
+				currentFuel--;
 
-			//Playing explosion sound effect
-			App->audio->PlayFx(3, 0);
-		}
-		else {
-			currentFuel--;
-			App->particles->AddParticle(App->particles->explosion, position.x, position.y, Collider::Type::NONE, 9);
-
-			//Playing explosion sound effect
-			App->audio->PlayFx(4, 0);
-			if (playerLifes > 1 && !App->debugInfo->maxLifes) {
-				playerLifes--;
-				App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->startScreen, 60);
+				//Playing hit sound effect
+				App->audio->PlayFx(hitFx, 0);
 			}
 			else {
-				playerLifes = 3;
-				money = 0;
-				pow1 = 4, pow2 = 11, pow3 = 13, pow4 = 16;
-				total = 0;
-				level = 1;
-				App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->loseScreen, 60);
+				currentFuel--;
+				App->particles->AddParticle(App->particles->explosion, position.x, position.y, Collider::Type::NONE, 9);
+
+				//Playing explosion sound effect
+				App->audio->PlayFx(dieFx, 0);
+				if (playerLifes > 1 && !App->debugInfo->maxLifes) {
+					playerLifes--;
+					App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->startScreen, 60);
+				}
+				else {
+					playerLifes = 3;
+					money = 0;
+					pow1 = 4, pow2 = 11, pow3 = 13, pow4 = 16;
+					total = 0;
+					level = 1;
+					App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->loseScreen, 60);
+				}
+				destroyed = true;
 			}
-			destroyed = true;
+			hasBeenHit = true;
+			hasBeenHitCounter = 0;
 		}
-		hasBeenHit = true;
-		hasBeenHitCounter = 0;
+		else if (c2->type == Collider::Type::POWERUP_ORANGE) {
+			if (level == 1 && pow1 > 0)--pow1;
+			if (level == 2 && pow2 > 0) --pow2;
+			if (level == 3 && pow3 > 0) --pow3;
+			if (!maxPow && level == 4 && pow4 > 0) --pow4;
+
+			++total;
+		}
+		else if (c2->type == Collider::Type::POWERUP_BLUE) {
+			if (level == 1 && pow1 > 0) pow1 -= 3;
+			if (level == 2 && pow2 > 0) pow2 -= 3;
+			if (level == 3 && pow3 > 0) pow3 -= 3;
+			if (!maxPow && level == 4 && pow4 > 0) pow4 -= 3;
+
+			++total;
+		}
+		
 	}
 }
 
 uint ModulePlayer::GetCurrentPOW() {
-	if (level == 1) return pow1;
-	if (level == 2) return pow2;
-	if (level == 3) return pow3;
-	if (level == 4) return pow4;
+	if (level == 1 && pow1 > 0) return pow1;
+	if (level == 2 && pow2 > 0) return pow2;
+	if (level == 3 && pow3 > 0) return pow3;
+	if (level == 4 && pow4 > 0) return pow4;
 }

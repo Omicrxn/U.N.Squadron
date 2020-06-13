@@ -9,12 +9,12 @@ PowerupBlue::PowerupBlue(int x, int y) : Weapon(x, y)
 {
 	animPowerBlue.PushBack({ 497, 15, 15, 15 });
 	animPowerBlue.PushBack({ 497, 30, 15, 15 });
-	animPowerBlue.speed = 0.05f;
+	animPowerBlue.speed = 0.07f;
 
-	pathBlue.PushBack({ 2.0f, 2.0f }, 60, &animPowerBlue);
-	pathBlue.PushBack({ 2.0f, -2.0f }, 60, &animPowerBlue);
+	pathBlue.PushBack({ 0.5f, 0.5f }, 60, &animPowerBlue);
+	pathBlue.PushBack({ 0.5f, -0.5f }, 60, &animPowerBlue);
 
-	collider = App->collisions->AddCollider({ position.x, position.y, 15, 15 }, Collider::Type::POWERUP, (Module*)App->weapons);
+	collider = App->collisions->AddCollider({ position.x, position.y, 15, 15 }, Collider::Type::POWERUP_BLUE, (Module*)App->weapons);
 }
 
 void PowerupBlue::Update()
@@ -31,8 +31,5 @@ void PowerupBlue::Update()
 
 void PowerupBlue::OnCollision(Collider* collider)
 {
-	if (App->player->level == 1) App->player->pow1 -= 3;
-	if (App->player->level == 2) App->player->pow2 -= 3;
-	if (App->player->level == 3) App->player->pow3 -= 3;
-	if (!App->player->maxPow && App->player->level == 4) App->player->pow4 -= 3;
+
 }
