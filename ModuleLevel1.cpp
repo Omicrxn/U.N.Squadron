@@ -47,8 +47,6 @@ bool ModuleLevel1::Start() {
 	floorPos2 = { (float)floor.w, 308 };
 	floorSpeed = 0.5;
 
-	App->enemies->AddEnemy(ENEMY_TYPE::TRUCK, 1500, 770);
-
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
 
@@ -81,7 +79,7 @@ update_status ModuleLevel1::Update() {
 			App->player->position.x++;
 
 			App->render->camera.x += SCREEN_SIZE;
-			App->render->camera.y -= SCREEN_SIZE;
+			//App->render->camera.y -= SCREEN_SIZE;
 		}
 	}
 	
