@@ -61,7 +61,6 @@ public:
 	int GetLifes() {
 		return playerLifes;
 	}
-	uint GetCurrentPOW();
 
 	// The whole list of weapons to know which one is the player selecting at each moment
 	enum weapons {
@@ -79,6 +78,7 @@ public:
 
 	bool hasBeenHit;
 	uint hasBeenHitCounter;
+
 private:
 	iPoint position;
 	SDL_Texture* texture = nullptr;
@@ -105,8 +105,7 @@ private:
 	// Ceiling countdown
 	uint ceilingCountdown;
 
-	// POW
-	uint pow1 = 4, pow2 = 11, pow3 = 13, pow4 = 16;
+	bool debugLevel = false;
 
 	friend class ModuleLevel1;
 };

@@ -34,10 +34,11 @@ bool ModuleParticles::Start()
 	bullet2.anim.PushBack({ 470, 6, 12, 6 });
 	bullet3.anim.PushBack({ 483, 3, 13, 11 });
 	bullet4.anim.PushBack({ 498, 0, 13, 17 });
+	bullet5.anim.PushBack({ 499, 18, 13, 12 });
 
-	bullet1.anim.loop = bullet2.anim.loop = bullet3.anim.loop = bullet4.anim.loop = true;
-	bullet1.speed.x = bullet2.speed.x = bullet3.speed.x = bullet4.speed.x = 7.0f;
-	bullet1.lifetime = bullet2.lifetime = bullet3.lifetime = bullet4.lifetime = 180;
+	bullet1.anim.loop = bullet2.anim.loop = bullet3.anim.loop = bullet4.anim.loop = bullet4.anim.loop = true;
+	bullet1.speed.x = bullet2.speed.x = bullet3.speed.x = bullet4.speed.x = bullet5.speed.x = 7.0f;
+	bullet1.lifetime = bullet2.lifetime = bullet3.lifetime = bullet4.lifetime = bullet5.lifetime = 180;
 
 	// Enemy Bullet Animaton
 	enemyBullet.anim.PushBack({ 44, 370, 5 , 7 });
