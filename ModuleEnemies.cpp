@@ -245,8 +245,12 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 					enemies[i] = new Truck(info.x, info.y, info.spawnRight);
 					break;
 			}
+
 			if (info.type == ENEMY_TYPE::STEALTHBOMBER) {
 				enemies[i]->texture = sbTexture;
+			}
+			else if (info.type == ENEMY_TYPE::TRUCK) {
+				enemies[i]->texture = truckTexture;
 			}
 			else {
 				enemies[i]->texture = texture;

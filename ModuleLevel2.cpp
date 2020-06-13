@@ -44,7 +44,7 @@ bool ModuleLevel2::Start() {
 	thirdTopLayer = { 0,0,256,45 };
 	thirdBottomLayer = { 0,217,256,33 };
 
-// Background position in screen
+	// Background position in screen
 	// center
 	centerPos = { 0,85 };
 	centerPos2 = { (float)centerLayer.w,85 };

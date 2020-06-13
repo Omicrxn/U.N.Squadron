@@ -360,10 +360,15 @@ update_status ModulePlayer::Update() {
 update_status ModulePlayer::PostUpdate() {
 	update_status ret = UPDATE_CONTINUE;
 	
-	// Blit player
-	if (!destroyed) {
-		if (!App->render->Blit(texture, position.x, position.y, &rectAnim)) {
-			ret = UPDATE_ERROR;
+	// Blit player (depending on the level)
+	if (App->lvl1->IsEnabled()) {
+		// To do
+	}
+	else if (App->lvl2->IsEnabled()) {
+		if (!destroyed) {
+			if (!App->render->Blit(texture, position.x, position.y, &rectAnim)) {
+				ret = UPDATE_ERROR;
+			}
 		}
 	}
 

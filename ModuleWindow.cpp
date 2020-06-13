@@ -7,7 +7,6 @@ ModuleWindow::ModuleWindow(bool startEnabled) : Module(startEnabled) {
 }
 ModuleWindow::~ModuleWindow() {
 
-
 }
 
 bool ModuleWindow::Init() {

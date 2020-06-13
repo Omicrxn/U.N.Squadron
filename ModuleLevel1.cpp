@@ -34,7 +34,9 @@ bool ModuleLevel1::Start() {
 	mountains = { 0, 291, 13204, 224 };
 	floor = { 0, 518, 13204, 48 };
 
-	App->enemies->AddEnemy(ENEMY_TYPE::TRUCK, 100, 100);
+	App->enemies->AddEnemy(ENEMY_TYPE::TRUCK, 1600, 440);
+	App->enemies->AddEnemy(ENEMY_TYPE::TRUCK, 1700, 440);
+	App->enemies->AddEnemy(ENEMY_TYPE::TRUCK, 1800, 440);
 
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
@@ -107,9 +109,6 @@ update_status ModuleLevel1::Update() {
 			}
 			else if (App->render->camera.y < 791) {
 				currentPosition = RIGHTUP;
-				if (App->render->camera.x + SCREEN_WIDTH >= 13204 && currentDirection == RIGHTDIR) {
-					currentDirection = LEFTDIR;
-				}
 			}
 		}
 	}

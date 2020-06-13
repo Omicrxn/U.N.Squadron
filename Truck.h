@@ -2,7 +2,7 @@
 #include "Enemy.h"
 #include "Path.h"
 
-class Truck :public Enemy
+class Truck : public Enemy
 {
 public:
 	// Constructor (x y coordinates in the world)
@@ -17,4 +17,6 @@ private:
 	// This enemy has one sprite and one frame
 	// We are keeping it an animation for consistency with other enemies
 	Animation truckAnimation;
+
+	Path path;
 };
