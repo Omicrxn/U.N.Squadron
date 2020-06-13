@@ -7,6 +7,10 @@
 #include "ModuleRenderer.h"
 #include "ModulePlayer.h"
 #include "ModuleDebugInfo.h"
+#include "ModuleWeapons.h"
+
+#include <stdlib.h>
+#include <time.h>
 
 Enemy::Enemy(int x, int y,bool spawnRight) : position(x, y)
 {
@@ -47,17 +51,24 @@ void Enemy::OnCollision(Collider* collider)
 	}
 	else {
 		App->particles->AddParticle(App->particles->enemyExplosion, position.x, position.y);
-		App->audio->PlayFx(1, 0);
+		App->audio->PlayFx(destroyedFx, 0);
 
 		App->player->score += scoreGiven;
 
 		if (!App->debugInfo->maxMoney) {
 			App->player->money += moneyGiven;
 		}
+
+		powerupSpawn = rand() % 20;
+		if (powerupSpawn == 1) {
+			App->weapons->SpawnWeapon(WEAPON_TYPE::POWERUP_ORANGE, this->position.x, this->position.y);
+		}
+		else if (powerupSpawn == 2) {
+			App->weapons->SpawnWeapon(WEAPON_TYPE::POWERUP_BLUE, this->position.x, this->position.y);
+		}
+
 		this->SetToDelete();
 	}
-	
-	
 }
 
 void Enemy::SetToDelete()

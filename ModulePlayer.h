@@ -39,15 +39,15 @@ public:
 	// Money
 	uint money = 3000;
 
-	// POW
-	uint pow1 = 4, pow2 = 11, pow3 = 13, pow4 = 16;
-	bool maxPow = false;
-
 	// Total POW
 	uint total = 0;
 
 	// POW Level
 	uint level = 1;
+
+	bool maxAmmo = false;
+
+	bool maxPow = false;
 
 	iPoint GetPlayerPosition() {
 		return position;
@@ -105,6 +105,8 @@ private:
 	// Ceiling countdown
 	uint ceilingCountdown;
 
+	// POW
+	uint pow1 = 4, pow2 = 11, pow3 = 13, pow4 = 16;
 
 	friend class ModuleLevel1;
 };

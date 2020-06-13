@@ -19,25 +19,25 @@ SB_BombShrapnel::SB_BombShrapnel(int x, int y,unsigned int number) : Weapon(x, y
 	path0.PushBack({ -0.5f, 0.0f }, 60, &shrapnel0);
 	path0.loop = false;
 	//PATH1 UPPER-LEFT-DIAGONAL
-	path1.PushBack({ -0.5f, -1.5f }, 60, &shrapnel1);
+	path1.PushBack({ -0.0f, -1.0f }, 60, &shrapnel1);
 	path1.loop = false;
 	//PATH2 UPPER
 	path2.PushBack({ 1.0f, -1.5f }, 60, &shrapnel2);
 	path2.loop = false;
 	//PATH3 UPPER-RIGHT-DIAGONAL
-	path3.PushBack({ 2.5f, -1.5f }, 60, &shrapnel3);
+	path3.PushBack({ 2.0f, -1.0f }, 60, &shrapnel3);
 	path3.loop = false;
 	//PATH4 HORIZONTAL-RIGHT
 	path4.PushBack({ 2.5f, 0.0f }, 60, &shrapnel4);
 	path4.loop = false;
 	//PATH5 LOWER-RIGHT-DIAGONAL
-	path5.PushBack({ 2.5f, 1.5f }, 60, &shrapnel5);
+	path5.PushBack({ 2.0f, 1.0f }, 60, &shrapnel5);
 	path5.loop = false;
 	//PATH6 LOWER
 	path6.PushBack({ 1.0f,1.5f }, 60, &shrapnel6);
 	path6.loop = false;
 	//PATH7  LOWER-LEFT-DIAGONAL
-	path7.PushBack({ -0.5f, 1.5f }, 60, &shrapnel7);
+	path7.PushBack({ 0.0f, 1.0f }, 60, &shrapnel7);
 	path7.loop = false;
 
 

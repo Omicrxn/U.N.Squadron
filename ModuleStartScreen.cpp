@@ -71,12 +71,12 @@ update_status ModuleStartScreen::Update(){
 	if ((App->input->keyboard[SDL_SCANCODE_W] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_UP] == KEY_DOWN || App->input->pads[0].up == true)
 		&& selectorPos.y != 116) {
 		selectorPos = { 68,116 };
-		App->audio->PlayFx(0, 0);
+		App->audio->PlayFx(chooseFx, 0);
 	}
 	if ((App->input->keyboard[SDL_SCANCODE_S] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_DOWN || App->input->pads[0].down == true)
 		&& selectorPos.y != 135) {
 		selectorPos = { 68,135 };
-		App->audio->PlayFx(0, 0);
+		App->audio->PlayFx(chooseFx, 0);
 	}
 	
 	if ((App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN || App->input->pads[0].a == true) && App->transition->hasEnded()) {
@@ -84,7 +84,7 @@ update_status ModuleStartScreen::Update(){
 		switch (selectorPos.y) {
 		case 116: {
 			selector.speed = 0.2;
-			App->audio->PlayFx(1, 0);
+			App->audio->PlayFx(startFx, 0);
 			App->transition->FadeToBlack(this, (Module*)App->selector, 60);
 			
 		} break;

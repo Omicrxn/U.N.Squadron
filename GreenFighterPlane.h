@@ -26,6 +26,8 @@ private:
 	SDL_Rect rect;
 	unsigned int shootingFrequency;
 	GFState state = gSPAWNING;
+	bool spawningTop = false;
+	bool goingUp = false;
 	iPoint idlePosition = { 0, 0 };
 	
 };

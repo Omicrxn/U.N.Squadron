@@ -17,6 +17,8 @@ public:
 	update_status PostUpdate();
 	bool CleanUp();
 
+	uint loseFx = 0;
+
 private:
 	SDL_Texture* tex = nullptr;
 	Animation anim;

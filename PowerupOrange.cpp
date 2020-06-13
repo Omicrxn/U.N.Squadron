@@ -9,12 +9,12 @@ PowerupOrange::PowerupOrange(int x, int y) : Weapon(x, y)
 {
 	animPowerOrange.PushBack({ 497, 0, 15, 15 });
 	animPowerOrange.PushBack({ 497, 30, 15, 15 });
-	animPowerOrange.speed = 0.05f;
+	animPowerOrange.speed = 0.07f;
 
-	pathOrange.PushBack({ 2.0f, 2.0f }, 60, &animPowerOrange);
-	pathOrange.PushBack({ 2.0f, -2.0f }, 60, &animPowerOrange);
+	pathOrange.PushBack({ 0.5f, 0.8f }, 70, &animPowerOrange);
+	pathOrange.PushBack({ 0.5f, -0.8f }, 70, &animPowerOrange);
 
-	collider = App->collisions->AddCollider({ position.x, position.y, 15, 15 }, Collider::Type::POWERUP, (Module*)App->weapons);
+	collider = App->collisions->AddCollider({ position.x, position.y, 15, 15 }, Collider::Type::POWERUP_ORANGE, (Module*)App->weapons);
 }
 
 void PowerupOrange::Update()
@@ -30,8 +30,5 @@ void PowerupOrange::Update()
 
 void PowerupOrange::OnCollision(Collider* collider)
 {
-	if (App->player->level == 1) --App->player->pow1;
-	if (App->player->level == 2) --App->player->pow2;
-	if (App->player->level == 3) --App->player->pow3;
-	if (!App->player->maxPow && App->player->level == 4) --App->player->pow4;
+
 }

@@ -18,8 +18,8 @@ struct Collider
 		PLAYER_SHOT,
 		ENEMY_SHOT,
 		BOSS,
-		POWERUP,
-
+		POWERUP_ORANGE,
+		POWERUP_BLUE,
 		MAX
 	};
 

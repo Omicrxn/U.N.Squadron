@@ -53,6 +53,9 @@ bool ModuleLoseScreen::Start() {
 	// Playing lose audio
 	App->audio->PlayMusic("Assets/music/events/thankyouforplaying(youarecrazy).wav");
 
+	loseFx = App->audio->LoadFx("Assets/music/events/start.wav");
+	++activeFx; ++totalFx;
+
 	return ret;
 }
 
@@ -63,8 +66,9 @@ update_status ModuleLoseScreen::Update() {
 		if ((App->input->keyboard[SDL_SCANCODE_S] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_DOWN || App->input->pads[0].down == true) && !pressed) {
 			continue3 = false;
 		}
-		else if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN || App->input->pads[0].a == true) {
+		else if ((App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN || App->input->pads[0].a == true) && App->transition->hasEnded()) {
 			pressed = true;
+			App->audio->PlayFx(loseFx, 0);
 			App->transition->FadeToBlack(this, (Module*)App->selector, 60);
 		}
 	}
@@ -72,9 +76,10 @@ update_status ModuleLoseScreen::Update() {
 		if ((App->input->keyboard[SDL_SCANCODE_W] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_UP] == KEY_DOWN || App->input->pads[0].up == true) && !pressed) {
 			continue3 = true;
 		}
-		else if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN || App->input->pads[0].a == true) {
+		else if ((App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN || App->input->pads[0].a == true) && App->transition->hasEnded()) {
 			pressed = true;
-			App->transition->FadeToBlack(this, (Module*)App->startScreen, 60);
+			App->audio->PlayFx(loseFx, 0);
+			App->transition->FadeToBlack(this, (Module*)App->initialScreen, 90);
 		}
 	}
 	return ret;
@@ -103,7 +108,7 @@ update_status ModuleLoseScreen::PostUpdate() {
 bool ModuleLoseScreen::CleanUp() {
 	bool ret = true;
 
-	activeTextures = activeFonts = 0;
+	activeTextures = activeFonts = activeFx = 0;
 
 	if (!App->textures->Unload(tex)) {
 		LOG("Loose Screen -> Error unloading the texture.");
@@ -116,6 +121,9 @@ bool ModuleLoseScreen::CleanUp() {
 
 	App->fonts->UnLoad(greenFont);
 	--totalFonts;
+
+	App->audio->UnloadFx(loseFx);
+	--totalFx;
 
 	App->audio->StopMusic();
 

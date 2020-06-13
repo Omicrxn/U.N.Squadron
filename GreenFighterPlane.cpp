@@ -52,10 +52,14 @@ GreenFighterPlane::GreenFighterPlane(int x, int y, bool spawnRight) : Enemy(x, y
 	//other var
 	if (spawnPos.y == 0)
 	{
+		goingUp = false;
+		spawningTop = true;
 		despawnLeft = false;
 
 	}
 	else {
+		goingUp = true;
+		spawningTop = false;
 		despawnLeft = true;
 	}
 	health = 70;
@@ -68,7 +72,7 @@ void GreenFighterPlane::Update()
 	switch (state)
 	{
 	case gSPAWNING:
-		if (spawnPos.y == 0) {
+		if (spawningTop) {
 			spawnPathTop.Update();
 			position = spawnPos + spawnPathTop.GetRelativePosition();
 		}
@@ -88,7 +92,7 @@ void GreenFighterPlane::Update()
 		idlePosition = position;
 		break;
 	case gIDLE:
-		if (spawnPos.y == 0) {
+		if (spawningTop) {
 			idlePathTop.Update();
 			position = idlePosition + idlePathTop.GetRelativePosition();
 		}
@@ -104,14 +108,26 @@ void GreenFighterPlane::Update()
 	default:
 		break;
 	}
+	if (goingUp && position.y <= 30) {
+		goingUp = false;
 
+	}else if (!goingUp && position.y >=160){
+		goingUp = true;
+	}
 	Enemy::Update();
 
 	shootingFrequency++;
 	if (state == gIDLE && shootingFrequency > 60)
 	{
 		shootingFrequency = 0;
-		App->weapons->SpawnWeapon(WEAPON_TYPE::GF_HOOK,position.x+53.5f,position.y+39);
+		if (goingUp) {
+			App->weapons->SpawnWeapon(WEAPON_TYPE::GF_HOOK, position.x + 53.5f, position.y + 39, 0);
+
+		}
+		else {
+			App->weapons->SpawnWeapon(WEAPON_TYPE::GF_HOOK, position.x + 53.5f, position.y, 1);
+
+		}
 		//SetBulletDirection(this);
 
 		//App->particles->AddParticle(App->particles->enemyBullet, position.x + 32, position.y, Collider::Type::ENEMY_SHOT);
