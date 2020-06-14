@@ -89,7 +89,8 @@ update_status ModuleHUD::Update() {
 
 	sprintf_s(lifesText, 10, "%d", App->player->GetLifes());
 
-	sprintf_s(totalText, 4, "%3d", App->player->total);
+	if(App->player->total >= 100) sprintf_s(totalText, 4, "max");
+	else sprintf_s(totalText, 4, "%3d", App->player->total);
 
 	sprintf_s(levelText, 2, "%1d", App->player->level);
 

@@ -321,6 +321,7 @@ update_status ModulePlayer::Update() {
 		level = 5;
 		maxPow = true;
 	}
+	if (total >= 100) total = 100;
 
 	if (App->input->keyboard[SDL_SCANCODE_N] == KEY_DOWN) {
 		App->weapons->SpawnWeapon(WEAPON_TYPE::POWERUP_ORANGE, position.x + 40, position.y);
@@ -448,7 +449,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 		else if (c2->type == Collider::Type::ENEMY) {
 			if (collisionCountdown == 0) {
 				if (currentFuel > 3) {
-					currentFuel -= 3;
+					currentFuel -= 2;
 
 					//Playing hit sound effect
 					App->audio->PlayFx(hitFx, 0);
