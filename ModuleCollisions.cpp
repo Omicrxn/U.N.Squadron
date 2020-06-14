@@ -201,7 +201,22 @@ void ModuleCollisions::DebugDraw() {
 			App->render->DrawQuad(colliders[i]->rect, 255, 255, 0, alpha);
 			break;
 		case Collider::Type::ENEMY_SHOT: // Magenta
+			App->render->DrawQuad(colliders[i]->rect, 255, 0, 255, alpha);
+			break;
+		case Collider::Type::BOSS: // Brown
+			App->render->DrawQuad(colliders[i]->rect, 102, 51, 0, alpha);
+			break;
+		case Collider::Type::POWERUP_ORANGE: // Orange
+			App->render->DrawQuad(colliders[i]->rect, 255, 128, 0, alpha);
+			break;
+		case Collider::Type::POWERUP_BLUE: // Blue Sky
 			App->render->DrawQuad(colliders[i]->rect, 0, 255, 255, alpha);
+			break;
+		case Collider::Type::WEAPON: // GREY
+			App->render->DrawQuad(colliders[i]->rect, 128, 128, 128, alpha);
+			break;
+		case Collider::Type::WEAPON_SHELL: // PINK
+			App->render->DrawQuad(colliders[i]->rect, 127, 0, 255, alpha);
 			break;
 		}
 	}

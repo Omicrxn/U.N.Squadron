@@ -217,7 +217,7 @@ void ModuleWeapons::OnCollision(Collider* c1, Collider* c2)
 		if (weapons[i] != nullptr && weapons[i]->GetCollider() == c1)
 		{
 			weapons[i]->OnCollision(c2); // Notify the weapon of a collision
-			if ((c1->type == Collider::Type::WEAPON_SHELL)) {}
+			if (c1->type == Collider::Type::WEAPON_SHELL && c2->type == Collider::Type::ENEMY) {}
 			else {
 				delete weapons[i];
 				weapons[i] = nullptr;
