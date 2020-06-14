@@ -225,6 +225,9 @@ bool ModuleLevel2::Start() {
 	App->enemies->AddEnemy(ENEMY_TYPE::BIGORANGEJET, 7550, SCREEN_HEIGHT - 70);
 	App->enemies->AddEnemy(ENEMY_TYPE::BIGORANGEJET, 7575, SCREEN_HEIGHT - 70);
 
+	//if (bossDead == true) {
+	//	App->transition->FadeToBlack(this, (Module*)App->winScreen, 60);
+	//}
 
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;

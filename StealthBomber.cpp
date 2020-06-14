@@ -10,6 +10,7 @@
 #include "ModuleDebugInfo.h"
 #include "ModuleWeapons.h"
 #include "ModulePlayer.h"
+#include "ModuleFadeToBlack.h"
 
 StealthBomber::StealthBomber(int x, int y, bool spawnRight) : Enemy(x, y, spawnRight)
 {
@@ -139,5 +140,6 @@ void StealthBomber::OnCollision(Collider* collider) {
 			App->player->money += moneyGiven;
 		}
 		this->SetToDelete();
+		App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->winScreen, 60);
 	}
 }
