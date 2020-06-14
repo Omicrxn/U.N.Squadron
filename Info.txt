@@ -1,4 +1,4 @@
-This project is a tribute to U.N. Squadron (1989), developed and released by Capcom. This title is a shoot'em up single-player game (horizontal arcade scrolling shooter game).
+This project is a tribute to U.N. Squadron (1989), developed and released by Capcom. This title is an arcade shoot'em up single-player game (horizontal scrolling shooter game).
 
 Syllabus: Project I
 Degree: Game Design and Development Bachelor's Degree
@@ -7,4 +7,5 @@ Tutor: Marc Garrigó
 
 Team Members: Alejandro Ávila, Bosco Barber, Carles López and Yeray Tarifa
 
-GitHub Link: https://github.com/Omicrxn/U.N.Squadron
+GitHub Repository Link: https://github.com/Omicrxn/U.N.Squadron
+GitHub Website Link: https://omicrxn.github.io/U.N.Squadron
