@@ -28,6 +28,8 @@ Our team is named B.A.T.L. Studio, and it is formed by:
 
 # Short gameplay of the game
 
+<iframe width= [1440] heigh=[1080] src=[https://youtu.be/MZL0K1TqdiU]></iframe>
+
 ### Download the [last version]() of our game
 ### For more information check our [U.N. Squadron Wiki](https://github.com/Omicrxn/U.N.Squadron/wiki)
 ### Check our [GitHub Repository](https://github.com/Omicrxn/U.N.Squadron)
