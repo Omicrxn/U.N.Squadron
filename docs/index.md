@@ -31,6 +31,6 @@ Our team is named B.A.T.L. Studio, and it is formed by:
 <iframe width="720" height="350" src="https://www.youtube.com/embed/MZL0K1TqdiU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> (If the video doesn't work, you can always click [here](https://youtu.be/MZL0K1TqdiU))
 YouTube
 
-### Download the [last version]() of our game
+### Download the [last version](https://github.com/Omicrxn/U.N.Squadron/releases/tag/v1.0) of our game
 ### For more information check our [U.N. Squadron Wiki](https://github.com/Omicrxn/U.N.Squadron/wiki)
 ### Check our [GitHub Repository](https://github.com/Omicrxn/U.N.Squadron)
