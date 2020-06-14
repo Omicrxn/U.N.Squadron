@@ -12,6 +12,7 @@
 #include "ModuleFonts.h"
 #include "ModuleWeapons.h"
 #include "Truck.h"
+#include "Turret.h"
 
 ModuleLevel1::ModuleLevel1(bool startEnabled) : Module(startEnabled) {
 	name = "Level 1";
@@ -40,6 +41,8 @@ bool ModuleLevel1::Start() {
 	App->enemies->AddEnemy(ENEMY_TYPE::TRUCK, 1600, 440);
 	App->enemies->AddEnemy(ENEMY_TYPE::TRUCK, 1700, 440);
 	App->enemies->AddEnemy(ENEMY_TYPE::TRUCK, 1800, 440);
+
+	App->enemies->AddEnemy(ENEMY_TYPE::TURRET, 50, 50);
 
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
