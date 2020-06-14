@@ -204,7 +204,7 @@ update_status ModuleHUD::PostUpdate() {
 
 		if (App->lvl1->IsEnabled())
 		{
-			App->fonts->BlitText(SCREEN_WIDTH/2, SCREEN_HEIGHT/3, yellowFont, timer);
+			App->fonts->BlitText(108, SCREEN_HEIGHT/3, yellowFont, timer);
 		}
 	}
 
