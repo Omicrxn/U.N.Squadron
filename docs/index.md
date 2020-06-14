@@ -15,13 +15,13 @@ U.N. Squadron is an arcade shoot'em up single-player game (horizontal scrolling 
 ## The Team
 Our team is named B.A.T.L. Studio, and it is formed by:
 
-- Alejandro Ávila ([Omicrxn](https://github.com/Omicrxn)): Programmer and management 
+- Alejandro Ávila ([Omicrxn](https://github.com/Omicrxn)): implementation of the boss and the subboss of the levels, with all their features and the HUD.
 
-- Bosco Barber ([boscobarberesbert](https://github.com/boscobarberesbert)): Programmer 
+- Bosco Barber ([boscobarberesbert](https://github.com/boscobarberesbert)): implementation of the store, weapons and the features from level 1. 
 
-- Carles López ([carlesli](https://github.com/carlesli)): Art & design 
+- Carles López ([carlesli](https://github.com/carlesli)): creation of the  GitHub Page, sprites of particles and implementation of level 1. 
 
-- Yeray Tarifa ([yeraytm](https://github.com/yeraytm)): QA 
+- Yeray Tarifa ([yeraytm](https://github.com/yeraytm)): implementation of power-ups, debugging functionalities, gamepad gameplay and the implementation of the menu selector.
 
 ## Team Photo
 ![Team Photo](https://user-images.githubusercontent.com/60881573/75655998-4eb19500-5c63-11ea-9065-91b4b566a1df.jpg)
