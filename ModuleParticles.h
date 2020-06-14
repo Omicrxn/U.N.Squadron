@@ -120,6 +120,12 @@ public:
 	Particle bullet4;
 	Particle bullet5;
 
+	Particle bullet1_left;
+	Particle bullet2_left;
+	Particle bullet3_left;
+	Particle bullet4_left;
+	Particle bullet5_left;
+
 	Particle enemyBullet;
 	Particle turretMissile;
 	Particle greenFighterBullet;
