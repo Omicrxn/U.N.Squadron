@@ -218,7 +218,7 @@ bool ModuleLevel2::Start() {
 	App->enemies->AddEnemy(ENEMY_TYPE::BIGORANGEJET, 7575, SCREEN_HEIGHT - 70);
 
     //SUB BOSS GREEN FIGHTER PLANE
-	//App->enemies->AddEnemy(ENEMY_TYPE::GREENFIGHTERPLANE, SCREEN_WIDTH/2, 0, true);
+	App->enemies->AddEnemy(ENEMY_TYPE::GREENFIGHTERPLANE, SCREEN_WIDTH/2, 0, true);
 
 	App->enemies->AddEnemy(ENEMY_TYPE::GREENFIGHTERPLANE, SCREEN_WIDTH/2-5, 256, true);
 

@@ -14,7 +14,7 @@ Bomb::Bomb(int x, int y) : Weapon(x, y)
 	path.PushBack({ 1.5f, 2.0f }, 15, &drop1);
 	path.PushBack({ 1.5f, 2.0f }, 85, &drop2);
 
-	collider = App->collisions->AddCollider({ position.x, position.y, 30, 9 }, Collider::Type::PLAYER_SHOT, (Module*)App->weapons);
+	collider = App->collisions->AddCollider({ position.x, position.y, 30, 9 }, Collider::Type::WEAPON, (Module*)App->weapons);
 }
 
 void Bomb::Update()

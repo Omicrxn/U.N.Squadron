@@ -20,6 +20,9 @@ struct Collider
 		BOSS,
 		POWERUP_ORANGE,
 		POWERUP_BLUE,
+		WEAPON,
+		WEAPON_SHELL,
+
 		MAX
 	};
 

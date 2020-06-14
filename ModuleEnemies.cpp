@@ -286,7 +286,7 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 {
 	for(uint i = 0; i < MAX_ENEMIES; ++i)
 	{
-		if (enemies[i] != nullptr && enemies[i]->GetCollider() == c1 && c2->type == Collider::Type::PLAYER_SHOT) {
+		if (enemies[i] != nullptr && enemies[i]->GetCollider() == c1 && (c2->type == Collider::Type::PLAYER_SHOT || c2->type == Collider::Type::WEAPON || c2->type == Collider::Type::WEAPON_SHELL)) {
 			enemies[i]->OnCollision(c2);
 		}
 	}

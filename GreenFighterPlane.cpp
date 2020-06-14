@@ -7,6 +7,7 @@
 #include "ModulePlayer.h"
 #include "SetBulletDirection.h"
 #include "ModuleWeapons.h"
+#include "ModuleDebugInfo.h"
 
 GreenFighterPlane::GreenFighterPlane(int x, int y, bool spawnRight) : Enemy(x, y, spawnRight)
 {
@@ -131,9 +132,38 @@ void GreenFighterPlane::Update()
 		//SetBulletDirection(this);
 
 		//App->particles->AddParticle(App->particles->enemyBullet, position.x + 32, position.y, Collider::Type::ENEMY_SHOT);
-
-		//Playing shooting sound effect
-		App->audio->PlayFx(0, 0);
 	}
 }
 
+void GreenFighterPlane::OnCollision(Collider* collider) {
+	if (health > 1) {
+		if (collider->type == Collider::Type::PLAYER_SHOT) {
+			if (App->player->level == 1) health--;
+			else if (App->player->level == 2) health -= 2;
+			else if (App->player->level == 3) health -= 3;
+			else if (App->player->level == 4) health -= 4;
+			else if (App->player->level == 5) health -= 5;
+		}
+		else if (collider->type == Collider::Type::WEAPON || collider->type == Collider::Type::WEAPON_SHELL) {
+			health -= 7;
+		}
+	}
+	else {
+		App->particles->AddParticle(App->particles->enemyExplosion, position.x, position.y);
+		App->particles->AddParticle(App->particles->enemyExplosion, position.x + 10, position.y - 4);
+		App->particles->AddParticle(App->particles->enemyExplosion, position.x - 10, position.y + 4);
+		App->particles->AddParticle(App->particles->enemyExplosion, position.x + 15, position.y - 4);
+		App->particles->AddParticle(App->particles->enemyExplosion, position.x - 15, position.y + 4);
+		App->particles->AddParticle(App->particles->enemyExplosion, position.x + 20, position.y);
+		App->particles->AddParticle(App->particles->enemyExplosion, position.x - 20, position.y);
+
+		App->audio->PlayFx(destroyedFx, 0);
+
+		App->player->score += scoreGiven;
+
+		if (!App->debugInfo->maxMoney) {
+			App->player->money += moneyGiven;
+		}
+		this->SetToDelete();
+	}
+}

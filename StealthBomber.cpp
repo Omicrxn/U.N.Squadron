@@ -1,14 +1,14 @@
 #include "StealthBomber.h"
+
 #include "Application.h"
 #include "ModuleCollisions.h"
 #include "ModuleParticles.h"
 #include "ModuleAudio.h"
-#include "ModulePlayer.h"
 #include "ModuleLevel2.h"
 #include "SetBulletDirection.h"
 #include "ModuleDebugInfo.h"
 #include "ModuleWeapons.h"
-
+#include "ModulePlayer.h"
 
 StealthBomber::StealthBomber(int x, int y, bool spawnRight) : Enemy(x, y, spawnRight)
 {
@@ -111,3 +111,35 @@ void StealthBomber::Update()
 	Enemy::Update();
 }
 
+void StealthBomber::OnCollision(Collider* collider) {
+	if (health > 1) {
+		if (collider->type == Collider::Type::PLAYER_SHOT) {
+			if (App->player->level == 1) health--;
+			else if (App->player->level == 2) health -= 2;
+			else if (App->player->level == 3) health -= 3;
+			else if (App->player->level == 4) health -= 4;
+			else if (App->player->level == 5) health -= 5;
+		}
+		else if (collider->type == Collider::Type::WEAPON || collider->type == Collider::Type::WEAPON_SHELL) {
+			health -= 7;
+		}
+	}
+	else {
+		App->particles->AddParticle(App->particles->enemyExplosion, position.x, position.y);
+		App->particles->AddParticle(App->particles->enemyExplosion, position.x + 10, position.y - 4);
+		App->particles->AddParticle(App->particles->enemyExplosion, position.x - 10, position.y + 4);
+		App->particles->AddParticle(App->particles->enemyExplosion, position.x + 15, position.y - 4);
+		App->particles->AddParticle(App->particles->enemyExplosion, position.x - 15, position.y + 4);
+		App->particles->AddParticle(App->particles->enemyExplosion, position.x + 20, position.y);
+		App->particles->AddParticle(App->particles->enemyExplosion, position.x - 20, position.y);
+
+		App->audio->PlayFx(destroyedFx, 0);
+
+		App->player->score += scoreGiven;
+
+		if (!App->debugInfo->maxMoney) {
+			App->player->money += moneyGiven;
+		}
+		this->SetToDelete();
+	}
+}

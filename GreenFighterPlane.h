@@ -16,6 +16,8 @@ public:
 	// Position will be updated depending on the speed defined at each step
 	void Update() override;
 
+	void OnCollision(Collider* collider) override;
+
 private:
 	Path spawnPathTop;
 	Path spawnPathBot;

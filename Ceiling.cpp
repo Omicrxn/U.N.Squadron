@@ -18,7 +18,7 @@ Ceiling::Ceiling(int x, int y) : Weapon(x, y)
 	path.PushBack({ 1.0f, -2.0f }, 15, &drop);
 	path.PushBack({ 1.0f, -3.5f }, 100, &drop);
 
-	collider = App->collisions->AddCollider({ position.x, position.y, 30, 9 }, Collider::Type::PLAYER_SHOT, (Module*)App->weapons);
+	collider = App->collisions->AddCollider({ position.x, position.y, 30, 9 }, Collider::Type::WEAPON, (Module*)App->weapons);
 }
 
 void Ceiling::Update()

@@ -11,6 +11,8 @@ class StealthBomber : public Enemy
 public:
 	StealthBomber(int x, int y, bool spawnRight);
 	void Update() override;
+	void OnCollision(Collider* collider) override;
+
 private:
 	Path spawnPath;
 	Path normalPath;
