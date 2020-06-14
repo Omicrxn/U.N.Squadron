@@ -143,6 +143,8 @@ void ModuleWeapons::SpawnWeapon(WEAPON_TYPE weaponType, int x, int y)
 				break;
 			case WEAPON_TYPE::LEVEL1GUN:
 				weapons[i] = new Level1Gun(x, y);
+
+				break;
 			}
 			weapons[i]->texture = this->texture;
 			weapons[i]->destroyedFx = weaponDestroyedFx;

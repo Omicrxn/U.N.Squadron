@@ -149,33 +149,48 @@ update_status ModulePlayer::Update() {
 	if ((App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_REPEAT && !destroyed) || pad.x == true || pad.r1 == true) {
 		if (App->lvl1->IsEnabled())
 		{
-			App->weapons->SpawnWeapon(WEAPON_TYPE::LEVEL1GUN, position.x + 4, position.y - 4);
+			if (shotCountdown == 0)
+			{
+				App->weapons->SpawnWeapon(WEAPON_TYPE::LEVEL1GUN, position.x + 4, position.y);
+				// Playing shooting sound effect (if space was pressed)
+				App->audio->PlayFx(shootFx, 0);
+				shotCountdown = shotMaxCountdown;
+			}
+			
 		}
 		else if (App->lvl2->IsEnabled())
 		{
 			if (shotCountdown == 0) {
 				if (level == 1) {
 					App->particles->AddParticle(App->particles->bullet1, position.x + 7, position.y + 5, Collider::Type::PLAYER_SHOT);
+					// Playing shooting sound effect (if space was pressed)
+					App->audio->PlayFx(shootFx, 0);
 				}
 				else if (level == 2) {
 					App->particles->AddParticle(App->particles->bullet2, position.x + 7, position.y + 3, Collider::Type::PLAYER_SHOT);
+					// Playing shooting sound effect (if space was pressed)
+					App->audio->PlayFx(shootFx, 0);
 				}
 				else if (level == 3) {
 					App->particles->AddParticle(App->particles->bullet3, position.x + 11, position.y, Collider::Type::PLAYER_SHOT);
+					// Playing shooting sound effect (if space was pressed)
+					App->audio->PlayFx(shootFx, 0);
 				}
 				else if (level == 4) {
 					App->particles->AddParticle(App->particles->bullet4, position.x + 11, position.y - 3, Collider::Type::PLAYER_SHOT);
+					// Playing shooting sound effect (if space was pressed)
+					App->audio->PlayFx(shootFx, 0);
 				}
 				else if (level == 5) {
 					App->particles->AddParticle(App->particles->bullet5, position.x + 10, position.y, Collider::Type::PLAYER_SHOT);
+					// Playing shooting sound effect (if space was pressed)
+					App->audio->PlayFx(shootFx, 0);
 				}
+				shotCountdown = shotMaxCountdown;
 			}
 		}
 
-		// Playing shooting sound effect (if space was pressed)
-		App->audio->PlayFx(shootFx, 0);
-
-		shotCountdown = shotMaxCountdown;
+		
 	}
 
 	// Moving the spaceship when pressing WASD or using the Gamepad
