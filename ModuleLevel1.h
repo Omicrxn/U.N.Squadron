@@ -48,6 +48,13 @@ public:
 
 	bool spinningLeft;
 	uint spinningLeftCounter;
+
+	// Timer
+	uint startTime;
+	uint prevTime;
+	uint currentTime;
+	uint seconds;
+	uint miliseconds;
 };
 
 #endif

@@ -62,6 +62,12 @@ bool ModuleLevel1::Start() {
 	App->collisions->Enable();
 	App->weapons->Enable();
 
+	uint startTime = SDL_GetTicks();
+	uint currentTime = 0;
+
+	seconds = 46;
+	miliseconds = 100;
+
 	return ret;
 }
 
@@ -205,6 +211,21 @@ update_status ModuleLevel1::Update() {
 			App->player->position.x -= cameraSpeed;
 			App->player->position.y -= cameraSpeed / proportion;
 		}
+	}
+
+	// Timer
+	currentTime = SDL_GetTicks() - startTime;
+	if (currentTime >= 1000)
+	{
+		seconds--;
+		startTime = SDL_GetTicks();
+		miliseconds = 100;
+	}
+
+	if (SDL_GetTicks() - prevTime >= 10)
+	{
+		miliseconds--;
+		prevTime = SDL_GetTicks();
 	}
 	
 	return ret;

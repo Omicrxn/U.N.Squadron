@@ -56,6 +56,11 @@ private:
 	// Id Fonts
 	int yellowFont = -1;
 	int greenFont = -1;
+
+	// Level 1 timer
+	char secondsText[5] = { "\0" };
+	char milisecondsText[5] = { "\0" };
+	char timer[10] = { "\0" };
 };
 
 #endif // __ModuleHUD_H__

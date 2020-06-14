@@ -5,6 +5,7 @@
 #include "ModuleRenderer.h"
 #include "ModuleTextureManager.h"
 #include "ModuleDebugInfo.h"
+#include "ModuleLevel1.h"
 
 #include <stdio.h>
 
@@ -116,6 +117,15 @@ update_status ModuleHUD::Update() {
 		sprintf_s(ceilingAmmoText, 5, "max");
 	}
 
+	if (App->lvl1->IsEnabled())
+	{
+		sprintf_s(secondsText, 5, "%d", App->lvl1->seconds);
+		sprintf_s(milisecondsText, 5, "%d", App->lvl1->miliseconds);
+		sprintf_s(timer, 5, secondsText);
+		strcat_s(timer, ":");
+		strcat_s(timer, milisecondsText);
+	}
+
 	return ret;
 }
 
@@ -191,6 +201,11 @@ update_status ModuleHUD::PostUpdate() {
 		App->fonts->BlitText(224, 31, greenFont, totalText);
 		App->fonts->BlitText(32, 208, yellowFont, "=");
 		App->fonts->BlitText(41, 207, greenFont, lifesText);
+
+		if (App->lvl1->IsEnabled())
+		{
+			App->fonts->BlitText(SCREEN_WIDTH/2, SCREEN_HEIGHT/3, yellowFont, timer);
+		}
 	}
 
 	return ret;
