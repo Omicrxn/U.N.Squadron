@@ -39,9 +39,13 @@ bool ModuleEnemies::Start()
 	++activeTextures; ++totalTextures;
 	sbTexture = App->textures->Load("Assets/sprites/enemies/UNSquadronSheet10.gif ");
 	++activeTextures; ++totalTextures;
+	gfTexture = App->textures->Load("Assets/sprites/enemies/gfTexture.png ");
+	++activeTextures; ++totalTextures;
 	truckTexture = App->textures->Load("Assets/sprites/enemies/UNSquadronSheet24.gif");
 	++activeTextures; ++totalTextures;
 	enemyDestroyedFx = App->audio->LoadFx("Assets/music/events/enemiesexplotion.wav");
+	++activeFx; ++totalFx;
+	shootBossFx = App->audio->LoadFx("Assets/music/events/shoot.wav");
 	++activeFx; ++totalFx;
 
 	return true;
@@ -133,6 +137,9 @@ bool ModuleEnemies::CleanUp()
 	--totalTextures;
 
 	App->audio->UnloadFx(enemyDestroyedFx);
+	--totalFx;
+
+	App->audio->UnloadFx(shootBossFx);
 	--totalFx;
 
 	return true;
@@ -266,6 +273,10 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 
 			if (info.type == ENEMY_TYPE::STEALTHBOMBER) {
 				enemies[i]->texture = sbTexture;
+			}
+			else if (info.type == ENEMY_TYPE::GREENFIGHTERPLANE)
+			{
+				enemies[i]->texture = gfTexture;
 			}
 			else if (info.type == ENEMY_TYPE::TRUCK) {
 				enemies[i]->texture = truckTexture;

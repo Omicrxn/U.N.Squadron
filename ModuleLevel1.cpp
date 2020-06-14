@@ -224,7 +224,7 @@ update_status ModuleLevel1::Update() {
 
 	if (SDL_GetTicks() - prevTime >= 10)
 	{
-		miliseconds--;
+		miliseconds = miliseconds -1;
 		prevTime = SDL_GetTicks();
 	}
 	

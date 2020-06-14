@@ -8,13 +8,14 @@
 #include "SetBulletDirection.h"
 #include "ModuleWeapons.h"
 #include "ModuleDebugInfo.h"
+#include "ModuleEnemies.h"
 
 GreenFighterPlane::GreenFighterPlane(int x, int y, bool spawnRight) : Enemy(x, y, spawnRight)
 {
 	//animations
-	idle.PushBack({ 275,151,107,39 });
+	idle.PushBack({ 0,0,107,39 });
 	//collision
-	collider = App->collisions->AddCollider({ position.x, position.y, 139, 79 }, Collider::Type::BOSS, (Module*)App->enemies);
+	collider = App->collisions->AddCollider({ position.x, position.y, 107, 39 }, Collider::Type::BOSS, (Module*)App->enemies);
 	//--------PATHS------
 	//SPAWN PATH TOP
 	spawnPathTop.PushBack({ 1.12f,0.65f }, 240, &idle);
@@ -70,6 +71,18 @@ GreenFighterPlane::GreenFighterPlane(int x, int y, bool spawnRight) : Enemy(x, y
 
 void GreenFighterPlane::Update()
 {
+	if (damaged)
+	{
+		currentTime++;
+		if (currentTime == 5)
+		{
+			SDL_SetTextureColorMod(App->enemies->gfTexture, 255, 255, 255);
+			damaged = false;
+			currentTime = 0;
+		}
+
+
+	}
 	switch (state)
 	{
 	case gSPAWNING:
@@ -136,6 +149,8 @@ void GreenFighterPlane::Update()
 }
 
 void GreenFighterPlane::OnCollision(Collider* collider) {
+	damaged = true;
+	SDL_SetTextureColorMod(App->enemies->gfTexture, 250, 200, 75);
 	if (health > 1) {
 		if (collider->type == Collider::Type::PLAYER_SHOT) {
 			if (App->player->level == 1) health--;

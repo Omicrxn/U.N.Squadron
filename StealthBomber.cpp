@@ -2,6 +2,7 @@
 
 #include "Application.h"
 #include "ModuleCollisions.h"
+#include "ModuleEnemies.h"
 #include "ModuleParticles.h"
 #include "ModuleAudio.h"
 #include "ModuleLevel2.h"
@@ -35,12 +36,22 @@ StealthBomber::StealthBomber(int x, int y, bool spawnRight) : Enemy(x, y, spawnR
 	moneyGiven = 300;
 	health = 140;
 	currentAnim = spawnPath.GetCurrentAnimation();
+
 }
 
 void StealthBomber::Update()
 {
 	
-	
+	if (damaged)
+	{
+		currentTime++;
+		if (currentTime == 5 )
+		{
+			SDL_SetTextureColorMod(App->enemies->sbTexture, 255, 255, 255);
+			damaged = false;
+			currentTime = 0;
+		}
+	}
 	switch (state)
 	{
 	case SPAWNING:
@@ -65,20 +76,11 @@ void StealthBomber::Update()
 			currentAnim = normalPath.GetCurrentAnimation();
 
 		}
-		
-		
-	
 		break;
-	
-		
-		
 	default:
 		break;
 	}
 	
-	
-	
-
 	if (shootingFrequency == 190 && state == IDLE)
 	{
 
@@ -87,13 +89,7 @@ void StealthBomber::Update()
 		App->particles->AddParticle(App->particles->sbSparks, position.x-1, position.y + 24, Collider::Type::ENEMY_SHOT, 0);
 		App->particles->AddParticle(App->particles->sbFirecannon, position.x-1-24, position.y + 24, Collider::Type::ENEMY_SHOT, 5);
 		
-
-
-
-		//Playing shooting sound effect
-
-		//Playing shooting sound effect (if space was pressed)
-		App->audio->PlayFx(0, 0);
+		App->audio->PlayFx(App->enemies->shootBossFx, 0);
 	}
 	if (shootingFrequency2 == 180 && state == IDLE) {
 		shootingFrequency2 = 0;
@@ -112,6 +108,8 @@ void StealthBomber::Update()
 }
 
 void StealthBomber::OnCollision(Collider* collider) {
+	damaged = true;
+	SDL_SetTextureColorMod(App->enemies->sbTexture, 250, 200, 75);
 	if (health > 1) {
 		if (collider->type == Collider::Type::PLAYER_SHOT) {
 			if (App->player->level == 1) health--;

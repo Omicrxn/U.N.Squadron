@@ -47,7 +47,10 @@ update_status ModuleSelector::Update() {
 	update_status ret = update_status::UPDATE_CONTINUE;
 
 	if (!selected) {
-		if ((App->input->keyboard[SDL_SCANCODE_A] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_DOWN || App->input->pads[0].left == true || App->input->keyboard[SDL_SCANCODE_S] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_DOWN || App->input->pads[0].down == true) && !enterPressed) {
+		if ((App->input->keyboard[SDL_SCANCODE_W] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_A] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_S] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_D] == KEY_DOWN
+			|| App->input->keyboard[SDL_SCANCODE_UP] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_DOWN
+			|| App->input->pads[0].up == true || App->input->pads[0].down == true || App->input->pads[0].left == true || App->input->pads[0].right == true) 
+			&& !enterPressed) {
 			selected = true;
 		}
 		else if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN || App->input->pads[0].a == true) {
@@ -56,7 +59,10 @@ update_status ModuleSelector::Update() {
 		}
 	}
 	else {
-		if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_DOWN || App->input->pads[0].right == true || App->input->keyboard[SDL_SCANCODE_W] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_UP] == KEY_DOWN || App->input->pads[0].up == true) && !enterPressed) {
+		if ((App->input->keyboard[SDL_SCANCODE_W] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_A] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_S] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_D] == KEY_DOWN
+			|| App->input->keyboard[SDL_SCANCODE_UP] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_DOWN
+			|| App->input->pads[0].up == true || App->input->pads[0].down == true || App->input->pads[0].left == true || App->input->pads[0].right == true)
+			&& !enterPressed) {
 			selected = false;
 		}
 		else if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN || App->input->pads[0].a == true) {

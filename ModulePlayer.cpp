@@ -127,7 +127,18 @@ update_status ModulePlayer::Update() {
 	update_status ret = UPDATE_CONTINUE;
 
 	GamePad& pad = App->input->pads[0];
+	if (damaged)
+	{
+		currentTime++;
+		if (currentTime == 5)
+		{
+			SDL_SetTextureColorMod(texture, 255, 255, 255);
+			damaged = false;
+			currentTime = 0;
+		}
 
+
+	}
 	// Moving the player with the camera scroll
 	if (App->lvl2->IsEnabled())
 	{
@@ -405,67 +416,6 @@ update_status ModulePlayer::Update() {
 		}
 	}
 
-	//if (App->input->keyboard[SDL_SCANCODE_W] == KEY_IDLE && App->input->keyboard[SDL_SCANCODE_S] == KEY_IDLE && App->input->keyboard[SDL_SCANCODE_UP] == KEY_IDLE && App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_IDLE) {
-	//	if (current_anim != &playerAnim) {
-	//		current_anim = &playerAnim;
-	//	}
-	//	rectAnim = current_anim->GetFrame(0);
-	//}
-	//// If no up/down movement detected, set the current animation back to idle
-	//else if (pad.enabled) {
-	//	if (pad.l_x == 0.0f && pad.l_y == 0.0f)
-	//		current_anim = &playerAnim;
-	//}
-
-	//if (App->input->keyboard[SDL_SCANCODE_W] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_UP] == KEY_REPEAT || pad.l_y < 0.0f || pad.up == true) {
-
-	//	if (position.y > 42 && App->lvl2->IsEnabled()) {
-	//		position.y -= 2;
-	//		if (current_anim != &playerAnim) {
-	//			current_anim = &playerAnim;
-	//		}
-	//		rectAnim = current_anim->GetFrame(1);
-	//	}
-	//	else if (position.y > (App->render->camera.y / SCREEN_SIZE + 42) && App->lvl1->IsEnabled())
-	//	{
-	//		position.y -= 2;
-	//		if (current_anim != &playerAnim) {
-	//			current_anim = &playerAnim;
-	//		}
-	//		rectAnim = current_anim->GetFrame(1);
-	//	}
-	//}
-
-	//if (App->input->keyboard[SDL_SCANCODE_A] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_REPEAT || pad.l_x < 0.0f || pad.left == true) {
-	//	if (position.x > App->render->camera.x / SCREEN_SIZE) {
-	//		position.x -= 2;
-	//	}
-	//}
-
-	//if (App->input->keyboard[SDL_SCANCODE_S] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_REPEAT || pad.l_y > 0.0f || pad.down == true) {
-	//	if (position.y < SCREEN_HEIGHT - 38 && App->lvl2->IsEnabled()) {
-	//		position.y += 2;
-	//		if (current_anim != &playerAnim) {
-	//			current_anim = &playerAnim;
-	//		}
-	//		rectAnim = current_anim->GetFrame(2);
-	//	}
-	//	else if (position.y < (App->render->camera.y / SCREEN_SIZE + SCREEN_HEIGHT - 38) && App->lvl1->IsEnabled())
-	//	{
-	//		position.y += 2;
-	//		if (current_anim != &playerAnim) {
-	//			current_anim = &playerAnim;
-	//		}
-	//		rectAnim = current_anim->GetFrame(2);
-	//	}
-	//}
-
-	//if (App->input->keyboard[SDL_SCANCODE_D] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_REPEAT || pad.l_y > 0.0f || pad.right == true) {
-	//	if (position.x < (App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH - 32)) {
-	//		position.x += 2;
-	//	}
-	//}
-
 	if (App->input->keyboard[SDL_SCANCODE_F] == KEY_REPEAT || pad.b == true || pad.r2 == true) {
 		if (weaponCountdown == 0) {
 			switch (currentWeapon)
@@ -678,7 +628,8 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 	// Detect collision with a bullet or an enemy. If so, disappear and explode.
 	if (c1 == collider && destroyed == false) {
 		if (c2->type == Collider::Type::ENEMY_SHOT) {
-			//SDL_SetTextureColorMod(texture, 450, 450, 64);
+			damaged = true;
+			SDL_SetTextureColorMod(texture, 250, 200, 75);
 			if (currentFuel > 1) {
 				currentFuel--;
 
@@ -698,7 +649,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 				}
 				else {
 					playerLifes = 3;
-					money = 0;
+					money = 3000;
 					total = 0;
 					level = 1;
 					if (App->lvl2->IsEnabled()) App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->loseScreen, 60);
@@ -731,7 +682,8 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 					}
 					else {
 						playerLifes = 3;
-						money = total = 0;
+						money = 3000;
+						total = 0;
 						level = 1;
 						if (App->lvl2->IsEnabled()) App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->loseScreen, 60);
 						else if (App->lvl1->IsEnabled()) App->transition->FadeToBlack((Module*)App->lvl1, (Module*)App->loseScreen, 60);
