@@ -40,7 +40,8 @@ bool ModuleLevel1::Start() {
 	App->enemies->AddEnemy(ENEMY_TYPE::TRUCK, 1700, 440);
 	App->enemies->AddEnemy(ENEMY_TYPE::TRUCK, 1800, 440);
 
-	App->enemies->AddEnemy(ENEMY_TYPE::TURRET, 50, 50);
+	App->enemies->AddEnemy(ENEMY_TYPE::TURRET, 1675, 440);
+	App->enemies->AddEnemy(ENEMY_TYPE::TURRET, 1775, 440);
 
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;

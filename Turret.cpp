@@ -11,6 +11,7 @@ Turret::Turret(int x, int y, bool spawnRight) :Enemy(x, y, spawnRight) {
 	turretAnimation.PushBack({ 219, 14, 23, 28 });
 	turretAnimation.PushBack({ 252, 14, 23, 28 });
 	turretAnimation.PushBack({ 287, 13, 23, 28 });
+	turretAnimation.speed = 0.05;
 
 	path.PushBack({ 0.0f, 0.0f }, 1000000000, &turretAnimation);
 
@@ -29,4 +30,12 @@ void Turret::Update() {
 	// Call it to the base class. It must be called at the end
 	// It will update the collider depending on the position
 	Enemy::Update();
+
+	shootingFrequency++;
+	if (shootingFrequency > 150)
+	{
+		shootingFrequency = 0;
+
+		App->particles->AddParticle(App->particles->turretMissile, position.x, position.y + 64, Collider::Type::ENEMY_SHOT);
+	}
 }
