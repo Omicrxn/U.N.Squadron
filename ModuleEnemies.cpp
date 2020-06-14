@@ -16,6 +16,7 @@
 #include "Turret.h"
 #include "GreenFighterPlane.h"
 #include "ModuleParticles.h"
+#include "ModuleLevel2.h"
 
 #define SPAWN_MARGIN 50
 
@@ -70,8 +71,11 @@ update_status ModuleEnemies::Update()
 			enemies[i]->Update();
 	}
 
-	HandleEnemiesDespawn();
-
+	if (App->lvl2->IsEnabled())
+	{
+		HandleEnemiesDespawn();
+	}
+	
 	return update_status::UPDATE_CONTINUE;
 }
 
