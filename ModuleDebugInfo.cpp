@@ -62,57 +62,57 @@ update_status ModuleDebugInfo::Update() {
 	// Debug functionality to jump screens
 	if (App->input->keyboard[SDL_SCANCODE_F4] == KEY_DOWN) {
 		if (App->initialScreen->IsEnabled()) {
-			App->transition->FadeToBlack((Module*)App->initialScreen, (Module*)App->startScreen, 60);
+			App->transition->FadeToBlack((Module*)App->initialScreen, (Module*)App->startScreen, 30);
 		}
 		else if (App->startScreen->IsEnabled()) {
-			App->transition->FadeToBlack((Module*)App->startScreen, (Module*)App->selector, 60);
+			App->transition->FadeToBlack((Module*)App->startScreen, (Module*)App->selector, 30);
 		}
 		else if (App->selector->IsEnabled()) {
-			App->transition->FadeToBlack((Module*)App->selector, (Module*)App->store, 60);
+			App->transition->FadeToBlack((Module*)App->selector, (Module*)App->store, 30);
 		}
 		else if (App->store->IsEnabled()) {
-			if(App->selector->GetSelected()) App->transition->FadeToBlack((Module*)App->store, (Module*)App->lvl2, 60);
-			else App->transition->FadeToBlack((Module*)App->store, (Module*)App->lvl1, 60);
+			if(App->selector->GetSelected()) App->transition->FadeToBlack((Module*)App->store, (Module*)App->lvl2, 30);
+			else App->transition->FadeToBlack((Module*)App->store, (Module*)App->lvl1, 30);
 		}
 		else if (App->lvl2->IsEnabled()) {
-			App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->selector, 60);
+			App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->selector, 30);
 		}
 		else if (App->lvl1->IsEnabled()) {
-			App->transition->FadeToBlack((Module*)App->lvl1, (Module*)App->selector, 60);
+			App->transition->FadeToBlack((Module*)App->lvl1, (Module*)App->selector, 30);
 		}
 		else if (App->winScreen->IsEnabled()) {
-			App->transition->FadeToBlack((Module*)App->winScreen, (Module*)App->selector, 60);
+			App->transition->FadeToBlack((Module*)App->winScreen, (Module*)App->selector, 30);
 		}
 		else if (App->loseScreen->IsEnabled()) {
-			App->transition->FadeToBlack((Module*)App->loseScreen, (Module*)App->startScreen, 60);
+			App->transition->FadeToBlack((Module*)App->loseScreen, (Module*)App->startScreen, 30);
 		}
 	}
 
 	if (App->input->keyboard[SDL_SCANCODE_F5] == KEY_DOWN) {
 		if (App->lvl2->IsEnabled()) {
-			App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->startScreen, 60);
+			App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->startScreen, 30);
 		}
 		if (App->lvl1->IsEnabled()) {
-			App->transition->FadeToBlack((Module*)App->lvl1, (Module*)App->startScreen, 60);
+			App->transition->FadeToBlack((Module*)App->lvl1, (Module*)App->startScreen, 30);
 		}
 	}
 
 	// Debug functionality to Win Screen
 	if (App->input->keyboard[SDL_SCANCODE_F6] == KEY_DOWN) {
 		if (App->lvl2->IsEnabled()) {
-			App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->winScreen, 60);
+			App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->winScreen, 30);
 		}
 		if (App->lvl1->IsEnabled()) {
-			App->transition->FadeToBlack((Module*)App->lvl1, (Module*)App->winScreen, 60);
+			App->transition->FadeToBlack((Module*)App->lvl1, (Module*)App->winScreen, 30);
 		}
 	}
 
 	if (App->input->keyboard[SDL_SCANCODE_F7] == KEY_DOWN) {
 		if (App->lvl2->IsEnabled()) {
-			App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->loseScreen, 60);
+			App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->loseScreen, 30);
 		}
 		if (App->lvl1->IsEnabled()) {
-			App->transition->FadeToBlack((Module*)App->lvl1, (Module*)App->loseScreen, 60);
+			App->transition->FadeToBlack((Module*)App->lvl1, (Module*)App->loseScreen, 30);
 		}
 	}
 

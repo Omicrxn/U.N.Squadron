@@ -69,7 +69,7 @@ update_status ModuleLoseScreen::Update() {
 		else if ((App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_DOWN || App->input->pads[0].a == true) && App->transition->hasEnded()) {
 			pressed = true;
 			App->audio->PlayFx(loseFx, 0);
-			App->transition->FadeToBlack(this, (Module*)App->selector, 60);
+			App->transition->FadeToBlack(this, (Module*)App->selector, 90);
 		}
 	}
 	else {
@@ -94,11 +94,11 @@ update_status ModuleLoseScreen::PostUpdate() {
 	}
 
 	if (continue3) {
-		App->fonts->BlitText(96, 183, greenFont, "CONTINUE 3");
+		App->fonts->BlitText(96, 183, greenFont, "CONTINUE");
 		App->fonts->BlitText(96, 199, greyFont, "END");
 	}
 	else {
-		App->fonts->BlitText(96, 183, greyFont, "CONTINUE 3");
+		App->fonts->BlitText(96, 183, greyFont, "CONTINUE");
 		App->fonts->BlitText(96, 199, greenFont, "END");
 	}
 

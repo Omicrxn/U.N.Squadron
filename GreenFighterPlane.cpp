@@ -136,3 +136,4 @@ void GreenFighterPlane::Update()
 		App->audio->PlayFx(0, 0);
 	}
 }
+

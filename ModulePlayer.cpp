@@ -693,14 +693,16 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 				App->audio->PlayFx(dieFx, 0);
 				if (playerLifes > 1 && !App->debugInfo->maxLifes) {
 					playerLifes--;
-					App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->selector, 60);
+					if (App->lvl2->IsEnabled()) App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->selector, 60);
+					else if (App->lvl1->IsEnabled()) App->transition->FadeToBlack((Module*)App->lvl1, (Module*)App->selector, 60);
 				}
 				else {
 					playerLifes = 3;
 					money = 0;
 					total = 0;
 					level = 1;
-					App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->loseScreen, 60);
+					if (App->lvl2->IsEnabled()) App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->loseScreen, 60);
+					else if(App->lvl1->IsEnabled()) App->transition->FadeToBlack((Module*)App->lvl1, (Module*)App->loseScreen, 60);
 				}
 				destroyed = true;
 			}
@@ -711,7 +713,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 		else if (c2->type == Collider::Type::ENEMY) {
 			if (collisionCountdown == 0) {
 				if (currentFuel > 3) {
-					currentFuel -= 2;
+					currentFuel -= 3;
 
 					//Playing hit sound effect
 					App->audio->PlayFx(hitFx, 0);
@@ -724,13 +726,15 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 					App->audio->PlayFx(dieFx, 0);
 					if (playerLifes > 1 && !App->debugInfo->maxLifes) {
 						playerLifes--;
-						App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->selector, 60);
+						if (App->lvl2->IsEnabled()) App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->selector, 60);
+						else if (App->lvl1->IsEnabled()) App->transition->FadeToBlack((Module*)App->lvl1, (Module*)App->selector, 60);
 					}
 					else {
 						playerLifes = 3;
 						money = total = 0;
 						level = 1;
-						App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->loseScreen, 60);
+						if (App->lvl2->IsEnabled()) App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->loseScreen, 60);
+						else if (App->lvl1->IsEnabled()) App->transition->FadeToBlack((Module*)App->lvl1, (Module*)App->loseScreen, 60);
 					}
 					destroyed = true;
 				}
