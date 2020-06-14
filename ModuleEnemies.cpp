@@ -45,6 +45,8 @@ bool ModuleEnemies::Start()
 	++activeTextures; ++totalTextures;
 	enemyDestroyedFx = App->audio->LoadFx("Assets/music/events/enemiesexplotion.wav");
 	++activeFx; ++totalFx;
+	shootBossFx = App->audio->LoadFx("Assets/music/events/shoot.wav");
+	++activeFx; ++totalFx;
 
 	return true;
 }
@@ -135,6 +137,9 @@ bool ModuleEnemies::CleanUp()
 	--totalTextures;
 
 	App->audio->UnloadFx(enemyDestroyedFx);
+	--totalFx;
+
+	App->audio->UnloadFx(shootBossFx);
 	--totalFx;
 
 	return true;

@@ -77,6 +77,8 @@ public:
 	SDL_Texture* sbTexture = nullptr;
 	//Texture for the GreenFighter SubBoss
 	SDL_Texture* gfTexture = nullptr;
+
+	int shootBossFx = 0;
 private:
 	// Spawns a new enemy using the data from the queue
 	void SpawnEnemy(const EnemySpawnpoint& info);

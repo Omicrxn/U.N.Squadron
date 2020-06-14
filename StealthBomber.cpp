@@ -51,8 +51,6 @@ void StealthBomber::Update()
 			damaged = false;
 			currentTime = 0;
 		}
-		
-
 	}
 	switch (state)
 	{
@@ -78,20 +76,11 @@ void StealthBomber::Update()
 			currentAnim = normalPath.GetCurrentAnimation();
 
 		}
-		
-		
-	
 		break;
-	
-		
-		
 	default:
 		break;
 	}
 	
-	
-	
-
 	if (shootingFrequency == 190 && state == IDLE)
 	{
 
@@ -100,13 +89,7 @@ void StealthBomber::Update()
 		App->particles->AddParticle(App->particles->sbSparks, position.x-1, position.y + 24, Collider::Type::ENEMY_SHOT, 0);
 		App->particles->AddParticle(App->particles->sbFirecannon, position.x-1-24, position.y + 24, Collider::Type::ENEMY_SHOT, 5);
 		
-
-
-
-		//Playing shooting sound effect
-
-		//Playing shooting sound effect (if space was pressed)
-		App->audio->PlayFx(0, 0);
+		App->audio->PlayFx(App->enemies->shootBossFx, 0);
 	}
 	if (shootingFrequency2 == 180 && state == IDLE) {
 		shootingFrequency2 = 0;
