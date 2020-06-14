@@ -13,6 +13,7 @@
 #include "StealthBomber.h"
 #include "BlueJet.h"
 #include "Truck.h"
+#include "Turret.h"
 #include "GreenFighterPlane.h"
 #include "ModuleParticles.h"
 
@@ -244,12 +245,18 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 				case ENEMY_TYPE::TRUCK:
 					enemies[i] = new Truck(info.x, info.y, info.spawnRight);
 					break;
+				case ENEMY_TYPE::TURRET:
+					enemies[i] = new Turret(info.x, info.y, info.spawnRight);
+					break;
 			}
 
 			if (info.type == ENEMY_TYPE::STEALTHBOMBER) {
 				enemies[i]->texture = sbTexture;
 			}
 			else if (info.type == ENEMY_TYPE::TRUCK) {
+				enemies[i]->texture = truckTexture;
+			}
+			else if (info.type == ENEMY_TYPE::TURRET) {
 				enemies[i]->texture = truckTexture;
 			}
 			else {

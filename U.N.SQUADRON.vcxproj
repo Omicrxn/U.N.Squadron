@@ -185,6 +185,7 @@
     <ClCompile Include="SmallCamouflageJet.cpp" />
     <ClCompile Include="StealthBomber.cpp" />
     <ClCompile Include="Truck.cpp" />
+    <ClCompile Include="Turret.cpp" />
     <ClCompile Include="Weapon.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -237,6 +238,7 @@
     <ClInclude Include="SmallCamouflageJet.h" />
     <ClInclude Include="StealthBomber.h" />
     <ClInclude Include="Truck.h" />
+    <ClInclude Include="Turret.h" />
     <ClInclude Include="Weapon.h" />
   </ItemGroup>
   <ItemGroup>
