@@ -92,7 +92,8 @@ private:
 	bool godMode = false;
 	uint weaponCount;
 	bool hasBought;
-
+	bool damaged = false;
+	int currentTime = 0;
 	// Countdown to handle shot spacing
 	int shotMaxCountdown = 13;
 	int shotCountdown = 0;

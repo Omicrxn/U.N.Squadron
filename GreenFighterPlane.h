@@ -31,5 +31,7 @@ private:
 	bool spawningTop = false;
 	bool goingUp = false;
 	iPoint idlePosition = { 0, 0 };
+	bool damaged = false;
+	int currentTime = 0;
 	
 };

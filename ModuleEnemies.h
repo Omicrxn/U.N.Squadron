@@ -73,6 +73,10 @@ public:
 	// Destroys any enemies that have moved outside the camera limits
 	void HandleEnemiesDespawn();
 
+	//Texture for the Stealth Bomber Boss
+	SDL_Texture* sbTexture = nullptr;
+	//Texture for the GreenFighter SubBoss
+	SDL_Texture* gfTexture = nullptr;
 private:
 	// Spawns a new enemy using the data from the queue
 	void SpawnEnemy(const EnemySpawnpoint& info);
@@ -86,8 +90,7 @@ private:
 
 	// The enemies sprite sheet
 	SDL_Texture* texture = nullptr;
-	//Texture for the Stealth Bomber Boss
-	SDL_Texture* sbTexture = nullptr;
+	
 	// Texture for the enemies of level 1
 	SDL_Texture* truckTexture = nullptr;
 

@@ -21,7 +21,8 @@ private:
 	SDL_Rect rect;
 	unsigned int shootingFrequency;
 	unsigned int shootingFrequency2;
-	
+	bool damaged = false;
+	int currentTime = 0;
 	SBState state = SPAWNING;
 	iPoint idlePosition = { 0, 0};
 	

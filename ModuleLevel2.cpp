@@ -110,7 +110,7 @@ bool ModuleLevel2::Start() {
 	App->enemies->AddEnemy(ENEMY_TYPE::SMALLCAMOUFLAGEJET, 1725, 50);
 	App->enemies->AddEnemy(ENEMY_TYPE::SMALLCAMOUFLAGEJET, 1700, SCREEN_HEIGHT - 70);
 	App->enemies->AddEnemy(ENEMY_TYPE::SMALLCAMOUFLAGEJET, 1725, SCREEN_HEIGHT - 70);
-
+	//HERE
 	// 4 bluejet (2 arriba 2 abajo) izquierda
 	App->enemies->AddEnemy(ENEMY_TYPE::BLUEJET, 1800, 50, false);
 	App->enemies->AddEnemy(ENEMY_TYPE::BLUEJET, 1825, 50, false);
@@ -217,7 +217,7 @@ bool ModuleLevel2::Start() {
 	App->enemies->AddEnemy(ENEMY_TYPE::BIGORANGEJET, 7550, SCREEN_HEIGHT - 70);
 	App->enemies->AddEnemy(ENEMY_TYPE::BIGORANGEJET, 7575, SCREEN_HEIGHT - 70);
 
-    //SUB BOSS GREEN FIGHTER PLANE
+ //   //SUB BOSS GREEN FIGHTER PLANE
 	App->enemies->AddEnemy(ENEMY_TYPE::GREENFIGHTERPLANE, SCREEN_WIDTH/2, 0, true);
 
 	App->enemies->AddEnemy(ENEMY_TYPE::GREENFIGHTERPLANE, SCREEN_WIDTH/2-5, 256, true);

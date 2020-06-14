@@ -2,6 +2,7 @@
 
 #include "Application.h"
 #include "ModuleCollisions.h"
+#include "ModuleEnemies.h"
 #include "ModuleParticles.h"
 #include "ModuleAudio.h"
 #include "ModuleLevel2.h"
@@ -35,12 +36,24 @@ StealthBomber::StealthBomber(int x, int y, bool spawnRight) : Enemy(x, y, spawnR
 	moneyGiven = 300;
 	health = 140;
 	currentAnim = spawnPath.GetCurrentAnimation();
+
 }
 
 void StealthBomber::Update()
 {
 	
-	
+	if (damaged)
+	{
+		currentTime++;
+		if (currentTime == 5 )
+		{
+			SDL_SetTextureColorMod(App->enemies->sbTexture, 255, 255, 255);
+			damaged = false;
+			currentTime = 0;
+		}
+		
+
+	}
 	switch (state)
 	{
 	case SPAWNING:
@@ -112,6 +125,8 @@ void StealthBomber::Update()
 }
 
 void StealthBomber::OnCollision(Collider* collider) {
+	damaged = true;
+	SDL_SetTextureColorMod(App->enemies->sbTexture, 250, 200, 75);
 	if (health > 1) {
 		if (collider->type == Collider::Type::PLAYER_SHOT) {
 			if (App->player->level == 1) health--;

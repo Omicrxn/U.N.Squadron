@@ -127,7 +127,18 @@ update_status ModulePlayer::Update() {
 	update_status ret = UPDATE_CONTINUE;
 
 	GamePad& pad = App->input->pads[0];
+	if (damaged)
+	{
+		currentTime++;
+		if (currentTime == 5)
+		{
+			SDL_SetTextureColorMod(texture, 255, 255, 255);
+			damaged = false;
+			currentTime = 0;
+		}
 
+
+	}
 	// Moving the player with the camera scroll
 	if (App->lvl2->IsEnabled())
 	{
@@ -678,7 +689,8 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 	// Detect collision with a bullet or an enemy. If so, disappear and explode.
 	if (c1 == collider && destroyed == false) {
 		if (c2->type == Collider::Type::ENEMY_SHOT) {
-			//SDL_SetTextureColorMod(texture, 450, 450, 64);
+			damaged = true;
+			SDL_SetTextureColorMod(texture, 250, 200, 75);
 			if (currentFuel > 1) {
 				currentFuel--;
 
