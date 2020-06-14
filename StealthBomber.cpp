@@ -24,7 +24,7 @@ StealthBomber::StealthBomber(int x, int y, bool spawnRight) : Enemy(x, y, spawnR
 	//collision
 	collider = App->collisions->AddCollider({ position.x, position.y, 139, 79 }, Collider::Type::BOSS, (Module*)App->enemies);
 	//paths
-	spawnPath.PushBack({ 1.43f,-0.2f }, 600, &idle);
+	spawnPath.PushBack({ 1.20f,-0.2f }, 600, &idle);
 	spawnPath.PushBack({ 1.0-0.15f,-0.25f }, 180, &idle);
 	spawnPath.loop = false;
 	normalPath.PushBack({ 0.9f,0.3f }, 180, &idle);

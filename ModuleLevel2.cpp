@@ -70,8 +70,14 @@ bool ModuleLevel2::Start() {
 	thirdTopPos2 = { (float)thirdTopLayer.w,0 };
 	thirdBotPos2 = { (float)thirdBottomLayer.w,(float)(SCREEN_HEIGHT-thirdBottomLayer.h) };
 	thirdSpeed = 2.0;
-	App->enemies->AddEnemy(ENEMY_TYPE::STEALTHBOMBER, 7625, SCREEN_HEIGHT, false);
-	App->enemies->AddEnemy(ENEMY_TYPE::GREENFIGHTERPLANE, 1750, 0,true);
+	App->enemies->AddEnemy(ENEMY_TYPE::STEALTHBOMBER, 8700, SCREEN_HEIGHT, false);
+	App->enemies->AddEnemy(ENEMY_TYPE::GREENFIGHTERPLANE, 1200, 0-39,false);
+	App->enemies->AddEnemy(ENEMY_TYPE::GREENFIGHTERPLANE, 2650, 256,false);
+	App->enemies->AddEnemy(ENEMY_TYPE::GREENFIGHTERPLANE, 4500, 0 - 39, false);
+	App->enemies->AddEnemy(ENEMY_TYPE::GREENFIGHTERPLANE, 5800, 256, false);
+	App->enemies->AddEnemy(ENEMY_TYPE::GREENFIGHTERPLANE, 7200, 0 - 39, false);
+
+
 	App->enemies->AddEnemy(ENEMY_TYPE::MEDIUMCAMOUFLAGEJET, 400, 50);
 	App->enemies->AddEnemy(ENEMY_TYPE::MEDIUMCAMOUFLAGEJET, 425, 50);
 	App->enemies->AddEnemy(ENEMY_TYPE::MEDIUMCAMOUFLAGEJET, 450, 50);
@@ -124,7 +130,7 @@ bool ModuleLevel2::Start() {
 	App->enemies->AddEnemy(ENEMY_TYPE::SMALLCAMOUFLAGEJET, 2425, 50);
 	App->enemies->AddEnemy(ENEMY_TYPE::SMALLCAMOUFLAGEJET, 2400, SCREEN_HEIGHT - 70);
 	App->enemies->AddEnemy(ENEMY_TYPE::SMALLCAMOUFLAGEJET, 2425, SCREEN_HEIGHT - 70);
-
+	//here
 	// 1 bluejet arriba y 1 abajo izquierda
 	App->enemies->AddEnemy(ENEMY_TYPE::BLUEJET, 2500, 50, false);
 	App->enemies->AddEnemy(ENEMY_TYPE::BLUEJET, 2500, SCREEN_HEIGHT - 70, false);
@@ -183,7 +189,7 @@ bool ModuleLevel2::Start() {
 	App->enemies->AddEnemy(ENEMY_TYPE::BIGCAMOUFLAGEJET, 5725, 50);
 	App->enemies->AddEnemy(ENEMY_TYPE::BIGCAMOUFLAGEJET, 5750, 50);
 	App->enemies->AddEnemy(ENEMY_TYPE::BIGCAMOUFLAGEJET, 5775, 50);
-
+	//here
 	// 4 big camouflage arriba a la derecha
 	App->enemies->AddEnemy(ENEMY_TYPE::BIGCAMOUFLAGEJET, 6000, 50);
 	App->enemies->AddEnemy(ENEMY_TYPE::BIGCAMOUFLAGEJET, 6025, 50);
