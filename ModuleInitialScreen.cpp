@@ -15,14 +15,16 @@ ModuleInitialScreen::ModuleInitialScreen(bool startEnabled) : Module(startEnable
 	// Screen rect
 	logo = { 0,0,256,224 };
 	screen = { 0,0,SCREEN_WIDTH * SCREEN_SIZE,SCREEN_HEIGHT * SCREEN_SIZE };
-
-	startTime = 0;
 }
 
 ModuleInitialScreen::~ModuleInitialScreen() {}
 
 bool ModuleInitialScreen::Start() {
 	bool ret = true;
+
+	startTime = 0;
+	actualTime = 0;
+	endTime = 0;
 
 	logoTex = App->textures->Load("Assets/sprites/menus/Logo.png");
 	++activeTextures; ++totalTextures;
@@ -75,6 +77,10 @@ update_status ModuleInitialScreen::PostUpdate() {
 
 bool ModuleInitialScreen::CleanUp() {
 	bool ret = true;
+
+	startTime = 0;
+	actualTime = 0;
+	endTime = 0;
 
 	activeTextures = 0;
 

@@ -113,10 +113,13 @@ public:
 	// Template particle for an explosion
 	Particle explosion;
 	Particle enemyExplosion;
+
 	Particle bullet1;
 	Particle bullet2;
 	Particle bullet3;
 	Particle bullet4;
+	Particle bullet5;
+
 	Particle enemyBullet;
 	Particle greenFighterBullet;
 	Particle sbFirecannon;

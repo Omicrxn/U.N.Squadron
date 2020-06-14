@@ -24,8 +24,8 @@ bool ModuleLevel1::Start() {
 
 	numSpawnedEnemies = 0;
 
-	backgroundTexture = App->textures->Load("Assets/sprites/scenarios/BonusLevel.png");
-	++activeTextures; ++totalTextures;
+	//backgroundTexture = App->textures->Load("Assets/sprites/scenarios/BonusLevel.png");
+	//++activeTextures; ++totalTextures;
 
 	// Music
 	App->audio->PlayMusic("Assets/music/soundtrack/cave.ogg");
@@ -173,21 +173,21 @@ update_status ModuleLevel1::Update() {
 update_status ModuleLevel1::PostUpdate() {
 	update_status ret = UPDATE_CONTINUE;
 
-	/*Render Sky*/
-	if (!App->render->Blit(backgroundTexture, 0, -70, &sky, 0.3)) {
-		LOG("Cannot blit the texture in ModuleLevel1 %s\n", SDL_GetError());
-		ret = update_status::UPDATE_ERROR;
-	}
-	/*Render Mountains*/
-	if (!App->render->Blit(backgroundTexture, 0, 84, &mountains, 0.5)) {
-		LOG("Cannot blit the texture in ModuleLevel1 %s\n", SDL_GetError());
-		ret = update_status::UPDATE_ERROR;
-	}
-	/*Render Floor*/
-	if (!App->render->Blit(backgroundTexture, 0, 308, &floor, 0.5)) {
-		LOG("Cannot blit the texture in ModuleLevel1 %s\n", SDL_GetError());
-		ret = update_status::UPDATE_ERROR;
-	}
+	///*Render Sky*/
+	//if (!App->render->Blit(backgroundTexture, 0, -70, &sky, 0.3)) {
+	//	LOG("Cannot blit the texture in ModuleLevel1 %s\n", SDL_GetError());
+	//	ret = update_status::UPDATE_ERROR;
+	//}
+	///*Render Mountains*/
+	//if (!App->render->Blit(backgroundTexture, 0, 84, &mountains, 0.5)) {
+	//	LOG("Cannot blit the texture in ModuleLevel1 %s\n", SDL_GetError());
+	//	ret = update_status::UPDATE_ERROR;
+	//}
+	///*Render Floor*/
+	//if (!App->render->Blit(backgroundTexture, 0, 308, &floor, 0.5)) {
+	//	LOG("Cannot blit the texture in ModuleLevel1 %s\n", SDL_GetError());
+	//	ret = update_status::UPDATE_ERROR;
+	//}
 	
 	return ret;
 }

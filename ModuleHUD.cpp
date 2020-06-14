@@ -93,7 +93,12 @@ update_status ModuleHUD::Update() {
 
 	sprintf_s(levelText, 2, "%1d", App->player->level);
 
-	if (!App->player->maxPow) sprintf_s(powText, 4, "%3d", App->player->GetCurrentPOW());
+	if (!App->player->maxPow) {
+		if (App->player->level == 1) sprintf_s(powText, 4, "%3d", (4 - App->player->total));
+		if (App->player->level == 2) sprintf_s(powText, 4, "%3d", (15 - App->player->total));
+		if (App->player->level == 3) sprintf_s(powText, 4, "%3d", (26 - App->player->total));
+		if (App->player->level == 4) sprintf_s(powText, 4, "%3d", (42 - App->player->total));
+	}
 	else sprintf_s(powText, 4, "max");
 
 	// Passing the weapons ammo from uint to char
@@ -109,7 +114,6 @@ update_status ModuleHUD::Update() {
 		sprintf_s(bombAmmoText, 5, "max");
 		sprintf_s(ceilingAmmoText, 5, "max");
 	}
-
 
 	return ret;
 }
