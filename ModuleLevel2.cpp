@@ -70,7 +70,8 @@ bool ModuleLevel2::Start() {
 	thirdTopPos2 = { (float)thirdTopLayer.w,0 };
 	thirdBotPos2 = { (float)thirdBottomLayer.w,(float)(SCREEN_HEIGHT-thirdBottomLayer.h) };
 	thirdSpeed = 2.0;
-
+	App->enemies->AddEnemy(ENEMY_TYPE::STEALTHBOMBER, 7625, SCREEN_HEIGHT, false);
+	App->enemies->AddEnemy(ENEMY_TYPE::GREENFIGHTERPLANE, 1750, 0,true);
 	App->enemies->AddEnemy(ENEMY_TYPE::MEDIUMCAMOUFLAGEJET, 400, 50);
 	App->enemies->AddEnemy(ENEMY_TYPE::MEDIUMCAMOUFLAGEJET, 425, 50);
 	App->enemies->AddEnemy(ENEMY_TYPE::MEDIUMCAMOUFLAGEJET, 450, 50);
@@ -111,11 +112,12 @@ bool ModuleLevel2::Start() {
 	App->enemies->AddEnemy(ENEMY_TYPE::SMALLCAMOUFLAGEJET, 1700, SCREEN_HEIGHT - 70);
 	App->enemies->AddEnemy(ENEMY_TYPE::SMALLCAMOUFLAGEJET, 1725, SCREEN_HEIGHT - 70);
 	//HERE
+	
 	// 4 bluejet (2 arriba 2 abajo) izquierda
-	App->enemies->AddEnemy(ENEMY_TYPE::BLUEJET, 1800, 50, false);
-	App->enemies->AddEnemy(ENEMY_TYPE::BLUEJET, 1825, 50, false);
-	App->enemies->AddEnemy(ENEMY_TYPE::BLUEJET, 1800, SCREEN_HEIGHT - 70, false);
-	App->enemies->AddEnemy(ENEMY_TYPE::BLUEJET, 1825, SCREEN_HEIGHT - 70, false);
+	App->enemies->AddEnemy(ENEMY_TYPE::BLUEJET, 2200, 50, false);
+	App->enemies->AddEnemy(ENEMY_TYPE::BLUEJET, 2225, 50, false);
+	App->enemies->AddEnemy(ENEMY_TYPE::BLUEJET, 2200, SCREEN_HEIGHT - 70, false);
+	App->enemies->AddEnemy(ENEMY_TYPE::BLUEJET, 2225, SCREEN_HEIGHT - 70, false);
 
 	// 4 small (2 arriba 2 abajo) derecha
 	App->enemies->AddEnemy(ENEMY_TYPE::SMALLCAMOUFLAGEJET, 2400, 50);
@@ -217,13 +219,6 @@ bool ModuleLevel2::Start() {
 	App->enemies->AddEnemy(ENEMY_TYPE::BIGORANGEJET, 7550, SCREEN_HEIGHT - 70);
 	App->enemies->AddEnemy(ENEMY_TYPE::BIGORANGEJET, 7575, SCREEN_HEIGHT - 70);
 
- //   //SUB BOSS GREEN FIGHTER PLANE
-	App->enemies->AddEnemy(ENEMY_TYPE::GREENFIGHTERPLANE, SCREEN_WIDTH/2, 0, true);
-
-	App->enemies->AddEnemy(ENEMY_TYPE::GREENFIGHTERPLANE, SCREEN_WIDTH/2-5, 256, true);
-
-	//BOSS: STEALTH BOMBER
-	/*App->enemies->AddEnemy(ENEMY_TYPE::STEALTHBOMBER, -139, SCREEN_HEIGHT, false);*/
 
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;

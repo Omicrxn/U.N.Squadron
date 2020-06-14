@@ -269,7 +269,7 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 			if (info.type == ENEMY_TYPE::STEALTHBOMBER) {
 				enemies[i]->texture = sbTexture;
 			}
-			if (info.type == ENEMY_TYPE::GREENFIGHTERPLANE)
+			else if (info.type == ENEMY_TYPE::GREENFIGHTERPLANE)
 			{
 				enemies[i]->texture = gfTexture;
 			}
