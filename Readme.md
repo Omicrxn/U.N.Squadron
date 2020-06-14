@@ -18,7 +18,7 @@ Website of the project: [U.N. Squadron Website](https://omicrxn.github.io/U.N.Sq
 </p>
 
 ## Description
-U.N. Squadron was developed and published by Capcom on December 31, 1989. Initially it was developed for the arcade of the same company, the CPS arcade, but it was later launched for the Super NES and Sinclair ZX Spectrum on 1991. It was known in Japan as Area 88 since the game was based on the manga Area 88 created by Kaoru Shintani. It has a secuel game named Carrier Air Wing (U.S. Navy in Japan) which was released in 1990 for the CP system arcade.
+U.N. Squadron was developed and published by Capcom on December 31, 1989. Initially it was developed for the arcade of the same company, the CPS arcade, but it was later launched for the Super NES and Sinclair ZX Spectrum on 1991. It was known in Japan as Area 88 since the game was based on the manga Area 88 created by Kaoru Shintani. It has a sequel game named Carrier Air Wing (U.S. Navy in Japan) which was released in 1990 for the CP system arcade.
 
 ![CPS arcade](https://www.arcade-museum.com/images/122/1228931605.jpg)
 ![CPS arcade with UNSQUADRON](https://www.arcade-museum.com/images/118/1181242184165.jpg)
