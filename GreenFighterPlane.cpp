@@ -18,10 +18,13 @@ GreenFighterPlane::GreenFighterPlane(int x, int y, bool spawnRight) : Enemy(x, y
 	collider = App->collisions->AddCollider({ position.x, position.y, 107, 39 }, Collider::Type::BOSS, (Module*)App->enemies);
 	//--------PATHS------
 	//SPAWN PATH TOP
+	spawnPathTop.PushBack({ 1.4f,0.0f }, 240, &idle);
+	spawnPathTop.PushBack({ 1.12f,0.65f }, 60, &idle);
 	spawnPathTop.PushBack({ 1.12f,0.65f }, 240, &idle);
 	spawnPathTop.PushBack({ 1.0f,0.0f }, 10, &idle);
 	spawnPathTop.loop = false;
 	//SPAWN PATH BOT
+	spawnPathBot.PushBack({ 1.4f,0.0f }, 240, &idle);
 	spawnPathBot.PushBack({ 1.05f,-0.98f }, 120, &idle);
 	spawnPathBot.PushBack({ 1.25f,-0.98f }, 120, &idle);
 	spawnPathBot.PushBack({ 1.0f,0.0f }, 10, &idle);
@@ -35,7 +38,7 @@ GreenFighterPlane::GreenFighterPlane(int x, int y, bool spawnRight) : Enemy(x, y
 	idlePathTop.PushBack({ 1.0f,0.0f }, 10, &idle);
 	idlePathTop.PushBack({ 0.82f,0.7f }, 180, &idle);//down-left
 	idlePathTop.PushBack({ 1.0f,0.0f }, 10, &idle);
-	idlePathTop.PushBack({ 1.13f,-0.7f }, 275, &idle);//up-right and despawn
+	idlePathTop.PushBack({ 1.13f,-0.8f }, 275, &idle);//up-right and despawn
 	idlePathTop.PushBack({ 2.0f,-0.0f }, 180, &idle);//up-right and despawn
 	idlePathTop.loop = false;
 	//IDLE PATH WHEN SPAWNING BOT
@@ -52,7 +55,7 @@ GreenFighterPlane::GreenFighterPlane(int x, int y, bool spawnRight) : Enemy(x, y
 
 	idlePathBot.loop = false;
 	//other var
-	if (spawnPos.y == 0)
+	if (spawnPos.y <= 0)
 	{
 		goingUp = false;
 		spawningTop = true;
@@ -122,10 +125,10 @@ void GreenFighterPlane::Update()
 	default:
 		break;
 	}
-	if (goingUp && position.y <= 30) {
+	if (goingUp && position.y <= 37) {
 		goingUp = false;
 
-	}else if (!goingUp && position.y >=160){
+	}else if (!goingUp && position.y >=156){
 		goingUp = true;
 	}
 	Enemy::Update();
