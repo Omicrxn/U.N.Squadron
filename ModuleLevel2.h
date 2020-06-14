@@ -37,6 +37,8 @@ public:
 	float centerSpeed, firstSpeed, secondSpeed, thirdSpeed;
 	
 	unsigned int numSpawnedEnemies = 0;
+
+	bool bossDead = false;
 };
 
 #endif

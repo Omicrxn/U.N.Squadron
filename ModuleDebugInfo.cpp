@@ -170,9 +170,6 @@ update_status ModuleDebugInfo::Update() {
 		maxMoney = !maxMoney;
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_1] == KEY_DOWN && App->store->IsEnabled()) App->selector->selected = false;
-	if (App->input->keyboard[SDL_SCANCODE_2] == KEY_DOWN && App->store->IsEnabled()) App->selector->selected = true;
-
 	return update_status::UPDATE_CONTINUE;
 }
 
