@@ -49,6 +49,12 @@ bool ModuleLevel1::Start() {
 	currentPosition = LEFTUP;
 	currentDirection = RIGHTDIR;
 
+	spinningRight = false;
+	spinningRightCounter = 0;
+
+	spinningLeft = false;
+	spinningLeftCounter = 0;
+
 	App->particles->Enable();
 	App->player->Enable();
 	App->enemies->Enable();
@@ -61,6 +67,29 @@ bool ModuleLevel1::Start() {
 
 update_status ModuleLevel1::Update() {
 	update_status ret = update_status::UPDATE_CONTINUE;
+
+	// Update the counter of the spinning
+	if (spinningRight)
+	{
+		spinningRightCounter++;
+	}
+	
+	if (spinningRightCounter >= 60)
+	{
+		spinningRight = false;
+		spinningRightCounter = 0;
+	}
+
+	if (spinningLeft)
+	{
+		spinningLeftCounter++;
+	}
+	
+	if (spinningLeftCounter >= 60)
+	{
+		spinningLeft = false;
+		spinningLeftCounter = 0;
+	}
 
 	// Setting the current position and the current direction
 	if (currentDirection == RIGHTDIR)
@@ -87,6 +116,11 @@ update_status ModuleLevel1::Update() {
 				if (App->render->camera.y < -701 && currentDirection == RIGHTDIR) {
 					currentDirection = LEFTDIR;
 				}
+				
+				if (App->render->camera.x >= 11844)
+				{
+					spinningRight = true;
+				}
 			}
 		}
 	}
@@ -95,8 +129,9 @@ update_status ModuleLevel1::Update() {
 		if (App->render->camera.x <= 6602) {
 			if (App->render->camera.y <= 791) {
 				currentPosition = LEFTUP;
-				if (App->render->camera.x < 0) {
+				if (App->render->camera.x <= 0) {
 					currentDirection = RIGHTDIR;
+					spinningLeft = true;
 				}
 			}
 			else if (App->render->camera.y > 791) {

@@ -29,7 +29,6 @@ public:
 
 	unsigned int numSpawnedEnemies = 0;
 
-private:
 	enum position {
 		LEFTUP, LEFTDOWN, RIGHTUP, RIGHTDOWN
 	};
@@ -43,6 +42,12 @@ private:
 	uint currentDirection;
 	uint cameraSpeed = 7;
 	uint proportion = 3;
+
+	bool spinningRight;
+	uint spinningRightCounter;
+
+	bool spinningLeft;
+	uint spinningLeftCounter;
 };
 
 #endif

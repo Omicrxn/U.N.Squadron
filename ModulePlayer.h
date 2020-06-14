@@ -83,7 +83,10 @@ private:
 	iPoint position;
 	SDL_Texture* texture = nullptr;
 	Animation* current_anim = nullptr;
-	Animation playerAnim;
+	Animation playerAnimRight;
+	Animation playerAnimLeft;
+	Animation playerSpinningRight;
+	Animation playerSpinningLeft;
 	SDL_Rect rectAnim;
 	int maxFuel = 8, currentFuel = 8, playerLifes = 3;
 	bool godMode = false;

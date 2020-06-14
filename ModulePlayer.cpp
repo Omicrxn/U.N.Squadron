@@ -38,9 +38,27 @@ bool ModulePlayer::Start() {
 	position.y = SCREEN_HEIGHT / 2;
 
 	// Position of the rectangle that we are getting from the image we load
-	playerAnim.PushBack({ 155,187,32,9 });
-	playerAnim.PushBack({ 190,186,32,12 });
-	playerAnim.PushBack({ 120,185,32,16 });
+	playerAnimRight.PushBack({ 155,187,32,9 });
+	playerAnimRight.PushBack({ 190,186,32,12 });
+	playerAnimRight.PushBack({ 120,185,32,16 });
+
+	playerAnimLeft.PushBack({ 48,187,32,9 });
+	playerAnimLeft.PushBack({ 13,186,32,12 });
+	playerAnimLeft.PushBack({ 83,185,32,16 });
+
+	playerSpinningRight.PushBack({ 237,175,36,20 });
+	playerSpinningRight.PushBack({ 289,174,28,22 });
+	playerSpinningRight.PushBack({ 340,172,20,26 });
+	playerSpinningRight.PushBack({ 391,170,18,30 });
+	playerSpinningRight.PushBack({ 427,172,17,25 });
+	playerSpinningRight.PushBack({ 469,174,27,21 });
+
+	playerSpinningLeft.PushBack({ 242,216,28,23 });
+	playerSpinningLeft.PushBack({ 285,215,19,25 });
+	playerSpinningLeft.PushBack({ 333,213,15,29 });
+	playerSpinningLeft.PushBack({ 377,216,19,24 });
+	playerSpinningLeft.PushBack({ 422,216,27,23 });
+	playerSpinningLeft.PushBack({ 467,218,35,20 });
 
 	// Loading shooting sound effect
 	shootFx = App->audio->LoadFx("Assets/music/events/shoot1.wav");
@@ -143,66 +161,310 @@ update_status ModulePlayer::Update() {
 	}
 
 	// Moving the spaceship when pressing WASD or using the Gamepad
-	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_IDLE && App->input->keyboard[SDL_SCANCODE_S] == KEY_IDLE && App->input->keyboard[SDL_SCANCODE_UP] == KEY_IDLE && App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_IDLE) {
-		if (current_anim != &playerAnim) {
-			current_anim = &playerAnim;
-		}
-		rectAnim = current_anim->GetFrame(0);
-	}
-	// If no up/down movement detected, set the current animation back to idle
-	else if (pad.enabled) {
-		if (pad.l_x == 0.0f && pad.l_y == 0.0f)
-			current_anim = &playerAnim;
-	}
-
-	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_UP] == KEY_REPEAT || pad.l_y < 0.0f || pad.up == true) {
-
-		if (position.y > 42 && App->lvl2->IsEnabled()) {
-			position.y -= 2;
-			if (current_anim != &playerAnim) {
-				current_anim = &playerAnim;
-			}
-			rectAnim = current_anim->GetFrame(1);
-		}
-		else if (position.y > (App->render->camera.y / SCREEN_SIZE + 42) && App->lvl1->IsEnabled())
+	if (App->lvl1->IsEnabled())
+	{
+		if (App->lvl1->spinningLeft || App->lvl1->spinningRight)
 		{
-			position.y -= 2;
-			if (current_anim != &playerAnim) {
-				current_anim = &playerAnim;
+			if (App->lvl1->spinningLeft)
+			{
+				if (App->lvl1->spinningLeftCounter <= 10)
+				{
+					if (current_anim != &playerSpinningLeft) {
+						current_anim = &playerSpinningLeft;
+					}
+					rectAnim = current_anim->GetFrame(0);
+				}
+				else if (App->lvl1->spinningLeftCounter > 10 && App->lvl1->spinningLeftCounter <= 20)
+				{
+					if (current_anim != &playerSpinningLeft) {
+						current_anim = &playerSpinningLeft;
+					}
+					rectAnim = current_anim->GetFrame(1);
+				}
+				else if (App->lvl1->spinningLeftCounter > 20 && App->lvl1->spinningLeftCounter <= 30)
+				{
+					if (current_anim != &playerSpinningLeft) {
+						current_anim = &playerSpinningLeft;
+					}
+					rectAnim = current_anim->GetFrame(2);
+				}
+				else if (App->lvl1->spinningLeftCounter > 30 && App->lvl1->spinningLeftCounter <= 40)
+				{
+					if (current_anim != &playerSpinningLeft) {
+						current_anim = &playerSpinningLeft;
+					}
+					rectAnim = current_anim->GetFrame(3);
+				}
+				else if (App->lvl1->spinningLeftCounter > 40 && App->lvl1->spinningLeftCounter <= 50)
+				{
+					if (current_anim != &playerSpinningLeft) {
+						current_anim = &playerSpinningLeft;
+					}
+					rectAnim = current_anim->GetFrame(4);
+				}
+				else if (App->lvl1->spinningLeftCounter > 50 && App->lvl1->spinningLeftCounter <= 60)
+				{
+					if (current_anim != &playerSpinningLeft) {
+						current_anim = &playerSpinningLeft;
+					}
+					rectAnim = current_anim->GetFrame(5);
+				}
 			}
-			rectAnim = current_anim->GetFrame(1);
-		}
-	}
-
-	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_REPEAT || pad.l_x < 0.0f || pad.left == true) {
-		if (position.x > App->render->camera.x / SCREEN_SIZE) {
-			position.x -= 2;
-		}
-	}
-
-	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_REPEAT || pad.l_y > 0.0f || pad.down == true) {
-		if (position.y < SCREEN_HEIGHT - 38 && App->lvl2->IsEnabled()) {
-			position.y += 2;
-			if (current_anim != &playerAnim) {
-				current_anim = &playerAnim;
+			else if (App->lvl1->spinningRight)
+			{
+				if (App->lvl1->spinningRightCounter <= 10)
+				{
+					if (current_anim != &playerSpinningRight) {
+						current_anim = &playerSpinningRight;
+					}
+					rectAnim = current_anim->GetFrame(0);
+				}
+				else if (App->lvl1->spinningRightCounter > 10 && App->lvl1->spinningRightCounter <= 20)
+				{
+					if (current_anim != &playerSpinningRight) {
+						current_anim = &playerSpinningRight;
+					}
+					rectAnim = current_anim->GetFrame(1);
+				}
+				else if (App->lvl1->spinningRightCounter > 20 && App->lvl1->spinningRightCounter <= 30)
+				{
+					if (current_anim != &playerSpinningRight) {
+						current_anim = &playerSpinningRight;
+					}
+					rectAnim = current_anim->GetFrame(2);
+				}
+				else if (App->lvl1->spinningRightCounter > 30 && App->lvl1->spinningRightCounter <= 40)
+				{
+					if (current_anim != &playerSpinningRight) {
+						current_anim = &playerSpinningRight;
+					}
+					rectAnim = current_anim->GetFrame(3);
+				}
+				else if (App->lvl1->spinningRightCounter > 40 && App->lvl1->spinningRightCounter <= 50)
+				{
+					if (current_anim != &playerSpinningRight) {
+						current_anim = &playerSpinningRight;
+					}
+					rectAnim = current_anim->GetFrame(4);
+				}
+				else if (App->lvl1->spinningRightCounter > 50 && App->lvl1->spinningRightCounter <= 60)
+				{
+					if (current_anim != &playerSpinningRight) {
+						current_anim = &playerSpinningRight;
+					}
+					rectAnim = current_anim->GetFrame(5);
+				}
 			}
-			rectAnim = current_anim->GetFrame(2);
+
 		}
-		else if (position.y < (App->render->camera.y / SCREEN_SIZE + SCREEN_HEIGHT - 38) && App->lvl1->IsEnabled())
+		else
 		{
-			position.y += 2;
-			if (current_anim != &playerAnim) {
-				current_anim = &playerAnim;
+			if (App->lvl1->currentDirection == App->lvl1->RIGHTDIR)
+			{
+				if (App->input->keyboard[SDL_SCANCODE_W] == KEY_IDLE && App->input->keyboard[SDL_SCANCODE_S] == KEY_IDLE && App->input->keyboard[SDL_SCANCODE_UP] == KEY_IDLE && App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_IDLE) {
+					if (current_anim != &playerAnimRight) {
+						current_anim = &playerAnimRight;
+					}
+					rectAnim = current_anim->GetFrame(0);
+				}
+				// If no up/down movement detected, set the current animation back to idle
+				else if (pad.enabled) {
+					if (pad.l_x == 0.0f && pad.l_y == 0.0f)
+						current_anim = &playerAnimRight;
+				}
+
+				if (App->input->keyboard[SDL_SCANCODE_W] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_UP] == KEY_REPEAT || pad.l_y < 0.0f || pad.up == true) {
+					if (position.y > (App->render->camera.y / SCREEN_SIZE + 42) && App->lvl1->IsEnabled())
+					{
+						position.y -= 2;
+						if (current_anim != &playerAnimRight) {
+							current_anim = &playerAnimRight;
+						}
+						rectAnim = current_anim->GetFrame(1);
+					}
+				}
+
+				if (App->input->keyboard[SDL_SCANCODE_A] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_REPEAT || pad.l_x < 0.0f || pad.left == true) {
+					if (position.x > App->render->camera.x / SCREEN_SIZE) {
+						position.x -= 2;
+					}
+				}
+
+				if (App->input->keyboard[SDL_SCANCODE_S] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_REPEAT || pad.l_y > 0.0f || pad.down == true) {
+					if (position.y < (App->render->camera.y / SCREEN_SIZE + SCREEN_HEIGHT - 38) && App->lvl1->IsEnabled())
+					{
+						position.y += 2;
+						if (current_anim != &playerAnimRight) {
+							current_anim = &playerAnimRight;
+						}
+						rectAnim = current_anim->GetFrame(2);
+					}
+				}
+
+				if (App->input->keyboard[SDL_SCANCODE_D] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_REPEAT || pad.l_y > 0.0f || pad.right == true) {
+					if (position.x < (App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH - 32)) {
+						position.x += 2;
+					}
+				}
 			}
-			rectAnim = current_anim->GetFrame(2);
+			else if (App->lvl1->currentDirection == App->lvl1->LEFTDIR)
+			{
+				if (App->input->keyboard[SDL_SCANCODE_W] == KEY_IDLE && App->input->keyboard[SDL_SCANCODE_S] == KEY_IDLE && App->input->keyboard[SDL_SCANCODE_UP] == KEY_IDLE && App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_IDLE) {
+					if (current_anim != &playerAnimLeft) {
+						current_anim = &playerAnimLeft;
+					}
+					rectAnim = current_anim->GetFrame(0);
+				}
+				// If no up/down movement detected, set the current animation back to idle
+				else if (pad.enabled) {
+					if (pad.l_x == 0.0f && pad.l_y == 0.0f)
+						current_anim = &playerAnimLeft;
+				}
+
+				if (App->input->keyboard[SDL_SCANCODE_W] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_UP] == KEY_REPEAT || pad.l_y < 0.0f || pad.up == true) {
+					if (position.y > (App->render->camera.y / SCREEN_SIZE + 42) && App->lvl1->IsEnabled())
+					{
+						position.y -= 2;
+						if (current_anim != &playerAnimLeft) {
+							current_anim = &playerAnimLeft;
+						}
+						rectAnim = current_anim->GetFrame(1);
+					}
+				}
+
+				if (App->input->keyboard[SDL_SCANCODE_A] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_REPEAT || pad.l_x < 0.0f || pad.left == true) {
+					if (position.x > App->render->camera.x / SCREEN_SIZE) {
+						position.x -= 2;
+					}
+				}
+
+				if (App->input->keyboard[SDL_SCANCODE_S] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_REPEAT || pad.l_y > 0.0f || pad.down == true) {
+					if (position.y < (App->render->camera.y / SCREEN_SIZE + SCREEN_HEIGHT - 38) && App->lvl1->IsEnabled())
+					{
+						position.y += 2;
+						if (current_anim != &playerAnimLeft) {
+							current_anim = &playerAnimLeft;
+						}
+						rectAnim = current_anim->GetFrame(2);
+					}
+				}
+
+				if (App->input->keyboard[SDL_SCANCODE_D] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_REPEAT || pad.l_y > 0.0f || pad.right == true) {
+					if (position.x < (App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH - 32)) {
+						position.x += 2;
+					}
+				}
+			}
+		}
+	}
+	else if (App->lvl2->IsEnabled())
+	{
+		if (App->input->keyboard[SDL_SCANCODE_W] == KEY_IDLE && App->input->keyboard[SDL_SCANCODE_S] == KEY_IDLE && App->input->keyboard[SDL_SCANCODE_UP] == KEY_IDLE && App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_IDLE) {
+			if (current_anim != &playerAnimRight) {
+				current_anim = &playerAnimRight;
+			}
+			rectAnim = current_anim->GetFrame(0);
+		}
+		// If no up/down movement detected, set the current animation back to idle
+		else if (pad.enabled) {
+			if (pad.l_x == 0.0f && pad.l_y == 0.0f)
+				current_anim = &playerAnimRight;
+		}
+
+		if (App->input->keyboard[SDL_SCANCODE_W] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_UP] == KEY_REPEAT || pad.l_y < 0.0f || pad.up == true) {
+
+			if (position.y > 42 && App->lvl2->IsEnabled()) {
+				position.y -= 2;
+				if (current_anim != &playerAnimRight) {
+					current_anim = &playerAnimRight;
+				}
+				rectAnim = current_anim->GetFrame(1);
+			}
+		}
+
+		if (App->input->keyboard[SDL_SCANCODE_A] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_REPEAT || pad.l_x < 0.0f || pad.left == true) {
+			if (position.x > App->render->camera.x / SCREEN_SIZE) {
+				position.x -= 2;
+			}
+		}
+
+		if (App->input->keyboard[SDL_SCANCODE_S] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_REPEAT || pad.l_y > 0.0f || pad.down == true) {
+			if (position.y < SCREEN_HEIGHT - 38 && App->lvl2->IsEnabled()) {
+				position.y += 2;
+				if (current_anim != &playerAnimRight) {
+					current_anim = &playerAnimRight;
+				}
+				rectAnim = current_anim->GetFrame(2);
+			}
+		}
+
+		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_REPEAT || pad.l_y > 0.0f || pad.right == true) {
+			if (position.x < (App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH - 32)) {
+				position.x += 2;
+			}
 		}
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_REPEAT || pad.l_y > 0.0f || pad.right == true) {
-		if (position.x < (App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH - 32)) {
-			position.x += 2;
-		}
-	}
+	//if (App->input->keyboard[SDL_SCANCODE_W] == KEY_IDLE && App->input->keyboard[SDL_SCANCODE_S] == KEY_IDLE && App->input->keyboard[SDL_SCANCODE_UP] == KEY_IDLE && App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_IDLE) {
+	//	if (current_anim != &playerAnim) {
+	//		current_anim = &playerAnim;
+	//	}
+	//	rectAnim = current_anim->GetFrame(0);
+	//}
+	//// If no up/down movement detected, set the current animation back to idle
+	//else if (pad.enabled) {
+	//	if (pad.l_x == 0.0f && pad.l_y == 0.0f)
+	//		current_anim = &playerAnim;
+	//}
+
+	//if (App->input->keyboard[SDL_SCANCODE_W] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_UP] == KEY_REPEAT || pad.l_y < 0.0f || pad.up == true) {
+
+	//	if (position.y > 42 && App->lvl2->IsEnabled()) {
+	//		position.y -= 2;
+	//		if (current_anim != &playerAnim) {
+	//			current_anim = &playerAnim;
+	//		}
+	//		rectAnim = current_anim->GetFrame(1);
+	//	}
+	//	else if (position.y > (App->render->camera.y / SCREEN_SIZE + 42) && App->lvl1->IsEnabled())
+	//	{
+	//		position.y -= 2;
+	//		if (current_anim != &playerAnim) {
+	//			current_anim = &playerAnim;
+	//		}
+	//		rectAnim = current_anim->GetFrame(1);
+	//	}
+	//}
+
+	//if (App->input->keyboard[SDL_SCANCODE_A] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_REPEAT || pad.l_x < 0.0f || pad.left == true) {
+	//	if (position.x > App->render->camera.x / SCREEN_SIZE) {
+	//		position.x -= 2;
+	//	}
+	//}
+
+	//if (App->input->keyboard[SDL_SCANCODE_S] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_REPEAT || pad.l_y > 0.0f || pad.down == true) {
+	//	if (position.y < SCREEN_HEIGHT - 38 && App->lvl2->IsEnabled()) {
+	//		position.y += 2;
+	//		if (current_anim != &playerAnim) {
+	//			current_anim = &playerAnim;
+	//		}
+	//		rectAnim = current_anim->GetFrame(2);
+	//	}
+	//	else if (position.y < (App->render->camera.y / SCREEN_SIZE + SCREEN_HEIGHT - 38) && App->lvl1->IsEnabled())
+	//	{
+	//		position.y += 2;
+	//		if (current_anim != &playerAnim) {
+	//			current_anim = &playerAnim;
+	//		}
+	//		rectAnim = current_anim->GetFrame(2);
+	//	}
+	//}
+
+	//if (App->input->keyboard[SDL_SCANCODE_D] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_REPEAT || pad.l_y > 0.0f || pad.right == true) {
+	//	if (position.x < (App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH - 32)) {
+	//		position.x += 2;
+	//	}
+	//}
 
 	if (App->input->keyboard[SDL_SCANCODE_F] == KEY_REPEAT || pad.b == true || pad.r2 == true) {
 		if (weaponCountdown == 0) {
@@ -418,7 +680,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 		if (c2->type == Collider::Type::ENEMY_SHOT) {
 			//SDL_SetTextureColorMod(texture, 450, 450, 64);
 			if (currentFuel > 1) {
-				//currentFuel--;
+				currentFuel--;
 
 				//Playing hit sound effect
 				App->audio->PlayFx(hitFx, 0);

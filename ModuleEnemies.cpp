@@ -103,6 +103,16 @@ bool ModuleEnemies::CleanUp()
 			enemies[i] = nullptr;
 		}
 	}
+	for (uint i = 0; i < MAX_ENEMIES; ++i)
+	{
+		if (spawnQueue[i].type != ENEMY_TYPE::NO_TYPE)
+		{
+			spawnQueue[i].type = ENEMY_TYPE::NO_TYPE;
+			spawnQueue[i].x = 0;
+			spawnQueue[i].y = 0;
+			spawnQueue[i].spawnRight = false;
+		}
+	}
 
 	activeTextures = activeFx = 0;
 
