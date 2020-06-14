@@ -84,7 +84,7 @@ update_status ModuleDebugInfo::Update() {
 			App->transition->FadeToBlack((Module*)App->winScreen, (Module*)App->selector, 60);
 		}
 		else if (App->loseScreen->IsEnabled()) {
-			App->transition->FadeToBlack((Module*)App->loseScreen, (Module*)App->initialScreen, 60);
+			App->transition->FadeToBlack((Module*)App->loseScreen, (Module*)App->startScreen, 60);
 		}
 	}
 
@@ -206,11 +206,8 @@ update_status ModuleDebugInfo::PostUpdate()
 		sprintf_s(debugText, 150, "Level  %i", App->player->level);
 		App->fonts->BlitText(140, 80, debugFont, debugText);
 
-		sprintf_s(debugText, 150, "POW    %i", App->player->GetCurrentPOW());
-		App->fonts->BlitText(140, 95, debugFont, debugText);
-
 		sprintf_s(debugText, 150, "Total  %i", App->player->total);
-		App->fonts->BlitText(140, 110, debugFont, debugText);
+		App->fonts->BlitText(140, 95, debugFont, debugText);
 
 		// Display total audio files loaded
 		sprintf_s(debugText, 150, "audio fx  %i", App->audio->GetFxCount());

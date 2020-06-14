@@ -120,16 +120,19 @@ update_status ModulePlayer::Update() {
 	if ((App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_REPEAT && !destroyed) || pad.x == true || pad.r1 == true) {
 		if (shotCountdown == 0) {
 			if (level == 1) {
- 				App->particles->AddParticle(App->particles->bullet1, position.x + 7, position.y + 5, Collider::Type::PLAYER_SHOT);
+				App->particles->AddParticle(App->particles->bullet1, position.x + 7, position.y + 5, Collider::Type::PLAYER_SHOT);
 			}
 			else if (level == 2) {
 				App->particles->AddParticle(App->particles->bullet2, position.x + 7, position.y + 3, Collider::Type::PLAYER_SHOT);
 			}
 			else if (level == 3) {
-				App->particles->AddParticle(App->particles->bullet3, position.x + 7, position.y + 1, Collider::Type::PLAYER_SHOT);
+				App->particles->AddParticle(App->particles->bullet3, position.x + 11, position.y, Collider::Type::PLAYER_SHOT);
 			}
 			else if (level == 4) {
-				App->particles->AddParticle(App->particles->bullet4, position.x + 7, position.y - 3, Collider::Type::PLAYER_SHOT);
+				App->particles->AddParticle(App->particles->bullet4, position.x + 11, position.y - 3, Collider::Type::PLAYER_SHOT);
+			}
+			else if (level == 5) {
+				App->particles->AddParticle(App->particles->bullet5, position.x + 10, position.y, Collider::Type::PLAYER_SHOT);
 			}
 
 			// Playing shooting sound effect (if space was pressed)
@@ -152,8 +155,8 @@ update_status ModulePlayer::Update() {
 			current_anim = &playerAnim;
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_UP] == KEY_REPEAT || pad.l_y < 0.0f|| pad.up == true) {
-		
+	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_UP] == KEY_REPEAT || pad.l_y < 0.0f || pad.up == true) {
+
 		if (position.y > 42 && App->lvl2->IsEnabled()) {
 			position.y -= 2;
 			if (current_anim != &playerAnim) {
@@ -170,7 +173,7 @@ update_status ModulePlayer::Update() {
 			rectAnim = current_anim->GetFrame(1);
 		}
 	}
-	
+
 	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_REPEAT || pad.l_x < 0.0f || pad.left == true) {
 		if (position.x > App->render->camera.x / SCREEN_SIZE) {
 			position.x -= 2;
@@ -227,7 +230,7 @@ update_status ModulePlayer::Update() {
 				if ((App->store->weaponSelection & (1 << 2)) != 0 && ceilingAmmo > 0) {
 					App->weapons->SpawnWeapon(WEAPON_TYPE::CEILING, position.x + 4, position.y - 4);
 					App->particles->AddParticle(App->particles->ceilingExplosion, position.x, position.y - 4);
-					if(!maxAmmo) ceilingAmmo--;
+					if (!maxAmmo) ceilingAmmo--;
 					ceilingCountdown = 60;
 				}
 				break;
@@ -294,11 +297,30 @@ update_status ModulePlayer::Update() {
 	}
 
 	// Change POW Level
-	if (App->input->keyboard[SDL_SCANCODE_1] == KEY_DOWN) level = 1;
-	if (App->input->keyboard[SDL_SCANCODE_2] == KEY_DOWN) level = 2;
-	if (App->input->keyboard[SDL_SCANCODE_3] == KEY_DOWN) level = 3;
-	if (App->input->keyboard[SDL_SCANCODE_4] == KEY_DOWN) level = 4;
+	if (App->input->keyboard[SDL_SCANCODE_1] == KEY_DOWN) {
+		level = 1;
+	}
+	if (App->input->keyboard[SDL_SCANCODE_2] == KEY_DOWN) {
+		level = 2;
+	}
+	if (App->input->keyboard[SDL_SCANCODE_3] == KEY_DOWN) {
+		level = 3;
+	}
+	if (App->input->keyboard[SDL_SCANCODE_4] == KEY_DOWN) {
+		level = 4;
+	}
+	if (App->input->keyboard[SDL_SCANCODE_5] == KEY_DOWN) {
+		level = 5;
+		// maxPow = true;
+	}
 
+	if (total >= 4) level = 2;
+	if (total >= 15) level = 3;
+	if (total >= 26) level = 4;
+	if (total >= 42) {
+		level = 5;
+		maxPow = true;
+	}
 
 	if (App->input->keyboard[SDL_SCANCODE_N] == KEY_DOWN) {
 		App->weapons->SpawnWeapon(WEAPON_TYPE::POWERUP_ORANGE, position.x + 40, position.y);
@@ -307,18 +329,6 @@ update_status ModulePlayer::Update() {
 	if (App->input->keyboard[SDL_SCANCODE_M] == KEY_DOWN) {
 		App->weapons->SpawnWeapon(WEAPON_TYPE::POWERUP_BLUE, position.x + 40, position.y);
 	}
-
-	// Update shot countdown
-	if (shotCountdown > 0)
-		--shotCountdown;
-
-	// Update weapon shot countdown
-	if (weaponCountdown > 0)
-		--weaponCountdown;
-
-	// Update weapon change countdown
-	if (changeCountdown > 0)
-		--changeCountdown;
 
 	if (ceilingCountdown > 0)
 	{
@@ -344,15 +354,19 @@ update_status ModulePlayer::Update() {
 		hasBeenHit = false;
 	}
 
-	if (pow1 < 0) pow1 = 0;
-	if (pow2 < 0) pow2 = 0;
-	if (pow3 < 0) pow3 = 0;
-	if (pow4 < 0) pow4 = 0;
+	// Update shot countdown
+	if (shotCountdown > 0)
+		--shotCountdown;
 
-	if (pow1 == 0 && level == 1) ++level;
-	if (pow2 == 0 && level == 2) ++level;
-	if (pow3 == 0 && level == 3) ++level;
-	if (pow4 == 0 && level == 4) maxPow = true;
+	// Update weapon shot countdown
+	if (weaponCountdown > 0)
+		--weaponCountdown;
+
+	// Update weapon change countdown
+	if (changeCountdown > 0)
+		--changeCountdown;
+
+	if (collisionCountdown > 0) --collisionCountdown;
 
 	return ret;
 }
@@ -370,7 +384,7 @@ update_status ModulePlayer::PostUpdate() {
 				ret = UPDATE_ERROR;
 			}
 		}
-	/*}*/
+	//}
 
 	return ret;
 }
@@ -393,17 +407,17 @@ bool ModulePlayer::CleanUp() {
 	App->collisions->DeleteCollider(collider);
 	--totalColliders;
 	collider = nullptr;
-	
+
 	return ret;
 }
 
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 	// Detect collision with a bullet or an enemy. If so, disappear and explode.
 	if (c1 == collider && destroyed == false) {
-		if (c2->type == Collider::Type::PLAYER_SHOT) {
+		if (c2->type == Collider::Type::ENEMY_SHOT) {
 			//SDL_SetTextureColorMod(texture, 450, 450, 64);
 			if (currentFuel > 1) {
-				currentFuel--;
+				//currentFuel--;
 
 				//Playing hit sound effect
 				App->audio->PlayFx(hitFx, 0);
@@ -416,50 +430,58 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 				App->audio->PlayFx(dieFx, 0);
 				if (playerLifes > 1 && !App->debugInfo->maxLifes) {
 					playerLifes--;
-					App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->startScreen, 60);
+					App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->selector, 60);
 				}
 				else {
 					playerLifes = 3;
 					money = 0;
-					pow1 = 4, pow2 = 11, pow3 = 13, pow4 = 16;
 					total = 0;
 					level = 1;
 					App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->loseScreen, 60);
 				}
 				destroyed = true;
 			}
+
 			hasBeenHit = true;
 			hasBeenHitCounter = 0;
 		}
-		else if (c2->type == Collider::Type::POWERUP_ORANGE) {
-			if (level == 1 && pow1 > 0) --pow1;
-			if (level == 2 && pow2 > 0) --pow2;
-			if (level == 3 && pow3 > 0) --pow3;
-			if (!maxPow && level == 4 && pow4 > 0) --pow4;
+		else if (c2->type == Collider::Type::ENEMY) {
+			if (collisionCountdown == 0) {
+				if (currentFuel > 3) {
+					currentFuel -= 3;
 
+					//Playing hit sound effect
+					App->audio->PlayFx(hitFx, 0);
+				}
+				else {
+					currentFuel -= 3;
+					App->particles->AddParticle(App->particles->explosion, position.x, position.y, Collider::Type::NONE, 9);
+
+					//Playing explosion sound effect
+					App->audio->PlayFx(dieFx, 0);
+					if (playerLifes > 1 && !App->debugInfo->maxLifes) {
+						playerLifes--;
+						App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->selector, 60);
+					}
+					else {
+						playerLifes = 3;
+						money = total = 0;
+						level = 1;
+						App->transition->FadeToBlack((Module*)App->lvl2, (Module*)App->loseScreen, 60);
+					}
+					destroyed = true;
+				}
+
+				hasBeenHit = true;
+				hasBeenHitCounter = 0;
+			}
+			collisionCountdown = collisionMaxCountdown;
+		}
+		else if (c2->type == Collider::Type::POWERUP_ORANGE) {
 			++total;
 		}
 		else if (c2->type == Collider::Type::POWERUP_BLUE) {
-			if (level == 1 && (pow1 <= 2 || pow1 <= 1)) pow1 = 0;
-			else if (level == 1 && pow1 >= 3) pow1 -= 3;
-			
-			if (level == 2 && (pow2 <= 2 || pow2 <= 1)) pow2 = 0;
-			else if (level == 2 && pow2 >= 3) pow2 -= 3;
-			
-			if (level == 3 && (pow3 <= 2 || pow3 <= 1)) pow3 = 0;
-			else if (level == 3 && pow3 >= 3) pow3 -= 3;
-			
-			if (level == 4 && (pow4 <= 2 || pow1 <= 1)) pow4 = 0;
-			else if (!maxPow && level == 4 && pow4 >= 3) pow4 -= 3;
-
-			++total;
+			total += 3;
 		}
 	}
-}
-
-uint ModulePlayer::GetCurrentPOW() {
-	if (level == 1 && pow1 > 0) return pow1;
-	if (level == 2 && pow2 > 0) return pow2;
-	if (level == 3 && pow3 > 0) return pow3;
-	if (level == 4 && pow4 > 0) return pow4;
 }
