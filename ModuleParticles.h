@@ -53,7 +53,6 @@ public:
 	// The particle's collider
 	Collider* collider = nullptr;
 	bool isWeapon = false;
-	bool isMissile = false;
 };
 
 class ModuleParticles : public Module
@@ -110,8 +109,6 @@ private:
 	// Weapons particles spritesheet loaded into an SDL Texture
 	SDL_Texture* weaponsParticlesTexture = nullptr;
 
-	SDL_Texture* turretParticlesTexture = nullptr;
-
 public:
 	// Template particle for an explosion
 	Particle explosion;
@@ -124,6 +121,7 @@ public:
 	Particle bullet5;
 
 	Particle enemyBullet;
+	Particle turretMissile;
 	Particle greenFighterBullet;
 	Particle sbFirecannon;
 	Particle sbExplosion;
@@ -136,7 +134,5 @@ public:
 	Particle shellExplosion;
 	Particle bombExplosion;
 	Particle ceilingExplosion;
-
-	Particle turretMissile;
 };
 #endif

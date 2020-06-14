@@ -5,6 +5,7 @@
 #include "ModuleParticles.h"
 #include "ModuleAudio.h"
 #include "ModulePlayer.h"
+#include "SetBulletDirection.h"
 
 Turret::Turret(int x, int y, bool spawnRight) :Enemy(x, y, spawnRight) {
 
@@ -32,10 +33,13 @@ void Turret::Update() {
 	Enemy::Update();
 
 	shootingFrequency++;
-	if (shootingFrequency > 150)
+	shootingFrequency++;
+	if (shootingFrequency > 120)
 	{
 		shootingFrequency = 0;
 
-		App->particles->AddParticle(App->particles->turretMissile, position.x, position.y + 64, Collider::Type::ENEMY_SHOT);
+		SetBulletDirection(this);
+
+		App->particles->AddParticle(App->particles->turretMissile, position.x, position.y - 40, Collider::Type::ENEMY_SHOT);
 	}
 }

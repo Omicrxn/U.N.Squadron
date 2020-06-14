@@ -29,10 +29,6 @@ bool ModuleParticles::Start()
 	weaponsParticlesTexture = App->textures->Load("Assets/sprites/weapons/weapons.png");
 	++totalTextures;
 
-	LOG("Loading weapons particles");
-	turretParticlesTexture = App->textures->Load("Assets/sprites/enemies/UNSquadronSheet24.png");
-	++totalTextures;
-
 	// Bullets Animaton 
 	bullet1.anim.PushBack({ 456, 8, 13, 3 });
 	bullet2.anim.PushBack({ 470, 6, 12, 6 });
@@ -51,6 +47,13 @@ bool ModuleParticles::Start()
 	enemyBullet.anim.loop = true;
 	enemyBullet.anim.speed = 0.075f;
 	enemyBullet.lifetime = 180;
+
+	// Turret's missiles
+	turretMissile.anim.PushBack({ 307, 57, 6, 16 });
+	turretMissile.anim.PushBack({ 322, 58, 6, 16 });
+	turretMissile.anim.loop = true;
+	turretMissile.anim.speed = 0.075f;
+	turretMissile.lifetime = 180;
 
 	// Explosion Animation
 	explosion.anim.PushBack({ 27, 256, 34, 39 });
@@ -123,13 +126,6 @@ bool ModuleParticles::Start()
 	ceilingExplosion.anim.loop = false;
 	ceilingExplosion.isWeapon = true;
 
-	// Turret's missiles
-	turretMissile.anim.PushBack({ 181, 9, 6, 16 });
-	turretMissile.anim.PushBack({ 196, 10, 7, 14 });
-	turretMissile.anim.speed = 0.075f;
-	turretMissile.anim.loop = false;
-	turretMissile.isMissile = true;
-
 	return true;
 }
 
@@ -151,8 +147,6 @@ bool ModuleParticles::CleanUp()
 	App->textures->Unload(particlesTexture);
 	--totalTextures;
 	App->textures->Unload(weaponsParticlesTexture);
-	--totalTextures;
-	App->textures->Unload(turretParticlesTexture);
 	--totalTextures;
 
 	return true;
@@ -205,9 +199,6 @@ update_status ModuleParticles::PostUpdate()
 			if (particle->isWeapon) {
 				App->render->Blit(weaponsParticlesTexture, particle->position.x, particle->position.y, &(particle->anim.GetCurrentFrame()));
 
-			}
-			else if (particle->isMissile) {
-				App->render->Blit(turretParticlesTexture, particle->position.x, particle->position.y, &(particle->anim.GetCurrentFrame()));
 			}
 			else {
 				App->render->Blit(particlesTexture, particle->position.x, particle->position.y, &(particle->anim.GetCurrentFrame()));
