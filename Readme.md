@@ -79,7 +79,7 @@ While at the moment Capcom was developing vertically scrolling shooters, U.N.Squ
 |Traverse Resources Information|F9|
 |Gamepad Information|F10|
 |Maximize / Resize|F11|
-|Change POW Level|1 to 4|
+|Change POW Level|1 to 5|
 |Infinite Money|9|
 |Infinite Lifes|8|
 |Infinite Ammo|7|
