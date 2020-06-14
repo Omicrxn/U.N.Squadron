@@ -24,18 +24,16 @@ bool ModuleLevel1::Start() {
 
 	numSpawnedEnemies = 0;
 
-	backgroundTexture = App->textures->Load("Assets/sprites/scenarios/BonusLevel.png");
+	backgroundTexture = App->textures->Load("Assets/sprites/scenarios/BonusLevelHalf1.png");
+	backgroundTexture2 = App->textures->Load("Assets/sprites/scenarios/BonusLevelHalf2.png");
 	++activeTextures; ++totalTextures;
 
 	// Music
 	App->audio->PlayMusic("Assets/music/soundtrack/cave.ogg");
 	
-	skyHalf1 = { 0, 0, 6602, 288 };
-	skyHalf2 = { 6603, 0, 6602, 288 };
-	mountainsHalf1 = { 0, 291, 6602, 224 };
-	mountainsHalf2 = { 6603, 291, 6602, 224 };
-	floorHalf1 = { 0, 518, 6602, 48 };
-	floorHalf2 = { 6603, 518, 6602, 48 };
+	sky = { 0, 0, 6602, 288 };
+	mountains = { 0, 291, 6602, 224 };
+	floor = { 0, 518, 6602, 48 };
 
 	App->enemies->AddEnemy(ENEMY_TYPE::TRUCK, 1600, 440);
 	App->enemies->AddEnemy(ENEMY_TYPE::TRUCK, 1700, 440);
@@ -177,29 +175,29 @@ update_status ModuleLevel1::PostUpdate() {
 	update_status ret = UPDATE_CONTINUE;
 
 	/*Render Sky*/
-	if (!App->render->Blit(backgroundTexture, 0, -70, &skyHalf1, 0.3)) {
+	if (!App->render->Blit(backgroundTexture, 0, -70, &sky, 0.3)) {
 		LOG("Cannot blit the texture in ModuleLevel1 %s\n", SDL_GetError());
 		ret = update_status::UPDATE_ERROR;
 	}
-	if (!App->render->Blit(backgroundTexture, 6603, -70, &skyHalf2, 0.3)) {
+	if (!App->render->Blit(backgroundTexture2, 6603, -70, &sky, 0.3)) {
 		LOG("Cannot blit the texture in ModuleLevel1 %s\n", SDL_GetError());
 		ret = update_status::UPDATE_ERROR;
 	}
 	/*Render Mountains*/
-	if (!App->render->Blit(backgroundTexture, 0, 84, &mountainsHalf1, 0.5)) {
+	if (!App->render->Blit(backgroundTexture, 0, 84, &mountains, 0.5)) {
 		LOG("Cannot blit the texture in ModuleLevel1 %s\n", SDL_GetError());
 		ret = update_status::UPDATE_ERROR;
 	}
-	if (!App->render->Blit(backgroundTexture, 6603, 84, &mountainsHalf2, 0.5)) {
+	if (!App->render->Blit(backgroundTexture2, 6603, 84, &sky, 0.5)) {
 		LOG("Cannot blit the texture in ModuleLevel1 %s\n", SDL_GetError());
 		ret = update_status::UPDATE_ERROR;
 	}
 	/*Render Floor*/
-	if (!App->render->Blit(backgroundTexture, 0, 308, &floorHalf1, 0.5)) {
+	if (!App->render->Blit(backgroundTexture, 0, 308, &floor, 0.5)) {
 		LOG("Cannot blit the texture in ModuleLevel1 %s\n", SDL_GetError());
 		ret = update_status::UPDATE_ERROR;
 	}
-	if (!App->render->Blit(backgroundTexture, 6603, 308, &floorHalf2, 0.5)) {
+	if (!App->render->Blit(backgroundTexture2, 6603, 308, &floor, 0.5)) {
 		LOG("Cannot blit the texture in ModuleLevel1 %s\n", SDL_GetError());
 		ret = update_status::UPDATE_ERROR;
 	}

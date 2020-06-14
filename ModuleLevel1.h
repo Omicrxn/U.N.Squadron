@@ -22,12 +22,10 @@ public:
 	bool CleanUp();
 
 	SDL_Texture* backgroundTexture = nullptr;
-	SDL_Rect skyHalf1;
-	SDL_Rect skyHalf2;
-	SDL_Rect mountainsHalf1;
-	SDL_Rect mountainsHalf2;
-	SDL_Rect floorHalf1;
-	SDL_Rect floorHalf2;
+	SDL_Texture* backgroundTexture2 = nullptr;
+	SDL_Rect sky;
+	SDL_Rect mountains;
+	SDL_Rect floor;
 
 	unsigned int numSpawnedEnemies = 0;
 
