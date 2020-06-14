@@ -545,7 +545,7 @@ update_status ModulePlayer::Update() {
 	}
 	if (App->input->keyboard[SDL_SCANCODE_5] == KEY_DOWN) {
 		level = 5;
-		// maxPow = true;
+		maxPow = true;
 	}
 
 	if (total >= 4) level = 2;
