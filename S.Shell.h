@@ -22,8 +22,10 @@ private:
 
 	// This weapon has one sprite and one frame
 	// We are keeping it an animation for consistency with other weapons
-	Animation drop1;
-	Animation drop2;
+	Animation dropRight1;
+	Animation dropRight2;
+	Animation dropLeft1;
+	Animation dropLeft2;
 };
 
 #endif // __S.SHELL_H__
