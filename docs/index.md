@@ -28,9 +28,7 @@ Our team is named B.A.T.L. Studio, and it is formed by:
 
 # Short gameplay of the game
 
-<iframe width= [1440] heigh=[1080] src=[https://youtu.be/MZL0K1TqdiU]></iframe>
-
-<iframe width="1440" height="1080" src="https://youtu.be/MZL0K1TqdiU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> (If the video doesn't work, you can always click [here](https://www.youtube.com/watch?v=1H2wFkoIIFE))
+<iframe width="720" height="350" src="https://youtu.be/MZL0K1TqdiU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> (If the video doesn't work, you can always click [here](https://youtu.be/MZL0K1TqdiU))
 YouTube
 
 ### Download the [last version]() of our game
