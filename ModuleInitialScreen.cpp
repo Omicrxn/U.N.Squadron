@@ -52,15 +52,7 @@ update_status ModuleInitialScreen::Update() {
 update_status ModuleInitialScreen::PostUpdate() {
 	update_status ret = UPDATE_CONTINUE;
 
-	/*if (startTime == 0) {
-		startTime = SDL_GetTicks();
-		endTime = startTime + 1000;
-	}*/
 	actualTime = SDL_GetTicks() - startTime;
-
-	//else {
-	//	actualTime = SDL_GetTicks() - startTime;
-	//}
 	
 	// Blit 
 	if (actualTime < endTime) {
