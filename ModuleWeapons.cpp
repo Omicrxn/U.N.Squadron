@@ -16,6 +16,7 @@
 #include "SB_BombShrapnel.h"
 #include "PowerupOrange.h"
 #include "PowerupBlue.h"
+#include "Level1Gun.h"
 
 #include "ModuleParticles.h"
 #include "ModulePlayer.h"
@@ -140,6 +141,8 @@ void ModuleWeapons::SpawnWeapon(WEAPON_TYPE weaponType, int x, int y)
 			case WEAPON_TYPE::POWERUP_BLUE:
 				weapons[i] = new PowerupBlue(x, y);
 				break;
+			case WEAPON_TYPE::LEVEL1GUN:
+				weapons[i] = new Level1Gun(x, y);
 			}
 			weapons[i]->texture = this->texture;
 			weapons[i]->destroyedFx = weaponDestroyedFx;

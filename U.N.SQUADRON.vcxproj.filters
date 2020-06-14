@@ -145,6 +145,9 @@
     <ClCompile Include="Turret.cpp">
       <Filter>Source Files\Entities\Enemies</Filter>
     </ClCompile>
+    <ClCompile Include="Level1Gun.cpp">
+      <Filter>Source Files\Entities\Weapons</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -297,6 +300,9 @@
     </ClInclude>
     <ClInclude Include="Turret.h">
       <Filter>Source Files\Entities\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Level1Gun.h">
+      <Filter>Source Files\Entities\Weapons</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

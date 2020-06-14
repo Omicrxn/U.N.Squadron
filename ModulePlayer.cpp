@@ -147,28 +147,35 @@ update_status ModulePlayer::Update() {
 
 	// Spawn bullet particles when pressing SPACE or X/R1
 	if ((App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_REPEAT && !destroyed) || pad.x == true || pad.r1 == true) {
-		if (shotCountdown == 0) {
-			if (level == 1) {
-				App->particles->AddParticle(App->particles->bullet1, position.x + 7, position.y + 5, Collider::Type::PLAYER_SHOT);
-			}
-			else if (level == 2) {
-				App->particles->AddParticle(App->particles->bullet2, position.x + 7, position.y + 3, Collider::Type::PLAYER_SHOT);
-			}
-			else if (level == 3) {
-				App->particles->AddParticle(App->particles->bullet3, position.x + 11, position.y, Collider::Type::PLAYER_SHOT);
-			}
-			else if (level == 4) {
-				App->particles->AddParticle(App->particles->bullet4, position.x + 11, position.y - 3, Collider::Type::PLAYER_SHOT);
-			}
-			else if (level == 5) {
-				App->particles->AddParticle(App->particles->bullet5, position.x + 10, position.y, Collider::Type::PLAYER_SHOT);
-			}
-
-			// Playing shooting sound effect (if space was pressed)
-			App->audio->PlayFx(shootFx, 0);
-
-			shotCountdown = shotMaxCountdown;
+		if (App->lvl1->IsEnabled())
+		{
+			App->weapons->SpawnWeapon(WEAPON_TYPE::LEVEL1GUN, position.x + 4, position.y - 4);
 		}
+		else if (App->lvl2->IsEnabled())
+		{
+			if (shotCountdown == 0) {
+				if (level == 1) {
+					App->particles->AddParticle(App->particles->bullet1, position.x + 7, position.y + 5, Collider::Type::PLAYER_SHOT);
+				}
+				else if (level == 2) {
+					App->particles->AddParticle(App->particles->bullet2, position.x + 7, position.y + 3, Collider::Type::PLAYER_SHOT);
+				}
+				else if (level == 3) {
+					App->particles->AddParticle(App->particles->bullet3, position.x + 11, position.y, Collider::Type::PLAYER_SHOT);
+				}
+				else if (level == 4) {
+					App->particles->AddParticle(App->particles->bullet4, position.x + 11, position.y - 3, Collider::Type::PLAYER_SHOT);
+				}
+				else if (level == 5) {
+					App->particles->AddParticle(App->particles->bullet5, position.x + 10, position.y, Collider::Type::PLAYER_SHOT);
+				}
+			}
+		}
+
+		// Playing shooting sound effect (if space was pressed)
+		App->audio->PlayFx(shootFx, 0);
+
+		shotCountdown = shotMaxCountdown;
 	}
 
 	// Moving the spaceship when pressing WASD or using the Gamepad
@@ -534,14 +541,6 @@ update_status ModulePlayer::Update() {
 		maxPow = true;
 	}
 	if (total >= 100) total = 100;
-
-	if (App->input->keyboard[SDL_SCANCODE_N] == KEY_DOWN) {
-		App->weapons->SpawnWeapon(WEAPON_TYPE::POWERUP_ORANGE, position.x + 40, position.y);
-	}
-
-	if (App->input->keyboard[SDL_SCANCODE_M] == KEY_DOWN) {
-		App->weapons->SpawnWeapon(WEAPON_TYPE::POWERUP_BLUE, position.x + 40, position.y);
-	}
 
 	if (ceilingCountdown > 0)
 	{

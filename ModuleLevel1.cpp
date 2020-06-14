@@ -227,6 +227,16 @@ update_status ModuleLevel1::Update() {
 		miliseconds = miliseconds -1;
 		prevTime = SDL_GetTicks();
 	}
+
+	if (seconds <= 0)
+	{
+		App->transition->FadeToBlack(this, (Module*)App->selector, 60);
+	}
+	
+	if (App->player->GetCurrentFuel() <= 0)
+	{
+		App->transition->FadeToBlack(this, (Module*)App->loseScreen, 60);
+	}
 	
 	return ret;
 }
