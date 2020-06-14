@@ -22,9 +22,9 @@ ModuleInitialScreen::~ModuleInitialScreen() {}
 bool ModuleInitialScreen::Start() {
 	bool ret = true;
 
-	startTime = 0;
+	startTime = SDL_GetTicks();
 	actualTime = 0;
-	endTime = 0;
+	endTime = 3000;
 
 	logoTex = App->textures->Load("Assets/sprites/menus/Logo.png");
 	++activeTextures; ++totalTextures;
@@ -52,13 +52,15 @@ update_status ModuleInitialScreen::Update() {
 update_status ModuleInitialScreen::PostUpdate() {
 	update_status ret = UPDATE_CONTINUE;
 
-	if (startTime == 0) {
+	/*if (startTime == 0) {
 		startTime = SDL_GetTicks();
 		endTime = startTime + 1000;
-	}
-	else {
-		actualTime = SDL_GetTicks() - startTime;
-	}
+	}*/
+	actualTime = SDL_GetTicks() - startTime;
+
+	//else {
+	//	actualTime = SDL_GetTicks() - startTime;
+	//}
 	
 	// Blit 
 	if (actualTime < endTime) {
